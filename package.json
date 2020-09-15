@@ -1,5 +1,5 @@
 {
-  "name": "starting_code",
+  "name": "pandemic-prep",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,18 @@
     "client:build": "react-scripts build",
     "server:dev": "nodemon index.js",
     "db:build": "node ./db/init_db",
+    "db:build:dev": "nodemon .db/init_db",
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Fletcher, Forgette, Landers, and Olivares",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.2.1",
     "react": "^16.13.1",
