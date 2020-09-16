@@ -9,12 +9,15 @@ async function buildTables() {
     client.connect();
 
     // drop tables in correct order
-    // dropTables();
+    dropTables();
 
 
 
     // build tables in correct order
-    // createTables();
+    createTables();
+
+    // populate initial data
+    populateInitialData();
 
 
     
@@ -90,7 +93,7 @@ async function createTables() {
         name varchar(255) NOT NULL,
         image BYTEA
       );
-    `)
+    `);
     
   } catch (error) {
     throw error;
@@ -99,6 +102,16 @@ async function createTables() {
 
 async function dropTables() {
   try {
+    await client.query(`
+      DROP TABLE IF EXISTS products_carts;
+      DROP TABLE IF EXISTS products_categories;
+      DROP TABLE IF EXISTS cart;
+      DROP TABLE IF EXISTS users;
+      DROP TABLE IF EXISTS reviews;
+      DROP TABLE IF EXISTS images;
+      DROP TABLE IF EXISTS categories;
+      DROP TABLE IF EXISTS products;
+    `);
     
   } catch (error) {
     throw error;
