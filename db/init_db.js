@@ -2,7 +2,7 @@
 const {
   client
   // other db methods 
-} = require('./index');
+} = require('./client');
 
 async function buildTables() {
   try {
@@ -11,9 +11,13 @@ async function buildTables() {
     // drop tables in correct order
     // dropTables();
 
+
+
     // build tables in correct order
     // createTables();
 
+
+    
   } catch (error) {
     throw error;
   }
