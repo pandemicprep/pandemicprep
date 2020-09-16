@@ -3,6 +3,7 @@ const {
   client
   // other db methods 
 } = require('./client');
+const { seed } = require('./');
 
 async function buildTables() {
   try {
@@ -16,8 +17,7 @@ async function buildTables() {
     // build tables in correct order
     createTables();
 
-    // populate initial data
-    populateInitialData();
+    
 
 
     
