@@ -52,26 +52,27 @@ async function createTables() {
 
       CREATE TABLE cart (
         id SERIAL PRIMARY KEY,
-        quantity INTEGER,
         status varchar(255) NOT NULL,
         "lastUpdated" DATE,
-        total NUMERIC(9,2) NOT NULL
+        total NUMERIC(9,2) NOT NULL,
+        "userId" INTEGER REFERENCES users(id)
       ); 
 
       CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         "isAdmin" BOOLEAN DEFAULT false,
         email varchar(255) UNIQUE NOT NULL,
+        password varchar(255) NOT NULL,
         "firstName" varchar(255) NOT NULL,
         "lastName" varchar(255) NOT NULL,
-        street TEXT NOT NULL,
-        city varchar(255) NOT NULL,
-        state varchar(255) NOT NULL,
-        zipcode varchar(255) NOT NULL,
-        country varchar(255) NOT NULL,
-        phone varchar(255) UNIQUE NOT NULL,
-        "creditCard" INTEGER UNIQUE NOT NULL,
-        "cartId" INTEGER REFERENCES cart(id)
+        "addressLine1" varchar(255),
+        "addressLine2" varchar(255),
+        city varchar(255),
+        state varchar(255),
+        zipcode varchar(255),
+        country varchar(255),
+        phone varchar(255) UNIQUE,
+        "creditCard" INTEGER UNIQUE
       );
 
       CREATE TABLE reviews (
@@ -90,7 +91,10 @@ async function createTables() {
       CREATE TABLE products_carts (
         id SERIAL PRIMARY KEY,
         "productId" INTEGER REFERENCES products(id),
-        "cartId" INTEGER REFERENCES cart(id)
+        "cartId" INTEGER REFERENCES cart(id),
+        quantity INTEGER NOT NULL,
+        "unitPrice" INTEGER NOT NULL,
+        "itemTotal" INTEGER NOT NULL
       );
 
       
@@ -122,6 +126,7 @@ async function dropTables() {
 async function populateInitialData() {
   try {
     // create useful starting data
+    seed();
   } catch (error) {
     throw error;
   }
