@@ -1,66 +1,50 @@
 // code to build and initialize DB goes here
 const {
-  client
-  // other db methods 
+	client,
+	// other db methods
 } = require('./client');
 const { seed } = require('./');
 
 async function buildTables() {
-  try {
-    client.connect();
+	try {
+		client.connect();
 
-    // drop tables in correct order
-    await dropTables();
+		// drop tables in correct order
+		await dropTables();
 
-
-
-    // build tables in correct order
-    await createTables();
-
-    
-
-
-    
-  } catch (error) {
-    throw error;
-  }
+		// build tables in correct order
+		await createTables();
+	} catch (error) {
+		throw error;
+	}
 }
 
 async function createTables() {
-  try {
-    await client.query(`
-
-    CREATE TABLE images (
-      id SERIAL PRIMARY KEY,
-      name varchar(255) NOT NULL,
-      image BYTEA
-    );
-
+	try {
+    console.log('Creating tables');
+		await client.query(`
       CREATE TABLE products (
         id SERIAL PRIMARY KEY,
         title varchar(255) UNIQUE NOT NULL,
         description TEXT NOT NULL,
         price NUMERIC(9,2) NOT NULL,
-        "imageId" INTEGER REFERENCES images(id)
+        image varchar(255),
+        "imageDescription" varchar(255)
       );
       
       CREATE TABLE categories (
         id SERIAL PRIMARY KEY,
         name varchar(255) UNIQUE NOT NULL,
-        "imageId" INTEGER REFERENCES images(id)
+        image varchar(255),
+        "imageDescription" varchar(255)
       );
 
-      CREATE TABLE cart (
-        id SERIAL PRIMARY KEY,
-        status varchar(255) NOT NULL,
-        "lastUpdated" DATE,
-        total NUMERIC(9,2) NOT NULL,
-        "userId" INTEGER REFERENCES users(id)
-      ); 
+      
 
       CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         "isAdmin" BOOLEAN DEFAULT false,
+        "isUser" BOOLEAN,
         email varchar(255) UNIQUE NOT NULL,
         password varchar(255) NOT NULL,
         "firstName" varchar(255) NOT NULL,
@@ -74,6 +58,14 @@ async function createTables() {
         phone varchar(255) UNIQUE,
         "creditCard" INTEGER UNIQUE
       );
+
+      CREATE TABLE cart (
+        id SERIAL PRIMARY KEY,
+        status varchar(255) NOT NULL,
+        "lastUpdated" DATE,
+        total NUMERIC(9,2) NOT NULL,
+        "userId" INTEGER REFERENCES users(id)
+      ); 
 
       CREATE TABLE reviews (
         id SERIAL PRIMARY KEY,
@@ -99,40 +91,40 @@ async function createTables() {
 
       
     `);
-    
-  } catch (error) {
-    throw error;
-  }
+    console.log('Tables created');
+	} catch (error) {
+		throw error;
+	}
 }
 
 async function dropTables() {
-  try {
-    await client.query(`
+	try {
+    console.log('Dropping tables');
+		await client.query(`
       DROP TABLE IF EXISTS products_carts;
       DROP TABLE IF EXISTS products_categories;
       DROP TABLE IF EXISTS reviews;
-      DROP TABLE IF EXISTS users;
       DROP TABLE IF EXISTS cart;
+      DROP TABLE IF EXISTS users;
       DROP TABLE IF EXISTS categories;
       DROP TABLE IF EXISTS products;
-      DROP TABLE IF EXISTS images;
     `);
-    
-  } catch (error) {
-    throw error;
-  }
+    console.log('Tables dropped');
+	} catch (error) {
+		throw error;
+	}
 }
 
 async function populateInitialData() {
-  try {
-    // create useful starting data
-    seed();
-  } catch (error) {
-    throw error;
-  }
+	try {
+		// create useful starting data
+		
+	} catch (error) {
+		throw error;
+	}
 }
 
 buildTables()
-  .then(populateInitialData)
-  .catch(console.error)
-  .finally(() => client.end());
+	.then(populateInitialData)
+	.catch(console.error)
+	.finally(() => client.end());
