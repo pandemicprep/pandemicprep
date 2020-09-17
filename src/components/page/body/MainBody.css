@@ -2,9 +2,11 @@
     background-color: hotpink;
     border: 5px solid black;
     width: 100%;
+    font-size: 25px;
     text-align: center;
     font-family: 'Raleway', sans-serif;
     overflow: scroll;
+    height: 600px;
 }
 
 .productContainer {

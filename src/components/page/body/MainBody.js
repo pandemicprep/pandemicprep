@@ -20,6 +20,14 @@ export const MainBody = () => {
                 <div className="product">PRODUCT</div>
                 <div className="product">PRODUCT</div>
                 <div className="product">PRODUCT</div>
+                <div className="product">PRODUCT</div>
+                <div className="product">PRODUCT</div>
+                <div className="product">PRODUCT</div>
+                <div className="product">PRODUCT</div>
+                <div className="product">PRODUCT</div>
+                <div className="product">PRODUCT</div>
+                <div className="product">PRODUCT</div>
+                <div className="product">PRODUCT</div>
             </container>
         </div>
     )
