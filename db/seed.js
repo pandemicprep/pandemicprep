@@ -1,4 +1,4 @@
-const { addUser } = require('./users');
+const { addUser } = require('./');
 
 async function seed() {
 	//creating a new user
