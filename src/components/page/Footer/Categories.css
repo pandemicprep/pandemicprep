@@ -1,0 +1,26 @@
+.category {
+    background-color: aquamarine;
+    font-family: 'Raleway', sans-serif;
+    border: 5px solid black;
+    height: 100px;
+    text-align: center;
+}
+
+.productCategories {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cats {
+    height: 50px;
+    width: 100px;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: yellow;
+    border-radius: 50px;
+}
+
+.cats:hover {
+    background-color: pink;
+}
