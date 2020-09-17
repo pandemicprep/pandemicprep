@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-import { Header, MainBody, Categories } from './index'
+import { Header, MainBody, Categories, Footer } from './index'
 
 import {
   getSomething
 } from '../api';
 
+
 const App = () => {
-  
+
 
   // useEffect(() => {
   //   getSomething()
@@ -24,6 +25,7 @@ const App = () => {
       <Header />
       <MainBody />
       <Categories />
+      <Footer />
     </div>
   );
 }
