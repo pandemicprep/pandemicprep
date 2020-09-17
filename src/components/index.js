@@ -2,6 +2,6 @@
 
 
 export { default as App } from './App';
-export { Header } from './page/Header';
+export { Header } from './page/Header/Header';
 export { MainBody } from './page/body/MainBody';
-export { Categories } from './page/Categories';
+export { Categories } from './page/footer/Categories';
