@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const {
 	addUser,
-    } = require('../db/singletables/users');
+    } = require('../db');
     
     usersRouter.post('/register', async (req, res, next) => {
         const user = req.body;

@@ -3,14 +3,21 @@ const { client } = require('../client');
 const bcrypt = require('bcrypt');
 
 
-//add a user
+/**
+ * Create new user by registration (first, last, email, pass minimum),
+ * by guest purchase (all fields except for password),
+ * @param {Object} {requires firstName, lastName, email}
+ * returns a single object with { id, firstName, lastName, isAdmin, isUser, email, password, 
+ * addressLine1, addressLine2, city, state, zipcode, country, phone, creditcard } or
+ * an object with an error message { message: 'the error' } 
+ */
 async function addUser({
 	firstName,
 	lastName,
 	isAdmin = false,
 	isUser = false,
 	email,
-	password,
+	password = null,
 	addressLine1 = '',
 	addressLine2 = '',
 	city = '',
@@ -23,6 +30,7 @@ async function addUser({
 }) {
 	console.log('getting to addUser at the back end ');
 	try {
+		if (password) {
 		const {
 			rows: [newUser],
 		} = await client.query(
@@ -53,8 +61,11 @@ async function addUser({
 		if (newUser) {
 		return newUser;
 		} else {
-			return null;			//See if need to change later
+			return {message: 'email, phone, or credit card already exists'};			//See if need to change later
 		}
+	} else {
+		return {message: 'must enter unique email'}
+	}
 	} catch (error) {
 		throw error;
 	}
