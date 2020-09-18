@@ -1,7 +1,7 @@
 const { client } = require('../client');
 
 const bcrypt = require('bcrypt');
-const { useReducer } = require('react');
+
 
 //add a user
 async function addUser({
@@ -17,10 +17,11 @@ async function addUser({
 	state = '',
 	zipcode = '',
 	country = '',
-	phone = '',
-	creditCard = 0,
+	phone = null,
+	creditCard = null,
 	
 }) {
+	console.log('getting to addUser at the back end ');
 	try {
 		const {
 			rows: [newUser],
