@@ -1,0 +1,9 @@
+footer {
+    background-color: royalblue;
+    color: white;
+    border: 5px solid black;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+}
