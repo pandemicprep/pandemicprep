@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 
+import { addUser } from '../../../index';
+
 import './Profile.css';
 
 const states = [
@@ -63,8 +65,8 @@ const states = [
 	'Washington',
 	'West Virginia',
 	'Wisconsin',
-    'Wyoming',
-    "None"
+	'Wyoming',
+	'None',
 ];
 const countries = [
 	'United States',
@@ -310,67 +312,85 @@ const countries = [
 ];
 
 export const Profile = () => {
-    const [firstName, setFirstName ] = useState('');
-    const [lastName, setLastName ] = useState('');
-    const [email, setEmail ] = useState('');
-    const [password1, setPassword1 ] = useState('');
-    const [password2, setPassword2 ] = useState('');
-    const [address1, setAddress1 ] = useState('');
-    const [address2, setAddress2 ] = useState('');
-    const [city, setCity ] = useState('');
-    const [state, setState ] = useState('');
-    const [zipcode, setZipcode ] = useState('');
-    const [country, setCountry ] = useState('');
-    const [phone, setPhone ] = useState('');
-    const [creditcard, setCreditcard ] = useState('');
-
-
-
+    const [isUser, setIsUser] = useState(false)
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password1, setPassword1] = useState('');
+	const [password2, setPassword2] = useState('');
+	const [address1, setAddress1] = useState('');
+	const [address2, setAddress2] = useState('');
+	const [city, setCity] = useState('');
+	const [state, setState] = useState('');
+	const [zipcode, setZipcode] = useState('');
+	const [country, setCountry] = useState('');
+	const [phone, setPhone] = useState('');
+	const [creditCard, setCreditCard] = useState(0);
 
 	const firstNameGetter = (event) => {
-        setFirstName(event.target.value);
-    };
+		setFirstName(event.target.value);
+	};
 	const lastNameGetter = (event) => {
-        setLastName(event.target.value);
-    };
+		setLastName(event.target.value);
+	};
 	const emailGetter = (event) => {
-        setEmail(event.target.value);
-    };
+		setEmail(event.target.value);
+	};
 	const password1Getter = (event) => {
-        setPassword1(event.target.value);
-    };
+		setPassword1(event.target.value);
+	};
 	const password2Getter = (event) => {
-        setPassword2(event.target.value);
-    };
+		setPassword2(event.target.value);
+	};
 	const address1Getter = (event) => {
-        setAddress1(event.target.value);
-    };
+		setAddress1(event.target.value);
+	};
 	const address2Getter = (event) => {
-        setAddress2(event.target.value);
-    };
+		setAddress2(event.target.value);
+	};
 	const cityGetter = (event) => {
-        setCity(event.target.value);
-    };
+		setCity(event.target.value);
+	};
 	const zipGetter = (event) => {
-        setZipcode(event.target.value);
-    };
+		setZipcode(event.target.value);
+	};
 	const stateGetter = (event) => {
-        setState(event.target.value);
-    };
+		setState(event.target.value);
+	};
 	const countryGetter = (event) => {
-        setCountry(event.target.value);
-    };
-    const phoneGetter = (event) => {
-        setPhone(event.target.value);
-    };
-    const creditGetter = (event) => {
-        setCreditcard(event.target.value);
-    };
-    const cancelHandler = (event) => {};
-	const formHandler = (event) => {
-        event.preventDefault();
-
-    };
+		setCountry(event.target.value);
+	};
+	const phoneGetter = (event) => {
+		setPhone(event.target.value);
+	};
+	const creditGetter = (event) => {
+		setCreditCard(event.target.value);
+	};
+	const cancelHandler = (event) => {};
+	const formHandler = async (event) => {
+		event.preventDefault();
+		addUser({
+            isUser,
+			firstName,
+			lastName,
+			email,
+			password: password1,
+			addressLine1: address1,
+			addressLine2: address2,
+			city,
+			state,
+			zipcode,
+			country,
+			phone,
+			creditCard,
+		})
+			.then((result) => {
+				console.log('the new user is ', result);
+			})
+			.catch((error) => {
+				console.error();
+			});
+	};
 
 	return (
 		<div className='profile'>
@@ -438,11 +458,18 @@ export const Profile = () => {
 					value={
 						Math.floor(Math.random() * (9999999999999999 - 1000000000000000 + 1)) +
 						1000000000000000
-					} onChange={creditGetter}
+					}
+					onChange={creditGetter}
 				/>
-                <button id='submit' type='submit'>Submit</button>
-                <button id='cancel' onChange={cancelHandler} >Cancel</button>
+				<button id='submit' type='submit'>
+					Submit
+				</button>
+				<button id='cancel' onChange={cancelHandler}>
+					Cancel
+				</button>
 			</form>
 		</div>
 	);
 };
+
+// Maybe add cvv and date for the credit card. Front end only.
