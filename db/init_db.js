@@ -39,14 +39,12 @@ async function createTables() {
         "imageDescription" varchar(255)
       );
 
-      
-
       CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         "isAdmin" BOOLEAN DEFAULT false,
-        "isUser" BOOLEAN,
+        "isUser" BOOLEAN DEFAULT false,
         email varchar(255) UNIQUE NOT NULL,
-        password varchar(255) NOT NULL,
+        password varchar(255),
         "firstName" varchar(255) NOT NULL,
         "lastName" varchar(255) NOT NULL,
         "addressLine1" varchar(255),
@@ -56,7 +54,7 @@ async function createTables() {
         zipcode varchar(255),
         country varchar(255),
         phone varchar(255) UNIQUE,
-        "creditCard" INTEGER UNIQUE
+        "creditCard" BIGINT UNIQUE
       );
 
       CREATE TABLE cart (
@@ -117,7 +115,8 @@ async function dropTables() {
 
 async function populateInitialData() {
 	try {
-		// create useful starting data
+    // create useful starting data
+    await seed();
 		
 	} catch (error) {
 		throw error;
@@ -125,6 +124,5 @@ async function populateInitialData() {
 }
 
 buildTables()
-	.then(populateInitialData)
-	.catch(console.error)
+	.then(seed).catch(console.error)
 	.finally(() => client.end());

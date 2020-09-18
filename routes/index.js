@@ -1,7 +1,19 @@
 const apiRouter = require('express').Router();
 
-apiRouter.get("/products", (req, res, next) => {
-  res.status(200).json(require('./products.json'))
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = process.env;
+
+
+apiRouter.use((req, res, next) => {
+  console.log('api entry point');
+
+next();
+
 });
+
+
+const usersRouter = require('./users');
+apiRouter.use('/users', usersRouter);
+
 
 module.exports = apiRouter;
