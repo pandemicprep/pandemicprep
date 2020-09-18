@@ -1,11 +1,14 @@
-import React from 'react';
+/** @format */
 
-import './MainBody.css';
+import React from "react";
 
-export const MainBody = () => {
+import "./Productlist.css";
 
+
+export const Productlist = () => {
     return (
-        <div className='categoryContainer'>
+        <div className="productList">
+            <p>List of Products</p>
             <h1>MainBody</h1>
             <container className="productContainer">
                 <div className="product">PRODUCT</div>
@@ -30,5 +33,5 @@ export const MainBody = () => {
                 <div className="product">PRODUCT</div>
             </container>
         </div>
-    )
-}
+    );
+};
