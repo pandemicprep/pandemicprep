@@ -16,7 +16,7 @@ async function addUser({
 	lastName,
 	isAdmin = false,
 	isUser = false,
-	email,
+	email = null,
 	password = null,
 	addressLine1 = '',
 	addressLine2 = '',
@@ -30,7 +30,7 @@ async function addUser({
 }) {
 	console.log('getting to addUser at the back end ');
 	try {
-		if (password) {
+		if (email) {
 		const {
 			rows: [newUser],
 		} = await client.query(
