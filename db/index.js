@@ -1,5 +1,5 @@
-module.export = {
-    ...require('./seed.js'),
+module.exports = {
+    ...require('./seed'),
     ...require('./singletables/cart'),
     ...require('./singletables/categories'),
     ...require('./singletables/products'),
