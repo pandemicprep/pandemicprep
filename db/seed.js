@@ -1,4 +1,5 @@
 const { addUser } = require('./');
+const 
 
 async function seed() {
 	//creating a new user

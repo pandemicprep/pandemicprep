@@ -15,7 +15,7 @@ import axios from 'axios';
  */
 export async function addUser(user) {
   try {
-    const newUser = await axios.post('/api/register', user);
+    const { data: newUser } = await axios.post('/api/users/register', user);
     return newUser;
   } catch (error) {
       throw error;

@@ -368,7 +368,8 @@ export const Profile = () => {
 	};
 	const cancelHandler = (event) => {};
 	const formHandler = async (event) => {
-		event.preventDefault();
+        event.preventDefault();
+        console.log('getting to the submit with ', firstName, lastName, email);
 		addUser({
             isUser,
 			firstName,
@@ -436,13 +437,13 @@ export const Profile = () => {
 				<input type='text' id='city' placeholder='City' onChange={cityGetter} />
 				<input type='text' id='zipCode' placeholder='Zip Code' onChange={zipGetter} />
 				<select className='stateDropdown' onChange={stateGetter}>
-					{states.map((state) => {
-						return <option value=''>{state}</option>;
+					{states.map((state, i) => {
+						return <option key={i} value=''>{state}</option>;
 					})}
 				</select>
 				<select className='countryDropdown' onChange={countryGetter}>
-					{countries.map((country) => {
-						return <option value=''>{country}</option>;
+					{countries.map((country, i) => {
+						return <option key={i} value=''>{country}</option>;
 					})}
 				</select>
 				<input

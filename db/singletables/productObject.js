@@ -1,4 +1,4 @@
-const productArray = [
+const productArray = {
     "school": [
         {
             "name": "Desk Lamp",
@@ -397,4 +397,4 @@ const productArray = [
             "imageURL": "images/school/stickymemoball.jpg"
         }
     ]
-]
+}

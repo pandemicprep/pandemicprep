@@ -53,8 +53,8 @@ async function createTables() {
         state varchar(255),
         zipcode varchar(255),
         country varchar(255),
-        phone varchar(255) UNIQUE,
-        "creditCard" BIGINT UNIQUE
+        phone varchar(255),
+        "creditCard" BIGINT
       );
 
       CREATE TABLE cart (
