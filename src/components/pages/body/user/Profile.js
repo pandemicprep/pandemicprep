@@ -2,7 +2,14 @@
 
 import React, { useState } from 'react';
 
-import { addUser } from '../../../index';
+import { 
+	addUser
+} from '../../../index';
+
+import {
+	getAllUsers
+} from '../../../../api/index'
+
 
 import './Profile.css';
 
@@ -393,6 +400,12 @@ export const Profile = () => {
 			});
 	};
 
+	// added by matthew just to test getAllUsers
+	const logAllUsers = async () => {
+		const allUsers = await getAllUsers();
+		console.log('allUsers logged in front end: ', allUsers);
+	}
+
 	return (
 		<div className='profile'>
 			<p>Profile</p>
@@ -468,7 +481,11 @@ export const Profile = () => {
 				<button id='cancel' onChange={cancelHandler}>
 					Cancel
 				</button>
+				
 			</form>
+			<button onClick={logAllUsers}>
+					User test
+			</button>
 		</div>
 	);
 };
