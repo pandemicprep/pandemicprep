@@ -1,5 +1,12 @@
-const { addUser } = require('./singletables/users');
+
 const { addProduct } = require('./singletables/products');
+
+const { 
+    addUser,
+    getAllUsers
+} = require('./singletables/users');
+
+
 
 async function seed() {
     //creating a new user
@@ -72,25 +79,31 @@ async function seed() {
         console.log('ADD NEW PRODUCT TEST', product);
 
 
-        //not passing because null in email breaks the code (psql)
-        // console.log('creating user four, missing info ');
-        // const user4 = await addUser({
-        //     firstName: 'Joe',
-        //     lastName: 'Moe',
-        //     isAdmin: null,
-        //     isUser: null,
-        // 	email: null,
-        // 	password: 'password',
-        //     addressLine1: null,
-        //     addressLine2: null,
-        // 	city: null,
-        // 	state: null,
-        // 	zipcode: null,
-        // 	country: null,
-        // 	phone: null,
-        //     creditCard: null,
-        // });
-        // console.log('user4 with minimum data ', user4);
+
+        
+        console.log('creating user four, missing info ');
+        const user4 = await addUser({
+            firstName: 'Joe',
+            lastName: 'Moe',
+            isAdmin: null,
+            isUser: null,
+			email: null,
+			password: 'password',
+            addressLine1: null,
+            addressLine2: null,
+			city: null,
+			state: null,
+			zipcode: null,
+			country: null,
+			phone: null,
+            creditCard: null,
+        });
+        console.log('user4 with minimum data ', user4);
+
+        console.log('Running getAllUsers...');
+        const allUsers = await getAllUsers();
+        console.log('all users result: ', allUsers);
+
 
     } catch (error) {
         throw error;

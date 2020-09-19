@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 // export async function getSomething() {
 //   try {
 //     const { data } = await axios.get('/api/products');
@@ -15,9 +16,24 @@ import axios from 'axios';
  */
 export async function addUser(user) {
   try {
-    const newUser = await axios.post('/api/register', user);
+    const { data: newUser } = await axios.post('/api/users/register', user);
     return newUser;
   } catch (error) {
       throw error;
+  }
+}
+
+/**
+ * gets a list of users
+ * will require the user is admin later on
+ */
+
+export async function getAllUsers() {
+  try {
+    const { data } = await axios.get('/api/users');
+    console.log('all users in src api index: ', data);
+    return data;
+  } catch (error) {
+    throw error;
   }
 }
