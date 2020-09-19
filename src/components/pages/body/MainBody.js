@@ -9,9 +9,15 @@ export const MainBody = () => {
 
     return (
         <div className='categoryContainer'>
+
+            {/* <Profile /> */}
+      {/* <Productlist /> *}
+
+
             <Profile />
             {/* <Productlist products={bathCat} /> */}
             {/* <Productlist products={search} /> */}
+
             {/* <Categories /> */}
         </div>
     )

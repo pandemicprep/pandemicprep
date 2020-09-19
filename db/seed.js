@@ -1,47 +1,51 @@
+
+const { addProduct } = require('./singletables/products');
+
 const { 
     addUser,
     getAllUsers
 } = require('./singletables/users');
 
 
+
 async function seed() {
-	//creating a new user
-	try {
-		console.log('creating user one');
-		const user1 = await addUser({
-			firstName: 'Nicolas',
-			lastName: 'Olivares',
+    //creating a new user
+    try {
+        console.log('creating user one');
+        const user1 = await addUser({
+            firstName: 'Nicolas',
+            lastName: 'Olivares',
             isAdmin: true,
             isUser: true,
-			email: 'myemail@you.com',
-			password: 'mypassword',
+            email: 'myemail@you.com',
+            password: 'mypassword',
             addressLine1: '4545 street',
             addressLine2: '',
-			city: 'Jax',
-			state: 'Fl',
-			zipcode: '32210',
-			country: 'USA',
-			phone: '555-555-5555',
+            city: 'Jax',
+            state: 'Fl',
+            zipcode: '32210',
+            country: 'USA',
+            phone: '555-555-5555',
             creditCard: 45454545454545455,
-            
-		});
+
+        });
         console.log('this is user 1 ', user1);
-        
+
         console.log('creating user two, login in with minimum info ');
         const user2 = await addUser({
             firstName: 'Joe',
             lastName: 'Moe',
             isAdmin: null,
             isUser: null,
-			email: 'myemail2@you.com',
-			password: 'password',
+            email: 'myemail2@you.com',
+            password: 'password',
             addressLine1: null,
             addressLine2: null,
-			city: null,
-			state: null,
-			zipcode: null,
-			country: null,
-			phone: null,
+            city: null,
+            state: null,
+            zipcode: null,
+            country: null,
+            phone: null,
             creditCard: null,
         });
         console.log('user2 with minimum data ', user2);
@@ -52,18 +56,28 @@ async function seed() {
             lastName: 'Moe',
             isAdmin: null,
             isUser: null,
-			email: 'myemail2@you.com',
-			password: 'password',
+            email: 'myemail2@you.com',
+            password: 'password',
             addressLine1: null,
             addressLine2: null,
-			city: null,
-			state: null,
-			zipcode: null,
-			country: null,
-			phone: null,
+            city: null,
+            state: null,
+            zipcode: null,
+            country: null,
+            phone: null,
             creditCard: null,
         });
         console.log('user3 with minimum data ', user3);
+
+        console.log('creating new product... ');
+        const product = await addProduct({
+            name: 'New Product Name',
+            price: 999.99,
+            description: 'new product description yay',
+            imageURL: 'www.imageurl.com/urlurlurl',
+        });
+        console.log('ADD NEW PRODUCT TEST', product);
+
 
 
         
@@ -90,9 +104,10 @@ async function seed() {
         const allUsers = await getAllUsers();
         console.log('all users result: ', allUsers);
 
-	} catch (error) {
-		throw error;
-	}
+
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = { seed };
