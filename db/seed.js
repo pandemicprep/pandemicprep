@@ -1,10 +1,15 @@
 
-const { addProduct } = require('./singletables/products');
+const { 
+    addProduct,
+    getAllProducts
+} = require('./singletables/products');
 
 const { 
     addUser,
     getAllUsers
 } = require('./singletables/users');
+
+const productArray = require('./singletables/productObject')
 
 
 
@@ -68,18 +73,6 @@ async function seed() {
             creditCard: null,
         });
         console.log('user3 with minimum data ', user3);
-
-        console.log('creating new product... ');
-        const product = await addProduct({
-            name: 'New Product Name',
-            price: 999.99,
-            description: 'new product description yay',
-            imageURL: 'www.imageurl.com/urlurlurl',
-        });
-        console.log('ADD NEW PRODUCT TEST', product);
-
-
-
         
         console.log('creating user four, missing info ');
         const user4 = await addUser({
@@ -103,6 +96,35 @@ async function seed() {
         console.log('Running getAllUsers...');
         const allUsers = await getAllUsers();
         console.log('all users result: ', allUsers);
+
+
+        console.log('creating new product... ');
+        const product = await addProduct({
+            name: 'New Product Name',
+            price: 999.99,
+            description: 'new product description yay',
+            imageURL: 'www.imageurl.com/urlurlurl',
+            category: ''
+        });
+        console.log('ADD NEW PRODUCT TEST', product);
+
+        console.log('Adding all products in product array to db...');
+        await Promise.all(productArray.map(async (product) => {
+          const { name, price, description, imageURL, category} = product
+
+          await addProduct({
+              name,
+              price,
+              description,
+              imageURL,
+              category
+          });
+         }));
+        console.log('Exiting all products seed loop...');
+
+        // console.log('Running get all products...');
+        // const allProducts = await getAllProducts();
+        // console.log('Result: ', allProducts);
 
 
     } catch (error) {
