@@ -26,35 +26,47 @@ async function addUser({
   phone = null,
   creditCard = null,
 }) {
-  console.log("getting to addUser at the back end ");
-  try {
-    if (email) {
-      const {
-        rows: [newUser],
-      } = await client.query(
-        `
+
+	console.log('getting to addUser at the back end ');
+	const SALT_COUNT = 15;
+	let sercuredPassword = null;
+	
+	try {
+		if (email) {
+			if (password) {
+			bcrypt.hash(password, SALT_COUNT, async (err, hashedPassword) => {
+				securedPassword = hashedPassword;
+				});
+			}
+		const {
+			rows: [newUser],
+		} = await client.query(
+			`
+
             INSERT INTO users("isAdmin", "isUser", email, password, "firstName", "lastName", "addressLine1", "addressLine2", city, state, zipcode, country, phone, "creditCard")
             VALUES ($1, $2 ,$3 ,$4 ,$5 ,$6 ,$7 ,$8 ,$9 ,$10 ,$11 ,$12 ,$13, $14)
             ON CONFLICT DO NOTHING
             RETURNING *;
         `,
-        [
-          isAdmin,
-          isUser,
-          email,
-          password,
-          firstName,
-          lastName,
-          addressLine1,
-          addressLine2,
-          city,
-          state,
-          zipcode,
-          country,
-          phone,
-          creditCard,
-        ]
-      );
+
+			[
+				isAdmin,
+				isUser,
+				email,
+				securedPassword,
+				firstName,
+				lastName,
+				addressLine1,
+				addressLine2,
+				city,
+				state,
+				zipcode,
+				country,
+				phone,
+				creditCard,
+			],
+		);
+
 
       if (newUser) {
         return newUser;

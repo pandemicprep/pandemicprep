@@ -1,3 +1,4 @@
+
 const {
   addUser,
   getAllUsers,
@@ -5,7 +6,14 @@ const {
   getUserById,
 } = require("./singletables/users");
 
+
+const { addProduct } = require('./singletables/products');
+
+
+
+
 async function seed() {
+
   //creating a new user
   try {
     console.log("creating user one");
@@ -85,6 +93,16 @@ async function seed() {
       creditCard: null,
     });
     console.log("user4 with minimum data ", user4);
+    
+    console.log('creating new product... ');
+        const product = await addProduct({
+            name: 'New Product Name',
+            price: 999.99,
+            description: 'new product description yay',
+            imageURL: 'www.imageurl.com/urlurlurl',
+        });
+        console.log('ADD NEW PRODUCT TEST', product);
+
 
     console.log("Running getAllUsers...");
     const allUsers = await getAllUsers();
@@ -110,12 +128,14 @@ async function seed() {
     });
     console.log("Updated User2", user5);
 
+
     console.log("Getting User By Id...");
     const user = await getUserById(1);
     console.log("Got user by id 1", user);
   } catch (error) {
     throw error;
   }
+
 }
 
 module.exports = { seed };
