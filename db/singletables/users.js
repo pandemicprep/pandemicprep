@@ -29,8 +29,16 @@ async function addUser({
 	
 }) {
 	console.log('getting to addUser at the back end ');
+	const SALT_COUNT = 15;
+	let sercuredPassword = null;
+	
 	try {
 		if (email) {
+			if (password) {
+			bcrypt.hash(password, SALT_COUNT, async (err, hashedPassword) => {
+				securedPassword = hashedPassword;
+				});
+			}
 		const {
 			rows: [newUser],
 		} = await client.query(
@@ -44,7 +52,7 @@ async function addUser({
 				isAdmin,
 				isUser,
 				email,
-				password,
+				securedPassword,
 				firstName,
 				lastName,
 				addressLine1,
