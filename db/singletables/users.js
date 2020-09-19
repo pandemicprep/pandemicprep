@@ -73,6 +73,25 @@ async function addUser({
 
 //retrieve a user (check if admin)
 
+// retrieve all user
+async function getAllUsers() {
+	try {
+		const {
+			rows
+		} = await client.query(`
+			SELECT * FROM users;
+		`);
+
+		// console.log('all users: ', rows);
+		return rows;
+	} catch (error) {
+		throw error;
+	}
+}
+
 //patch a user
 
-module.exports = { addUser };
+module.exports = { 
+	addUser,
+	getAllUsers
+};

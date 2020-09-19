@@ -4,8 +4,9 @@ const jwt = require('jsonwebtoken');
 
 
 const {
-	addUser,
-    } = require('../db');
+    addUser,
+    getAllUsers
+    } = require('../db/singletables/users');
     
     usersRouter.post('/register', async (req, res, next) => {
         const user = req.body;
@@ -19,5 +20,16 @@ const {
         }
     
     });
+
+    // get all users
+    usersRouter.get('/', async (req, res, next) => {
+        try {
+            const allUsers = await getAllUsers();
+
+            res.send(allUsers);
+        } catch (error) {
+            throw error;
+        }
+    })
 
     module.exports = usersRouter;

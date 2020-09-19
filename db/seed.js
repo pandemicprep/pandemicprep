@@ -1,4 +1,7 @@
-const { addUser } = require('./singletables/users');
+const { 
+    addUser,
+    getAllUsers
+} = require('./singletables/users');
 
 
 async function seed() {
@@ -82,6 +85,10 @@ async function seed() {
             creditCard: null,
         });
         console.log('user4 with minimum data ', user4);
+
+        console.log('Running getAllUsers...');
+        const allUsers = await getAllUsers();
+        console.log('all users result: ', allUsers);
 
 	} catch (error) {
 		throw error;
