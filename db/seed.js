@@ -1,4 +1,9 @@
-const { addUser, getAllUsers, updateUser } = require("./singletables/users");
+const {
+  addUser,
+  getAllUsers,
+  updateUser,
+  getUserById,
+} = require("./singletables/users");
 
 async function seed() {
   //creating a new user
@@ -104,6 +109,10 @@ async function seed() {
       creditCard: 1234567891234567,
     });
     console.log("Updated User2", user5);
+
+    console.log("Getting User By Id...");
+    const user = await getUserById(1);
+    console.log("Got user by id 1", user);
   } catch (error) {
     throw error;
   }
