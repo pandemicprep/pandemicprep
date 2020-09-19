@@ -1,5 +1,6 @@
 const { client } = require('../client');
 
+
 async function addProduct({
     name,
     price,
@@ -39,3 +40,4 @@ async function addProduct({
 
 
 module.exports = { addProduct };
+
