@@ -1,5 +1,5 @@
-const { addUser } = require('./');
-const 
+const { addUser } = require('./singletables/users');
+
 
 async function seed() {
 	//creating a new user
@@ -63,25 +63,25 @@ async function seed() {
         console.log('user3 with minimum data ', user3);
 
 
-        //not passing because null in email breaks the code (psql)
-        // console.log('creating user four, missing info ');
-        // const user4 = await addUser({
-        //     firstName: 'Joe',
-        //     lastName: 'Moe',
-        //     isAdmin: null,
-        //     isUser: null,
-		// 	email: null,
-		// 	password: 'password',
-        //     addressLine1: null,
-        //     addressLine2: null,
-		// 	city: null,
-		// 	state: null,
-		// 	zipcode: null,
-		// 	country: null,
-		// 	phone: null,
-        //     creditCard: null,
-        // });
-        // console.log('user4 with minimum data ', user4);
+        
+        console.log('creating user four, missing info ');
+        const user4 = await addUser({
+            firstName: 'Joe',
+            lastName: 'Moe',
+            isAdmin: null,
+            isUser: null,
+			email: null,
+			password: 'password',
+            addressLine1: null,
+            addressLine2: null,
+			city: null,
+			state: null,
+			zipcode: null,
+			country: null,
+			phone: null,
+            creditCard: null,
+        });
+        console.log('user4 with minimum data ', user4);
 
 	} catch (error) {
 		throw error;

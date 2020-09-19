@@ -4,7 +4,7 @@ module.exports = {
     ...require('./singletables/categories'),
     ...require('./singletables/products'),
     ...require('./singletables/reviews'),
-    ...require('./singletables/users'),
+    ...require('./singletables/users.js'),
     ...require('./jointables/products_carts'),
     ...require('./jointables/products_categories')
 }
