@@ -72,6 +72,7 @@ export const Profile = () => {
 	};
 	
 	const cancelHandler = (event) => {};
+	
 	const formHandler = async (event) => {
         event.preventDefault();
 		console.log('getting to the submit with ', firstName, lastName, email);
@@ -98,11 +99,18 @@ export const Profile = () => {
 		})
 			.then((result) => {
 				console.log('the new user is ', result);
+				if (result.message) {
+					warning(result.message);
+				}
 			})
 			.catch((error) => {
 				console.error();
 			});
 	};
+
+	function warning(warningMessage) {
+		alert(warningMessage);
+	}
 
 	// added by matthew just to test getAllUsers
 	const logAllUsers = async () => {
@@ -174,6 +182,7 @@ export const Profile = () => {
 					id='creditCard'
 					placeholder='Credit Card Number'
 					value={creditCard}
+					readOnly
 				/>
 				<button id='submit' type='submit'>
 					Submit
