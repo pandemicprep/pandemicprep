@@ -1,10 +1,11 @@
 const apiRouter = require('express').Router();
+const { getUserById } = require ('../db/');
 
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 
 
-apiRouter.use((req, res, next) => {
+apiRouter.use(async (req, res, next) => {
   console.log('api entry point');
   const prefix = 'Bearer ';
 	const auth = req.header('Authorization');
@@ -16,10 +17,10 @@ apiRouter.use((req, res, next) => {
 		const token = auth.slice(prefix.length);
 
 		try {
-			const { id } = jwt.verify(token, JWT_SECRET);
+			const { id, isAdmin, isUser } = jwt.verify(token, JWT_SECRET);
 
 			if (id) {
-        req.user = await getUserById(id);
+        req.user = await getUserById(id);        
         req.verified = true;
 				next();
 			}

@@ -37,4 +37,6 @@ export { Profile } from "./pages/body/user/Profile";
 export { Header } from "./pages/header/Header";
 export { Footer } from "./pages/footer/Footer";
 
+//utils
+export { states, countries } from './utils';
 

@@ -5,7 +5,7 @@ import React from "react";
 import "./Product.css";
 
 
-const Product = ({
+export const Product = ({
     name,
     price,
     description,
@@ -33,4 +33,3 @@ const Product = ({
     );
 }
 
-export default Product;
