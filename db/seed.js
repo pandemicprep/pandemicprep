@@ -1,7 +1,8 @@
 
 const { 
     addProduct,
-    getAllProducts
+    getAllProducts,
+    getProductsByQuery
 } = require('./singletables/products');
 
 const { 
@@ -125,6 +126,10 @@ async function seed() {
         // console.log('Running get all products...');
         // const allProducts = await getAllProducts();
         // console.log('Result: ', allProducts);
+
+        console.log('getting products by query...');
+        const allProductsByQuery = await getProductsByQuery("desk");
+        console.log('Result: ', allProductsByQuery);
 
 
     } catch (error) {

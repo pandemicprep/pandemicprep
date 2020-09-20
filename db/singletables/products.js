@@ -19,6 +19,7 @@ async function addProduct({
 
 }) {
     try {
+        // add the product
         const {
             rows: [newProduct],
         } = await client.query(
@@ -36,6 +37,29 @@ async function addProduct({
             ],
         );
 
+
+        // const { 
+        //     rows: [newCategory]
+        // } = await client.query(`
+        //     INSERT INTO categories (name)
+        //     VALUES ($1)
+        //     ON CONFLICT DO NOTHING
+        //     RETURNING *;
+        // `, [category]);
+
+        // console.log('new category: ', newCategory);
+
+        // 
+        // const {
+        //     rows
+        // } = await client.query(`
+        //     SELECT * 
+        //     FROM products 
+        //     JOIN products_categories ON products.id=products_categories."productId"
+        //     JOIN products_categories ON categories.id=products_categories."categoryId";
+        // `);
+
+        // console.log('newProductCategory: ', rows)
 
 
         if (newProduct) {
@@ -64,7 +88,34 @@ async function getAllProducts() {
     }
 }
 
+// gets specific products by a search query
+async function getProductsByQuery(query) {
+    try {
+        console.log('entering products query in db...')
+        console.log('query: ', query)
+
+        const uppercaseQuery = query.charAt(0).toUpperCase() + query.slice(1);
+        console.log(uppercaseQuery, 'LOOK HERE')
+
+        if (query === '') {
+            return await getAllProducts();
+        }
+
+        const { rows } = await client.query(`
+            SELECT * FROM products 
+            WHERE 
+            title LIKE '%${query}%'
+            OR title LIKE '%${uppercaseQuery}%';
+        `);
+
+        console.log('products by query: ', rows)
+        return rows;
+    } catch (error) {
+        throw error;
+    }
+}
 
 
-module.exports = { addProduct, getAllProducts };
+
+module.exports = { addProduct, getAllProducts, getProductsByQuery };
 
