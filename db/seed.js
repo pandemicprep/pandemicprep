@@ -1,20 +1,28 @@
 
+
 const { 
     addProduct,
     getAllProducts,
     getProductsByQuery
 } = require('./singletables/products');
 
-const { 
-    addUser,
-    getAllUsers
-} = require('./singletables/users');
+const {
+  addUser,
+  getAllUsers,
+  updateUser,
+  getUserById,
+} = require("./singletables/users");
+
+
+
+
 
 const productArray = require('./singletables/productObject')
 
 
 
 async function seed() {
+
     //creating a new user
     try {
         console.log('creating user one');
@@ -100,14 +108,16 @@ async function seed() {
 
 
         console.log('creating new product... ');
+
         const product = await addProduct({
             name: 'New Product Name',
             price: 999.99,
             description: 'new product description yay',
             imageURL: 'www.imageurl.com/urlurlurl',
+
             category: ''
         });
-        console.log('ADD NEW PRODUCT TEST', product);
+        
 
         console.log('Adding all products in product array to db...');
         await Promise.all(productArray.map(async (product) => {
@@ -135,6 +145,44 @@ async function seed() {
     } catch (error) {
         throw error;
     }
+
+        });
+        console.log('ADD NEW PRODUCT TEST', product);
+
+
+    console.log("Running getAllUsers...");
+    const allUsers = await getAllUsers();
+    console.log("all users result: ", allUsers);
+
+    console.log("Updating User 1...");
+    const user5 = await updateUser({
+      id: 2,
+      isAdmin: false,
+      isUser: true,
+      email: "myemail2@you.com",
+      password: "password",
+      firstName: "Joe",
+      lastName: "Moe",
+      addressLine1: "1234 Anywhere",
+      addressLine2: null,
+      city: "Anywhere",
+      state: "Florida",
+      zipcode: "12345",
+      country: null,
+      phone: "123-456-7890",
+      creditCard: 1234567891234567,
+    });
+    console.log("Updated User2", user5);
+
+
+    console.log("Getting User By Id...");
+    const user = await getUserById(1);
+    console.log("Got user by id 1", user);
+  } catch (error) {
+    throw error;
+  }
+
+
 }
 
 module.exports = { seed };

@@ -29,7 +29,8 @@ async function createTables() {
         description TEXT NOT NULL,
         price NUMERIC(9,2) NOT NULL,
         image varchar(255),
-        "imageDescription" varchar(255)
+        "imageDescription" varchar(255),
+        "isHighlighted" BOOLEAN DEFAULT false
       );
       
       CREATE TABLE categories (
@@ -54,7 +55,7 @@ async function createTables() {
         zipcode varchar(255),
         country varchar(255),
         phone varchar(255),
-        "creditCard" BIGINT
+        "creditCard" varchar(255)
       );
 
       CREATE TABLE cart (
