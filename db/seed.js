@@ -142,17 +142,12 @@ async function seed() {
         console.log('Result: ', allProductsByQuery);
 
 
-    } catch (error) {
-        throw error;
-    }
+    
 
-        });
         console.log('ADD NEW PRODUCT TEST', product);
 
 
-    console.log("Running getAllUsers...");
-    const allUsers = await getAllUsers();
-    console.log("all users result: ", allUsers);
+    
 
     console.log("Updating User 1...");
     const user5 = await updateUser({
