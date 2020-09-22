@@ -127,8 +127,7 @@ async function seed() {
         console.log("ADD NEW PRODUCT TEST", product);
 
         console.log("Updating User 1...");
-        const user5 = await updateUser({
-            id: 2,
+        const user5 = await updateUser(2, {
             isAdmin: false,
             isUser: true,
             email: "myemail2@you.com",
@@ -149,6 +148,12 @@ async function seed() {
         console.log("Getting User By Id...");
         const user = await getUserById(1);
         console.log("Got user by id 1", user);
+
+        console.log("Updating User 1....");
+        const user6 = await updateUser(1, {
+            email: "falon@pleasework.com",
+        })
+        console.log("updated user 1...", user6)
     } catch (error) {
         throw error;
     }
