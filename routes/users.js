@@ -35,15 +35,33 @@ usersRouter.get("/", async (req, res, next) => {
 });
 
 // update user by id
-// usersRouter.patch("/:userId", async (req, res, next) => {
-//   try {
-//       const {userId} = req.params
-//       const {user} = req.body
-//       const id = await getUserById(userId)
-//       const updateduser = await updateUser(id:id , user)
-//   } catch (error) {
-//     throw error;
-//   }
-// });
+usersRouter.patch("/:userId", async (req, res, next) => {
+  try {
+    console.log("entering update user by id route...");
+    const fields = req.body
+    const id = req.params.userId
+    const updateUserById = await updateUser(id, fields);
+    console.log("updated userId:", updateUserById);
+    res.send(updateUserById);
+
+  } catch (error) {
+    throw error;
+  }
+});
+
+//get user by id
+usersRouter.get("/:userId", async (req, res, next) => {
+  try {
+    console.log("entering getting user by id route...");
+    const id = req.params.userId
+    const getUser = await getUserById(id);
+    console.log("getting user by id....", getUser);
+    res.send(getUser);
+
+  } catch (error) {
+    throw error;
+  }
+});
+
 
 module.exports = usersRouter;
