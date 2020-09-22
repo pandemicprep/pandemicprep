@@ -19,6 +19,8 @@ async function addProduct({
 
 }) {
     try {
+        const categories = category.split(' ');
+
         // add the product
         const {
             rows: [newProduct],
@@ -38,84 +40,108 @@ async function addProduct({
         );
 
 
-        // const { 
-        //     rows: [newCategory]
-        // } = await client.query(`
-        //     INSERT INTO categories (name)
-        //     VALUES ($1)
-        //     ON CONFLICT DO NOTHING
-        //     RETURNING *;
-        // `, [category]);
+       await Promise.all(categories.map(async category => {
+                try {
+            st { 
+                          rows: [newCategory] }
+                    wait client.query(`
+                 INTO categories (name)
+                VALUES ($1)
+                ON CONFLICT DO NOTHING
+                RETURNING id;
+            `, [category]);
+
+            if (!newCategory) {
+                        const {
+                        rows: [index]
+                        await client.query(`
+                    SELECT id FROM categories
+                    WHERE name=$1;
+                `, [category]);
+            }
+                    
+ newCategory ? newCategory : index;
+                                
+roduct.id, newIndex, 'LOOK HERE')
+                                
+ await client.query(`
+                                    INSERT INTO products_categories ("productId", "categoryId")
+                VALUES ($1, $2);
+            `, [newProduct.id, newIndex]);
+
+            } catch (error) {
+            throw error;
+                    
+
+
+
+       
 
         // console.log('new category: ', newCategory);
+                        
 
-        // 
-        // const {
-        //     rows
-        // } = await client.query(`
-        //     SELECT * 
-        //     FROM products 
-        //     JOIN products_categories ON products.id=products_categories."productId"
-        //     JOIN products_categories ON categories.id=products_categories."categoryId";
-        // `);
+            if (newCategory) {
+    //     const { rows } = await client.query(`
+                                        //         INSER INTO products_categories ("productId", "categoryId");
+                    //     `, [newProduct.id, newCategory.id]);
+                        
 
-        // console.log('newProductCategory: ', rows)
-
+                
+ }
+                                    
+og('newProductCategory: ', rows)
+                                
 
         if (newProduct) {
-            return newProduct;
-        } else {
-            return { message: 'Unable to add new Product' };
-        }
+                            return newProduct;
+                            se {
+                        return { message: 'Unable to add new Product' };
+                                
 
-    } catch (error) {
-        throw error;
-    }
-}
+} catch (error) {
+                                            throw error;
+                                
+
 
 // gets all products
-async function getAllProducts() {
-    try {
-        const {
-            rows
-        } = await client.query(`
-            SELECT * FROM products;
+                                                    async function getAllProducts() {
+                                try {
+                                    const {
+                                        rows
+                                        await client.query(`
+                                    SELECT * FROM products;
         `);
 
         return rows;
-    } catch (error) {
-        throw error;
-    }
-}
+                                                    } catch (error) {
+                                throw error;
+                                    
+                                
+                            
 
-// gets specific products by a search query
-async function getProductsByQuery(query) {
-    try {
-        console.log('entering products query in db...')
-        console.log('query: ', query)
-
-        const uppercaseQuery = query.charAt(0).toUpperCase() + query.slice(1);
-        console.log(uppercaseQuery, 'LOOK HERE')
-
-        if (query === '') {
-            return await getAllProducts();
-        }
-
-        const { rows } = await client.query(`
-            SELECT * FROM products 
+specific products by a search query
+                            async function getProductsByQuery(query) {
+                                try {
+                                                const uppercaseQuery = query.charAt(0).toUpperCase() + query.slice(1);
+                                    
+= '') {
+                                                    return await getAllProducts();
+                                        
+                                    
+rows } = await client.query(`
+                                        SELECT * FROM products 
             WHERE 
             title LIKE '%${query}%'
             OR title LIKE '%${uppercaseQuery}%';
         `);
 
-        console.log('products by query: ', rows)
         return rows;
-    } catch (error) {
-        throw error;
-    }
-}
+                                        } catch (error) {
+                                w error;
+                                    
+                                
+                               
 
 
 
-module.exports = { addProduct, getAllProducts, getProductsByQuery };
-
+module.exports = { addProduct, getAllProducts, getProductsByQuery };                            

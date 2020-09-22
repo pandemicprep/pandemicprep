@@ -105,72 +105,95 @@ async function getAllUsers() {
 }
 
 //patch a user
-async function updateUser({
-    id,
-    isAdmin,
-    isUser,
-    email,
-    password,
-    firstName,
-    lastName,
-    addressLine1,
-    addressLine2,
-    city,
-    state,
-    zipcode,
-    country,
-    phone,
-    creditCard,
-}) {
-    const SALT_COUNT = 13;
-    let securedPassword = null;
-    let securedCreditCard = null;
-    if (password.length > 0) {
-        const validity = checkPassword(password);
-        if (validity.valid) {
-            securedPassword = await bcrypt.hash(password, SALT_COUNT);
-        } else {
-            return validity.message;
-        }
-    }
-
-    if (creditCard > 0) {
-        securedCreditCard = await bcrypt.hash("" + creditCard, SALT_COUNT);
+async function updateUser(id, fields = {}) {
+    // build the set string
+    const setString = Object.keys(fields).map(
+        (key, index) => `"${key}"=$${index + 1}`
+    ).join(', ');
+    // return early if this is called without fields
+    if (setString.length === 0) {
+        return;
     }
     try {
-        const { rows } = await client.query(
-            `
-    	UPDATE users
-    	SET "isAdmin" = $2, "isUser" = $3, email = $4,
-    	password = $5, "firstName" = $6, "lastName" = $7,
-    	"addressLine1" = $8, "addressLine2" = $9, city = $10, state = $11,
-    	zipcode = $12, country = $13, phone = $14, "creditCard" = $15
-		WHERE id = $1
-		RETURNING *;
-    	`,
-            [
-                id,
-                isAdmin,
-                isUser,
-                email,
-                securedPassword,
-                firstName,
-                lastName,
-                addressLine1,
-                addressLine2,
-                city,
-                state,
-                zipcode,
-                country,
-                phone,
-                securedCreditCard,
-            ]
-        );
-        return rows;
+        const { rows: [users] } = await client.query(`
+      UPDATE users
+      SET ${ setString}
+      WHERE id=${ id}
+      RETURNING *;
+    `, Object.values(fields));
+
+        return users;
     } catch (error) {
         throw error;
     }
 }
+
+// async function updateUser({
+//     id,
+//     isAdmin,
+//     isUser,
+//     email,
+//     password,
+//     firstName,
+//     lastName,
+//     addressLine1,
+//     addressLine2,
+//     city,
+//     state,
+//     zipcode,
+//     country,
+//     phone,
+//     creditCard,
+// }) {
+//     const SALT_COUNT = 13;
+//     let securedPassword = null;
+//     let securedCreditCard = null;
+//     if (password.length > 0) {
+//         const validity = checkPassword(password);
+//         if (validity.valid) {
+//             securedPassword = await bcrypt.hash(password, SALT_COUNT);
+//         } else {
+//             return validity.message;
+//         }
+//     }
+
+//     if (creditCard > 0) {
+//         securedCreditCard = await bcrypt.hash("" + creditCard, SALT_COUNT);
+//     }
+//     try {
+//         const { rows } = await client.query(
+//             `
+//     	UPDATE users
+//     	SET "isAdmin" = $2, "isUser" = $3, email = $4,
+//     	password = $5, "firstName" = $6, "lastName" = $7,
+//     	"addressLine1" = $8, "addressLine2" = $9, city = $10, state = $11,
+//     	zipcode = $12, country = $13, phone = $14, "creditCard" = $15
+// 		WHERE id = $1
+// 		RETURNING *;
+//     	`,
+//             [
+//                 id,
+//                 isAdmin,
+//                 isUser,
+//                 email,
+//                 securedPassword,
+//                 firstName,
+//                 lastName,
+//                 addressLine1,
+//                 addressLine2,
+//                 city,
+//                 state,
+//                 zipcode,
+//                 country,
+//                 phone,
+//                 securedCreditCard,
+//             ]
+//         );
+//         return rows;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 
 async function getUserById(id) {
     try {
