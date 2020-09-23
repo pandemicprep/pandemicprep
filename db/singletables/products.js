@@ -147,5 +147,6 @@ async function getProductsByQuery(query) {
 module.exports = { 
     addProductAndCategory, 
     getAllProducts, 
-    getProductsByQuery 
+    getProductsByQuery,
+    addProduct
 };

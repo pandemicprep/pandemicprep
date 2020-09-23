@@ -9,7 +9,8 @@ export { default as App } from "./App";
 export { 
     addUser,
     getAllUsers,
-    getProductsByQuery
+    getProductsByQuery,
+    addNewProduct
 } from '../api';
 
 
@@ -31,6 +32,7 @@ export { Orders } from './pages/body/orders/Orders';
 //products
 export { Product } from './pages/body/products/Product';
 export { Productlist } from './pages/body/products/Productlist';
+export { AddProduct } from './pages/body/products/AddProduct';
 
 //user
 export { Checkout } from './pages/body/user/Checkout';
