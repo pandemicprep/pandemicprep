@@ -105,6 +105,7 @@ async function getAllUsers() {
 }
 
 //patch a user
+
 async function updateUser(id, fields = {}) {
     // build the set string
     const setString = Object.keys(fields).map(
@@ -126,6 +127,7 @@ async function updateUser(id, fields = {}) {
     } catch (error) {
         throw error;
     }
+
 }
 
 
