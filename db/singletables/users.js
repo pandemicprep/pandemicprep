@@ -120,6 +120,7 @@ async function updateUser({
 	phone,
 	creditCard,
 }) {
+	
 	try {
 		const { rows } = await client.query(
 			`

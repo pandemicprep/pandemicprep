@@ -1,5 +1,8 @@
 const { client } = require('../client');
 
+const { addCategory, categoryIdByName } = require('./categories');
+const { addProduct_Categories } = require('../jointables/products_categories')
+
 /**
  * addProduct => add product,
  * then add category,
@@ -9,91 +12,78 @@ const { client } = require('../client');
  * For the products_categories you’ll use the id of the product and the id of the category
  */
 
-async function addProduct({ name, price, description, imageURL, category }) {
+async function addProductAndCategory({ name, price, description, image, category }) {
 	try {
 		const categories = category.split(' ');
-
+		console.log('category split ', categories);
 		// add the product
+
+		const newProduct = await addProduct({ name, price, description, image });
+		if (newProduct) {
+			var newProductId = newProduct.id;
+		} else {
+			//product already existed in the db
+			// console.log('finishing after creating product ', newProduct);
+			return;
+		}
+		console.log('new product from add product ', newProduct);
+		await Promise.all(
+			categories.map((name) => {
+				var catId;
+				categoryIdByName(name).then((categoryId) => {
+					if (!categoryId) {
+						addCategory(name).then((categoryObject) => {
+							catId = categoryObject.id;
+						});
+					} else {
+						catId = categoryId;
+					}
+				}); //number or false
+				// console.log('first categoryId, finding by name: ', categoryId);
+				// if (!categoryId) {
+				// 	const categoryObject = await addCategory(name); // category object or false
+				// 	console.log('first categoryId should be false. categoryObject should be new category ', categoryObject);
+				// 	if (categoryObject) {
+
+				// 		categoryId = categoryObject.id;
+				// 		console.log('categoryId will now turn into id of categoryObject ', categoryId);
+				// 	}
+				// }
+
+				if (catId) {
+					
+						addProduct_Categories(newProduct, catId);
+				}
+			}),
+		);
+	} catch (error) {
+		throw error;
+	}
+}
+
+async function addProduct({ name, price, description, image }) {
+	try {
 		const {
 			rows: [newProduct],
 		} = await client.query(
 			`
-            INSERT INTO products (title, price, description, image)
-            VALUES ($1, $2, $3, $4)
-            ON CONFLICT DO NOTHING
-            RETURNING *;
-        `,
-			[name, price, description, imageURL],
+		INSERT INTO products (title, price, description, image)
+		VALUES ($1, $2, $3, $4)
+		ON CONFLICT DO NOTHING
+		RETURNING *;
+	`,
+			[name, price, description, image],
 		);
-
-		console.log('new product from add product ', newProduct);
-		await Promise.all(
-			categories.map(async (category) => {
-				try {
-					const {
-						rows: [newCategory],
-					} = await client.query(
-						`
-                INSERT INTO categories (name)
-                VALUES ($1)
-                ON CONFLICT DO NOTHING
-                RETURNING id;
-            `,
-						[category],
-					);
-
-					console.log('new Category ', newCategory);
-					if (!newCategory) {
-						const {
-							rows: [index],
-						} = await client.query(
-							`
-                    SELECT id FROM categories
-                    WHERE name=$1;
-                `,
-							[category],
-						);
-					}
-
-					const newIndex = newCategory ? newCategory : index;
-
-					console.log(newProduct.id, newIndex.id, 'LOOK HERE');
-
-					const { rows } = await client.query(
-						`
-                INSERT INTO products_categories ("productId", "categoryId")
-                VALUES ($1, $2);
-            `,
-						[newProduct.id, newIndex.id],
-					);
-				} catch (error) {
-					throw error;
-				}
-			}),
-		);
-
-		// console.log('new category: ', newCategory);
-
-		//   if (newCategory) {
-		//     const { rows } = await client.query(`
-		//         INSER INTO products_categories ("productId", "categoryId");
-		//     `, [newProduct.id, newCategory.id]);
-
-		//   } else {
-
-		//   }
-
-		// console.log('newProductCategory: ', rows)
-
 		if (newProduct) {
 			return newProduct;
 		} else {
-			return { message: 'Unable to add new Product' };
+			return false;
 		}
 	} catch (error) {
 		throw error;
 	}
 }
+
 
 // gets all products
 async function getAllProducts() {
@@ -135,4 +125,4 @@ async function getProductsByQuery(query) {
 	}
 }
 
-module.exports = { addProduct, getAllProducts, getProductsByQuery };
+module.exports = { addProductAndCategory, getAllProducts, getProductsByQuery };
