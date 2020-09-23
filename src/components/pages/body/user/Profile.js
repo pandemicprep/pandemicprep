@@ -3,12 +3,14 @@
 import React, { useState } from 'react';
 
 import { 
-	addUser
+	addUser,
+	getAllUsers,
+	getProductsByQuery
 } from '../../../index';
 
-import {
-	getAllUsers
-} from '../../../../api/index'
+// import {
+// 	getAllUsers
+// } from '../../../../api/index'
 
 import { states, countries } from '../../../utils'
 
@@ -33,6 +35,8 @@ export const Profile = () => {
 	const [phone, setPhone] = useState('');
 	const [creditCard, setCreditCard] = useState(Math.floor(Math.random() * (9999999999999999 - 1000000000000000 + 1)) +
 	1000000000000000);
+
+	const [searchString, setSearchString] = useState('');
 
 	const firstNameGetter = (event) => {
 		setFirstName(event.target.value);
@@ -116,6 +120,12 @@ export const Profile = () => {
 	const logAllUsers = async () => {
 		const allUsers = await getAllUsers();
 		console.log('allUsers logged in front end: ', allUsers);
+		const products = await getProductsByQuery('memo')
+		console.log('PLEASE WORRRRKRKRKRK', products)
+	}
+
+	const handleSearchString = (event) => {
+		setSearchString(event.target.value)
 	}
 
 	return (

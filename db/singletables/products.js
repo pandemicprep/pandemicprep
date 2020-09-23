@@ -1,6 +1,6 @@
 const { client } = require('../client');
 
-const { addCategory, categoryIdByName } = require('./categories');
+const { addCategory, categoryIdByName, getCategoryByName } = require('./categories');
 const { addProduct_Categories } = require('../jointables/products_categories')
 
 /**
@@ -28,31 +28,22 @@ async function addProductAndCategory({ name, price, description, image, category
 		}
 		console.log('new product from add product ', newProduct);
 		await Promise.all(
-			categories.map((name) => {
-				var catId;
-				categoryIdByName(name).then((categoryId) => {
-					if (!categoryId) {
-						addCategory(name).then((categoryObject) => {
-							catId = categoryObject.id;
-						});
-					} else {
-						catId = categoryId;
+			categories.map(async (name) => {
+                
+                var categoryId = await categoryIdByName(name);
+				
+				console.log('first categoryId, finding by name: ', categoryId);
+				if (!categoryId) {
+					const categoryObject = await addCategory(name); // category object or false
+					console.log('first categoryId should be false. categoryObject should be new category ', categoryObject);
+					if (categoryObject) {
+						categoryId = categoryObject.id;
+						console.log('categoryId will now turn into id of categoryObject ', categoryId);
 					}
-				}); //number or false
-				// console.log('first categoryId, finding by name: ', categoryId);
-				// if (!categoryId) {
-				// 	const categoryObject = await addCategory(name); // category object or false
-				// 	console.log('first categoryId should be false. categoryObject should be new category ', categoryObject);
-				// 	if (categoryObject) {
+				}
 
-				// 		categoryId = categoryObject.id;
-				// 		console.log('categoryId will now turn into id of categoryObject ', categoryId);
-				// 	}
-				// }
-
-				if (catId) {
-					
-						addProduct_Categories(newProduct, catId);
+				if (categoryId) {
+					await addProduct_Categories(newProduct.id, categoryId);
 				}
 			}),
 		);
@@ -74,15 +65,43 @@ async function addProduct({ name, price, description, image }) {
 	`,
 			[name, price, description, image],
 		);
-		if (newProduct) {
-			return newProduct;
-		} else {
-			return false;
-		}
+		// if (newProduct) {
+		// 	return newProduct;
+		// } else {
+		// 	return false;
+        // }
+        return newProduct;
 	} catch (error) {
 		throw error;
 	}
 }
+
+// async function addProductAndCategory({name, price, description, image, category}) {
+//     try {
+//         const newProduct = await addProduct({name, price, description, image});
+//         // console.log('inside addProductAndCategory new product ID: ', newProduct.id);
+
+//         const categories = category.split(' ');
+//         // console.log('inside addProductAndCategory categories: ', categories);
+//         if (categories.length === 1) {
+//             const newCategory = await addCategory(category);
+//             await addProduct_Categories(newProduct.id, newCategory.id);
+//         } else if (categories.length > 1) {
+//             await Promise.all(
+//                 categories.map(async (name) => {
+//                     const categoryByName = await addCategory(name);
+//                     console.log('LOOK HERE PRODUCT ID ', newProduct)
+//                     console.log('LOOK HERE CATEGORY ID ', categoryByName)
+//                     await addProduct_Categories(newProduct.id, categoryByName.id);
+//                 })
+//             )
+//         }
+
+        
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 
 
 // gets all products
@@ -101,11 +120,11 @@ async function getAllProducts() {
 // gets specific products by a search query
 async function getProductsByQuery(query) {
 	try {
-		console.log('entering products query in db...');
-		console.log('query: ', query);
+		// console.log('entering products query in db...');
+		// console.log('query: ', query);
 
 		const uppercaseQuery = query.charAt(0).toUpperCase() + query.slice(1);
-		console.log(uppercaseQuery, 'LOOK HERE');
+		// console.log(uppercaseQuery, 'LOOK HERE');
 
 		if (query === '') {
 			return await getAllProducts();
@@ -118,11 +137,16 @@ async function getProductsByQuery(query) {
             OR title LIKE '%${uppercaseQuery}%';
         `);
 
-		console.log('products by query: ', rows);
+		// console.log('products by query: ', rows);
 		return rows;
 	} catch (error) {
 		throw error;
 	}
 }
 
-module.exports = { addProductAndCategory, getAllProducts, getProductsByQuery };
+module.exports = { 
+    addProductAndCategory, 
+    getAllProducts, 
+    getProductsByQuery,
+    addProduct
+};

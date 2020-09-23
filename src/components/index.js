@@ -6,7 +6,12 @@
 export { default as App } from "./App";
 
 //api/index
-export { addUser } from '../api';
+export { 
+    addUser,
+    getAllUsers,
+    getProductsByQuery,
+    addNewProduct
+} from '../api';
 
 
 //main body
@@ -27,6 +32,7 @@ export { Orders } from './pages/body/orders/Orders';
 //products
 export { Product } from './pages/body/products/Product';
 export { Productlist } from './pages/body/products/Productlist';
+export { AddProduct } from './pages/body/products/AddProduct';
 
 //user
 export { Checkout } from './pages/body/user/Checkout';
