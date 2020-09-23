@@ -443,14 +443,14 @@ const productArray = [
             category: "work kitchen"
         },
         {
-            name: "Sticky Memo Ball",
+            name: "Sticky Memo Ball dummy1",
             price: 12.99,
             description: "Its 12 sticky sides each feature tear-off sticky memos in different colors so you can get creative with group brainstorming at work or keeping the whole family organized at home.",
             image: "images/school/stickymemoball.jpg",
             category: "supplies"
         },
         {
-            name: "Sticky Memo Ball",
+            name: "Sticky Memo Ball dummy2",
             price: 12.99,
             description: "Its 12 sticky sides each feature tear-off sticky memos in different colors so you can get creative with group brainstorming at work or keeping the whole family organized at home.",
             image: "images/school/stickymemoball.jpg",

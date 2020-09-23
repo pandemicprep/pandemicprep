@@ -24,7 +24,7 @@ const productArray = require('./singletables/productObject')
 async function seed() {
 try {
     
-    // await createNewUsers();
+    await createNewUsers();
     // await gettingAllUsers();
     await creatingOneNewProduct();
     await seedingProductObject();
@@ -32,7 +32,7 @@ try {
     // await updatingUsers();
     // await gettingUserById();
     // await gettingCategoryIdsByName();
-    // await addingNewCategory();
+    await addingNewCategory();
         
 
 

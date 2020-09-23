@@ -6,7 +6,11 @@
 export { default as App } from "./App";
 
 //api/index
-export { addUser } from '../api';
+export { 
+    addUser,
+    getAllUsers,
+    getProductsByQuery
+} from '../api';
 
 
 //main body

@@ -26,28 +26,65 @@ async function categoryIdByName(name) {
 
 async function addCategory(name) {
     try {
-        var {
-            rows: [newCategory],
-        } = await client.query(
-            `
-    INSERT INTO categories (name)
-    VALUES ($1)
-    ON CONFLICT DO NOTHING
-    RETURNING *;
-`,
-            [name],
-        );
-        // console.log('adding Category is adding ', newCategory);
-        if (newCategory) {
-            // console.log('newCategory is returning true');
-            return newCategory;
+        const categoryByName = await getCategoryByName(name);
+        console.log('category by name: ', categoryByName)
+        if (categoryByName) {
+            console.log('returning because caught by category by name')
+            return categoryByName;
         } else {
-            // console.log('newCategory is returning false');
-            return false;
+            var {
+                rows: [newCategory],
+            } = await client.query(
+                `
+        INSERT INTO categories (name)
+        VALUES ($1)
+        ON CONFLICT DO NOTHING
+        RETURNING *;
+    `,
+                [name],
+            );
+            console.log('LOOK HERE tsest', newCategory)
+            return newCategory;
         }
+
+        
+//         var {
+//             rows: [newCategory],
+//         } = await client.query(
+//             `
+//     INSERT INTO categories (name)
+//     VALUES ($1)
+//     ON CONFLICT DO NOTHING
+//     RETURNING *;
+// `,
+//             [name],
+//         );
+        // console.log('adding Category is adding ', newCategory);
+        // if (newCategory) {
+            // console.log('newCategory is returning true');
+            // return newCategory;
+        // } else {
+            // console.log('newCategory is returning false');
+        //     return false;
+        // }
     } catch (error) {
         throw error;
     }
 }
 
-module.exports = { categoryIdByName, addCategory };
+async function getCategoryByName(name) {
+    try {
+        const {
+            rows: [category]
+        } = await client.query(`
+            SELECT * FROM categories
+            WHERE name=$1;
+        `, [name]);
+
+        return category;
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports = { categoryIdByName, addCategory, getCategoryByName };
