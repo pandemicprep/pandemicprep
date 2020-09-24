@@ -21,7 +21,6 @@ apiRouter.use(async (req, res, next) => {
 
 			if (id) {
         req.user = await getUserById(id);        
-        req.verified = true;
 				next();
 			}
 		} catch ({ name, message }) {

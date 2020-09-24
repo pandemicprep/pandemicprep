@@ -29,7 +29,7 @@ try {
     
     await createNewUsers();
     // await gettingAllUsers();
-    await creatingOneNewProduct();
+    // await creatingOneNewProduct();
     await seedingProductObject();
     // await gettingProductsByQuery();
     // await updatingUsers();
@@ -164,25 +164,33 @@ async function creatingOneNewProduct() {
 }
 
 async function seedingProductObject() {
-    try {
+    
         console.log('Adding all products in product array to db...');
-        await Promise.all(productArray.map(async (product) => {
-          const { name, price, description, image, category} = product
-        
-          const newProduct = await addProductAndCategory({
-              name,
-              price,
-              description,
-              image,
-              category
-          });
-          console.log('the new product ', newProduct);
-         }));
-        console.log('Exiting all products seed loop...');
 
-    } catch (error) {
-        throw error;
-    }
+        productArray.forEach(({name, price, description, image, category}) => {
+            addProductAndCategory({name, price, description, image, category}).then((result) => {
+                console.log('the new product', result);
+            })
+        });
+
+
+
+
+        // await Promise.all(productArray.map(async (product) => {
+        //   const { name, price, description, image, category} = product
+        
+        //   const newProduct = await addProductAndCategory({
+        //       name,
+        //       price,
+        //       description,
+        //       image,
+        //       category
+        //   });
+        //   console.log('the new product ', newProduct);
+        //  }));
+        // console.log('Exiting all products seed loop...');
+
+    
 }
 
 async function gettingProductsByQuery() {

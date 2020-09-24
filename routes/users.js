@@ -7,19 +7,65 @@ const {
   getAllUsers,
   updateUser,
   getUserById,
+  getUserByEmail
 } = require("../db/singletables/users");
 
 usersRouter.post("/register", async (req, res, next) => {
   const user = req.body;
-  console.log("got into router", user);
+  console.log("got into user router registration ", user);
   try {
     const newUser = await addUser(user);
     console.log("new user ", newUser);
-    res.send(newUser);
+    if (newUser.message) {
+      res.send(newUser);
+    } else {
+      const token = jwt.sign(
+				{
+					id: newUser.id,
+          isAdmin: newUser.isAdmin,
+          isUser: newUser.isUser
+				},
+				process.env.JWT_SECRET,
+				{
+					expiresIn: '1w',
+				},
+			);
+    res.send(token);
+    }
   } catch (error) {
     throw error;
   }
 });
+
+usersRouter.post('/login', async (req, res, next) => {
+  const SALT_COUNT = 13;
+  const { email, password } = req.body;
+  console.log('got into user router login with ', email, password);
+  try {
+    const user = await getUserByEmail(email);
+    if (user.message) {
+      res.send(user);
+    } else {
+      const validated = await bcrypt.compare(password, user.password);
+      if (validated) {
+        const token = jwt.sign(
+          {
+            id: user.id,
+            isAdmin: user.isAdmin,
+            isUser: user.isUser
+          },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: '1w',
+          },
+        );
+        res.send(token);
+      }
+    }
+  } catch (error) {
+    throw error;
+  }
+})
 
 // get all users
 usersRouter.get("/", async (req, res, next) => {
