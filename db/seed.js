@@ -1,4 +1,6 @@
 /** @format */
+const Promise = require('bluebird');
+
 
 const {
     addProductAndCategory,
@@ -17,7 +19,7 @@ const { addCart } = require("./singletables/cart");
 async function seed() {
     try {
         await createNewUsers();
-        // await gettingAllUsers();
+        await gettingAllUsers();
         // await creatingOneNewProduct();
         await seedingProductObject();
         // await gettingProductsByQuery();
@@ -140,35 +142,28 @@ async function creatingOneNewProduct() {
 
             category: "bath",
         });
+        console.log('the new product is ', product);
     } catch (error) {
         throw error;
     }
 }
 
-function seedingProductObject() {
+async function seedingProductObject() {
     console.log("Adding all products in product array to db...");
+    const length = productArray.length;
+        try {
+            await Promise.mapSeries(productArray, function ({name, price, description, image, category}, index, length) {
+                    const newProduct = addProductAndCategory({name, price, description, image, category});
+                    
+                    return newProduct;
+                
+            });
+        } catch (error) {
+            throw error;
+        }
+       
+    }
 
-    productArray.forEach(({ name, price, description, image, category }) => {
-        addProductAndCategory({ name, price, description, image, category });
-        // .then((result) => {
-        //     console.log('the new product', result);
-        // }).catch((error) => console.error(error));
-    });
-
-    // await Promise.all(productArray.map(async (product) => {
-    //   const { name, price, description, image, category} = product
-
-    //   const newProduct = await addProductAndCategory({
-    //       name,
-    //       price,
-    //       description,
-    //       image,
-    //       category
-    //   });
-    //   console.log('the new product ', newProduct);
-    //  }));
-    // console.log('Exiting all products seed loop...');
-}
 
 async function gettingProductsByQuery() {
     try {
