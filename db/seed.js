@@ -1,9 +1,6 @@
 
 /** @format */
 
-
-
-
 const { 
     addProductAndCategory,
     getAllProducts,
@@ -17,11 +14,16 @@ const {
   getUserById,
 } = require("./singletables/users");
 
-const { categoryIdByName, addCategory } = require('./singletables/categories')
+const { 
+    categoryIdByName, 
+    addCategory 
+} = require('./singletables/categories');
 
+const productArray = require('./singletables/productObject');
 
-
-const productArray = require('./singletables/productObject')
+const {
+    addCart
+} = require('./singletables/cart');
 
 
 async function seed() {
@@ -30,12 +32,13 @@ try {
     await createNewUsers();
     // await gettingAllUsers();
     // await creatingOneNewProduct();
-    await seedingProductObject();
+    // await seedingProductObject();
     // await gettingProductsByQuery();
     // await updatingUsers();
     // await gettingUserById();
     // await gettingCategoryIdsByName();
     await addingNewCategory();
+    await addingOneCart();
         
 
 
@@ -262,7 +265,19 @@ async function addingNewCategory() {
     }
 }
 
-
+async function addingOneCart() {
+    try {
+        const newCart = await addCart({
+            status: 'active',
+            lastUpdated: '09-22-2020',
+            total: 99.99,
+            userId: '1'
+        });
+        console.log('one new cart in seed: ', newCart);
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 module.exports = { seed };
