@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 
-import { 
+import {
 	addUser
 } from '../../../index';
 
 import {
-	getAllUsers
+	getAllUsers, updateUser
 } from '../../../../api/index'
 
 import { states, countries } from '../../../utils'
@@ -17,8 +17,9 @@ import './Profile.css';
 
 
 export const Profile = () => {
-	const [ view, setView ] = useState('register');				//will define the page view. Views are register, guest, userPay, edit
-    const [isUser, setIsUser] = useState(false);	
+	//MODIFY FIELDS FOR EACH VIEW --->
+	const [view, setView] = useState('register');				//will define the page view. Views are register, guest, userPay, edit
+	const [isUser, setIsUser] = useState(false);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ export const Profile = () => {
 	const [country, setCountry] = useState('');
 	const [phone, setPhone] = useState('');
 	const [creditCard, setCreditCard] = useState(Math.floor(Math.random() * (9999999999999999 - 1000000000000000 + 1)) +
-	1000000000000000);
+		1000000000000000);
 
 	const firstNameGetter = (event) => {
 		setFirstName(event.target.value);
@@ -70,11 +71,11 @@ export const Profile = () => {
 	const phoneGetter = (event) => {
 		setPhone(event.target.value);
 	};
-	
-	const cancelHandler = (event) => {};
-	
+
+	const cancelHandler = (event) => { };
+
 	const formHandler = async (event) => {
-        event.preventDefault();
+		event.preventDefault();
 		console.log('getting to the submit with ', firstName, lastName, email);
 		if (password1.length > 0) {
 			if (password1 !== password2) {
@@ -83,7 +84,7 @@ export const Profile = () => {
 			}
 		}
 		addUser({
-            isUser: true,
+			isUser: true,
 			firstName,
 			lastName,
 			email,
@@ -190,10 +191,10 @@ export const Profile = () => {
 				<button id='cancel' onChange={cancelHandler}>
 					Cancel
 				</button>
-				
+
 			</form>
 			<button onClick={logAllUsers}>
-					User test
+				User test
 			</button>
 		</div>
 	);
