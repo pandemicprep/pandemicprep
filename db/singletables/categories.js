@@ -26,47 +26,47 @@ async function categoryIdByName(name) {
 
 async function addCategory(name) {
     try {
-        const categoryByName = await getCategoryByName(name);
-        console.log('category by name: ', categoryByName)
-        if (categoryByName) {
-            console.log('returning because caught by category by name')
-            return categoryByName;
-        } else {
-            var {
-                rows: [newCategory],
-            } = await client.query(
-                `
-        INSERT INTO categories (name)
-        VALUES ($1)
-        ON CONFLICT DO NOTHING
-        RETURNING *;
-    `,
-                [name],
-            );
-            console.log('LOOK HERE tsest', newCategory)
-            return newCategory;
-        }
+    //     const categoryByName = await getCategoryByName(name);
+    //     console.log('category by name: ', categoryByName)
+    //     if (categoryByName) {
+    //         console.log('returning because caught by category by name')
+    //         return categoryByName;
+    //     } else {
+    //         var {
+    //             rows: [newCategory],
+    //         } = await client.query(
+    //             `
+    //     INSERT INTO categories (name)
+    //     VALUES ($1)
+    //     ON CONFLICT DO NOTHING
+    //     RETURNING *;
+    // `,
+    //             [name],
+    //         );
+    //         console.log('LOOK HERE tsest', newCategory)
+    //         return newCategory;
+    //     }
 
         
-//         var {
-//             rows: [newCategory],
-//         } = await client.query(
-//             `
-//     INSERT INTO categories (name)
-//     VALUES ($1)
-//     ON CONFLICT DO NOTHING
-//     RETURNING *;
-// `,
-//             [name],
-//         );
-        // console.log('adding Category is adding ', newCategory);
-        // if (newCategory) {
-            // console.log('newCategory is returning true');
-            // return newCategory;
-        // } else {
-            // console.log('newCategory is returning false');
-        //     return false;
-        // }
+        var {
+            rows: [newCategory],
+        } = await client.query(
+            `
+    INSERT INTO categories (name)
+    VALUES ($1)
+    ON CONFLICT DO NOTHING
+    RETURNING *;
+`,
+            [name],
+        );
+        
+        if (newCategory) {
+            
+            return newCategory;
+        } else {
+           
+            return false;
+        }
     } catch (error) {
         throw error;
     }

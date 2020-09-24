@@ -8,6 +8,7 @@ export const AddProduct = () => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+    const [categories, setCategories] = useState('');
 
     const handleName = (event) => {
         setName(event.target.value);
@@ -23,6 +24,10 @@ export const AddProduct = () => {
 
     const handleImage = (event) => {
         setImage(event.target.value);
+    }
+
+    const handleCategories = (event) => {
+        setCategories(event.target.value);
     }
 
     const handleSubmit = async (event) => {
@@ -64,6 +69,12 @@ export const AddProduct = () => {
             placeholder='image'
             value={image}
             onChange={handleImage}
+            />
+
+<input
+            placeholder='categories'
+            value={categories}
+            onChange={handleCategories}
             />
 
             <button/>
