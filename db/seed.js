@@ -17,7 +17,7 @@ const {
   getUserById,
 } = require("./singletables/users");
 
-const { categoryIdByName, addCategory } = require('./singletables/categories')
+const { categoryIdByName } = require('./singletables/categories')
 
 
 
@@ -27,7 +27,7 @@ const productArray = require('./singletables/productObject')
 async function seed() {
 try {
     
-    await createNewUsers();
+    // await createNewUsers();
     // await gettingAllUsers();
     // await creatingOneNewProduct();
     await seedingProductObject();
@@ -35,7 +35,7 @@ try {
     // await updatingUsers();
     // await gettingUserById();
     // await gettingCategoryIdsByName();
-    await addingNewCategory();
+    
         
 
 
@@ -163,14 +163,15 @@ async function creatingOneNewProduct() {
     }
 }
 
-async function seedingProductObject() {
+function seedingProductObject() {
     
         console.log('Adding all products in product array to db...');
 
         productArray.forEach(({name, price, description, image, category}) => {
-            addProductAndCategory({name, price, description, image, category}).then((result) => {
-                console.log('the new product', result);
-            })
+            addProductAndCategory({name, price, description, image, category});
+            // .then((result) => {
+            //     console.log('the new product', result);
+            // }).catch((error) => console.error(error));
         });
 
 
@@ -244,23 +245,17 @@ async function gettingUserById() {
 async function gettingCategoryIdsByName() {
     try {
         console.log('getting category ids by name');
-        console.log('getting bath id ', await categoryIdByName('bath'));
-        console.log('getting car id by name (non existent) ', await categoryIdByName('car'));
+        console.log('getting bath id 1 ', await categoryIdByName('bath'));
+        console.log('getting car id by name (non existent) 2 ', await categoryIdByName('car'));
+        console.log('getting bath id 1 ', await categoryIdByName('bath'));
+        console.log('getting null id, should be false ', await categoryIdByName(null));
+        console.log('getting "" id, should be false ', await categoryIdByName(''));
     } catch (error) {
         throw error;
     }
 }
 
-async function addingNewCategory() {
-    try {
-        console.log('Adding new categories');
-        console.log('Category outdoors ', await addCategory('outdoors'));
-        console.log('Category outdoors (repeated) ', await addCategory('outdoors'));
-        console.log('Category food ', await addCategory('food'));
-    } catch (error) {
-        throw error;
-    }
-}
+
 
 
 

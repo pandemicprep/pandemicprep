@@ -14,26 +14,16 @@ const { addProduct_Categories } = require('../jointables/products_categories')
 
 
  function addProductAndCategory({name, price, description, image, category}) {
-
+	
 	const categories = category.split(' ');
-	let catId;
+
 	let newProduct;
 	
 	return addProduct({name, price, description, image}).then((result) => {
 		newProduct = result;
 		categories.forEach((item) => {
 			categoryIdByName(item).then((categoryId) => {
-				if (!categoryId) {
-					addCategory(item).then((newCategory) => {
-						catId = newCategory.id;
-						addProduct_Categories(newProduct.id, catId).catch((error) => console.error(error));
-						console.log('the newCategory id ', newCategory.id, catId);
-					}).catch((error) => console.error(error));
-				} else {
-					catId = categoryId;
-					addProduct_Categories(newProduct.id, catId).catch((error) => console.error(error));
-				}
-				
+				addProduct_Categories(newProduct.id, categoryId).catch((error) => console.error(error));
 			});
 		})
 	}).catch((error) => console.error(error));
