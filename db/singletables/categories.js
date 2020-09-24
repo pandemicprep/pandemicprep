@@ -2,75 +2,47 @@ const { client } = require('../client');
 
 async function categoryIdByName(name) {
     try {
+        if (name) {
+            if (name.length > 0) {
         const {
             rows: [index],
         } = await client.query(
             `
-    SELECT id FROM categories
+    SELECT id 
+    FROM categories
     WHERE name=$1;
 `,
             [name],
         );
-        // console.log('index from categoryIdByName ', index);
+       
         if (index) {
-            // console.log("im returning that index from categoryIdByName");
+            
             return index.id;
         } else {
-            // console.log('index from categoryIdByName returning false');
-            return false;
+            const { rows: [ newIndex ]} = await client.query(`
+            INSERT INTO categories (name)
+            VALUES ($1)
+            ON CONFLICT DO NOTHING
+            RETURNING *;
+            `, [ name ]);
+            if (newIndex) {
+                return newIndex.id;
+            } else {
+                return false;
+            }
         }
+    } else {
+        return false;
+    }
+ } else {
+        return false;
+    }
     } catch (error) {
         throw error;
     }
 }
 
-async function addCategory(name) {
-    try {
-    //     const categoryByName = await getCategoryByName(name);
-    //     console.log('category by name: ', categoryByName)
-    //     if (categoryByName) {
-    //         console.log('returning because caught by category by name')
-    //         return categoryByName;
-    //     } else {
-    //         var {
-    //             rows: [newCategory],
-    //         } = await client.query(
-    //             `
-    //     INSERT INTO categories (name)
-    //     VALUES ($1)
-    //     ON CONFLICT DO NOTHING
-    //     RETURNING *;
-    // `,
-    //             [name],
-    //         );
-    //         console.log('LOOK HERE tsest', newCategory)
-    //         return newCategory;
-    //     }
 
-        
-        var {
-            rows: [newCategory],
-        } = await client.query(
-            `
-    INSERT INTO categories (name)
-    VALUES ($1)
-    ON CONFLICT DO NOTHING
-    RETURNING *;
-`,
-            [name],
-        );
-        
-        if (newCategory) {
-            
-            return newCategory;
-        } else {
-           
-            return false;
-        }
-    } catch (error) {
-        throw error;
-    }
-}
 
 async function getCategoryByName(name) {
     try {
@@ -87,4 +59,4 @@ async function getCategoryByName(name) {
     }
 }
 
-module.exports = { categoryIdByName, addCategory, getCategoryByName };
+module.exports = { categoryIdByName, getCategoryByName };

@@ -76,7 +76,8 @@ async function createTables() {
       CREATE TABLE products_categories (
         id SERIAL PRIMARY KEY,
         "productId" INTEGER REFERENCES products(id),
-        "categoryId" INTEGER REFERENCES categories(id)
+        "categoryId" INTEGER REFERENCES categories(id),
+        UNIQUE ("productId", "categoryId")
       );
 
       CREATE TABLE products_carts (
