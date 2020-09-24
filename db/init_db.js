@@ -58,7 +58,7 @@ async function createTables() {
         "creditCard" varchar(255)
       );
 
-      CREATE TABLE cart (
+      CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
         status varchar(255) NOT NULL,
         "lastUpdated" DATE,
@@ -83,7 +83,7 @@ async function createTables() {
       CREATE TABLE products_carts (
         id SERIAL PRIMARY KEY,
         "productId" INTEGER REFERENCES products(id),
-        "cartId" INTEGER REFERENCES cart(id),
+        "cartId" INTEGER REFERENCES carts(id),
         quantity INTEGER NOT NULL,
         "unitPrice" INTEGER NOT NULL,
         "itemTotal" INTEGER NOT NULL
@@ -104,7 +104,7 @@ async function dropTables() {
       DROP TABLE IF EXISTS products_carts;
       DROP TABLE IF EXISTS products_categories;
       DROP TABLE IF EXISTS reviews;
-      DROP TABLE IF EXISTS cart;
+      DROP TABLE IF EXISTS carts;
       DROP TABLE IF EXISTS users;
       DROP TABLE IF EXISTS categories;
       DROP TABLE IF EXISTS products;
