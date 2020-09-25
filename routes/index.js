@@ -21,7 +21,6 @@ apiRouter.use(async (req, res, next) => {
 
 			if (id) {
         req.user = await getUserById(id);        
-        req.verified = true;
 				next();
 			}
 		} catch ({ name, message }) {
@@ -40,5 +39,10 @@ apiRouter.use(async (req, res, next) => {
 const usersRouter = require('./users');
 apiRouter.use('/users', usersRouter);
 
+const productsRouter = require('./products');
+apiRouter.use('/products', productsRouter);
+
+const ordersRouter = require('./orders');
+apiRouter.use('/orders', ordersRouter);
 
 module.exports = apiRouter;

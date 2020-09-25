@@ -1,7 +1,13 @@
 import React from 'react';
 
 import './MainBody.css';
-import { Categories, Productlist, Profile } from '../../index';
+import { 
+	Categories, 
+	Productlist, 
+	Profile, 
+	AddProduct,
+	Cart 
+} from '../../index';
 
 export const MainBody = () => {
 	// const [bathCat, setBathCat] = useState([bathCat]);
@@ -9,9 +15,11 @@ export const MainBody = () => {
 
 	return (
 		<div className='categoryContainer'>
-			<Profile />
+			{/* <Profile /> */}
 			{/* <Productlist /> *}
             {/* <Categories /> */}
+			{/* <AddProduct /> */}
+			<Cart />
 		</div>
 	);
 };

@@ -2,19 +2,17 @@
 
 import React, { useState } from 'react';
 
-import {
-	addUser
-} from '../../../index';
+
+import { addUser, getAllUsers, getProductsByQuery } from '../../../index';
 
 import {
-	getAllUsers, updateUser
+	getAllUsers
 } from '../../../../api/index'
 
-import { states, countries } from '../../../utils'
 
+import { states, countries } from '../../../utils';
 
 import './Profile.css';
-
 
 
 export const Profile = () => {
@@ -35,8 +33,10 @@ export const Profile = () => {
 	const [zipcode, setZipcode] = useState('');
 	const [country, setCountry] = useState('');
 	const [phone, setPhone] = useState('');
+
 	const [creditCard, setCreditCard] = useState(Math.floor(Math.random() * (9999999999999999 - 1000000000000000 + 1)) +
 		1000000000000000);
+	const [searchString, setSearchString] = useState('');
 
 	const firstNameGetter = (event) => {
 		setFirstName(event.target.value);
@@ -75,14 +75,17 @@ export const Profile = () => {
 		setPhone(event.target.value);
 	};
 
+
+
 	const cancelHandler = (event) => { };
 
-	const formHandler = async (event) => {
+	const formHandler = async (event) => {			//will become registration handler
 		event.preventDefault();
-		console.log('getting to the submit with ', firstName, lastName, email);
+
 		if (password1.length > 0) {
-			if (password1 !== password2) {
-				alert('Passwords must match');
+			const passwordCheck = checkPassword(password1, password2);
+			if (!passwordCheck.valid) {
+				alert(passwordCheck.message);
 				return;
 			}
 		}
@@ -102,14 +105,51 @@ export const Profile = () => {
 			creditCard,
 		})
 			.then((result) => {
-				console.log('the new user is ', result);
 				if (result.message) {
-					warning(result.message);
+					alert(result.message);
+				} else {
+					localStorage.setItem('panprepToken', result);
+					setFirstName('');
+					setLastName('');
+					setEmail('');
+					setPassword1('');
+					setPassword2('');
+					setAddress1('');
+					setAddress2('');
+					setCity('');
+					setState('Alabama');
+					setZipcode('');
+					setCountry('United States');
+					setPhone('');
+
 				}
 			})
 			.catch((error) => {
-				console.error();
+				console.error(error);
 			});
+	};
+
+	const formHandler = async (event) => {			//will become login handler
+		event.preventDefault();
+
+
+		loginUser({
+			email,
+			password: password1,
+		})
+			.then((result) => {
+				if (result.message) {
+					alert(result.message);
+				} else {
+					localStorage.setItem('panprepToken', result);
+					setEmail('');
+					setPassword1('');
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+
 	};
 
 	function warning(warningMessage) {
@@ -120,7 +160,13 @@ export const Profile = () => {
 	const logAllUsers = async () => {
 		const allUsers = await getAllUsers();
 		console.log('allUsers logged in front end: ', allUsers);
-	}
+		const products = await getProductsByQuery('memo');
+		console.log('PLEASE WORRRRKRKRKRK', products);
+	};
+
+	const handleSearchString = (event) => {
+		setSearchString(event.target.value);
+	};
 
 	return (
 		<div className='profile'>
@@ -145,13 +191,25 @@ export const Profile = () => {
 					onChange={emailGetter} />
 				<input
 					type='text'
+					id='email'
+					placeholder='Email Address'
+					value={email}
+					onChange={(event) => setEmail(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
+				/>
+				<input
+					type='password'
 					id='password1'
 					placeholder='Password'
 					className={view === 'guest' || view === 'userCheckout' || view === 'edit' ? "field hide" : "field"}
 					onChange={password1Getter}
 				/>
 				<input
-					type='text'
+					type='password'
 					id='password2'
 					placeholder='Verify Password' //
 					className={view === 'guest' || view === 'userCheckout' || view === 'login' || view === 'edit' ? "field hide" : "field"}
@@ -175,12 +233,20 @@ export const Profile = () => {
 				<input type='text' id='zipCode' className={view === 'register' || view === 'login' ? "field hide" : "field"} placeholder='Zip Code' onChange={zipGetter} />
 				<select className={view === 'login' || view === 'register' ? "field hide" : "field"} onChange={stateGetter}>
 					{states.map((state, i) => {
-						return <option key={i} value=''>{state}</option>;
+						return (
+							<option key={i} value=''>
+								{state}
+							</option>
+						);
 					})}
 				</select>
 				<select className={view === 'register' || view === 'login' ? "field hide" : "field"} onChange={countryGetter}>
 					{countries.map((country, i) => {
-						return <option key={i} value=''>{country}</option>;
+						return (
+							<option key={i} value=''>
+								{country}
+							</option>
+						);
 					})}
 				</select>
 				<input
@@ -206,6 +272,7 @@ export const Profile = () => {
 				<button id='cancel' onChange={cancelHandler}>
 					Cancel
 				</button>
+
 
 			</form>
 		</div>
