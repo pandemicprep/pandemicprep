@@ -33,6 +33,7 @@ export { Orders } from './pages/body/orders/Orders';
 export { Product } from './pages/body/products/Product';
 export { Productlist } from './pages/body/products/Productlist';
 export { AddProduct } from './pages/body/products/AddProduct';
+export { Review } from './pages/body/products/Reviews';
 
 //user
 export { Checkout } from './pages/body/user/Checkout';
