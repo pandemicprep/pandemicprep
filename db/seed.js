@@ -1,4 +1,6 @@
 /** @format */
+const Promise = require('bluebird');
+
 
 const {
   addProductAndCategory,
@@ -26,6 +28,7 @@ const {
 // const { getAllProductsCart } = require("./jointables/products_carts");
 
 async function seed() {
+
   try {
     await createNewUsers();
     // await gettingAllUsers();
@@ -44,6 +47,7 @@ async function seed() {
   } catch (error) {
     throw error;
   }
+
 }
 
 async function createNewUsers() {
@@ -143,46 +147,41 @@ async function gettingAllUsers() {
 }
 
 async function creatingOneNewProduct() {
-  try {
-    console.log("creating new product... ");
 
-    const product = await addProductAndCategory({
-      name: "New Product Name",
-      price: 999.99,
-      description: "new product description yay",
-      image: "www.imageurl.com/urlurlurl",
+    try {
+        console.log("creating new product... ");
 
-      category: "bath",
-    });
-  } catch (error) {
-    throw error;
-  }
+        const product = await addProductAndCategory({
+            name: "New Product Name",
+            price: 999.99,
+            description: "new product description yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "bath",
+        });
+        console.log('the new product is ', product);
+    } catch (error) {
+        throw error;
+    }
 }
 
-function seedingProductObject() {
-  console.log("Adding all products in product array to db...");
+async function seedingProductObject() {
+    console.log("Adding all products in product array to db...");
+    const length = productArray.length;
+        try {
+            await Promise.mapSeries(productArray, function ({name, price, description, image, category}, index, length) {
+                    const newProduct = addProductAndCategory({name, price, description, image, category});
+                    
+                    return newProduct;
+                
+            });
+        } catch (error) {
+            throw error;
+        }
+       
+    }
 
-  productArray.forEach(({ name, price, description, image, category }) => {
-    addProductAndCategory({ name, price, description, image, category });
-    // .then((result) => {
-    //     console.log('the new product', result);
-    // }).catch((error) => console.error(error));
-  });
 
-  // await Promise.all(productArray.map(async (product) => {
-  //   const { name, price, description, image, category} = product
-
-  //   const newProduct = await addProductAndCategory({
-  //       name,
-  //       price,
-  //       description,
-  //       image,
-  //       category
-  //   });
-  //   console.log('the new product ', newProduct);
-  //  }));
-  // console.log('Exiting all products seed loop...');
-}
 
 async function gettingProductsByQuery() {
   try {

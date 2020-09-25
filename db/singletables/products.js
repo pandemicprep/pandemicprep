@@ -1,4 +1,6 @@
-const { client } = require("../client");
+
+const { client } = require('../client');
+const Promise = require('bluebird');
 
 const {
   addCategory,
@@ -16,67 +18,39 @@ const { addProduct_Categories } = require("../jointables/products_categories");
  * For the products_categories you’ll use the id of the product and the id of the category
  */
 
-function addProductAndCategory({ name, price, description, image, category }) {
-  const categories = category.split(" ");
 
-  let newProduct;
 
-  return addProduct({ name, price, description, image })
-    .then((result) => {
-      newProduct = result;
-      categories.forEach((item) => {
-        categoryIdByName(item).then((categoryId) => {
-          addProduct_Categories(newProduct.id, categoryId).catch((error) =>
-            console.error(error)
-          );
-        });
-      });
-    })
-    .catch((error) => console.error(error));
-}
+ async function addProductAndCategory({name, price, description, image, category}) {
+	const categories = category.split(' ');
+	const length = categories.length;
 
-// async function addProductAndCategory({ name, price, description, image, category }) {
-// 	try {
-// 		const categories = category.split(' ');
-// 		//console.log('category split ', categories);
-// 		// add the product
+	try {
+		const newProduct = await addProduct({name, price, description, image});
+		
+		await Promise.mapSeries(categories, async function(category, index, length) {
+			const categoryId = await categoryIdByName(category);
+			const jointTable = await addProduct_Categories(newProduct.id, categoryId);
+			return jointTable;
+		})
+		// await Promise.all(categories.map(async (categoryName) => {
+		// 	console.log('getting inside map');
+		// 	try {
+		// 		const categoryId = await categoryIdByName(categoryName);
+		// 		const jointTable = await addProduct_Categories(newProduct.id, categoryId);
+		// 		return jointTable;
+		// 	} catch (error) {
+		// 		throw error;
+		// 	}
+		// }));
+		return newProduct;
 
-// 		const newProduct = await addProduct({ name, price, description, image });
-// 		if (newProduct) {
-// 			var newProductId = newProduct.id;
-// 		} else {
-// 			//product already existed in the db
-// 			// console.log('finishing after creating product ', newProduct);
-// 			return;
-// 		}
-// 		console.log('new product from add product ', newProduct);
+	} catch (error) {
+		throw error;
+	}
+ }
 
-// 		await Promise.all(
-// 			categories.map(async (name) => {
-//                 var categoryId = await categoryIdByName(name);
 
-// 				console.log('first categoryId, finding by name: ', categoryId);
-// 				if (!categoryId) {
-// 					const categoryObject = await addCategory(name); // category object or false
-// 					console.log('first categoryId should be false. categoryObject should be new category ', categoryObject);
-// 					if (categoryObject) {
-// 						categoryId = categoryObject.id;
-// 						console.log('categoryId will now turn into id of categoryObject ', categoryId);
-// 					} else {
-// 						console.error('HELP ME!!!!!!!', 'we broke')
-// 					}
-// 				}
 
-// 				if (categoryId) {
-// 					await addProduct_Categories(newProduct.id, categoryId);
-// 				}
-// 			}),
-// 		);
-
-// 	} catch (error) {
-// 		throw error;
-// 	}
-// }
 
 async function addProduct({ name, price, description, image }) {
   try {
@@ -89,17 +63,19 @@ async function addProduct({ name, price, description, image }) {
 		ON CONFLICT DO NOTHING
 		RETURNING *;
 	`,
-      [name, price, description, image]
-    );
-    // if (newProduct) {
-    // 	return newProduct;
-    // } else {
-    // 	return false;
-    // }
-    return newProduct;
-  } catch (error) {
-    throw error;
-  }
+
+			[name, price, description, image],
+		);
+		if (newProduct) {
+			return newProduct;
+		} else {
+			return false;
+        }
+        
+	} catch (error) {
+		throw error;
+	}
+
 }
 
 // async function addProductAndCategory({name, price, description, image, category}) {
