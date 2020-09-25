@@ -27,26 +27,29 @@ const {
 
 // const { getAllProductsCart } = require("./jointables/products_carts");
 
+const { addReview, getReviewsByProductId } = require('./singletables/reviews');
+
 async function seed() {
 
-  try {
-    await createNewUsers();
-    // await gettingAllUsers();
-    // await creatingOneNewProduct();
-    await seedingProductObject();
-    // await gettingProductsByQuery();
-    // await updatingUsers();
-    // await gettingUserById();
-    // await gettingCategoryIdsByName();
-    await addingOneCart();
-    await gettingNonActiveCartAdmin();
-    await gettingNonActiveCart();
-    // console.log('Running get all products...');
-    // const allProducts = await getAllProducts();
-    // console.log('Result: ', allProducts);
-  } catch (error) {
-    throw error;
-  }
+    try {
+        await createNewUsers();
+        await gettingAllUsers();
+        // await creatingOneNewProduct();
+        await seedingProductObject();
+        // await gettingProductsByQuery();
+        // await updatingUsers();
+        // await gettingUserById();
+        // await gettingCategoryIdsByName();
+        // await addingOneCart();
+        await seedingInitialReviews();
+        await gettingSeedReviewsByProduct();
+
+        // console.log('Running get all products...');
+        // const allProducts = await getAllProducts();
+        // console.log('Result: ', allProducts);
+    } catch (error) {
+        throw error;
+    }
 
 }
 
@@ -297,6 +300,50 @@ async function gettingNonActiveCart() {
   } catch (error) {
     throw error;
   }
+}
+
+async function seedingInitialReviews() {
+    try {
+        await addReview({
+            creatorId: 1,
+            productId: 1,
+            score: 5,
+            description: 'Very pleased with this product!'
+        });
+
+        await addReview({
+            creatorId: 1,
+            productId: 5,
+            score: 3,
+            description: 'Pleased'
+        });
+
+        await addReview({
+            creatorId: 2,
+            productId: 30,
+            score: 1,
+            description: 'Very disappointed!'
+        });
+
+        await addReview({
+            creatorId: 2,
+            productId: 5,
+            score: 5,
+            description: 'Experience could not have been better!'
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function gettingSeedReviewsByProduct() {
+    try {
+        const reviews = await getReviewsByProductId(5);
+
+        console.log('reviews by specific product: ', reviews);
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = { seed };

@@ -6,7 +6,8 @@ import {
 	Productlist, 
 	Profile, 
 	AddProduct,
-	Cart 
+	Cart,
+	Review
 } from '../../index';
 
 export const MainBody = () => {
@@ -19,7 +20,8 @@ export const MainBody = () => {
 			{/* <Productlist /> *}
             {/* <Categories /> */}
 			{/* <AddProduct /> */}
-			<Cart />
+			{/* <Cart /> */}
+			<Review />
 		</div>
 	);
 };

@@ -72,7 +72,8 @@ async function createTables() {
         id SERIAL PRIMARY KEY,
         "creatorId" INTEGER REFERENCES users(id),
         "productId" INTEGER REFERENCES products(id),
-        score INTEGER NOT NULL
+        score INTEGER NOT NULL,
+        description TEXT
       );
 
       CREATE TABLE products_categories (
