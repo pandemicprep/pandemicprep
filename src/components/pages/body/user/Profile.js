@@ -7,9 +7,6 @@ import { addUser, getAllUsers, getProductsByQuery, loginUser } from '../../../..
 
 
 
-import {
-	getAllUsers
-} from '../../../../api/index'
 
 // import {
 // 	getAllUsers, loginUser
