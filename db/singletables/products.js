@@ -1,7 +1,11 @@
-const { client } = require('../client');
+const { client } = require("../client");
 
-const { addCategory, categoryIdByName, getCategoryByName } = require('./categories');
-const { addProduct_Categories } = require('../jointables/products_categories')
+const {
+  addCategory,
+  categoryIdByName,
+  getCategoryByName,
+} = require("./categories");
+const { addProduct_Categories } = require("../jointables/products_categories");
 
 /**
  * addProduct => add product,
@@ -12,26 +16,24 @@ const { addProduct_Categories } = require('../jointables/products_categories')
  * For the products_categories you’ll use the id of the product and the id of the category
  */
 
+function addProductAndCategory({ name, price, description, image, category }) {
+  const categories = category.split(" ");
 
- function addProductAndCategory({name, price, description, image, category}) {
-	
-	const categories = category.split(' ');
+  let newProduct;
 
-	let newProduct;
-	
-	return addProduct({name, price, description, image}).then((result) => {
-		newProduct = result;
-		categories.forEach((item) => {
-			categoryIdByName(item).then((categoryId) => {
-				addProduct_Categories(newProduct.id, categoryId).catch((error) => console.error(error));
-			});
-		})
-	}).catch((error) => console.error(error));
-	
-
- }
-
-
+  return addProduct({ name, price, description, image })
+    .then((result) => {
+      newProduct = result;
+      categories.forEach((item) => {
+        categoryIdByName(item).then((categoryId) => {
+          addProduct_Categories(newProduct.id, categoryId).catch((error) =>
+            console.error(error)
+          );
+        });
+      });
+    })
+    .catch((error) => console.error(error));
+}
 
 // async function addProductAndCategory({ name, price, description, image, category }) {
 // 	try {
@@ -48,11 +50,11 @@ const { addProduct_Categories } = require('../jointables/products_categories')
 // 			return;
 // 		}
 // 		console.log('new product from add product ', newProduct);
-				
+
 // 		await Promise.all(
 // 			categories.map(async (name) => {
 //                 var categoryId = await categoryIdByName(name);
-				
+
 // 				console.log('first categoryId, finding by name: ', categoryId);
 // 				if (!categoryId) {
 // 					const categoryObject = await addCategory(name); // category object or false
@@ -71,34 +73,33 @@ const { addProduct_Categories } = require('../jointables/products_categories')
 // 			}),
 // 		);
 
-
 // 	} catch (error) {
 // 		throw error;
 // 	}
 // }
 
 async function addProduct({ name, price, description, image }) {
-	try {
-		const {
-			rows: [newProduct],
-		} = await client.query(
-			`
+  try {
+    const {
+      rows: [newProduct],
+    } = await client.query(
+      `
 		INSERT INTO products (title, price, description, image)
 		VALUES ($1, $2, $3, $4)
 		ON CONFLICT DO NOTHING
 		RETURNING *;
 	`,
-			[name, price, description, image],
-		);
-		// if (newProduct) {
-		// 	return newProduct;
-		// } else {
-		// 	return false;
-        // }
-        return newProduct;
-	} catch (error) {
-		throw error;
-	}
+      [name, price, description, image]
+    );
+    // if (newProduct) {
+    // 	return newProduct;
+    // } else {
+    // 	return false;
+    // }
+    return newProduct;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // async function addProductAndCategory({name, price, description, image, category}) {
@@ -122,56 +123,66 @@ async function addProduct({ name, price, description, image }) {
 //             )
 //         }
 
-        
 //     } catch (error) {
 //         throw error;
 //     }
 // }
 
-
 // gets all products
 async function getAllProducts() {
-	try {
-		const { rows } = await client.query(`
+  try {
+    const { rows } = await client.query(`
             SELECT * FROM products;
         `);
 
-		return rows;
-	} catch (error) {
-		throw error;
-	}
+    return rows;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // gets specific products by a search query
 async function getProductsByQuery(query) {
-	try {
-		// console.log('entering products query in db...');
-		// console.log('query: ', query);
+  try {
+    // console.log('entering products query in db...');
+    // console.log('query: ', query);
 
-		const uppercaseQuery = query.charAt(0).toUpperCase() + query.slice(1);
-		// console.log(uppercaseQuery, 'LOOK HERE');
+    const uppercaseQuery = query.charAt(0).toUpperCase() + query.slice(1);
+    // console.log(uppercaseQuery, 'LOOK HERE');
 
-		if (query === '') {
-			return await getAllProducts();
-		}
+    if (query === "") {
+      return await getAllProducts();
+    }
 
-		const { rows } = await client.query(`
+    const { rows } = await client.query(`
             SELECT * FROM products 
             WHERE 
             title LIKE '%${query}%'
             OR title LIKE '%${uppercaseQuery}%';
         `);
 
-		// console.log('products by query: ', rows);
-		return rows;
-	} catch (error) {
-		throw error;
-	}
+    // console.log('products by query: ', rows);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
 }
 
-module.exports = { 
-    addProductAndCategory, 
-    getAllProducts, 
-    getProductsByQuery,
-    addProduct
+async function getProductsForCartHistory() {
+  try {
+    const { rows } = await client.query(`
+		SELECT title, description, image, "imageDescription"
+		FROM products;`);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  addProductAndCategory,
+  getAllProducts,
+  getProductsByQuery,
+  addProduct,
+  getProductsForCartHistory,
 };
