@@ -16,9 +16,12 @@ import { states, countries } from '../../../utils'
 import './Profile.css';
 
 
+
 export const Profile = () => {
-	//MODIFY FIELDS FOR EACH VIEW --->
-	const [view, setView] = useState('register');				//will define the page view. Views are register, guest, userPay, edit
+	//CURRENT VIEWS: login register guest userCheckout edit 
+	//CHANGE PASSWORD BUTTON: needs onclick function to switch state to ''
+	//SET UP STATES FOR DIFFERENT VIEWS! :)
+	const [view, setView] = useState('edit');
 	const [isUser, setIsUser] = useState(false);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -121,53 +124,61 @@ export const Profile = () => {
 
 	return (
 		<div className='profile'>
-			<p>Profile</p>
 			<form className='profileForm' onSubmit={formHandler}>
 				<input
 					type='text'
 					id='firstName'
 					placeholder='First Name'
+					className={view === 'login' ? "field hide" : "field"}
 					onChange={firstNameGetter}
 				/>
 				<input
 					type='text'
 					id='lastName'
 					placeholder='Last Name'
+					className={view === 'login' ? "field hide" : "field"}
 					onChange={lastNameGetter}
 				/>
-				<input type='text' id='email' placeholder='Email Address' onChange={emailGetter} />
+				<input type='text'
+					id='email'
+					placeholder='Email Address'
+					onChange={emailGetter} />
 				<input
 					type='text'
 					id='password1'
 					placeholder='Password'
+					className={view === 'guest' || view === 'userCheckout' || view === 'edit' ? "field hide" : "field"}
 					onChange={password1Getter}
 				/>
 				<input
 					type='text'
 					id='password2'
-					placeholder='Password'
+					placeholder='Verify Password' //
+					className={view === 'guest' || view === 'userCheckout' || view === 'login' || view === 'edit' ? "field hide" : "field"}
 					onChange={password2Getter}
 				/>
 				<input
 					type='text'
 					id='addressOne'
-					placeholder='Address'
+					placeholder='Address Line One'
+					className={view === 'register' || view === 'login' || view === 'userCheckout' || view === 'edit' ? "field hide" : "field"}
 					onChange={address1Getter}
 				/>
 				<input
 					type='text'
 					id='addressTwo'
-					placeholder='Address'
+					placeholder='Address Line Two'
+					className={view === 'register' || view === 'login' || view === 'userCheckout' || view === 'edit' ? "field hide" : "field"}
 					onChange={address2Getter}
 				/>
-				<input type='text' id='city' placeholder='City' onChange={cityGetter} />
-				<input type='text' id='zipCode' placeholder='Zip Code' onChange={zipGetter} />
-				<select className='stateDropdown' onChange={stateGetter}>
+				<input type='text' id='city' className={view === 'register' || view === 'login' ? "field hide" : "field"} placeholder='City' onChange={cityGetter} />
+				<input type='text' id='zipCode' className={view === 'register' || view === 'login' ? "field hide" : "field"} placeholder='Zip Code' onChange={zipGetter} />
+				<select className={view === 'login' || view === 'register' ? "field hide" : "field"} onChange={stateGetter}>
 					{states.map((state, i) => {
 						return <option key={i} value=''>{state}</option>;
 					})}
 				</select>
-				<select className='countryDropdown' onChange={countryGetter}>
+				<select className={view === 'register' || view === 'login' ? "field hide" : "field"} onChange={countryGetter}>
 					{countries.map((country, i) => {
 						return <option key={i} value=''>{country}</option>;
 					})}
@@ -176,15 +187,19 @@ export const Profile = () => {
 					type='text'
 					id='phoneNumber'
 					placeholder='Phone Number'
+					className={view === 'register' || view === 'login' ? "field hide" : "field"}
 					onChange={phoneGetter}
 				/>
 				<input
 					type='number'
 					id='creditCard'
 					placeholder='Credit Card Number'
+					className={view === 'register' || view === 'login' ? "field hide" : "field"}
 					value={creditCard}
 					readOnly
 				/>
+				<button className={view === 'guest' || view === 'userCheckout' || view === 'login' || view === 'guest' || view === '' ? "field hide" : "field"}>
+					Change Password</button><br></br>
 				<button id='submit' type='submit'>
 					Submit
 				</button>
@@ -193,11 +208,6 @@ export const Profile = () => {
 				</button>
 
 			</form>
-			<button onClick={logAllUsers}>
-				User test
-			</button>
 		</div>
 	);
 };
-
-// Maybe add cvv and date for the credit card. Front end only.
