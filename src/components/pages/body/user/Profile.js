@@ -2,18 +2,22 @@
 
 import React, { useState } from 'react';
 
+
 import { addUser, getAllUsers, getProductsByQuery } from '../../../index';
 
 // import {
 // 	getAllUsers
 // } from '../../../../api/index'
 
+
 import { states, countries } from '../../../utils';
 
 import './Profile.css';
 
 export const Profile = () => {
+
 	const [view, setView] = useState('register'); //will define the page view. Views are register, guest, userPay, edit
+
 	const [isUser, setIsUser] = useState(false);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -27,11 +31,49 @@ export const Profile = () => {
 	const [zipcode, setZipcode] = useState('');
 	const [country, setCountry] = useState('');
 	const [phone, setPhone] = useState('');
-	const [creditCard, setCreditCard] = useState(
-		Math.floor(Math.random() * (9999999999999999 - 1000000000000000 + 1)) + 1000000000000000,
-	);
 
-	const [searchString, setSearchString] = useState('');
+	const [creditCard, setCreditCard] = useState(Math.floor(Math.random() * (9999999999999999 - 1000000000000000 + 1)) +
+		1000000000000000);
+  const [searchString, setSearchString] = useState('');
+
+	const firstNameGetter = (event) => {
+		setFirstName(event.target.value);
+	};
+	const lastNameGetter = (event) => {
+		setLastName(event.target.value);
+	};
+	const emailGetter = (event) => {
+		setEmail(event.target.value);
+	};
+	const password1Getter = (event) => {
+		setPassword1(event.target.value);
+	};
+	const password2Getter = (event) => {
+		setPassword2(event.target.value);
+	};
+	const address1Getter = (event) => {
+		setAddress1(event.target.value);
+	};
+	const address2Getter = (event) => {
+		setAddress2(event.target.value);
+	};
+	const cityGetter = (event) => {
+		setCity(event.target.value);
+	};
+	const zipGetter = (event) => {
+		setZipcode(event.target.value);
+	};
+	const stateGetter = (event) => {
+		setState(event.target.value);
+	};
+	const countryGetter = (event) => {
+		setCountry(event.target.value);
+	};
+	const phoneGetter = (event) => {
+		setPhone(event.target.value);
+	};
+
+		
 	
 	const cancelHandler = (event) => {};
 
@@ -85,8 +127,8 @@ export const Profile = () => {
 	// 		});
 	// };
 
-	const formHandler = async (event) => {			//will become login handler
-		event.preventDefault();
+// 	const formHandler = async (event) => {			//will become login handler
+// 		event.preventDefault();
 
 		
 		// loginUser({
@@ -105,6 +147,7 @@ export const Profile = () => {
 		// 	.catch((error) => {
 		// 		console.error(error);
 		// 	});
+
 	};
 
 	function warning(warningMessage) {
@@ -286,8 +329,13 @@ export const Profile = () => {
 				<button id='cancel' onChange={cancelHandler}>
 					Cancel
 				</button>
+
+
 			</form>
-			<button onClick={logAllUsers}>User test</button>
+			<button onClick={logAllUsers}>
+				User test
+			</button>
+
 		</div>
 	);
 };
