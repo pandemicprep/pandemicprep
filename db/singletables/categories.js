@@ -59,4 +59,18 @@ async function getCategoryByName(name) {
     }
 }
 
-module.exports = { categoryIdByName, getCategoryByName };
+async function getAllCategories() {
+    try {
+        const {
+            rows
+        } = await client.query(`
+            SELECT * FROM categories;
+        `);
+
+        return rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports = { categoryIdByName, getCategoryByName, getAllCategories };

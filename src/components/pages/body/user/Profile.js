@@ -7,16 +7,6 @@ import { addUser, getAllUsers, getProductsByQuery, loginUser } from '../../../..
 
 
 
-import {
-	getAllUsers
-} from '../../../../api/index'
-
-// import {
-// 	getAllUsers, loginUser
-// } from '../../../../api/index'
-
-
-
 import { states, countries } from '../../../utils';
 
 import './Profile.css';

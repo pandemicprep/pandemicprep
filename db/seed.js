@@ -15,7 +15,7 @@ const {
   getUserById,
 } = require("./singletables/users");
 
-const { categoryIdByName } = require("./singletables/categories");
+const { categoryIdByName, getAllCategories } = require("./singletables/categories");
 
 const productArray = require("./singletables/productObject");
 
@@ -43,6 +43,7 @@ async function seed() {
         // await addingOneCart();
         await seedingInitialReviews();
         await gettingSeedReviewsByProduct();
+        await gettingAllCategories();
 
         // console.log('Running get all products...');
         // const allProducts = await getAllProducts();
@@ -341,6 +342,16 @@ async function gettingSeedReviewsByProduct() {
         const reviews = await getReviewsByProductId(5);
 
         console.log('reviews by specific product: ', reviews);
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function gettingAllCategories() {
+    try {
+        const categories = await getAllCategories();
+
+        console.log('all categories: ', categories);
     } catch (error) {
         throw error;
     }
