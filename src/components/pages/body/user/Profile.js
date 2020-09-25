@@ -3,11 +3,18 @@
 import React, { useState } from 'react';
 
 
-import { addUser, getAllUsers, getProductsByQuery } from '../../../index';
+import { addUser, getAllUsers, getProductsByQuery, loginUser } from '../../../../api';
+
+
 
 import {
 	getAllUsers
 } from '../../../../api/index'
+
+// import {
+// 	getAllUsers, loginUser
+// } from '../../../../api/index'
+
 
 
 import { states, countries } from '../../../utils';
@@ -79,59 +86,66 @@ export const Profile = () => {
 
 	const cancelHandler = (event) => { };
 
-	const formHandler = async (event) => {			//will become registration handler
-		event.preventDefault();
+// 	const formHandler = async (event) => {			//will become registration handler
+// 		event.preventDefault();
 
-		if (password1.length > 0) {
-			const passwordCheck = checkPassword(password1, password2);
-			if (!passwordCheck.valid) {
-				alert(passwordCheck.message);
-				return;
-			}
-		}
-		addUser({
-			isUser: true,
-			firstName,
-			lastName,
-			email,
-			password: password1,
-			addressLine1: address1,
-			addressLine2: address2,
-			city,
-			state,
-			zipcode,
-			country,
-			phone,
-			creditCard,
-		})
-			.then((result) => {
-				if (result.message) {
-					alert(result.message);
-				} else {
-					localStorage.setItem('panprepToken', result);
-					setFirstName('');
-					setLastName('');
-					setEmail('');
-					setPassword1('');
-					setPassword2('');
-					setAddress1('');
-					setAddress2('');
-					setCity('');
-					setState('Alabama');
-					setZipcode('');
-					setCountry('United States');
-					setPhone('');
 
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
+// 		if (password1.length > 0) {
+// 			const passwordCheck = checkPassword(password1, password2);
+// 			if (!passwordCheck.valid) {
+// 				alert(passwordCheck.message);
+// 				return;
+// 			}
+// 		}
+// 		addUser({
+// 			isUser: true,
+// 			firstName,
+// 			lastName,
+// 			email,
+// 			password: password1,
+// 			addressLine1: address1,
+// 			addressLine2: address2,
+// 			city,
+// 			state,
+// 			zipcode,
+// 			country,
+// 			phone,
+// 			creditCard,
+// 		})
+// 			.then((result) => {
+// 				if (result.message) {
+// 					alert(result.message);
+// 				} else {
+// 					localStorage.setItem('panprepToken', result);
+// 					setFirstName('');
+// 					setLastName('');
+// 					setEmail('');
+// 					setPassword1('');
+// 					setPassword2('');
+// 					setAddress1('');
+// 					setAddress2('');
+// 					setCity('');
+// 					setState('Alabama');
+// 					setZipcode('');
+// 					setCountry('United States');
+// 					setPhone('');
+
+// 				}
+// 			})
+// 			.catch((error) => {
+// 				console.error(error);
+// 			});
+// 	};
+
+	
+
+
+
 
 	const formHandler = async (event) => {			//will become login handler
 		event.preventDefault();
-
+		console.log('getting to handler');
+		
 
 		loginUser({
 			email,
