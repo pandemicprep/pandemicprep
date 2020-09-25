@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 
-import { addUser, getAllUsers, getProductsByQuery } from '../../../index';
+import { addUser, getAllUsers, getProductsByQuery, loginUser } from '../../../../api';
 
 // import {
-// 	getAllUsers
+// 	getAllUsers, loginUser
 // } from '../../../../api/index'
 
 import { states, countries } from '../../../utils';
@@ -87,24 +87,24 @@ export const Profile = () => {
 
 	const formHandler = async (event) => {			//will become login handler
 		event.preventDefault();
-
+		console.log('getting to handler');
 		
-		// loginUser({
-		// 	email,
-		// 	password: password1,
-		// })
-		// 	.then((result) => {
-		// 		if (result.message) {
-		// 			alert(result.message);
-		// 		} else {
-		// 			localStorage.setItem('panprepToken', result);
-		// 			setEmail('');
-		// 			setPassword1('');
-		// 		}
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error(error);
-		// 	});
+		loginUser({
+			email,
+			password: password1,
+		})
+			.then((result) => {
+				if (result.message) {
+					alert(result.message);
+				} else {
+					localStorage.setItem('panprepToken', result);
+					setEmail('');
+					setPassword1('');
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 
 	function warning(warningMessage) {

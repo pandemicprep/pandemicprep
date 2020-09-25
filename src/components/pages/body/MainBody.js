@@ -15,11 +15,11 @@ export const MainBody = () => {
 
 	return (
 		<div className='categoryContainer'>
-			{/* <Profile /> */}
+			<Profile />
 			{/* <Productlist /> *}
             {/* <Categories /> */}
 			{/* <AddProduct /> */}
-			<Cart />
+			{/* <Cart /> */}
 		</div>
 	);
 };

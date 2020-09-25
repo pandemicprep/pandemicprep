@@ -20,9 +20,11 @@ export async function addUser(user) {
  * @param {Object} {requires email, password} 
  */
 export async function loginUser(credentials) {
+  console.log('getting to the axios call');
   try {
-    const { data: user } = await axios.post('/api/users/login', credentials);
-    return user;
+    const { data: token } = await axios.post('/api/users/login', credentials);
+    console.log('getting from the back end ', token);
+    return token;
   } catch (error) {
       throw error;
   }
