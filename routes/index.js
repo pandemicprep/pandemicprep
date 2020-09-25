@@ -45,4 +45,7 @@ apiRouter.use('/products', productsRouter);
 const ordersRouter = require('./orders');
 apiRouter.use('/orders', ordersRouter);
 
+const reviewsRouter = require('./reviews');
+apiRouter.use('/reviews', reviewsRouter);
+
 module.exports = apiRouter;
