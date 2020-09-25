@@ -6,6 +6,7 @@ const {
   addProductAndCategory,
   getAllProducts,
   getProductsByQuery,
+  getProductById
 } = require("./singletables/products");
 
 const {
@@ -29,11 +30,13 @@ const {
 
 const { addReview, getReviewsByProductId } = require('./singletables/reviews');
 
+const { getProductsByCategory } = require('./jointables/products_categories');
+
 async function seed() {
 
     try {
         await createNewUsers();
-        await gettingAllUsers();
+        // await gettingAllUsers();
         // await creatingOneNewProduct();
         await seedingProductObject();
         // await gettingProductsByQuery();
@@ -41,9 +44,11 @@ async function seed() {
         // await gettingUserById();
         // await gettingCategoryIdsByName();
         // await addingOneCart();
-        await seedingInitialReviews();
-        await gettingSeedReviewsByProduct();
-        await gettingAllCategories();
+        // await seedingInitialReviews();
+        // await gettingSeedReviewsByProduct();
+        // await gettingAllCategories();
+        await gettingProductById();
+        // await gettingProductsByCategory();
 
         // console.log('Running get all products...');
         // const allProducts = await getAllProducts();
@@ -352,6 +357,25 @@ async function gettingAllCategories() {
         const categories = await getAllCategories();
 
         console.log('all categories: ', categories);
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function gettingProductById() {
+    try {
+        const product = await getProductById(1);
+
+        console.log('product by id in seed: ', product);
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function gettingProductsByCategory() {
+    try {
+        const products = await getProductsByCategory('school');
+        console.log('returning products by category in seed: ', products);
     } catch (error) {
         throw error;
     }
