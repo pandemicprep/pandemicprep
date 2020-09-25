@@ -2,23 +2,22 @@
 
 import React, { useState } from 'react';
 
-import {
-	addUser
-} from '../../../index';
 
-import {
-	getAllUsers, updateUser
-} from '../../../../api/index'
+import { addUser, getAllUsers, getProductsByQuery } from '../../../index';
 
-import { states, countries } from '../../../utils'
+// import {
+// 	getAllUsers
+// } from '../../../../api/index'
 
+
+import { states, countries } from '../../../utils';
 
 import './Profile.css';
 
-
 export const Profile = () => {
-	//MODIFY FIELDS FOR EACH VIEW --->
-	const [view, setView] = useState('register');				//will define the page view. Views are register, guest, userPay, edit
+
+	const [view, setView] = useState('register'); //will define the page view. Views are register, guest, userPay, edit
+
 	const [isUser, setIsUser] = useState(false);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -32,8 +31,10 @@ export const Profile = () => {
 	const [zipcode, setZipcode] = useState('');
 	const [country, setCountry] = useState('');
 	const [phone, setPhone] = useState('');
+
 	const [creditCard, setCreditCard] = useState(Math.floor(Math.random() * (9999999999999999 - 1000000000000000 + 1)) +
 		1000000000000000);
+  const [searchString, setSearchString] = useState('');
 
 	const firstNameGetter = (event) => {
 		setFirstName(event.target.value);
@@ -72,41 +73,81 @@ export const Profile = () => {
 		setPhone(event.target.value);
 	};
 
-	const cancelHandler = (event) => { };
+		
+	
+	const cancelHandler = (event) => {};
 
-	const formHandler = async (event) => {
-		event.preventDefault();
-		console.log('getting to the submit with ', firstName, lastName, email);
-		if (password1.length > 0) {
-			if (password1 !== password2) {
-				alert('Passwords must match');
-				return;
-			}
-		}
-		addUser({
-			isUser: true,
-			firstName,
-			lastName,
-			email,
-			password: password1,
-			addressLine1: address1,
-			addressLine2: address2,
-			city,
-			state,
-			zipcode,
-			country,
-			phone,
-			creditCard,
-		})
-			.then((result) => {
-				console.log('the new user is ', result);
-				if (result.message) {
-					warning(result.message);
-				}
-			})
-			.catch((error) => {
-				console.error();
-			});
+	// const formHandler = async (event) => {			//will become registration handler
+	// 	event.preventDefault();
+
+	// 	if (password1.length > 0) {
+	// 		const passwordCheck = checkPassword(password1, password2);
+	// 		if (!passwordCheck.valid) {
+	// 			alert(passwordCheck.message);
+	// 			return;
+	// 		}
+	// 	}
+	// 	addUser({
+	// 		isUser: true,
+	// 		firstName,
+	// 		lastName,
+	// 		email,
+	// 		password: password1,
+	// 		addressLine1: address1,
+	// 		addressLine2: address2,
+	// 		city,
+	// 		state,
+	// 		zipcode,
+	// 		country,
+	// 		phone,
+	// 		creditCard,
+	// 	})
+	// 		.then((result) => {
+	// 			if (result.message) {
+	// 				alert(result.message);
+	// 			} else {
+	// 				localStorage.setItem('panprepToken', result);
+	// 				setFirstName('');
+	// 				setLastName('');
+	// 				setEmail('');
+	// 				setPassword1('');
+	// 				setPassword2('');
+	// 				setAddress1('');
+	// 				setAddress2('');
+	// 				setCity('');
+	// 				setState('Alabama');
+	// 				setZipcode('');
+	// 				setCountry('United States');
+	// 				setPhone('');
+
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error(error);
+	// 		});
+	// };
+
+// 	const formHandler = async (event) => {			//will become login handler
+// 		event.preventDefault();
+
+		
+		// loginUser({
+		// 	email,
+		// 	password: password1,
+		// })
+		// 	.then((result) => {
+		// 		if (result.message) {
+		// 			alert(result.message);
+		// 		} else {
+		// 			localStorage.setItem('panprepToken', result);
+		// 			setEmail('');
+		// 			setPassword1('');
+		// 		}
+		// 	})
+		// 	.catch((error) => {
+		// 		console.error(error);
+		// 	});
+
 	};
 
 	function warning(warningMessage) {
@@ -117,7 +158,13 @@ export const Profile = () => {
 	const logAllUsers = async () => {
 		const allUsers = await getAllUsers();
 		console.log('allUsers logged in front end: ', allUsers);
-	}
+		const products = await getProductsByQuery('memo');
+		console.log('PLEASE WORRRRKRKRKRK', products);
+	};
+
+	const handleSearchString = (event) => {
+		setSearchString(event.target.value);
+	};
 
 	return (
 		<div className='profile'>
@@ -127,56 +174,147 @@ export const Profile = () => {
 					type='text'
 					id='firstName'
 					placeholder='First Name'
-					onChange={firstNameGetter}
+					value={firstName}
+					onChange={(event) => setFirstName(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
 				/>
 				<input
 					type='text'
 					id='lastName'
 					placeholder='Last Name'
-					onChange={lastNameGetter}
+					value={lastName}
+					onChange={(event) => setLastName(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
 				/>
-				<input type='text' id='email' placeholder='Email Address' onChange={emailGetter} />
 				<input
 					type='text'
+					id='email'
+					placeholder='Email Address'
+					value={email}
+					onChange={(event) => setEmail(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
+				/>
+				<input
+					type='password'
 					id='password1'
 					placeholder='Password'
-					onChange={password1Getter}
+					value={password1}
+					onChange={(event) => setPassword1(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
 				/>
 				<input
-					type='text'
+					type='password'
 					id='password2'
 					placeholder='Password'
-					onChange={password2Getter}
+					value={password2}
+					onChange={(event) => setPassword2(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
 				/>
 				<input
 					type='text'
 					id='addressOne'
 					placeholder='Address'
-					onChange={address1Getter}
+					value={address1}
+					onChange={(event) => setAddress1(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
 				/>
 				<input
 					type='text'
 					id='addressTwo'
 					placeholder='Address'
-					onChange={address2Getter}
+					value={address2}
+					onChange={(event) => setAddress2(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
 				/>
-				<input type='text' id='city' placeholder='City' onChange={cityGetter} />
-				<input type='text' id='zipCode' placeholder='Zip Code' onChange={zipGetter} />
-				<select className='stateDropdown' onChange={stateGetter}>
+				<input
+					type='text'
+					id='city'
+					placeholder='City'
+					value={city}
+					onChange={(event) => setCity(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
+				/>
+				<input
+					type='text'
+					id='zipCode'
+					placeholder='Zip Code'
+					value={zipcode}
+					onChange={(event) => setZipcode(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
+				/>
+				<select
+					className='stateDropdown'
+					value={state}
+					onChange={(event) => setState(event.target.value)}
+				>
 					{states.map((state, i) => {
-						return <option key={i} value=''>{state}</option>;
+						return (
+							<option key={i} value=''>
+								{state}
+							</option>
+						);
 					})}
 				</select>
-				<select className='countryDropdown' onChange={countryGetter}>
+				<select
+					className='countryDropdown'
+					value={country}
+					onChange={(event) => setCountry(event.target.value)}
+				>
 					{countries.map((country, i) => {
-						return <option key={i} value=''>{country}</option>;
+						return (
+							<option key={i} value=''>
+								{country}
+							</option>
+						);
 					})}
 				</select>
 				<input
 					type='text'
 					id='phoneNumber'
 					placeholder='Phone Number'
-					onChange={phoneGetter}
+					value={phone}
+					onChange={(event) => setPhone(event.target.value)}
+					onKeyDown={(event) =>
+						event.target.value === 'return' || event.target.value === 'enter'
+							? formHandler
+							: ''
+					}
 				/>
 				<input
 					type='number'
@@ -192,12 +330,47 @@ export const Profile = () => {
 					Cancel
 				</button>
 
+
 			</form>
 			<button onClick={logAllUsers}>
 				User test
 			</button>
+
 		</div>
 	);
 };
 
 // Maybe add cvv and date for the credit card. Front end only.
+
+//Helper functions
+function checkPassword(password1, password2) {
+	if (password1 === password2) {
+		var password = password1;
+	} else {
+		return { valid: false, message: 'Passwords must match' };
+	}
+	if (password.length < 8) {
+		return { valid: false, message: 'This password is too short. 8 characters or more' };
+	}
+	const passwordCharacters = password.split('');
+	let hasNumber = false;
+	let hasUpper = false;
+	passwordCharacters.forEach((char) => {
+		if (char >= 0 && char <= 10) {
+			hasNumber = true;
+		}
+		if (char >= 'A' && char <= 'Z') {
+			hasUpper = true;
+		}
+	});
+	if (hasNumber) {
+		return { valid: true, message: 'valid' };
+	} else {
+		return { valid: false, message: 'Password must have at least one number' };
+	}
+	if (hasUpper) {
+		return { valid: true, message: 'valid' };
+	} else {
+		return { valid: false, message: 'Password must have at least one uppercase letter' };
+	}
+}

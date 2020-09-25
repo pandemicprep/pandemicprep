@@ -2,6 +2,9 @@
 const express = require('express');
 const server = express();
 
+//set up dotenv
+require('dotenv').config();
+
 // create logs for everything
 const morgan = require('morgan');
 server.use(morgan('dev'));

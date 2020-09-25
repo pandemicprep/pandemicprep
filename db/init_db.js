@@ -1,28 +1,30 @@
+/** @format */
+
 // code to build and initialize DB goes here
 const {
-	client,
-	// other db methods
-} = require('./client');
-const { seed } = require('./');
+    client,
+    // other db methods
+} = require("./client");
+const { seed } = require("./");
 
 async function buildTables() {
-	try {
-		client.connect();
+    try {
+        client.connect();
 
-		// drop tables in correct order
-		await dropTables();
+        // drop tables in correct order
+        await dropTables();
 
-		// build tables in correct order
-		await createTables();
-	} catch (error) {
-		throw error;
-	}
+        // build tables in correct order
+        await createTables();
+    } catch (error) {
+        throw error;
+    }
 }
 
 async function createTables() {
-	try {
-    console.log('Creating tables');
-		await client.query(`
+    try {
+        console.log("Creating tables");
+        await client.query(`
       CREATE TABLE products (
         id SERIAL PRIMARY KEY,
         title varchar(255) UNIQUE NOT NULL,
@@ -58,7 +60,7 @@ async function createTables() {
         "creditCard" varchar(255)
       );
 
-      CREATE TABLE cart (
+      CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
         status varchar(255) NOT NULL,
         "lastUpdated" DATE,
@@ -76,13 +78,14 @@ async function createTables() {
       CREATE TABLE products_categories (
         id SERIAL PRIMARY KEY,
         "productId" INTEGER REFERENCES products(id),
-        "categoryId" INTEGER REFERENCES categories(id)
+        "categoryId" INTEGER REFERENCES categories(id),
+        UNIQUE ("productId", "categoryId")
       );
 
       CREATE TABLE products_carts (
         id SERIAL PRIMARY KEY,
         "productId" INTEGER REFERENCES products(id),
-        "cartId" INTEGER REFERENCES cart(id),
+        "cartId" INTEGER REFERENCES carts(id),
         quantity INTEGER NOT NULL,
         "unitPrice" INTEGER NOT NULL,
         "itemTotal" INTEGER NOT NULL
@@ -90,40 +93,40 @@ async function createTables() {
 
       
     `);
-    console.log('Tables created');
-	} catch (error) {
-		throw error;
-	}
+        console.log("Tables created");
+    } catch (error) {
+        throw error;
+    }
 }
 
 async function dropTables() {
-	try {
-    console.log('Dropping tables');
-		await client.query(`
+    try {
+        console.log("Dropping tables");
+        await client.query(`
       DROP TABLE IF EXISTS products_carts;
       DROP TABLE IF EXISTS products_categories;
       DROP TABLE IF EXISTS reviews;
-      DROP TABLE IF EXISTS cart;
-      DROP TABLE IF EXISTS users;
+      DROP TABLE IF EXISTS carts;
+      DROP TABLE IF EXISTS users CASCADE;
       DROP TABLE IF EXISTS categories;
       DROP TABLE IF EXISTS products;
     `);
-    console.log('Tables dropped');
-	} catch (error) {
-		throw error;
-	}
+        console.log("Tables dropped");
+    } catch (error) {
+        throw error;
+    }
 }
 
 async function populateInitialData() {
-	try {
-    // create useful starting data
-    await seed();
-		
-	} catch (error) {
-		throw error;
-	}
+    try {
+        // create useful starting data
+        await seed();
+    } catch (error) {
+        throw error;
+    }
 }
 
 buildTables()
-	.then(seed).catch(console.error)
-	.finally(() => client.end());
+    .then(seed)
+    .catch(console.error)
+    .finally(() => client.end());
