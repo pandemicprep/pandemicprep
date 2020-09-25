@@ -2,10 +2,7 @@
 
 import React, { useState } from 'react';
 
-
 import { addUser, getAllUsers, getProductsByQuery, loginUser } from '../../../../api';
-
-
 
 import { states, countries } from '../../../utils';
 
