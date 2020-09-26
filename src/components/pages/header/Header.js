@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
-import { NavLink, useHistory, navigate } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 
 import "./Header.css";
@@ -45,7 +45,7 @@ export const Header = ({
     }
 
     const loginHandler = (event) => {
-        navigate('/login');
+        history.push('/login')
     }
 
     return (
