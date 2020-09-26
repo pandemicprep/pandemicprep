@@ -8,10 +8,15 @@ import { Header, MainBody, Categories, Footer } from "./index";
 import { getSomething } from "../api";
 
 const App = () => {
+    const [products, setProducts] = useState([]);
+    const [searchString, setSearchString] = useState('');
+
     return (
         <div className="App">
-            <Header />
-            <MainBody />
+            <Header products={products} setProducts={setProducts}
+            searchString={searchString} setSearchString={setSearchString}/>
+            <MainBody products={products} setProducts={setProducts}
+            searchString={searchString} setSearchString={setSearchString}/>
             <Footer />
         </div>
     );
