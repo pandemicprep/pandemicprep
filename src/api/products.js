@@ -39,3 +39,13 @@ export async function getProductsByCategory(categoryName) {
         throw error;
     }
 }
+
+export async function getPromotedProducts() {
+    try {
+        const { data } = await axios.get('/api/products');
+
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
