@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
-import { BrowserRouter as Router, useHistory } from 'react-router-dom';
+
 
 
 import "./Header.css";
@@ -19,7 +19,7 @@ export const Header = ({
     setProducts,
     searchString,
     setSearchString,
-    
+    useHistory
 }) => {
     const history = useHistory();
 
@@ -45,13 +45,11 @@ export const Header = ({
         }
     }
 
-    const loginHandler = (event) => {
-        history.push('/login');
-    }
+    
     
 
     return (
-        <Router>
+        
         <div className="headerContainer">
             <img id="headLogo" src={process.env.PUBLIC_URL + '/styleimages/PANPREPLOGO.png'} />
 
@@ -62,15 +60,15 @@ export const Header = ({
                 </button>
             </form>
 
-            <button id="login" onClick={loginHandler} >login</button>
-            <button id="signup">Sign Up</button>
-            <button id="cart">Cart</button>
-            <div class="dropdown">
-                <button class="dropbtn">Welcome!</button>
-                <div class="dropdown-content">
-                    <a href="#">Admin</a>
-                    <a href="#">Profile</a>
-                    <a href="#">Orders</a>
+            <button id="login" onClick={() => history.push('/login')} >login</button>
+            <button id="signup" onClick={() => history.push('/register')} >Sign Up</button>
+            <button id="cart" onClick={() => history.push('/cart')} >Cart</button>
+            <div className="dropdown">
+                <button className="dropbtn">Welcome!</button>
+                <div className="dropdown-content">
+                    <a href="#" onClick={() => history.push('/orders')} >Admin</a>
+                    <a href="#" onClick={() => history.push('/orders')} >Profile</a>
+                    <a href="#" onClick={() => history.push('/orders')} >Orders</a>
                     <a href="#">Log Out</a>
                     <a href="#">Whatever</a>
                     <a href="#">Whatever</a>
@@ -78,7 +76,7 @@ export const Header = ({
                 </div>
             </div>
         </div>
-        </Router>
+        
     );
 };
 
