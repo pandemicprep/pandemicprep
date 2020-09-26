@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
-import { NavLink, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 
 
 import "./Header.css";
@@ -18,7 +18,8 @@ export const Header = ({
     products,
     setProducts,
     searchString,
-    setSearchString
+    setSearchString,
+    
 }) => {
     const history = useHistory();
 
@@ -45,10 +46,12 @@ export const Header = ({
     }
 
     const loginHandler = (event) => {
-        history.push('/login')
+        history.push('/login');
     }
+    
 
     return (
+        <Router>
         <div className="headerContainer">
             <img id="headLogo" src={process.env.PUBLIC_URL + '/styleimages/PANPREPLOGO.png'} />
 
@@ -59,7 +62,7 @@ export const Header = ({
                 </button>
             </form>
 
-            <button id="login" onClick={loginHandler} >Login</button>
+            <button id="login" onClick={loginHandler} >login</button>
             <button id="signup">Sign Up</button>
             <button id="cart">Cart</button>
             <div class="dropdown">
@@ -75,6 +78,7 @@ export const Header = ({
                 </div>
             </div>
         </div>
+        </Router>
     );
 };
 
