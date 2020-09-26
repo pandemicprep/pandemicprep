@@ -11,26 +11,7 @@ export const Productlist = () => {
             <p>List of Products</p>
             <h1>MainBody</h1>
             <container className="productContainer">
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
-                <div className="product">PRODUCT</div>
+                <div class="product"></div>
             </container>
         </div>
     );

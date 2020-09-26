@@ -11,8 +11,8 @@ export const MainBody = () => {
 
     return (
         <div className="categoryContainer">
-            <Profile />
-            {/* <Productlist /> *}
+            {/* <Profile /> */}
+            <Productlist />
             {/* <Categories /> */}
             {/* <AddProduct /> */}
             {/* <Cart /> */}
