@@ -40,6 +40,7 @@ export const Header = ({
             .catch(error => {
                 setProducts(error.message);
             })
+            history.push('/');
         } else {
             alert('Must enter search term(s)');
         }
