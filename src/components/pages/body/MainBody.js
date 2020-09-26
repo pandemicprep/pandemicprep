@@ -29,9 +29,11 @@ export const MainBody = ({products, setProducts, searchString, setSearchString})
         <Router>
             <div className="bodyContainer">
                 <Switch>
-                <Route path='/' >
+                <Route exact path='/' >
+                        <>
                         <Productlist products={products} />
                         <Categories />
+                        </>
                     </Route>
                     <Route path='/register'>
                         <Profile view='register'/>
@@ -46,8 +48,10 @@ export const MainBody = ({products, setProducts, searchString, setSearchString})
                         <Profile view='edit' />
                     </Route>
                     <Route path='/product' >
+                        <>
                         <Product />
                         <Categories />
+                        </>
                     </Route>
                     <Route path='/cart' >
                         <Cart />
