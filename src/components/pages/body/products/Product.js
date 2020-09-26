@@ -38,7 +38,7 @@ export const Product = ({
                 <div key={product.id} className="product">
                 <div className="info">
                     <p className="header">
-                        {product.name}
+                        {product.title}
                     </p>
                     <p className="image">
                         {product.imageURL}

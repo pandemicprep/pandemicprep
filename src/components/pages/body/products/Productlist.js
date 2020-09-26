@@ -15,7 +15,7 @@ import {
 } from '../../../../api/products';
 
 
-export const Productlist = ({products, setProducts}) => {
+export const Productlist = ({products, setProducts, setProduct, NavLink}) => {
 
 
     return (
@@ -23,16 +23,31 @@ export const Productlist = ({products, setProducts}) => {
             <p>List of Products</p>
             <h1>MainBody</h1>
             <div className="productContainer">
-                {products.map((product, i) => {
-                    return <Product 
-                    key={i}
-                    product={product} 
-                    class='product' />
+                {products.map((singleProduct, i) => {
+                    return (
+                        <NavLink  to='/product' onClick={(event) => {setProduct(singleProduct)}}>
+                            <div key={singleProduct.id} className="product" singleProduct={singleProduct} >
+                                <div className="info">
+                                    <p className="header">
+                                        {singleProduct.title}
+                                    </p>
+                                    <p className="image">
+                                        {singleProduct.imageURL}
+                                    </p>
+                                    <p className="price">
+                                        {singleProduct.price}
+                                    </p>
+                                    <button>Add to Cart</button>
+                                </div>
+                            </div>
+                        </NavLink>
+                    )
                 })}
                 
             </div>
             
             
         </div>
+        
     );
 };

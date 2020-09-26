@@ -36,10 +36,8 @@ const App = () => {
             searchString={searchString} setSearchString={setSearchString} useHistory={useHistory} />
             <Switch>
                 <Route exact path='/' >
-                        
-                        <Productlist products={products} setProducts={setProducts} />
+                        <Productlist products={products} setProducts={setProducts} setProduct={setProduct} NavLink={NavLink} />
                         <Categories />
-                        
                     </Route>
                     <Route path='/register'>
                         <Profile view='register'/>
@@ -47,7 +45,6 @@ const App = () => {
                     <Route path='/login' render={() => 
                         <Profile view='login' />
                     } >
-                        
                     </Route>
                     <Route path='/guest'>
                         <Profile view='guest' />
@@ -56,10 +53,8 @@ const App = () => {
                         <Profile view='edit' />
                     </Route>
                     <Route path='/product' >
-                    
                         <Product product={product} setProduct={setProduct} />
                         <Categories />
-                        
                     </Route>
                     <Route path='/cart' >
                         <Cart />
