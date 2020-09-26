@@ -20,12 +20,12 @@ const { addProduct_Categories } = require("../jointables/products_categories");
 
 
 
- async function addProductAndCategory({name, price, description, image, category}) {
+ async function addProductAndCategory({name, price, description, image, category, isHighlighted}) {
 	const categories = category.split(' ');
 	const length = categories.length;
 
 	try {
-		const newProduct = await addProduct({name, price, description, image});
+		const newProduct = await addProduct({name, price, description, image, isHighlighted});
 		
 		await Promise.mapSeries(categories, async function(category, index, length) {
 			const categoryId = await categoryIdByName(category);
@@ -52,19 +52,19 @@ const { addProduct_Categories } = require("../jointables/products_categories");
 
 
 
-async function addProduct({ name, price, description, image }) {
+async function addProduct({ name, price, description, image, isHighlighted }) {
   try {
     const {
       rows: [newProduct],
     } = await client.query(
       `
-		INSERT INTO products (title, price, description, image)
-		VALUES ($1, $2, $3, $4)
+		INSERT INTO products (title, price, description, image, "isHighlighted")
+		VALUES ($1, $2, $3, $4, $5)
 		ON CONFLICT DO NOTHING
 		RETURNING *;
 	`,
 
-			[name, price, description, image],
+			[name, price, description, image, isHighlighted],
 		);
 		if (newProduct) {
 			return newProduct;
@@ -131,14 +131,23 @@ async function getProductsByQuery(query) {
     }
 
     const { rows } = await client.query(`
-            SELECT * FROM products 
+            SELECT id FROM products 
             WHERE 
             title LIKE '%${query}%'
             OR title LIKE '%${uppercaseQuery}%';
         `);
 
+      const prodIdArray = rows.map((product) => {
+        const [newProductId] = Object.values(product);
+        return newProductId;
+      });
+  
+      const productsArray = await Promise.map(prodIdArray, async function(productId) {
+        return await getProductById(productId)
+      }, { concurrency: 25});   
+
     // console.log('products by query: ', rows);
-    return rows;
+    return productsArray;
   } catch (error) {
     throw error;
   }
@@ -230,6 +239,30 @@ async function getProductsByCategory(category) {
   }
 }
 
+async function getHighlightedProducts() {
+  try {
+    const {
+      rows
+    } = await client.query(`
+     SELECT id FROM products 
+     WHERE "isHighlighted" = true;
+    `);
+
+    const prodIdArray = rows.map((product) => {
+      const [newProductId] = Object.values(product);
+      return newProductId;
+    });
+
+    const productsArray = await Promise.map(prodIdArray, async function(productId) {
+      return await getProductById(productId)
+    }, { concurrency: 25});
+
+    return productsArray;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getProductById,
   addProductAndCategory,
@@ -237,5 +270,6 @@ module.exports = {
   getProductsByQuery,
   addProduct,
   getProductsForCartHistory,
-  getProductsByCategory
+  getProductsByCategory,
+  getHighlightedProducts
 };

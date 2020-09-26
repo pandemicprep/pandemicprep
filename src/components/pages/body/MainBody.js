@@ -1,7 +1,12 @@
 /** @format */
 
-import React from "react";
+
+
 import {BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom'
+import React, { useEffect } from "react";
+
+import { getPromotedProducts } from '../../../api/products';
+
 
 import "./MainBody.css";
 import { Categories, Productlist, Profile, Cart, Product, Orders, Userlist, Sales } from "../../index";
@@ -9,6 +14,16 @@ import { Categories, Productlist, Profile, Cart, Product, Orders, Userlist, Sale
 export const MainBody = ({products, setProducts, searchString, setSearchString}) => {
     // const [bathCat, setBathCat] = useState([bathCat]);
     // const [search, setSearch] = useState([searcResults]);
+
+    useEffect(() => {
+        getPromotedProducts()
+            .then((response) => {
+                setProducts(response)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }, []);
 
     return (
         <Router>

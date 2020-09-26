@@ -1,13 +1,15 @@
 /** @format */
-const Promise = require('bluebird');
-
+const Promise = require("bluebird");
 
 const {
   addProductAndCategory,
   getAllProducts,
   getProductsByQuery,
   getProductById,
-  getProductsByCategory
+  getProductsByCategory,
+
+  getHighlightedProducts
+
 } = require("./singletables/products");
 
 const {
@@ -17,7 +19,10 @@ const {
   getUserById,
 } = require("./singletables/users");
 
-const { categoryIdByName, getAllCategories } = require("./singletables/categories");
+const {
+  categoryIdByName,
+  getAllCategories,
+} = require("./singletables/categories");
 
 const productArray = require("./singletables/productObject");
 
@@ -27,34 +32,37 @@ const {
   getCartHistoryStatus,
 } = require("./singletables/cart");
 
-// const { getAllProductsCart } = require("./jointables/products_carts");
+const {
+  createProductCart,
+  getAllProductsCart,
+} = require("./jointables/products_carts");
 
-const { addReview, getReviewsByProductId } = require('./singletables/reviews');
+const { addReview, getReviewsByProductId } = require("./singletables/reviews");
 
 async function seed() {
 
-    try {
-        await createNewUsers();
-        // await gettingAllUsers();
-        // await creatingOneNewProduct();
-        await seedingProductObject();
-        // await gettingProductsByQuery();
-        // await updatingUsers();
-        // await gettingUserById();
-        // await gettingCategoryIdsByName();
-        // await addingOneCart();
-        await seedingInitialReviews();
-        // await gettingSeedReviewsByProduct();
-        // await gettingAllCategories();
-        await gettingProductById();
-        await gettingProductsByCategory();
-
-        // console.log('Running get all products...');
-        // const allProducts = await getAllProducts();
-        // console.log('Result: ', allProducts);
-    } catch (error) {
-        throw error;
-    }
+  try {
+    await createNewUsers();
+    // await gettingAllUsers();
+    await creatingOneNewProduct();
+    await seedingProductObject();
+    // await gettingProductsByQuery();
+    // await updatingUsers();
+    // await gettingUserById();
+    // await gettingCategoryIdsByName();
+    await addingOneCart();
+    await seedingInitialReviews();
+    // await gettingSeedReviewsByProduct();
+    // await gettingAllCategories();
+    await gettingProductById();
+    await gettingProductsByCategory();
+    await makingProductCart();
+    // console.log('Running get all products...');
+    // const allProducts = await getAllProducts();
+    // console.log('Result: ', allProducts);
+  } catch (error) {
+    throw error;
+  }
 
 }
 
@@ -155,6 +163,9 @@ async function gettingAllUsers() {
 }
 
 async function creatingOneNewProduct() {
+  try {
+    console.log("creating new product... ");
+
 
     try {
         console.log("creating new product... ");
@@ -166,30 +177,69 @@ async function creatingOneNewProduct() {
             image: "www.imageurl.com/urlurlurl",
 
             category: "bath",
+            isHighlighted: true
         });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 1",
+            price: 99.99,
+            description: "is highlighted 1 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "school",
+            isHighlighted: true
+        });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 2",
+            price: 59.99,
+            description: "is highlighted 2 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "supplies",
+            isHighlighted: true
+        });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 3",
+            price: 9.99,
+            description: "is highlighted 3 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "entertainment",
+            isHighlighted: true
+        });
+
         console.log('the new product is ', product);
     } catch (error) {
         throw error;
     }
+
 }
 
 async function seedingProductObject() {
-    console.log("Adding all products in product array to db...");
-    const length = productArray.length;
-        try {
-            await Promise.mapSeries(productArray, function ({name, price, description, image, category}, index, length) {
-                    const newProduct = addProductAndCategory({name, price, description, image, category});
-                    
-                    return newProduct;
-                
-            });
-        } catch (error) {
-            throw error;
-        }
-       
-    }
+  console.log("Adding all products in product array to db...");
+  const length = productArray.length;
+  try {
+    await Promise.mapSeries(productArray, function (
+      { name, price, description, image, category },
+      index,
+      length
+    ) {
+      const newProduct = addProductAndCategory({
+        name,
+        price,
+        description,
+        image,
+        category,
+      });
 
-
+      return newProduct;
+    });
+  } catch (error) {
+    throw error;
+  }
+}
 
 async function gettingProductsByQuery() {
   try {
@@ -308,76 +358,117 @@ async function gettingNonActiveCart() {
 }
 
 async function seedingInitialReviews() {
-    try {
-        await addReview({
-            creatorId: 1,
-            productId: 1,
-            score: 5,
-            description: 'Very pleased with this product!'
-        });
+  try {
+    await addReview({
+      creatorId: 1,
+      productId: 1,
+      score: 5,
+      description: "Very pleased with this product!",
+    });
 
-        await addReview({
-            creatorId: 1,
-            productId: 5,
-            score: 3,
-            description: 'Pleased'
-        });
+    await addReview({
+      creatorId: 1,
+      productId: 5,
+      score: 3,
+      description: "Pleased",
+    });
 
-        await addReview({
-            creatorId: 2,
-            productId: 30,
-            score: 1,
-            description: 'Very disappointed!'
-        });
+    await addReview({
+      creatorId: 2,
+      productId: 30,
+      score: 1,
+      description: "Very disappointed!",
+    });
 
-        await addReview({
-            creatorId: 2,
-            productId: 5,
-            score: 5,
-            description: 'Experience could not have been better!'
-        });
-    } catch (error) {
-        throw error;
-    }
+    await addReview({
+      creatorId: 2,
+      productId: 5,
+      score: 5,
+      description: "Experience could not have been better!",
+    });
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function gettingSeedReviewsByProduct() {
-    try {
-        const reviews = await getReviewsByProductId(5);
+  try {
+    const reviews = await getReviewsByProductId(5);
 
-        console.log('reviews by specific product: ', reviews);
-    } catch (error) {
-        throw error;
-    }
+    console.log("reviews by specific product: ", reviews);
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function gettingAllCategories() {
-    try {
-        const categories = await getAllCategories();
+  try {
+    const categories = await getAllCategories();
 
-        console.log('all categories: ', categories);
-    } catch (error) {
-        throw error;
-    }
+    console.log("all categories: ", categories);
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function gettingProductById() {
-    try {
-        const product = await getProductById(9);
+  try {
+    const product = await getProductById(9);
 
-        console.log('product by id in seed: ', product);
-    } catch (error) {
-        throw error;
-    }
+    console.log("product by id in seed: ", product);
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function gettingProductsByCategory() {
-    try {
-        const products = await getProductsByCategory('school');
-        console.log('returning products by category in seed: ', products);
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const products = await getProductsByCategory("school");
+    console.log("returning products by category in seed: ", products);
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function makingProductCart() {
+  try {
+    const productCart1 = await createProductCart({
+      productId: 2,
+      cartId: 1,
+      quantity: 4,
+      unitPrice: 5.99,
+    });
+    const productCart2 = await createProductCart({
+      productId: 13,
+      cartId: 2,
+      quantity: 2,
+      unitPrice: 199.99,
+    });
+    const productCart3 = await createProductCart({
+      productId: 4,
+      cartId: 3,
+      quantity: 45,
+      unitPrice: 1.99,
+    });
+
+    console.log(
+      "product cart test: ",
+      productCart1,
+      productCart2,
+      productCart3
+    );
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function gettingHighlightedProducts() {
+  try {
+    const products = await getHighlightedProducts();
+    console.log('returning highlighted products in seed: ', products);
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = { seed };

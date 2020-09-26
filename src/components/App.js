@@ -15,7 +15,7 @@ const App = () => {
     return (
         <div className="App">
             <Header products={products} setProducts={setProducts}
-            searchString={searchString} setSearchString={setSearchString}/>
+            searchString={searchString} setSearchString={setSearchString} history={history} />
             <MainBody products={products} setProducts={setProducts}
             searchString={searchString} setSearchString={setSearchString}/>
             <Footer />
