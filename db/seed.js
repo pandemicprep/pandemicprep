@@ -7,7 +7,8 @@ const {
   getAllProducts,
   getProductsByQuery,
   getProductById,
-  getProductsByCategory
+  getProductsByCategory,
+  getHighlightedProducts
 } = require("./singletables/products");
 
 const {
@@ -36,8 +37,9 @@ async function seed() {
     try {
         await createNewUsers();
         // await gettingAllUsers();
-        // await creatingOneNewProduct();
+        await creatingOneNewProduct();
         await seedingProductObject();
+        await gettingHighlightedProducts();
         // await gettingProductsByQuery();
         // await updatingUsers();
         // await gettingUserById();
@@ -47,7 +49,7 @@ async function seed() {
         // await gettingSeedReviewsByProduct();
         // await gettingAllCategories();
         await gettingProductById();
-        await gettingProductsByCategory();
+        // await gettingProductsByCategory();
 
         // console.log('Running get all products...');
         // const allProducts = await getAllProducts();
@@ -166,7 +168,39 @@ async function creatingOneNewProduct() {
             image: "www.imageurl.com/urlurlurl",
 
             category: "bath",
+            isHighlighted: true
         });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 1",
+            price: 99.99,
+            description: "is highlighted 1 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "school",
+            isHighlighted: true
+        });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 2",
+            price: 59.99,
+            description: "is highlighted 2 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "supplies",
+            isHighlighted: true
+        });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 3",
+            price: 9.99,
+            description: "is highlighted 3 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "entertainment",
+            isHighlighted: true
+        });
+
         console.log('the new product is ', product);
     } catch (error) {
         throw error;
@@ -378,6 +412,15 @@ async function gettingProductsByCategory() {
     } catch (error) {
         throw error;
     }
+}
+
+async function gettingHighlightedProducts() {
+  try {
+    const products = await getHighlightedProducts();
+    console.log('returning highlighted products in seed: ', products);
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = { seed };
