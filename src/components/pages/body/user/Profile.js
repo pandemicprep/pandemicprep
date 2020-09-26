@@ -8,11 +8,11 @@ import { states, countries, registrationHandler, loginHandler, guestHandler } fr
 
 import './Profile.css';
 
-export const Profile = () => {
+export const Profile = ({view}) => {
 	//CURRENT VIEWS: login register guest userCheckout edit
 	//CHANGE PASSWORD BUTTON: needs onclick function to switch state to ''
 	//SET UP STATES FOR DIFFERENT VIEWS! :)
-	const [view, setView] = useState('edit');
+	
 	const [isUser, setIsUser] = useState(false);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -76,7 +76,6 @@ export const Profile = () => {
 
 	const passwordButtonHandler = (event) => {
 		console.log('password handler ', event.target);
-		setView('');
 	};
 
 	const formHandler = async (event) => {

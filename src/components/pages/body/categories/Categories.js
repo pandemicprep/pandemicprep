@@ -8,12 +8,12 @@ export const Categories = () => {
         <div className='category'>
             <h1>Categories</h1>
 
-            <container className='productCategories'>
+            <div className='productCategories'>
                 <button className="cats">Working From Home</button>
                 <button className="cats">Learning From Home</button>
                 <button className="cats">Entertainment</button>
                 <button className="cats">Supplies</button>
-            </container>
+            </div>
         </div>
     )
 }

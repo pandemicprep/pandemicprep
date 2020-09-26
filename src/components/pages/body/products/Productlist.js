@@ -22,7 +22,7 @@ export const Productlist = ({products, setProducts}) => {
         <div className="productList">
             <p>List of Products</p>
             <h1>MainBody</h1>
-            <container className="productContainer">
+            <div className="productContainer">
                 {products.map((product, i) => {
                     return <Product 
                     key={i}
@@ -30,7 +30,7 @@ export const Productlist = ({products, setProducts}) => {
                     class='product' />
                 })}
                 
-            </container>
+            </div>
             
             
         </div>
