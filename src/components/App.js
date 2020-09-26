@@ -13,8 +13,10 @@ const App = () => {
 
     return (
         <div className="App">
-            <Header />
-            <MainBody />
+            <Header products={products} setProducts={setProducts}
+            searchString={searchString} setSearchString={setSearchString}/>
+            <MainBody products={products} setProducts={setProducts}
+            searchString={searchString} setSearchString={setSearchString}/>
             <Footer />
         </div>
     );

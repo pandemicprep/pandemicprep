@@ -14,45 +14,47 @@ export const Product = ({
     price,
     description,
     imageURL,
-    searchString
+    searchString,
+    setSearchString,
+    product
 }) => {
-    const [products, setProducts] = useState([]);
     
 
-    useEffect(() => {
-        getProductsByQuery(searchString)
-            .then(queryProducts => {
-                console.log(queryProducts)
-                setProducts(queryProducts)
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    }, []);
+    // useEffect(() => {
+    //     getProductsByQuery(searchString)
+    //         .then(queryProducts => {
+    //             console.log(queryProducts)
+    //             setProducts(queryProducts)
+    //             console.log(products, 'second log')
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         })
+    // }, []);
 
     return (
         <>
-            {products.map(({id, name, imageURL, description, price}) => (
-                <div key={id} className="product">
+            
+                <div key={product.id} className="product">
                 <div className="info">
                     <p className="header">
-                        {name}
+                        {product.name}
                     </p>
                     <p className="image">
-                        {imageURL}
+                        {product.imageURL}
                     </p>
                     <p className="description">
-                        {description}
+                        {product.description}
                     </p>
                     <p className="price">
-                        {price}
+                        {product.price}
                     </p>
                     <button>Add to Cart</button>
                 </div>
     
                 
             </div>
-            ))}
+            
            
         </>
     );

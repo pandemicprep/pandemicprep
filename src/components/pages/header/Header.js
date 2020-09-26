@@ -20,18 +20,25 @@ export const Header = ({
 }) => {
 
     const handleSearchString = (event) => {
-        console.log(event.target.value)
+        setSearchString(event.target.value)
+        // console.log(searchString)
     }
 
-    const searchProducts = async (event) => {
-        await getProductsByQuery(searchString)
+    function searchProducts(event) {
+        event.preventDefault();
+        if (searchString) {
+        getProductsByQuery(searchString)
             .then(queryProducts => {
                 console.log(queryProducts)
                 setProducts(queryProducts)
+                console.log(products, 'products in header')
             })
             .catch(error => {
                 setProducts(error.message);
             })
+        } else {
+            alert('Must enter search term(s)');
+        }
     }
 
     return (

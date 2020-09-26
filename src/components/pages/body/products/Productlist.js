@@ -15,7 +15,7 @@ import {
 } from '../../../../api/products';
 
 
-export const Productlist = () => {
+export const Productlist = ({products, setProducts}) => {
 
 
     return (
@@ -23,18 +23,12 @@ export const Productlist = () => {
             <p>List of Products</p>
             <h1>MainBody</h1>
             <container className="productContainer">
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
-                <Product class='product' />
+                {products.map((product, i) => {
+                    return <Product 
+                    key={i}
+                    product={product} 
+                    class='product' />
+                })}
                 
             </container>
             
