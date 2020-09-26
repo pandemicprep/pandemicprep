@@ -8,8 +8,10 @@ footer {
     border: 2px solid black;
     font-family: 'Raleway', sans-serif;
     text-align: center;
-    height: 200px;
+    height: 50px;
     width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 #footerLogo {
