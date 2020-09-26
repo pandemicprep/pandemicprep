@@ -25,8 +25,8 @@ export const Productlist = ({products, setProducts, setProduct, NavLink}) => {
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (
-                        <NavLink  to='/product' onClick={(event) => {setProduct(singleProduct)}}>
-                            <div key={singleProduct.id} className="product" singleProduct={singleProduct} >
+                        <NavLink key={i} to='/product' onClick={(event) => {setProduct(singleProduct)}}>
+                            <div key={i} className="product" >
                                 <div className="info">
                                     <p className="header">
                                         {singleProduct.title}
