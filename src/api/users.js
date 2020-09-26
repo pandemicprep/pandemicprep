@@ -13,6 +13,15 @@ export async function addUser(user) {
   }
 }
 
+export async function guestUser(guest) {
+  try {
+    const { data: newGuest } = await axios.post('/api/users/guest', guest)
+    return newGuest;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 //Update User
 export async function updateUser(fields = {}, token) {
   try {

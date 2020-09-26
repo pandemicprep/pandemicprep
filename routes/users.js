@@ -41,7 +41,7 @@ usersRouter.post("/register", async (req, res, next) => {
 usersRouter.post('/login', async (req, res, next) => {
   const SALT_COUNT = 13;
   const { email, password } = req.body;
-  console.log('got into user router login with ', email, password);
+  
   try {
     const user = await getUserByEmail(email);
     if (user.message) {
@@ -67,6 +67,26 @@ usersRouter.post('/login', async (req, res, next) => {
     throw error;
   }
 })
+
+usersRouter.post('/guest', async (req, res, next) => {
+  
+    const guest = req.body;
+  console.log("got into user router guest ", guest);
+  try {
+    const newGuest = await addUser(guest);
+    console.log("new guest ", newGuest);
+    if (newGuest.message) {
+      res.send(newGuest);
+    } else {
+      
+    res.send(newGuest);
+    }
+  } catch (error) {
+    throw error;
+  }
+
+})
+
 
 // get all users
 usersRouter.get("/", async (req, res, next) => {
