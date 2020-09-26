@@ -3,10 +3,13 @@ const productsRouter = express.Router();
 
 const {
     getProductsByQuery,
-    addProduct
+    addProduct,
+    getProductById,
+    getProductsByCategory
 } = require('../db/singletables/products');
 
-productsRouter.get('/:query', async (req, res, next) => {
+// gets product(s) by sending a searchString to the db
+productsRouter.get('/search/:query', async (req, res, next) => {
     try {
         const { query } = req.params;
         const queryProducts = await getProductsByQuery(query);
@@ -17,6 +20,7 @@ productsRouter.get('/:query', async (req, res, next) => {
     }
 });
 
+// adds a new product
 productsRouter.post('/', async (req, res, next) => {
     try {
         const product = req.body;
@@ -26,6 +30,31 @@ productsRouter.post('/', async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-})
+});
+
+// gets a product by id (to be used in other functions)
+productsRouter.get('/:productId', async (req, res, next) => {
+    try {
+        const { productId } = req.params;
+        const product = await getProductById(productId);
+
+        res.send(product);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// gets all products in a specific category
+productsRouter.get('/category/:categoryName', async (req, res, next) => {
+    try {
+        const { categoryName } = req.params;
+        const products = await getProductsByCategory(categoryName);
+
+        res.send(products);
+    } catch (error) {
+        next(error);
+    }
+}) 
+
 
 module.exports = productsRouter;

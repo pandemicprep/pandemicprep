@@ -164,17 +164,78 @@ async function getProductById(id) {
       WHERE id=$1;
     `, [id]);
 
+  //  console.log('product in getProductById', product)
+
+    const {
+      rows: categories
+    } = await client.query(`
+      SELECT categories.name FROM categories 
+      JOIN products_categories ON categories.id = products_categories."categoryId"
+      JOIN products ON products.id = products_categories."productId"
+      WHERE products.id=$1;
+    `, [product.id]);
+    // console.log('categories line 178', categories)
+
+    const newCategories = categories.map((category) => {
+        const [singleCat] = Object.values(category);
+        return singleCat;
+    });
+
+    product.categories = newCategories;
+
+    const {
+      rows: reviews
+    } = await client.query(`
+    SELECT * FROM reviews 
+    WHERE "productId" = $1;
+  `, [product.id]);
+
+    product.reviews = reviews;
+
+    // console.log('whole product inside getProductById in product db', product);
+    
     return product;
   } catch (error) {
     throw error;
   }
 }
 
+async function getProductsByCategory(category) {
+  try {
+      const {
+          rows: productIds
+      } = await client.query(`
+          SELECT products.id
+          FROM products
+          JOIN products_categories ON products.id = products_categories."productId"
+          JOIN categories ON categories.id = products_categories."categoryId"
+          WHERE categories.name = $1;
+      `, [category]);
+
+
+      const prodIdArray = productIds.map((product) => {
+          const [newProductId] = Object.values(product);
+          return newProductId;
+      });
+
+      const productsArray = await Promise.map(prodIdArray, async function(productId) {
+          return await getProductById(productId)
+      }, { concurrency: 25});
+
+      return productsArray;
+
+      // console.log('productsArray in getProductByCategory', productsArray);
+  } catch (error) {
+      throw error;
+  }
+}
+
 module.exports = {
+  getProductById,
   addProductAndCategory,
   getAllProducts,
   getProductsByQuery,
   addProduct,
   getProductsForCartHistory,
-  getProductById
+  getProductsByCategory
 };
