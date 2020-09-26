@@ -1,8 +1,10 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 
 import "./Header.css";
+
+import { getProductsByQuery } from '../../../api/products';
 
 import { Login, Register } from "../../index";
 
@@ -10,15 +12,38 @@ import { Login, Register } from "../../index";
 //NEED SIGN UP PAGE
 //NEED LOG OUT BUTTON
 //NEED ADMIN BUTTON
-export const Header = () => {
+export const Header = ({
+    products,
+    setProducts,
+    searchString,
+    setSearchString
+}) => {
+
+    const handleSearchString = (event) => {
+        console.log(event.target.value)
+    }
+
+    const searchProducts = async (event) => {
+        await getProductsByQuery(searchString)
+            .then(queryProducts => {
+                console.log(queryProducts)
+                setProducts(queryProducts)
+            })
+            .catch(error => {
+                setProducts(error.message);
+            })
+    }
+
     return (
         <div className="headerContainer">
             <img id="headLogo" src={process.env.PUBLIC_URL + '/styleimages/PANPREPLOGO.png'} />
 
-            <input type="text" className="searchTerm" placeholder="What are you looking for?" />
-            <button type="submit" id="search" className="searchButton">
-                Search
-            </button>
+            <form onSubmit={searchProducts} className='searchForm'>
+                <input value={searchString} onChange={handleSearchString} type="text" className="searchTerm" placeholder="What are you looking for?" />
+                <button type="submit" id="search" className="searchButton">
+                    Search
+                </button>
+            </form>
 
             <button id="login">Login</button>
             <button id="signup">Sign Up</button>
@@ -38,3 +63,5 @@ export const Header = () => {
         </div>
     );
 };
+
+

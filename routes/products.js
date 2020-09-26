@@ -9,7 +9,7 @@ const {
 } = require('../db/singletables/products');
 
 // gets product(s) by sending a searchString to the db
-productsRouter.get('/search/:query', async (req, res, next) => {
+productsRouter.get('/:query', async (req, res, next) => {
     try {
         const { query } = req.params;
         const queryProducts = await getProductsByQuery(query);

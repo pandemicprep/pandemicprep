@@ -8,6 +8,9 @@ import { Header, MainBody, Categories, Footer } from "./index";
 import { getSomething } from "../api";
 
 const App = () => {
+    const [products, setProducts] = useState([]);
+    const [searchString, setSearchString] = useState('');
+
     return (
         <div className="App">
             <Header />

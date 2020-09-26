@@ -21,6 +21,10 @@ h1 {
     margin-top: 20px;
 }
 
+.searchForm {
+    display: flex;
+}
+
 #login {
 background-color: lightblue;
 color: rgb(37, 43, 48);
