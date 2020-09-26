@@ -29,7 +29,7 @@ export const Header = () => {
                     <a href="#">Admin</a>
                     <a href="#">Profile</a>
                     <a href="#">Orders</a>
-                    <a href="#">Whatever</a>
+                    <a href="#">Log Out</a>
                     <a href="#">Whatever</a>
                     <a href="#">Whatever</a>
                     <a href="#">Whatever</a>

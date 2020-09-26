@@ -1,9 +1,13 @@
 .category {
     background-color: aquamarine;
     font-family: 'Raleway', sans-serif;
-    border: 5px solid black;
+    border: 1px solid black;
     height: 120px;
     text-align: center;
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    margin-left: -5px;
 }
 
 .productCategories {
@@ -24,3 +28,4 @@
 .cats:hover {
     background-color: pink;
 }
+

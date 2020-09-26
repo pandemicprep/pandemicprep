@@ -13,7 +13,7 @@ export const MainBody = () => {
         <div className="categoryContainer">
             {/* <Profile /> */}
             <Productlist />
-            {/* <Categories /> */}
+            <Categories />
             {/* <AddProduct /> */}
             {/* <Cart /> */}
 
