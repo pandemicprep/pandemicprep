@@ -88,8 +88,8 @@ async function createTables() {
         "productId" INTEGER REFERENCES products(id),
         "cartId" INTEGER REFERENCES carts(id),
         quantity INTEGER NOT NULL,
-        "unitPrice" INTEGER NOT NULL,
-        "itemTotal" INTEGER NOT NULL
+        "unitPrice" NUMERIC(9,2) NOT NULL,
+        "itemTotal" NUMERIC(9,2) NOT NULL
       );
 
       
