@@ -15,7 +15,7 @@ const App = () => {
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState({});
     const [searchString, setSearchString] = useState('');
-    // const history = useHistory();
+    const [categories, setCategories] = useState([]);    // const history = useHistory();
 
 
     useEffect(() => {
@@ -34,11 +34,12 @@ const App = () => {
         <Router>
         <div className="App">
             <Header products={products} setProducts={setProducts}
-            searchString={searchString} setSearchString={setSearchString} useHistory={useHistory} />
+            searchString={searchString} setSearchString={setSearchString} useHistory={useHistory} 
+            NavLink={NavLink} />
             <Switch>
                 <Route exact path='/' >
                         <Productlist products={products} setProducts={setProducts} setProduct={setProduct} NavLink={NavLink} />
-                        <Categories />
+                        <Categories setProducts={setProducts} NavLink={NavLink}/>
                     </Route>
                     <Route path='/register'>
                         <Profile view='register'/>
@@ -55,7 +56,7 @@ const App = () => {
                     </Route>
                     <Route path='/product' >
                         <Product product={product} setProduct={setProduct} />
-                        <Categories />
+                        <Categories setProducts={setProducts} NavLink={NavLink}/>
                     </Route>
                     <Route path='/cart' >
                         <Cart />

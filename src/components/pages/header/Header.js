@@ -19,7 +19,8 @@ export const Header = ({
     setProducts,
     searchString,
     setSearchString,
-    useHistory
+    useHistory,
+    NavLink
 }) => {
     const history = useHistory();
 
@@ -52,8 +53,9 @@ export const Header = ({
     return (
         
         <div className="headerContainer">
-            <img id="headLogo" src={process.env.PUBLIC_URL + '/styleimages/PANPREPLOGO.png'} />
-
+            <NavLink to='/'>
+                <img id="headLogo" src={process.env.PUBLIC_URL + '/styleimages/PANPREPLOGO.png'} />
+            </NavLink>
             <form onSubmit={searchProducts} className='searchForm'>
                 <input value={searchString} onChange={handleSearchString} type="text" className="searchTerm" placeholder="What are you looking for?" />
                 <button type="submit" id="search" className="searchButton">
