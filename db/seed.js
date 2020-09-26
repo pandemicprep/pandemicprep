@@ -163,11 +163,7 @@ async function gettingAllUsers() {
 }
 
 async function creatingOneNewProduct() {
-  try {
-    console.log("creating new product... ");
-
-
-    try {
+   try {
         console.log("creating new product... ");
 
         const product = await addProductAndCategory({

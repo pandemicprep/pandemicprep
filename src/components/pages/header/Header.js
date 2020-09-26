@@ -1,6 +1,8 @@
 /** @format */
 
 import React, { useState } from "react";
+import { NavLink, useHistory, navigate } from 'react-router-dom';
+
 
 import "./Header.css";
 
@@ -18,6 +20,7 @@ export const Header = ({
     searchString,
     setSearchString
 }) => {
+    const history = useHistory();
 
     const handleSearchString = (event) => {
         setSearchString(event.target.value)
@@ -41,6 +44,10 @@ export const Header = ({
         }
     }
 
+    const loginHandler = (event) => {
+        navigate('/login');
+    }
+
     return (
         <div className="headerContainer">
             <img id="headLogo" src={process.env.PUBLIC_URL + '/styleimages/PANPREPLOGO.png'} />
@@ -52,7 +59,7 @@ export const Header = ({
                 </button>
             </form>
 
-            <button id="login">Login</button>
+            <button id="login" onClick={loginHandler} >Login</button>
             <button id="signup">Sign Up</button>
             <button id="cart">Cart</button>
             <div class="dropdown">
