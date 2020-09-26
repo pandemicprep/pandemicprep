@@ -7,6 +7,9 @@ const {
   getProductsByQuery,
   getProductById,
   getProductsByCategory,
+
+  getHighlightedProducts
+
 } = require("./singletables/products");
 
 const {
@@ -37,6 +40,7 @@ const {
 const { addReview, getReviewsByProductId } = require("./singletables/reviews");
 
 async function seed() {
+
   try {
     await createNewUsers();
     // await gettingAllUsers();
@@ -59,6 +63,7 @@ async function seed() {
   } catch (error) {
     throw error;
   }
+
 }
 
 async function createNewUsers() {
@@ -161,18 +166,55 @@ async function creatingOneNewProduct() {
   try {
     console.log("creating new product... ");
 
-    const product = await addProductAndCategory({
-      name: "New Product Name",
-      price: 999.99,
-      description: "new product description yay",
-      image: "www.imageurl.com/urlurlurl",
 
-      category: "bath",
-    });
-    console.log("the new product is ", product);
-  } catch (error) {
-    throw error;
-  }
+    try {
+        console.log("creating new product... ");
+
+        const product = await addProductAndCategory({
+            name: "New Product Name",
+            price: 999.99,
+            description: "new product description yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "bath",
+            isHighlighted: true
+        });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 1",
+            price: 99.99,
+            description: "is highlighted 1 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "school",
+            isHighlighted: true
+        });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 2",
+            price: 59.99,
+            description: "is highlighted 2 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "supplies",
+            isHighlighted: true
+        });
+
+        await addProductAndCategory({
+            name: "Is Highlighted test 3",
+            price: 9.99,
+            description: "is highlighted 3 yay",
+            image: "www.imageurl.com/urlurlurl",
+
+            category: "entertainment",
+            isHighlighted: true
+        });
+
+        console.log('the new product is ', product);
+    } catch (error) {
+        throw error;
+    }
+
 }
 
 async function seedingProductObject() {
@@ -415,6 +457,15 @@ async function makingProductCart() {
       productCart2,
       productCart3
     );
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function gettingHighlightedProducts() {
+  try {
+    const products = await getHighlightedProducts();
+    console.log('returning highlighted products in seed: ', products);
   } catch (error) {
     throw error;
   }

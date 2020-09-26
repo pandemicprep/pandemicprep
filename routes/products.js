@@ -5,11 +5,12 @@ const {
     getProductsByQuery,
     addProduct,
     getProductById,
-    getProductsByCategory
+    getProductsByCategory,
+    getHighlightedProducts
 } = require('../db/singletables/products');
 
 // gets product(s) by sending a searchString to the db
-productsRouter.get('/search/:query', async (req, res, next) => {
+productsRouter.get('/:query', async (req, res, next) => {
     try {
         const { query } = req.params;
         const queryProducts = await getProductsByQuery(query);
@@ -55,6 +56,17 @@ productsRouter.get('/category/:categoryName', async (req, res, next) => {
         next(error);
     }
 }) 
+
+// Initial load of main page where products.isHighlighted is true
+productsRouter.get('/', async (req, res, next) => {
+    try {
+        const products = await getHighlightedProducts();
+
+        res.send(products);
+    } catch (error) {
+        next(error);
+    }
+})
 
 
 module.exports = productsRouter;

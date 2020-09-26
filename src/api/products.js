@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function getProductsByQuery(query) {
     try {
-        const { data } = await axios.get(`/api/products/search/${query}`);
+        const { data } = await axios.get(`/api/products/${query}`);
 
         return data;
     } catch (error) {
@@ -33,6 +33,16 @@ export async function getProductById(productId) {
 export async function getProductsByCategory(categoryName) {
     try {
         const { data } = await axios.get(`/api/products/category/${categoryName}`);
+
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getPromotedProducts() {
+    try {
+        const { data } = await axios.get('/api/products');
 
         return data;
     } catch (error) {
