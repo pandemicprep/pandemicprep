@@ -10,10 +10,10 @@ const {
 } = require('../db/singletables/products');
 
 // gets product(s) by sending a searchString to the db
-productsRouter.get('/:query', async (req, res, next) => {
+productsRouter.get('/:query/:pageNumber', async (req, res, next) => {
     try {
-        const { query } = req.params;
-        const queryProducts = await getProductsByQuery(query);
+        const { query, pageNumber } = req.params;
+        const queryProducts = await getProductsByQuery(query, pageNumber);
 
         res.send(queryProducts);
     } catch (error) {
@@ -46,10 +46,10 @@ productsRouter.get('/:productId', async (req, res, next) => {
 });
 
 // gets all products in a specific category
-productsRouter.get('/category/:categoryName', async (req, res, next) => {
+productsRouter.get('/category/:categoryName/:pageNumber', async (req, res, next) => {
     try {
-        const { categoryName } = req.params;
-        const products = await getProductsByCategory(categoryName);
+        const { categoryName, pageNumber } = req.params;
+        const products = await getProductsByCategory(categoryName, pageNumber);
 
         res.send(products);
     } catch (error) {
