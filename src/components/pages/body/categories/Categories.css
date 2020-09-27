@@ -1,9 +1,11 @@
 .category {
-    background-color: aquamarine;
+    background-color: rgb(50, 50, 50);
     font-family: 'Raleway', sans-serif;
-    border: 1px solid black;
+    border: 2px solid black;
+    color: white;
     height: 100px;
     text-align: center;
+    font-size: 20px;
     position: fixed;
     bottom: 50px;
     width: 100%;
@@ -18,23 +20,30 @@
     justify-content: center;
 }
 
-.cats {
+#catStar {
     height: 50px;
-    width: 100px;
-    margin-right: 20px;
-    margin-left: 20px;
-    background-color: yellow;
-    border-radius: 50px;
 }
 
-.cats:hover {
-    background-color: pink;
-}
-
-.category-tile {
-    border: 1px solid black;
-    padding: 20px;
-    width: 100px;
-    height: 100px;
-}
-
+/* unvisited link */
+a:link {
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* selected link */
+  a:active {
+    color: white;
+    text-decoration: none;
+  }
