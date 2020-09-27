@@ -13,14 +13,16 @@ import './App.css';
 
 const App = () => {
     const [products, setProducts] = useState([]);
+    const [promotedProducts, setPromotedProducts] = useState([]);
     const [product, setProduct] = useState({});
     const [searchString, setSearchString] = useState('');
-    const [categories, setCategories] = useState([]);    // const history = useHistory();
+    const [category, setCategory] = useState('');    // const history = useHistory();
 
 
     useEffect(() => {
         getPromotedProducts()
             .then((response) => {
+                setPromotedProducts(response)
                 setProducts(response)
             })
             .catch((error) => {
@@ -35,11 +37,12 @@ const App = () => {
         <div className="App">
             <Header products={products} setProducts={setProducts}
             searchString={searchString} setSearchString={setSearchString} useHistory={useHistory} 
-            NavLink={NavLink} />
+            NavLink={NavLink} promotedProducts={promotedProducts} />
             <Switch>
                 <Route exact path='/' >
-                        <Productlist products={products} setProducts={setProducts} setProduct={setProduct} NavLink={NavLink} />
-                        <Categories setProducts={setProducts} NavLink={NavLink}/>
+                        <Productlist products={products} setProducts={setProducts} setProduct={setProduct} NavLink={NavLink} 
+                        searchString={searchString} category={category} />
+                        <Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory}/>
                     </Route>
                     <Route path='/register'>
                         <Profile view='register'/>
@@ -56,7 +59,7 @@ const App = () => {
                     </Route>
                     <Route path='/product' >
                         <Product product={product} setProduct={setProduct} />
-                        <Categories setProducts={setProducts} NavLink={NavLink}/>
+                        <Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory}/>
                     </Route>
                     <Route path='/cart' >
                         <Cart />

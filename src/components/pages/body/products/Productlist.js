@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 
+
 // import "./Productlist.css";
 import '../MainBody.css';
 
@@ -13,9 +14,36 @@ import {
     getProductById,
     getProductsByCategory
 } from '../../../../api/products';
+import { PageIndex } from "./PageIndex";
 
 
-export const Productlist = ({products, setProducts, setProduct, NavLink}) => {
+export const Productlist = ({
+    products, 
+    setProducts, 
+    setProduct, 
+    NavLink,
+    searchString,
+    category
+}) => {
+    const [categoryPage, setCategoryPage] = useState(1);
+    const [searchPage, setSearchPage] = useState(1);
+
+    // let active = 1;
+    // let pages = [];
+    // for (let number = 1; number <= 5; number++) {
+    //     pages.push(
+    //       <Pagination.Item key={number} active={number === active}>
+    //         {number}
+    //       </Pagination.Item>,
+    //     );
+    // }
+
+    // const pagination = (
+    //     <div>
+    //         <Pagination>{pages}</Pagination>
+    //     </div>
+    // );
+    
 
 
     return (
@@ -45,8 +73,7 @@ export const Productlist = ({products, setProducts, setProduct, NavLink}) => {
                 })}
                 
             </div>
-            
-            
+                <PageIndex />
         </div>
         
     );

@@ -4,8 +4,8 @@ import './Categories.css';
 
 import { getProductsByCategory } from '../../../../api/products';
 
-export const Categories = ({ setProducts, NavLink }) => {
-    const [categoryState, setCategoryState] = useState('');
+
+export const Categories = ({setProducts, NavLink, setCategory}) => {
 
     const cat = [
         { name: 'school', image: '../../../../../public/images/school/mathblocks.jpg' },
@@ -13,7 +13,8 @@ export const Categories = ({ setProducts, NavLink }) => {
     ];
 
     const categoryHandler = (category) => {
-        getProductsByCategory(category.name)
+        setCategory(category.name);
+        getProductsByCategory(category.name, 1)
             .then((response) => {
                 setProducts(response)
             })
