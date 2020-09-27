@@ -24,26 +24,30 @@
     height: 50px;
 }
 
+#cat {
+    color: white;
+}
+
 /* unvisited link */
-a:link {
+a:link#cat {
     color: white;
     text-decoration: none;
-  }
-  
-  /* visited link */
-  a:visited {
+}
+
+/* visited link */
+a:visited#cat {
     color: white;
     text-decoration: none;
-  }
-  
-  /* mouse over link */
-  a:hover {
+}
+
+/* mouse over link */
+a:hover#cat {
     color: white;
     text-decoration: none;
-  }
-  
-  /* selected link */
-  a:active {
+}
+
+/* selected link */
+a:active#cat {
     color: white;
     text-decoration: none;
-  }
+}

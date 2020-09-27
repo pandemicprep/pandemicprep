@@ -22,6 +22,7 @@ export const Productlist = ({
     setProducts, 
     setProduct, 
     NavLink,
+    searchObject,
     searchString,
     category
 }) => {
@@ -53,9 +54,9 @@ export const Productlist = ({
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (
-                        <NavLink key={i} to='/product' onClick={(event) => {setProduct(singleProduct)}}>
+                        <NavLink key={i} to='/product' onClick={(event)  => {setProduct(singleProduct)}}>
                             <div key={i} className="product" >
-                                <div className="info">
+                                <div id='product' className="info">
                                     <p className="header">
                                         {singleProduct.title}
                                     </p>
@@ -73,7 +74,7 @@ export const Productlist = ({
                 })}
                 
             </div>
-                <PageIndex />
+                <PageIndex searchObject={searchObject}/>
         </div>
         
     );

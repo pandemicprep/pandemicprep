@@ -157,8 +157,9 @@ async function getProductsByQuery(query, pageNumber) {
         return await getProductById(productId)
       }, { concurrency: 25});   
 
-    console.log('LOOK HERE', rowCount, productsArray)
-    return [rowCount, productsArray];
+    const pageCount = Math.ceil(rowCount / LIMIT);  
+    console.log('LOOK HERE', pageCount, productsArray)
+    return [pageCount, productsArray];
   } catch (error) {
     throw error;
   }

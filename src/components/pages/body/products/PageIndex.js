@@ -1,25 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './PageIndex.css';
 
-export const PageIndex = () => {
+export const PageIndex = ({searchObject}) => {
+    const [page, setPage] = useState(1);
+
+    const firstHanlder = () => {
+        
+    }
+
+    const nextHandler = (event) => {
+        console.log(searchObject, 'searchObj in pagination')
+
+        if (page < searchObject.pageCount) {
+            setPage(page + 1);
+        }
+    }
+
+    const backHandler = () => {
+
+    }
+
+    const lastHandler = () => {
+
+    }
+
     return (
-        <Pagination>
-            <Pagination.First />
-            <Pagination.Prev />
-            <Pagination.Item>{1}</Pagination.Item>
-            <Pagination.Ellipsis />
-
-            <Pagination.Item>{10}</Pagination.Item>
-            <Pagination.Item>{11}</Pagination.Item>
-            <Pagination.Item active>{12}</Pagination.Item>
-            <Pagination.Item>{13}</Pagination.Item>
-            <Pagination.Item disabled>{14}</Pagination.Item>
-
-            <Pagination.Ellipsis />
-            <Pagination.Item>{20}</Pagination.Item>
-            <Pagination.Next />
-            <Pagination.Last />
+        <Pagination id='pagination'>
+            <Pagination.First onClick={() => {
+                if (page > 1) {
+                    setPage(1);
+                }
+            }} />
+            <Pagination.Prev onClick={() => {
+                if (page > 1) {
+                    setPage(page - 1);
+                }
+            }}/>
+            <Pagination.Item active>{page}</Pagination.Item>
+            <Pagination.Next onClick={nextHandler}/>
+            <Pagination.Last onClick={() => {
+                if (page < searchObject.pageCount) {
+                    setPage(searchObject.pageCount);
+                }
+            }}/>
         </Pagination>
     )
 }
