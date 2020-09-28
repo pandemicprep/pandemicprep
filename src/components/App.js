@@ -89,13 +89,15 @@ const App = () => {
 							searchObject={searchObject}
 							category={category}
 							pageType={pageType}
-							setPageType={setPageType}
+                            setPageType={setPageType}
 						/>
 						<Categories
 							setProducts={setProducts}
 							NavLink={NavLink}
 							setCategory={setCategory}
-							setPageType={setPageType}
+                            setPageType={setPageType}
+                            pageType={pageType}
+                            setSearchObject={setSearchObject}
 						/>
 					</Route>
 					<Route path='/register'>
@@ -114,7 +116,9 @@ const App = () => {
 							setProducts={setProducts}
 							NavLink={NavLink}
 							setCategory={setCategory}
-							setPageType={setPageType}
+                            setPageType={setPageType}
+                            pageType={pageType}
+                            setSearchObject={setSearchObject}
 						/>
 					</Route>
 					<Route path='/cart'>
