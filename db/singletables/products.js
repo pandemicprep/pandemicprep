@@ -226,6 +226,15 @@ async function getProductsByCategory(category, pageNumber) {
 
   try {
       const OFFSET = (LIMIT * (pageNumber -1)) + 1;
+
+    const { rowCount } = await client.query(`
+      SELECT products.id
+      FROM products 
+      JOIN products_categories ON products.id = products_categories."productId"
+      JOIN categories ON categories.id = products_categories."categoryId"
+      WHERE categories.name = $1;
+    `, [category])
+
       const {
           rows: productIds
       } = await client.query(`
@@ -248,7 +257,10 @@ async function getProductsByCategory(category, pageNumber) {
           return await getProductById(productId)
       }, { concurrency: 25});
 
-      return productsArray;
+      const pageCount = Math.ceil(rowCount / LIMIT);  
+
+
+      return [pageCount, productsArray];
 
       // console.log('productsArray in getProductByCategory', productsArray);
   } catch (error) {
