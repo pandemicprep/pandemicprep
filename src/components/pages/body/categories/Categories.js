@@ -5,14 +5,20 @@ import './Categories.css';
 import { getProductsByCategory } from '../../../../api/products';
 
 
-export const Categories = ({setProducts, NavLink, setCategory}) => {
+export const Categories = ({setProducts, NavLink, setCategory, setPageType}) => {
 
     const cat = [
         { name: 'school', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' }
+        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
     ];
 
     const categoryHandler = (category) => {
+        setPageType('category');
         setCategory(category.name);
         getProductsByCategory(category.name, 1)
             .then((response) => {
@@ -28,7 +34,7 @@ export const Categories = ({setProducts, NavLink, setCategory}) => {
             {cat.map((category, i) => {
                 return (
                     <NavLink key={i} to='/' onClick={() => { categoryHandler(category) }}>
-                        <div key={i} className='category-tile' >
+                        <div key={i} id='cat' className='category-tile' >
                             <img id="catStar" src={process.env.PUBLIC_URL + '/styleimages/star.png'} />
                             <p className='category-name'>{category.name}</p>
                         </div>

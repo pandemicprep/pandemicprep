@@ -17,30 +17,30 @@ import { Login, Register } from "../../index";
 export const Header = ({
     products,
     setProducts,
-    searchString,
-    setSearchString,
+    searchObject,
+    setSearchObject,
     useHistory,
     NavLink,
-
-    setView,
-    promotedProducts
-
+    promotedProducts,
+    setPageType
+    setView
 }) => {
     const history = useHistory();
+    const [searchString, setSearchString] = useState('');
 
     const handleSearchString = (event) => {
-        setSearchString({rowCount: 0, string: event.target.value})
-        // console.log(searchString)
+        setSearchString(event.target.value)
+        // console.log(searchObject)
     }
 
     function searchProducts(event) {
         event.preventDefault();
+        setPageType('search');
         if (searchString) {
         getProductsByQuery(searchString, 1)
             .then(queryProducts => {
-                setSearchString({rowCount: queryProducts[0].rowCount, string: searchString.string})
+                setSearchObject({pageCount: queryProducts[0], string: searchString})
                 setProducts(queryProducts[1])
-                console.log(products, 'products in header')
             })
             .catch(error => {
                 setProducts(error.message);
@@ -58,7 +58,7 @@ export const Header = ({
                 <img id="headLogo" src={process.env.PUBLIC_URL + '/styleimages/PANPREPLOGO.png'} />
             </NavLink>
             <form onSubmit={searchProducts} className='searchForm'>
-                <input value={searchString} onChange={handleSearchString} type="text" className="searchTerm" placeholder="What are you looking for?" />
+                <input value={searchString} onChange={handleSearchString} type="text" className="searchTerm" placeholder="What are you looking for?" contentEditable='true' />
                 <button type="submit" id="search" className="searchButton">
                     Search
                 </button>

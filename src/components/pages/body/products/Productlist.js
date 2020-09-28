@@ -22,27 +22,14 @@ export const Productlist = ({
     setProducts, 
     setProduct, 
     NavLink,
+    searchObject,
     searchString,
-    category
+    category,
+    pageType,
+    setPageType
 }) => {
     const [categoryPage, setCategoryPage] = useState(1);
     const [searchPage, setSearchPage] = useState(1);
-
-    // let active = 1;
-    // let pages = [];
-    // for (let number = 1; number <= 5; number++) {
-    //     pages.push(
-    //       <Pagination.Item key={number} active={number === active}>
-    //         {number}
-    //       </Pagination.Item>,
-    //     );
-    // }
-
-    // const pagination = (
-    //     <div>
-    //         <Pagination>{pages}</Pagination>
-    //     </div>
-    // );
     
 
 
@@ -50,12 +37,14 @@ export const Productlist = ({
         <div className="productList">
             <p>List of Products</p>
             <h1>MainBody</h1>
+            <PageIndex searchObject={searchObject} pageType={pageType} 
+                           setPageType={setPageType} setProducts={setProducts}/>
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (
-                        <NavLink key={i} to='/product' onClick={(event) => {setProduct(singleProduct)}}>
+                        <NavLink key={i} to='/product' onClick={(event)  => {setProduct(singleProduct)}}>
                             <div key={i} className="product" >
-                                <div className="info">
+                                <div id='product' className="info">
                                     <p className="header">
                                         {singleProduct.title}
                                     </p>
@@ -73,7 +62,7 @@ export const Productlist = ({
                 })}
                 
             </div>
-                <PageIndex />
+                
         </div>
         
     );
