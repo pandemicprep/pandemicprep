@@ -24,14 +24,15 @@ usersRouter.post("/register", async (req, res, next) => {
 				{
 					id: newUser.id,
           isAdmin: newUser.isAdmin,
-          isUser: newUser.isUser
+          isUser: newUser.isUser,
+          firstName: newUser.firstName
 				},
 				process.env.JWT_SECRET,
 				{
 					expiresIn: '1w',
 				},
 			);
-    res.send(token);
+    res.send({firstName: newUser.firstName, isAdmin: newUser.isAdmin, isUser: newUser.isUser, token: token});
     }
   } catch (error) {
     throw error;
@@ -53,14 +54,15 @@ usersRouter.post('/login', async (req, res, next) => {
           {
             id: user.id,
             isAdmin: user.isAdmin,
-            isUser: user.isUser
+            isUser: user.isUser,
+            firstName: user.firstName
           },
           process.env.JWT_SECRET,
           {
             expiresIn: '1w',
           },
         );
-        res.send(token);
+        res.send({firstName: user.firstName, isAdmin: user.isAdmin, isUser: user.isUser, token: token});
       }
     }
   } catch (error) {
@@ -87,6 +89,14 @@ usersRouter.post('/guest', async (req, res, next) => {
 
 })
 
+usersRouter.get('/verify', async (req, res, next) => {
+  console.log('getting to verify with ', req.user);
+  try {
+      res.send({ firstName: req.user.firstName, isAdmin: req.user.isAdmin, isUser: req.user.isUser});
+  } catch (error) {
+    throw error;
+  }
+});
 
 // get all users
 usersRouter.get("/", async (req, res, next) => {
@@ -102,11 +112,11 @@ usersRouter.get("/", async (req, res, next) => {
 });
 
 // update user by id
-usersRouter.patch("/:userId", async (req, res, next) => {
+usersRouter.patch("/", async (req, res, next) => {
   try {
     console.log("entering update user by id route...");
     const fields = req.body
-    const id = req.params.userId
+    const id = req.user.id;
     const updateUserById = await updateUser(id, fields);
     console.log("updated userId:", updateUserById);
     res.send(updateUserById);
@@ -115,6 +125,10 @@ usersRouter.patch("/:userId", async (req, res, next) => {
     throw error;
   }
 });
+
+
+
+
 
 //get user by id
 usersRouter.get("/:userId", async (req, res, next) => {

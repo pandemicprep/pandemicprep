@@ -28,7 +28,7 @@ async function addUser({
     phone = null,
     creditCard = null,
 }) {
-    console.log("getting to addUser at the back end ", password);
+    
     const SALT_COUNT = 13;
     let securedPassword = null;
     let securedCreditCard = null;
