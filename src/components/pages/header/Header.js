@@ -21,7 +21,8 @@ export const Header = ({
     setSearchObject,
     useHistory,
     NavLink,
-    promotedProducts
+    promotedProducts,
+    setPageType
 }) => {
     const history = useHistory();
     const [searchString, setSearchString] = useState('');
@@ -33,6 +34,7 @@ export const Header = ({
 
     function searchProducts(event) {
         event.preventDefault();
+        setPageType('search');
         if (searchString) {
         getProductsByQuery(searchString, 1)
             .then(queryProducts => {

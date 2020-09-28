@@ -17,6 +17,7 @@ const App = () => {
     const [product, setProduct] = useState({});
     const [searchObject, setSearchObject] = useState('');
     const [category, setCategory] = useState('');    // const history = useHistory();
+    const [pageType, setPageType] = useState('');
 
 
     useEffect(() => {
@@ -37,12 +38,12 @@ const App = () => {
         <div className="App">
             <Header products={products} setProducts={setProducts}
             searchObject={searchObject} setSearchObject={setSearchObject} useHistory={useHistory} 
-            NavLink={NavLink} promotedProducts={promotedProducts} />
+            NavLink={NavLink} promotedProducts={promotedProducts} setPageType={setPageType} />
             <Switch>
                 <Route exact path='/' >
                         <Productlist products={products} setProducts={setProducts} setProduct={setProduct} NavLink={NavLink} 
-                        searchObject={searchObject} category={category} />
-                        <Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory}/>
+                        searchObject={searchObject} category={category} pageType={pageType} setPageType={setPageType} />
+                        <Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory} setPageType={setPageType}/>
                     </Route>
                     <Route path='/register'>
                         <Profile view='register'/>
@@ -59,7 +60,7 @@ const App = () => {
                     </Route>
                     <Route path='/product' >
                         <Product product={product} setProduct={setProduct} />
-                        <Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory}/>
+                        <Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory} setPageType={setPageType}/>
                     </Route>
                     <Route path='/cart' >
                         <Cart />
