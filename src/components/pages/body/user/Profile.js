@@ -4,15 +4,15 @@ import React, { useState } from 'react';
 
 import { addUser, getAllUsers, getProductsByQuery, loginUser } from '../../../../api';
 
-import { states, countries, registrationHandler, loginHandler, guestHandler } from './profileUtils';
+import { states, countries, registrationHandler, loginHandler, guestHandler, updateHandler } from './profileUtils';
 
 import './Profile.css';
 
-export const Profile = ({view}) => {
+export const Profile = ({ view, setView, setUser, user={}, useHistory }) => {
 	//CURRENT VIEWS: login register guest userCheckout edit
 	//CHANGE PASSWORD BUTTON: needs onclick function to switch state to ''
 	//SET UP STATES FOR DIFFERENT VIEWS! :)
-	
+
 	const [isUser, setIsUser] = useState(false);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -26,48 +26,18 @@ export const Profile = ({view}) => {
 	const [zipcode, setZipcode] = useState('');
 	const [country, setCountry] = useState('');
 	const [phone, setPhone] = useState('');
-
 	const [creditCard, setCreditCard] = useState(
 		Math.floor(Math.random() * (9999999999999999 - 1000000000000000 + 1)) + 1000000000000000,
 	);
 	const [searchString, setSearchString] = useState('');
+	const history = useHistory();
 
-	const firstNameGetter = (event) => {
-		setFirstName(event.target.value);
-	};
-	const lastNameGetter = (event) => {
-		setLastName(event.target.value);
-	};
-	const emailGetter = (event) => {
-		setEmail(event.target.value);
-	};
-	const password1Getter = (event) => {
-		setPassword1(event.target.value);
-	};
-	const password2Getter = (event) => {
-		setPassword2(event.target.value);
-	};
-	const address1Getter = (event) => {
-		setAddress1(event.target.value);
-	};
-	const address2Getter = (event) => {
-		setAddress2(event.target.value);
-	};
-	const cityGetter = (event) => {
-		setCity(event.target.value);
-	};
-	const zipGetter = (event) => {
-		setZipcode(event.target.value);
-	};
-	const stateGetter = (event) => {
-		setState(event.target.value);
-	};
-	const countryGetter = (event) => {
-		setCountry(event.target.value);
-	};
-	const phoneGetter = (event) => {
-		setPhone(event.target.value);
-	};
+
+	if (view === 'edit' || view === 'fulledit') {
+		if (!user.isUser) {
+			history.push('/');
+		}
+	}
 
 	const cancelHandler = (event) => {
 		event.preventDefault();
@@ -75,23 +45,36 @@ export const Profile = ({view}) => {
 	};
 
 	const passwordButtonHandler = (event) => {
-		console.log('password handler ', event.target);
+		event.preventDefault();
+		setView('fulledit');
 	};
 
 	const formHandler = async (event) => {
 		event.preventDefault();
-		console.log('the view ', view);
 
 		try {
 			//Registration
 			if (view === 'register') {
-				registrationHandler({ firstName, lastName, email, password1, password2 });
+				const newUser = registrationHandler({
+					firstName,
+					lastName,
+					email,
+					password1,
+					password2,
+				});
+				console.log('new user from registration ', newUser);
+				setUser(newUser);
+				history.push('/');
 			}
+			//login
 			if (view === 'login') {
-				loginHandler({ email, password1 });
+				const user = loginHandler({ email, password1 });
+				console.log('user from login ', user);
+				setUser(user);
+				history.push('/');
 			}
+			//guest
 			if (view === 'guest') {
-				console.log('getting to the guest if');
 				guestHandler({
 					firstName,
 					lastName,
@@ -104,6 +87,25 @@ export const Profile = ({view}) => {
 					country,
 					phone,
 				});
+				history.push('/');
+			}
+			//edit and full edit
+			if ((view === 'edit' || view === 'fulledit') && user.isUser) {
+				updateHandler({
+					firstName,
+					lastName,
+					email,
+					password1,
+					password2,
+					address1,
+					address2,
+					city,
+					state,
+					zipcode,
+					country,
+					phone,
+				}, user.token);
+				history.push('/');
 			}
 		} catch (error) {
 			console.error(error);
@@ -131,18 +133,6 @@ export const Profile = ({view}) => {
 		setPhone('');
 	}
 
-	// added by matthew just to test getAllUsers
-	const logAllUsers = async () => {
-		const allUsers = await getAllUsers();
-		console.log('allUsers logged in front end: ', allUsers);
-		const products = await getProductsByQuery('memo');
-		console.log('PLEASE WORRRRKRKRKRK', products);
-	};
-
-	const handleSearchString = (event) => {
-		setSearchString(event.target.value);
-	};
-
 	//CURRENT VIEWS: login register guest userCheckout edit
 	return (
 		<div className='profile'>
@@ -153,7 +143,7 @@ export const Profile = ({view}) => {
 					placeholder='First Name'
 					value={firstName}
 					className={view === 'login' ? 'field hide' : 'field'}
-					onChange={firstNameGetter}
+					onChange={(event) => setFirstName(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -166,7 +156,7 @@ export const Profile = ({view}) => {
 					value={lastName}
 					placeholder='Last Name'
 					className={view === 'login' ? 'field hide' : 'field'}
-					onChange={lastNameGetter}
+					onChange={(event) => setLastName(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -179,7 +169,7 @@ export const Profile = ({view}) => {
 					id='email'
 					placeholder='Email Address'
 					value={email}
-					onChange={emailGetter}
+					onChange={(event) => setEmail(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -193,7 +183,7 @@ export const Profile = ({view}) => {
 						view === 'userCheckout' ||
 						view === 'login' ||
 						view === 'guest' ||
-						view === ''
+						view === 'fulledit'
 							? 'field hide'
 							: 'field'
 					}
@@ -211,7 +201,7 @@ export const Profile = ({view}) => {
 							? 'field hide'
 							: 'field'
 					}
-					onChange={password1Getter}
+					onChange={(event) => setPassword1(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -231,7 +221,7 @@ export const Profile = ({view}) => {
 							? 'field hide'
 							: 'field'
 					}
-					onChange={password2Getter}
+					onChange={(event) => setPassword2(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -251,7 +241,7 @@ export const Profile = ({view}) => {
 							? 'field hide'
 							: 'field'
 					}
-					onChange={address1Getter}
+					onChange={(event) => setAddress1(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -271,7 +261,7 @@ export const Profile = ({view}) => {
 							? 'field hide'
 							: 'field'
 					}
-					onChange={address2Getter}
+					onChange={(event) => setAddress2(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -284,7 +274,7 @@ export const Profile = ({view}) => {
 					value={city}
 					className={view === 'register' || view === 'login' ? 'field hide' : 'field'}
 					placeholder='City'
-					onChange={cityGetter}
+					onChange={(event) => setCity(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -297,7 +287,7 @@ export const Profile = ({view}) => {
 					value={zipcode}
 					className={view === 'register' || view === 'login' ? 'field hide' : 'field'}
 					placeholder='Zip Code'
-					onChange={zipGetter}
+					onChange={(event) => setZipcode(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler
@@ -307,7 +297,7 @@ export const Profile = ({view}) => {
 				<select
 					className={view === 'login' || view === 'register' ? 'field hide' : 'field'}
 					value={state}
-					onChange={stateGetter}
+					onChange={(event) => setState(event.target.value)}
 				>
 					{states.map((state, i) => {
 						return (
@@ -320,7 +310,7 @@ export const Profile = ({view}) => {
 				<select
 					className={view === 'register' || view === 'login' ? 'field hide' : 'field'}
 					value={country}
-					onChange={countryGetter}
+					onChange={(event) => setCountry(event.target.value)}
 				>
 					{countries.map((country, i) => {
 						return (
@@ -336,7 +326,7 @@ export const Profile = ({view}) => {
 					value={phone}
 					placeholder='Phone Number'
 					className={view === 'register' || view === 'login' ? 'field hide' : 'field'}
-					onChange={phoneGetter}
+					onChange={(event) => setPhone(event.target.value)}
 					onKeyDown={(event) =>
 						event.target.value === 'return' || event.target.value === 'enter'
 							? formHandler

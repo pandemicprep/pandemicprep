@@ -40,10 +40,21 @@ export async function updateUser(fields = {}, token) {
 export async function loginUser(credentials) {
   console.log('getting to the axios call');
   try {
-    const { data: token } = await axios.post('/api/users/login', credentials);
-    console.log('getting from the back end ', token);
-    return token;
+    const { data: user } = await axios.post('/api/users/login', credentials);
+    console.log('getting from the back end ', user);
+    return user;
   } catch (error) {
       throw error;
+  }
+}
+
+export async function getUserFromToken(token) {
+  try {
+      const { data: user } = await axios.get('/api/users/verify', { headers: { authorization: "Bearer " + token}});
+      user.token = token;
+      console.log('user from the api ', user);
+      return user;
+  } catch (error) {
+    console.error(error);
   }
 }
