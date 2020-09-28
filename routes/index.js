@@ -6,9 +6,9 @@ const { JWT_SECRET } = process.env;
 
 
 apiRouter.use(async (req, res, next) => {
-  console.log('api entry point');
+  console.log('api entry point with ', req.headers.authorization);
   const prefix = 'Bearer ';
-	const auth = req.header('Authorization');
+	const auth = req.headers.authorization;
 
 	if (!auth) {
 		// nothing to see here
@@ -20,7 +20,8 @@ apiRouter.use(async (req, res, next) => {
 			const { id, isAdmin, isUser } = jwt.verify(token, JWT_SECRET);
 
 			if (id) {
-        req.user = await getUserById(id);        
+		req.user = await getUserById(id);     
+				console.log('route entry point user is', req.user);
 				next();
 			}
 		} catch ({ name, message }) {

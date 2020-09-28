@@ -23,6 +23,7 @@ export const Header = ({
     NavLink,
     promotedProducts,
     setPageType
+    setView
 }) => {
     const history = useHistory();
     const [searchString, setSearchString] = useState('');
@@ -50,9 +51,6 @@ export const Header = ({
         }
     }
 
-    
-    
-
     return (
         
         <div className="headerContainer">
@@ -66,17 +64,28 @@ export const Header = ({
                 </button>
             </form>
 
-            <button id="login" onClick={() => history.push('/login')} >login</button>
-            <button id="signup" onClick={() => history.push('/register')} >Sign Up</button>
+            <button id="login" onClick={() => {
+                setView('login');
+                history.push('/login')
+                }} >login</button>
+            <button id="signup" onClick={() => {
+                setView('register');
+                history.push('/register')
+                }} >Sign Up</button>
             <button id="cart" onClick={() => history.push('/cart')} >Cart</button>
             <div className="dropdown">
                 <button className="dropbtn">Welcome!</button>
                 <div className="dropdown-content">
                     <a href="#" onClick={() => history.push('/orders')} >Admin</a>
-                    <a href="#" onClick={() => history.push('/orders')} >Profile</a>
+                    <a href="#" onClick={() => {
+                        setView('edit');
+                        history.push('/edit-user')}} >Edit Profile</a>
                     <a href="#" onClick={() => history.push('/orders')} >Orders</a>
                     <a href="#">Log Out</a>
-                    <a href="#">Whatever</a>
+                    <a href="#" onClick={() => {
+                        setView('guest');
+                        history.push('/guest')
+                    }} >Guest checkout (temporarty)</a>
                     <a href="#">Whatever</a>
                     <a href="#">Whatever</a>
                 </div>
