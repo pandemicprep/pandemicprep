@@ -22,7 +22,7 @@ export const Header = ({
     useHistory,
     NavLink,
     promotedProducts,
-    setPageType
+    setPageType,
     setView
 }) => {
     const history = useHistory();

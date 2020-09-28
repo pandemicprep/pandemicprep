@@ -36,7 +36,8 @@ const App = () => {
     const [searchObject, setSearchObject] = useState('');
     const [category, setCategory] = useState('');    // const history = useHistory();
     const [pageType, setPageType] = useState('');
-  	const [view, setView] = useState('');
+      const [view, setView] = useState('');
+      
 
 
 	useEffect(() => {
@@ -69,12 +70,12 @@ const App = () => {
 				<Header
 					products={products}
 					setProducts={setProducts}
-					searchString={searchString}
-					setSearchString={setSearchString}
+					searchObject={searchObject}
+					setSearchObject={setSearchObject}
 					useHistory={useHistory}
 					NavLink={NavLink}
 					setView={setView}
-    promotedProducts={promotedProducts}
+                    promotedProducts={promotedProducts}
 				/>
 				<Switch>
 					<Route exact path='/'>
@@ -83,7 +84,8 @@ const App = () => {
 							setProducts={setProducts}
 							setProduct={setProduct}
 							NavLink={NavLink}
-    searchString={searchString} category={category}
+                            searchObject={searchObject} 
+                            category={category}
 						/>
 						<Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory}/>
 					</Route>
