@@ -31,6 +31,7 @@ color: rgb(37, 43, 48);
 border: 1px solid black;
 border-radius: 10px;
 width: 75px;
+font-size: 16px;
 }
 
 #signup {
@@ -39,6 +40,8 @@ width: 75px;
     border: 1px solid black;
     border-radius: 10px;
     width: 75px;
+    font-size: 16px;
+
 }
   
 #search {
@@ -46,6 +49,12 @@ width: 75px;
     color: rgb(37, 43, 48);
     border: 1px solid black;
     border-radius: 10px;
+    font-size: 16px;
+
+}
+
+.searchTerm {
+    font-size: 16px;
 }
 
 #cart {
@@ -54,6 +63,8 @@ width: 75px;
     border: 1px solid black;
     border-radius: 10px;
     width: 75px;
+    font-size: 16px;
+
 }
 
 #admin {
@@ -62,6 +73,8 @@ width: 75px;
     border: 1px solid black;
     border-radius: 10px;
     width: 75px;
+    font-size: 16px;
+
 }
 
 #login:hover {
@@ -93,6 +106,8 @@ background-color: rgb(255, 186, 102);
     border: 1px solid black;
     border-radius: 10px;
     width: 150px;
+    font-size: 16px;
+
   }
   
   

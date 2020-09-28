@@ -29,21 +29,25 @@ import { getUserFromToken } from '../api/users';
 import './App.css';
 
 const App = () => {
+
 	const [user, setUser] = useState({ firstName: 'Guest', isAdmin: false, isUser: false, token: '' });
 	const [products, setProducts] = useState([]);
 	const [product, setProduct] = useState({});
+  const [promotedProducts, setPromotedProducts] = useState([]);
 	const [searchString, setSearchString] = useState('');
-	const [categories, setCategories] = useState([]); // const history = useHistory();
+	const [category, setCategory] = useState([]); // const history = useHistory();
 	const [view, setView] = useState('');
+
 
 	useEffect(() => {
 		getPromotedProducts()
-			.then((response) => {
-				setProducts(response);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+            .then((response) => {
+                setPromotedProducts(response)
+                setProducts(response)
+            })
+            .catch((error) => {
+                console.error(error)
+            });
 		if (localStorage.getItem('panprepToken')) {
 			getUserFromToken(localStorage.getItem('panprepToken'))
 				.then((response) => {
@@ -58,6 +62,7 @@ const App = () => {
        
 	}, []);
 
+
 	return (
 		<Router>
 			<div className='App'>
@@ -69,6 +74,7 @@ const App = () => {
 					useHistory={useHistory}
 					NavLink={NavLink}
 					setView={setView}
+    promotedProducts={promotedProducts}
 				/>
 				<Switch>
 					<Route exact path='/'>
@@ -77,8 +83,9 @@ const App = () => {
 							setProducts={setProducts}
 							setProduct={setProduct}
 							NavLink={NavLink}
+    searchString={searchString} category={category}
 						/>
-						<Categories setProducts={setProducts} NavLink={NavLink} />
+						<Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory}/>
 					</Route>
 					<Route path='/register'>
 						<Profile view={view} setUser={setUser} useHistory={useHistory} />
@@ -99,7 +106,7 @@ const App = () => {
 					</Route>
 					<Route path='/product'>
 						<Product product={product} setProduct={setProduct} />
-						<Categories setProducts={setProducts} NavLink={NavLink} />
+						<Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory}/>
 					</Route>
 					<Route path='/cart'>
 						<Cart user={user} />
@@ -119,6 +126,7 @@ const App = () => {
 			</div>
 		</Router>
 	);
+
 };
 
 export default App;

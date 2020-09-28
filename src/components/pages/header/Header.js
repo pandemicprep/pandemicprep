@@ -21,22 +21,25 @@ export const Header = ({
     setSearchString,
     useHistory,
     NavLink,
-    setView
+
+    setView,
+    promotedProducts
+
 }) => {
     const history = useHistory();
 
     const handleSearchString = (event) => {
-        setSearchString(event.target.value)
+        setSearchString({rowCount: 0, string: event.target.value})
         // console.log(searchString)
     }
 
     function searchProducts(event) {
         event.preventDefault();
         if (searchString) {
-        getProductsByQuery(searchString)
+        getProductsByQuery(searchString, 1)
             .then(queryProducts => {
-                console.log(queryProducts)
-                setProducts(queryProducts)
+                setSearchString({rowCount: queryProducts[0].rowCount, string: searchString.string})
+                setProducts(queryProducts[1])
                 console.log(products, 'products in header')
             })
             .catch(error => {
@@ -51,7 +54,7 @@ export const Header = ({
     return (
         
         <div className="headerContainer">
-            <NavLink to='/'>
+            <NavLink to='/' onClick={() => {setProducts(promotedProducts)}}>
                 <img id="headLogo" src={process.env.PUBLIC_URL + '/styleimages/PANPREPLOGO.png'} />
             </NavLink>
             <form onSubmit={searchProducts} className='searchForm'>

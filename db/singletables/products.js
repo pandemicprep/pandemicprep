@@ -1,6 +1,7 @@
 
 const { client } = require('../client');
 const Promise = require('bluebird');
+const LIMIT = 10;
 
 const {
   addCategory,
@@ -118,8 +119,9 @@ async function getAllProducts() {
 }
 
 // gets specific products by a search query
-async function getProductsByQuery(query) {
+async function getProductsByQuery(query, pageNumber) {
   try {
+    const OFFSET = (LIMIT * (pageNumber-1)) + 1;
     // console.log('entering products query in db...');
     // console.log('query: ', query);
 
@@ -130,12 +132,21 @@ async function getProductsByQuery(query) {
       return await getAllProducts();
     }
 
+    const { rowCount } = await client.query(`
+      SELECT id FROM products 
+      WHERE 
+      title LIKE '%${query}%'
+      OR title LIKE '%${uppercaseQuery}%';
+    `)
+
     const { rows } = await client.query(`
             SELECT id FROM products 
             WHERE 
             title LIKE '%${query}%'
-            OR title LIKE '%${uppercaseQuery}%';
+            OR title LIKE '%${uppercaseQuery}%'
+            LIMIT ${LIMIT} OFFSET ${OFFSET};
         `);
+        
 
       const prodIdArray = rows.map((product) => {
         const [newProductId] = Object.values(product);
@@ -146,8 +157,8 @@ async function getProductsByQuery(query) {
         return await getProductById(productId)
       }, { concurrency: 25});   
 
-    // console.log('products by query: ', rows);
-    return productsArray;
+    console.log('LOOK HERE', rowCount, productsArray)
+    return [rowCount, productsArray];
   } catch (error) {
     throw error;
   }
@@ -209,18 +220,23 @@ async function getProductById(id) {
   }
 }
 
-async function getProductsByCategory(category) {
+async function getProductsByCategory(category, pageNumber) {
+  console.log(pageNumber, 'pageNumber in db')
+
   try {
+      const OFFSET = (LIMIT * (pageNumber -1)) + 1;
       const {
           rows: productIds
       } = await client.query(`
           SELECT products.id
-          FROM products
+          FROM products 
           JOIN products_categories ON products.id = products_categories."productId"
           JOIN categories ON categories.id = products_categories."categoryId"
-          WHERE categories.name = $1;
+          WHERE categories.name = $1
+          LIMIT ${LIMIT} OFFSET ${OFFSET};
       `, [category]);
 
+      console.log(productIds, 'counting product ids')
 
       const prodIdArray = productIds.map((product) => {
           const [newProductId] = Object.values(product);
