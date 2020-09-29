@@ -3,7 +3,7 @@
 const { client } = require("../client");
 
 const bcrypt = require("bcrypt");
-const { addCart } = requires("../singletables/cart.js");
+const { addCart } = require("../singletables/cart.js");
 
 /**
  * Create new user by registration (first, last, email, pass minimum),

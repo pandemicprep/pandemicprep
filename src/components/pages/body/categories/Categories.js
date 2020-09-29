@@ -28,7 +28,7 @@ export const Categories = ({
         setPageType('category');
         // console.log('page type in categories', pageType)
         setCategory(category.name);
-        getProductsByCategory(category.name, 1)
+        getProductsByCategory(category.name.toLowerCase(), 1)
             .then((response) => {
                 setSearchObject({ pageCount: response[0], categoryName: category.name })
                 setProducts(response[1])
