@@ -1,16 +1,37 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css2?family=Secular+One&display=swap);
 
 .headerContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: white;
-    border: 2px solid black;
+    align-content: center;
+    position: fixed;
+    top: 50px;
     width: 100%;
-    height: 100px;
+    justify-content: space-evenly;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 5px solid rgb(1, 0, 53);
+    border-radius: 5px;
+    width: 100%;
+    height: 85px;
     text-align: center;
     font-size: 50px;
     font-family: 'Raleway', sans-serif;
+}
+
+#prepared {
+    color: white;
+    font-family: 'Secular One', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    -webkit-text-stroke: .2px black; /* width and color */
+    background-image: url("https://i1.wp.com/troyerstling.com/wp-content/uploads/2019/01/shutterstock_130568990.jpg?fit=1000%2C667&ssl=1");
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-position: center center;
+    background-size: cover;
+    text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -19,6 +40,7 @@ h1 {
 
 .searchTerm {
     margin-top: 20px;
+     border: 1px solid rgb(1, 0, 53);
 }
 
 .searchForm {
@@ -27,55 +49,79 @@ h1 {
 
 #login {
 width: 75px;
-font-size: 16px;
+font-size: 15px;
+margin-bottom: 15px;
 }
 
 #signup {
     width: 75px;
     font-size: 16px;
+    margin-bottom: 15px;
 }
   
 #search {
     font-size: 16px;
     width: 60px;
+    background-color: white;
+    border: none;
+    margin-bottom: 15px;
 }
 
 .searchTerm {
     font-size: 16px;
 }
 
+#sbtn {
+    height: 65px;
+    margin-left: -20px;
+    margin-top: -10px;
+}
+
 #cart {
     width: 75px;
     font-size: 16px;
+    margin-bottom: 15px;
+}
+
+
+#headerWrap {
+    display: block !important;
+    height: 100px;
+    position: top;
+    background-color: rgb(1, 0, 53);
+    text-align: center;
 }
 
 
 
-
-
-
 .dropbtn {
-    background-color: rgb(3, 70, 128);
+    background-color: rgb(1, 0, 53);
     color: white;
-    border: 1px solid black;
+    border: 1px solid #e18c79;
     border-radius: 10px;
     width: 150px;
     font-size: 16px;
     margin-bottom: 5px;
-    
+    background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
   }
   
   
   .dropdown {
     position: relative;
     display: inline-block;
+    margin-bottom: 15px;
   }
   
   
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: rgb(3, 70, 128);
+    background-color: rgb(1, 0, 53);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -93,8 +139,9 @@ font-size: 16px;
   
 
   .dropdown-content a:hover {
-    background-color:  rgb(1, 0, 53);
+    background-color:  rgb(3, 70, 128);
     border-radius: 20px;
+    border: 2px solid black;
     color: white;
 }
   
@@ -106,12 +153,15 @@ font-size: 16px;
     padding-bottom: 10px;
     padding-right: 5px;
     padding-left: 5px;
+    border: 1px solid #e18c79;
 }
   
 
 .dropdown:hover .dropbtn {
     background-color:  rgb(1, 0, 53);
     color: white;
+    text-transform: uppercase;
+    background-position: 0;
 }
 
 
@@ -134,18 +184,21 @@ font-size: 16px;
 
 .button {
     border-color: rgb(0, 28, 53);
-    background-color: rgb(3, 70, 128);
+    background-color: rgb(0, 28, 53);
     color: white;
-    background-image: -webkit-linear-gradient(45deg, rgb(1, 0, 53) 50%, transparent 50%);
-    background-image: linear-gradient(45deg, rgb(1, 0, 53) 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
     background-position: 100%;
     background-size: 400%;
     -webkit-transition: background 300ms ease-in-out;
     transition: background 300ms ease-in-out;
+    border: 1px solid #e18c79;
+    border-radius: 50px;
   }
   .button:hover {
     background-position: 0;
     color: white;
+    text-transform: uppercase;
   }
 
 
@@ -154,3 +207,66 @@ font-size: 16px;
       margin-right: 10px;
       filter: invert(100%)
   }
+
+.searchTerm {
+    background-image: url('https://lh3.googleusercontent.com/proxy/MtxHfmhJ7rHRSvipU-1ZjUePr0gYZqSp0Acplm2J2gC8vImi7wXXyENiUKw6Vude9kW4_KaWziwu-F5GwnjffxX-GA20Dn8O4bZ7n6YK2G7Iklmu7LYAzVXZlRiIFqnCnzdICXnRSBSrzGBBb0v7D6Xb3f-dIpcyYZinxHGDc5cNtFsZxcI');
+    background-size: cover;
+}
+
+
+
+
+
+
+
+
+.StreamsHero-image {
+  /* Wave Color */
+  background: #002d4d;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#59adeb', endColorstr='#34ce93', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  background-size: 350% 350%;
+  animation: waveColors 8s ease infinite;
+  /* End Wave Color */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+
+/* Animation Wave Color */
+
+@-webkit-keyframes waveColors {
+  0% {
+    background-position: 0% 7%;
+  }
+  50% {
+    background-position: 100% 94%;
+  }
+  100% {
+    background-position: 0% 7%;
+  }
+}
+
+@keyframes waveColors {
+  0% {
+    background-position: 0% 7%;
+  }
+  50% {
+    background-position: 100% 94%;
+  }
+  100% {
+    background-position: 0% 7%;
+  }
+}
