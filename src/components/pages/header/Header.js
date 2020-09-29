@@ -55,7 +55,9 @@ export const Header = ({
 
     return (
         <div>
-            <div id="headerWrap" className="StreamsHero-image"><h1 id="prepared">Are you prepared for disaster?</h1></div>
+            <div id="headerWrap" className="StreamsHero-image"><h1 id="prepared">Are you prepared for</h1>
+                <h1 id="doomsday">DOOMSDAY?</h1>
+            </div>
             <div className="headerContainer">
 
                 <NavLink to='/' onClick={() => { setProducts(promotedProducts) }}>

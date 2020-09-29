@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url(https://fonts.googleapis.com/css2?family=Secular+One&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Anton&display=swap);
 
 .headerContainer {
     display: flex;
@@ -7,7 +8,7 @@
     align-items: center;
     align-content: center;
     position: fixed;
-    top: 50px;
+    top: 130px;
     width: 100%;
     justify-content: space-evenly;
     background-color: rgb(255, 255, 255);
@@ -20,18 +21,20 @@
     font-family: 'Raleway', sans-serif;
 }
 
-#prepared {
+#doomsday {
     color: white;
-    font-family: 'Secular One', sans-serif;
-    font-size: 38px;
+    font-family: 'Anton', sans-serif;
+    font-size:72px;
     font-weight: 700;
     -webkit-text-stroke: .2px black; /* width and color */
-    background-image: url("https://i1.wp.com/troyerstling.com/wp-content/uploads/2019/01/shutterstock_130568990.jpg?fit=1000%2C667&ssl=1");
     -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-position: center center;
-    background-size: cover;
-    text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.1);
+}
+
+#prepared {
+  font-family: 'Secular One', sans-serif;
+  color: black;
+  font-weight: 900;
+  font-size: 32px;
 }
 
 h1 {
@@ -86,7 +89,7 @@ margin-bottom: 15px;
 
 #headerWrap {
     display: block !important;
-    height: 100px;
+    height: 200px;
     position: top;
     background-color: rgb(1, 0, 53);
     text-align: center;
