@@ -20,18 +20,6 @@ export const Product = ({
 }) => {
     
 
-    // useEffect(() => {
-    //     getProductsByQuery(searchString)
-    //         .then(queryProducts => {
-    //             console.log(queryProducts)
-    //             setProducts(queryProducts)
-    //             console.log(products, 'second log')
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         })
-    // }, []);
-
     return (
         <>
             

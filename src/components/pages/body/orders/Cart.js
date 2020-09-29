@@ -5,9 +5,10 @@ import React, { useState } from "react";
 import "./Cart.css";
 
 import { addNewCart } from '../../../../api';
+import { Product } from '../products/Product';
 
 
-export const Cart = () => {
+export const Cart = (product, user) => {
     const [status, setStatus] = useState('');
     const [lastUpdated, setLastUpdated] = useState('');
     const [total, setTotal] = useState('');
@@ -47,6 +48,18 @@ export const Cart = () => {
     
 
     return (
+
+        <div>
+            <h1>{user.firstName !== 'Guest' ? user.firstName+"'s" : ''} Cart</h1>
+            <div className='cart'>
+                <img className='image cart-field' src={product.image} />
+                <section className='title cart-field' >{product.title}</section>
+                <input className='quantity cart-field' type='dropbox'></input>
+                <section className='quantity cart-field'>{product.quantity}</section>
+                <section className='price cart-field'>{product.price}</section>
+                <section className='total cart-field'>{product.total}</section>
+                
+            </div>
         <form onSubmit={handleSubmit}>
             <input
             placeholder='status'
@@ -74,5 +87,6 @@ export const Cart = () => {
 
             <button/>
         </form>
+        </div>
     );
 };
