@@ -3,6 +3,7 @@
 const { client } = require("../client");
 
 const bcrypt = require("bcrypt");
+const { addCart } = requires("../singletables/cart.js");
 
 /**
  * Create new user by registration (first, last, email, pass minimum),
@@ -28,7 +29,6 @@ async function addUser({
     phone = null,
     creditCard = null,
 }) {
-    
     const SALT_COUNT = 13;
     let securedPassword = null;
     let securedCreditCard = null;
@@ -69,7 +69,15 @@ async function addUser({
                     securedCreditCard,
                 ]
             );
-
+            const {
+                rows: [activeCart],
+            } = await addCart({
+                status: "active",
+                lastUpdated: Date.now(),
+                total: 0,
+                userId: newUser.id,
+            });
+            newUser.activeCart = activeCart;
             if (newUser) {
                 return newUser;
             } else {
