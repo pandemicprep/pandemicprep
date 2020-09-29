@@ -42,6 +42,7 @@ const App = () => {
 	const [category, setCategory] = useState(''); // const history = useHistory();
 	const [pageType, setPageType] = useState('');
 	const [view, setView] = useState('');
+	const history = useHistory();
 
 	useEffect(() => {
 		getPromotedProducts()
@@ -78,6 +79,7 @@ const App = () => {
 					NavLink={NavLink}
 					promotedProducts={promotedProducts}
 					setPageType={setPageType}
+					setView={setView}
 				/>
 				<Switch>
 					<Route exact path='/'>
@@ -99,14 +101,16 @@ const App = () => {
 						/>
 					</Route>
 					<Route path='/register'>
-						<Profile view='register' />
+						<Profile view='register' useHistory={useHistory}/>
 					</Route>
-					<Route path='/login' render={() => <Profile view='login' />}></Route>
+					<Route path='/login'>
+						<Profile view='login' useHistory={useHistory} />
+					</Route>
 					<Route path='/guest'>
-						<Profile view='guest' />
+						<Profile view='guest' useHistory={useHistory}/>
 					</Route>
 					<Route path='/edit-user'>
-						<Profile view='edit' />
+						<Profile view='edit' useHistory={useHistory}/>
 					</Route>
 					<Route path='/product'>
 						<Product product={product} setProduct={setProduct} />
