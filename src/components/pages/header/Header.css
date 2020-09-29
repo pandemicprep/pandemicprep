@@ -1,19 +1,42 @@
+/*GOOGLE FONTS IMPORT*/
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url(https://fonts.googleapis.com/css2?family=Secular+One&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Anton&display=swap);
 
+/*BUTTON STYLING*/
+.button {
+  border-color: rgb(0, 28, 53);
+  background-color: rgb(0, 28, 53);
+  color: white;
+  background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+  background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+  background-position: 100%;
+  background-size: 400%;
+  -webkit-transition: background 300ms ease-in-out;
+  transition: background 300ms ease-in-out;
+  border: 1px solid #e18c79;
+  border-radius: 50px;
+}
+/*BUTTON HOVER*/
+.button:hover {
+  background-position: 0;
+  color: white;
+  text-transform: uppercase;
+}
+
+/*HEADER CONTAINER STYLING*/
 .headerContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
     position: fixed;
-    top: 130px;
+    top: 145px;
     width: 100%;
     justify-content: space-evenly;
     background-color: rgb(255, 255, 255);
-    border-bottom: 5px solid rgb(1, 0, 53);
-    border-radius: 5px;
+    border: 1px solid rgb(1, 0, 53);
+    border-radius: 50px;
     width: 100%;
     height: 85px;
     text-align: center;
@@ -21,6 +44,22 @@
     font-family: 'Raleway', sans-serif;
 }
 
+/*TOP DOOMSDAY BANNER STYLING*/
+#headerWrap {
+  display: block !important;
+  height: 200px;
+  position: top;
+  background-color: rgb(1, 0, 53);
+  text-align: center;
+}
+/*ARE YOU PREPARED HEADER STYLING*/
+#prepared {
+  font-family: 'Secular One', sans-serif;
+  color: black;
+  font-weight: 900;
+  font-size: 32px;
+}
+/*DOOMSDAY WORD (LARGE) BANNER STYLING*/
 #doomsday {
     color: white;
     font-family: 'Anton', sans-serif;
@@ -29,74 +68,107 @@
     -webkit-text-stroke: .2px black; /* width and color */
     -webkit-text-fill-color: transparent;
 }
-
-#prepared {
-  font-family: 'Secular One', sans-serif;
-  color: black;
-  font-weight: 900;
-  font-size: 32px;
+/*DOOMSDAY WAVE STYLING*/
+.StreamsHero-image {
+  background: #002d4d;
+  background: -moz-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  background: -webkit-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  background: linear-gradient(135deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#59adeb', endColorstr='#34ce93', GradientType=1);
+  background-size: 350% 350%;
+  animation: waveColors 8s ease infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
 }
 
-h1 {
-    font-size: larger;
+/*WEBKIT IMPORT FOR WAVE COLORS */
+@-webkit-keyframes waveColors {
+  0% {
+    background-position: 0% 7%;
+  }
+  50% {
+    background-position: 100% 94%;
+  }
+  100% {
+    background-position: 0% 7%;
+  }
+}
+@keyframes waveColors {
+  0% {
+    background-position: 0% 7%;
+  }
+  50% {
+    background-position: 100% 94%;
+  }
+  100% {
+    background-position: 0% 7%;
+  }
 }
 
+/*SEARCH FORMS STYLING*/
+/*INPUT STYLING*/
 .searchTerm {
     margin-top: 20px;
      border: 1px solid rgb(1, 0, 53);
+     font-size: 16px;
+     background-image: url('https://lh3.googleusercontent.com/proxy/MtxHfmhJ7rHRSvipU-1ZjUePr0gYZqSp0Acplm2J2gC8vImi7wXXyENiUKw6Vude9kW4_KaWziwu-F5GwnjffxX-GA20Dn8O4bZ7n6YK2G7Iklmu7LYAzVXZlRiIFqnCnzdICXnRSBSrzGBBb0v7D6Xb3f-dIpcyYZinxHGDc5cNtFsZxcI');
+     background-size: cover;
 }
-
+/*FORM STYLING*/
 .searchForm {
     display: flex;
 }
+/*SEARCH BUTTON*/
+#search {
+  font-size: 16px;
+  width: 60px;
+  background-color: white;
+  border: none;
+  margin-bottom: 15px;
+}
+/*SEARCH IMAGE*/
+#sbtn {
+  height: 65px;
+  margin-left: -20px;
+  margin-top: -10px;
+}
 
+/*LOGIN BUTTON*/
 #login {
 width: 75px;
 font-size: 15px;
 margin-bottom: 15px;
 }
 
+/*SIGN UP BUTTON*/
 #signup {
     width: 75px;
     font-size: 16px;
     margin-bottom: 15px;
 }
-  
-#search {
-    font-size: 16px;
-    width: 60px;
-    background-color: white;
-    border: none;
-    margin-bottom: 15px;
-}
 
-.searchTerm {
-    font-size: 16px;
-}
-
-#sbtn {
-    height: 65px;
-    margin-left: -20px;
-    margin-top: -10px;
-}
-
+/*CART BUTTON*/
 #cart {
     width: 75px;
     font-size: 16px;
     margin-bottom: 15px;
 }
-
-
-#headerWrap {
-    display: block !important;
-    height: 200px;
-    position: top;
-    background-color: rgb(1, 0, 53);
-    text-align: center;
+/*CART LOGO STYLING*/
+#cartLogo {
+  height: 50px;
+  filter: invert(100%);
+}
+/*CART LOGO ON HOVER*/
+#cartLogo:hover {
+  filter: invert(100%);
 }
 
-
-
+/*DROPDOWN MENU STYLING*/
+/*DROPDOWN WELCOME BUTTON*/
 .dropbtn {
     background-color: rgb(1, 0, 53);
     color: white;
@@ -112,44 +184,21 @@ margin-bottom: 15px;
     -webkit-transition: background 300ms ease-in-out;
     transition: background 300ms ease-in-out;
   }
-  
-  
+  /*DROPDOWN BUTTON HOVER*/
+  .dropdown:hover .dropbtn {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    text-transform: uppercase;
+    background-position: 0;
+}
+  /*DROPDOWN DIV*/
   .dropdown {
     position: relative;
     display: inline-block;
     margin-bottom: 15px;
   }
-  
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: rgb(1, 0, 53);
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-size: 20px;
-    
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-
-  .dropdown-content a:hover {
-    background-color:  rgb(3, 70, 128);
-    border-radius: 20px;
-    border: 2px solid black;
-    color: white;
-}
-  
-
-.dropdown:hover .dropdown-content {
+  /*DROPDOWN HOVER (CONTENT)*/
+  .dropdown:hover .dropdown-content {
     display: block;
     border-radius: 10px;
     padding-top: 10px;
@@ -158,118 +207,40 @@ margin-bottom: 15px;
     padding-left: 5px;
     border: 1px solid #e18c79;
 }
-  
-
-.dropdown:hover .dropbtn {
-    background-color:  rgb(1, 0, 53);
-    color: white;
-    text-transform: uppercase;
-    background-position: 0;
-}
-
-
-
-#cartLogo {
-    height: 50px;
-    filter: invert(100%);
-}
-
-#cartLogo:hover {
-    filter: invert(100%);
-}
-
-
-
-
-
-
-
-
-.button {
-    border-color: rgb(0, 28, 53);
-    background-color: rgb(0, 28, 53);
-    color: white;
-    background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
-    background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
-    background-position: 100%;
-    background-size: 400%;
-    -webkit-transition: background 300ms ease-in-out;
-    transition: background 300ms ease-in-out;
-    border: 1px solid #e18c79;
-    border-radius: 50px;
+  /*DROPDOWN MENU*/
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(1, 0, 53);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 20px;
   }
-  .button:hover {
-    background-position: 0;
+  /*LINKS INSIDE DROPDOWN MENU*/
+  .dropdown-content a {
     color: white;
-    text-transform: uppercase;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
   }
-
-
+  /*LINKS INSIDEE DROPDOWN MENU (HOVER)*/
+  .dropdown-content a:hover {
+    background-color:  rgb(3, 70, 128);
+    border-radius: 20px;
+    border: 2px solid black;
+    color: white;
+}
+/*DROPDOWN CONTENT IMAGE ICONS*/
   #dropdownIcon {
       width: 25px;
       margin-right: 10px;
       filter: invert(100%)
   }
 
-.searchTerm {
-    background-image: url('https://lh3.googleusercontent.com/proxy/MtxHfmhJ7rHRSvipU-1ZjUePr0gYZqSp0Acplm2J2gC8vImi7wXXyENiUKw6Vude9kW4_KaWziwu-F5GwnjffxX-GA20Dn8O4bZ7n6YK2G7Iklmu7LYAzVXZlRiIFqnCnzdICXnRSBSrzGBBb0v7D6Xb3f-dIpcyYZinxHGDc5cNtFsZxcI');
-    background-size: cover;
-}
 
 
 
 
 
 
-
-
-.StreamsHero-image {
-  /* Wave Color */
-  background: #002d4d;
-  /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#59adeb', endColorstr='#34ce93', GradientType=1);
-  /* IE6-9 fallback on horizontal gradient */
-  background-size: 350% 350%;
-  animation: waveColors 8s ease infinite;
-  /* End Wave Color */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-}
-
-
-
-/* Animation Wave Color */
-
-@-webkit-keyframes waveColors {
-  0% {
-    background-position: 0% 7%;
-  }
-  50% {
-    background-position: 100% 94%;
-  }
-  100% {
-    background-position: 0% 7%;
-  }
-}
-
-@keyframes waveColors {
-  0% {
-    background-position: 0% 7%;
-  }
-  50% {
-    background-position: 100% 94%;
-  }
-  100% {
-    background-position: 0% 7%;
-  }
-}
