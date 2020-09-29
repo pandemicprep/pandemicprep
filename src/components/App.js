@@ -20,7 +20,8 @@ import {
 	Product,
 	Orders,
 	Userlist,
-	Sales,
+    Sales,
+    PageIndex
 } from './index';
 
 import { getPromotedProducts } from '../api/products';
@@ -85,22 +86,34 @@ const App = () => {
 				/>
 				<Switch>
 					<Route exact path='/'>
-						<Productlist
-							products={products}
-							setProducts={setProducts}
-							setProduct={setProduct}
-							NavLink={NavLink}
-							searchObject={searchObject}
-							category={category}
-							pageType={pageType}
-							setPageType={setPageType}
-						/>
-						<Categories
-							setProducts={setProducts}
-							NavLink={NavLink}
-							setCategory={setCategory}
-							setPageType={setPageType}
-						/>
+                        <div id='products-with-page'>
+                            <Productlist
+                                products={products}
+                                setProducts={setProducts}
+                                setProduct={setProduct}
+                                NavLink={NavLink}
+                                searchObject={searchObject}
+                                category={category}
+                                pageType={pageType}
+                                setPageType={setPageType}
+                            />
+                            <PageIndex 
+                                searchObject={searchObject} 
+                                pageType={pageType} 
+                                setPageType={setPageType} 
+                                setProducts={setProducts} 
+                                products={products}
+                                category={category}
+                            />
+                        </div>
+                        <Categories
+                            setProducts={setProducts}
+                            NavLink={NavLink}
+                            setCategory={setCategory}
+                            setPageType={setPageType}
+                            setSearchObject={setSearchObject}
+                        />
+                        
 					</Route>
 					<Route path='/register'>
 						<Profile view='register' useHistory={useHistory}/>
@@ -120,7 +133,8 @@ const App = () => {
 							setProducts={setProducts}
 							NavLink={NavLink}
 							setCategory={setCategory}
-							setPageType={setPageType}
+                            setPageType={setPageType}
+                            setSearchObject={setSearchObject}
 						/>
 					</Route>
 					<Route path='/cart'>
