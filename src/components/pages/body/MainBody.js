@@ -11,7 +11,7 @@
 // import "./MainBody.css";
 // import { Categories, Productlist, Profile, Cart, Product, Orders, Userlist, Sales } from "../../index";
 
-// export const MainBody = ({products, setProducts, searchString, setSearchString, Router, Route, Switch, Redirect}) => {
+// export const MainBody = ({ products, setProducts, searchString, setSearchString, Router, Route, Switch, Redirect }) => {
 //     // const [ profileView, setProfileView ] = useState('');
 //     // const [bathCat, setBathCat] = useState([bathCat]);
 //     // const [search, setSearch] = useState([searcResults]);
@@ -30,19 +30,19 @@
 //         <Router>
 //             <div className="bodyContainer">
 //                 <Switch>
-//                 <Route exact path='/' >
-                        
+//                     <Route exact path='/' >
+
 //                         <Productlist products={products} />
 //                         <Categories />
-                        
+
 //                     </Route>
 //                     <Route path='/register'>
-//                         <Profile view='register'/>
+//                         <Profile view='register' />
 //                     </Route>
-//                     <Route path='/login' render={() => 
+//                     <Route path='/login' render={() =>
 //                         <Profile view='login' />
 //                     } >
-                        
+
 //                     </Route>
 //                     <Route path='/guest'>
 //                         <Profile view='guest' />
@@ -52,8 +52,8 @@
 //                     </Route>
 //                     <Route path='/product' >
 //                         <>
-//                         <Product />
-//                         <Categories />
+//                             <Product />
+//                             <Categories />
 //                         </>
 //                     </Route>
 //                     <Route path='/cart' >

@@ -18,9 +18,9 @@ import { PageIndex } from "./PageIndex";
 
 
 export const Productlist = ({
-    products, 
-    setProducts, 
-    setProduct, 
+    products,
+    setProducts,
+    setProduct,
     NavLink,
     searchObject,
     searchString,
@@ -30,7 +30,7 @@ export const Productlist = ({
 }) => {
     const [categoryPage, setCategoryPage] = useState(1);
     const [searchPage, setSearchPage] = useState(1);
-    
+
 
 
     return (
@@ -40,7 +40,7 @@ export const Productlist = ({
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (
-                        <NavLink key={i} to='/product' onClick={(event)  => {setProduct(singleProduct)}}>
+                        <NavLink key={i} to='/product' onClick={(event) => { setProduct(singleProduct) }}>
                             <div key={i} className="product" >
                                 <div id='product' className="info">
                                     <p className="header">
@@ -58,7 +58,7 @@ export const Productlist = ({
                         </NavLink>
                     )
                 })}
-            
+
             </div>
             {/* <PageIndex 
                 searchObject={searchObject} 
@@ -68,8 +68,8 @@ export const Productlist = ({
                 products={products}
                 category={category}
             /> */}
-                
+
         </div>
-        
+
     );
 };

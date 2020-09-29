@@ -6,22 +6,22 @@ import { getProductsByCategory } from '../../../../api/products';
 
 
 export const Categories = ({
-    setProducts, 
-    NavLink, 
-    setCategory, 
-    setPageType, 
+    setProducts,
+    NavLink,
+    setCategory,
+    setPageType,
     pageType,
     setSearchObject
 }) => {
 
     const cat = [
-        { name: 'school', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'work', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'School', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'Work', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'Household', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'Health', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'Protection', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'Groceries', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'Entertainment', image: '../../../../../public/images/school/mathblocks.jpg' },
     ];
 
     const categoryHandler = (category) => {
@@ -30,7 +30,7 @@ export const Categories = ({
         setCategory(category.name);
         getProductsByCategory(category.name, 1)
             .then((response) => {
-                setSearchObject({pageCount: response[0], categoryName: category.name})
+                setSearchObject({ pageCount: response[0], categoryName: category.name })
                 setProducts(response[1])
             })
             .catch((error) => {
@@ -45,8 +45,7 @@ export const Categories = ({
                 return (
                     <NavLink key={i} to='/' onClick={() => { categoryHandler(category) }}>
                         <div key={i} id='cat' className='category-tile' >
-                            <img id="catStar" src={process.env.PUBLIC_URL + '/styleimages/star.png'} />
-                            <p className='category-name'>{category.name}</p>
+                            <button className='category-name'>{category.name}</button>
                         </div>
                     </NavLink>
                 )

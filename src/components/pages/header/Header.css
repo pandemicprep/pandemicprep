@@ -1,156 +1,258 @@
+/*GOOGLE FONTS IMPORT*/
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css2?family=Secular+One&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Anton&display=swap);
 
+/*BUTTON STYLING*/
+.button {
+  color: black;
+  background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+  background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+  background-position: 100%;
+  background-size: 400%;
+  border: 1px solid white;
+  background-color: white;
+  -webkit-transition: background 300ms ease-in-out;
+  transition: background 300ms ease-in-out;
+}
+/*BUTTON HOVER*/
+.button:hover {
+  background-position: 0;
+  color: white;
+  text-transform: uppercase;
+}
+
+/*HEADER CONTAINER STYLING*/
 .headerContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: white;
-    border: 2px solid black;
+    align-content: center;
+    position: fixed;
+    top: 145px;
     width: 100%;
-    height: 100px;
+    justify-content: space-evenly;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(1, 0, 53);
+    border-radius: 50px;
+    width: 100%;
+    height: 85px;
     text-align: center;
     font-size: 50px;
     font-family: 'Raleway', sans-serif;
 }
 
-h1 {
-    font-size: larger;
+/*TOP DOOMSDAY BANNER STYLING*/
+#headerWrap {
+  display: block !important;
+  height: 200px;
+  position: top;
+  background-color: rgb(1, 0, 53);
+  text-align: center;
+}
+/*ARE YOU PREPARED HEADER STYLING*/
+#prepared {
+  font-family: 'Secular One', sans-serif;
+  color: black;
+  font-weight: 900;
+  font-size: 32px;
+}
+/*DOOMSDAY WORD (LARGE) BANNER STYLING*/
+#doomsday {
+    color: white;
+    font-family: 'Anton', sans-serif;
+    font-size:72px;
+    font-weight: 700;
+    -webkit-text-stroke: .2px black; /* width and color */
+    -webkit-text-fill-color: transparent;
+}
+/*DOOMSDAY WAVE STYLING*/
+.StreamsHero-image {
+  background: #002d4d;
+  background: -moz-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  background: -webkit-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  background: linear-gradient(135deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#59adeb', endColorstr='#34ce93', GradientType=1);
+  background-size: 350% 350%;
+  animation: waveColors 8s ease infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
 }
 
+/*WEBKIT IMPORT FOR WAVE COLORS */
+@-webkit-keyframes waveColors {
+  0% {
+    background-position: 0% 7%;
+  }
+  50% {
+    background-position: 100% 94%;
+  }
+  100% {
+    background-position: 0% 7%;
+  }
+}
+@keyframes waveColors {
+  0% {
+    background-position: 0% 7%;
+  }
+  50% {
+    background-position: 100% 94%;
+  }
+  100% {
+    background-position: 0% 7%;
+  }
+}
+
+/*SEARCH FORMS STYLING*/
+/*INPUT STYLING*/
 .searchTerm {
     margin-top: 20px;
+     border: 1px solid rgb(1, 0, 53);
+     font-size: 16px;
+     background-image: url('https://lh3.googleusercontent.com/proxy/MtxHfmhJ7rHRSvipU-1ZjUePr0gYZqSp0Acplm2J2gC8vImi7wXXyENiUKw6Vude9kW4_KaWziwu-F5GwnjffxX-GA20Dn8O4bZ7n6YK2G7Iklmu7LYAzVXZlRiIFqnCnzdICXnRSBSrzGBBb0v7D6Xb3f-dIpcyYZinxHGDc5cNtFsZxcI');
+     background-size: cover;
 }
-
+/*FORM STYLING*/
 .searchForm {
     display: flex;
 }
+/*SEARCH BUTTON*/
+#search {
+  font-size: 16px;
+  width: 60px;
+  background-color: white;
+  border: none;
+  margin-bottom: 15px;
+}
+/*SEARCH IMAGE*/
+#sbtn {
+  height: 65px;
+  margin-left: -20px;
+  margin-top: -10px;
+}
 
+/*BETWEEN BUTTON BREAK*/
+#breaker {
+  margin-top:15px;
+}
+
+/*LOGIN BUTTON*/
 #login {
 width: 75px;
-font-size: 16px;
+font-size: 20px;
+margin-bottom: 15px;
 }
 
+/*SIGN UP BUTTON*/
 #signup {
-    width: 75px;
-    font-size: 16px;
-}
-  
-#search {
-    font-size: 16px;
-    width: 60px;
+    width: 100px;
+    font-size: 20px;
+    margin-bottom: 15px;
 }
 
-.searchTerm {
-    font-size: 16px;
-}
-
+/*CART BUTTON*/
 #cart {
     width: 75px;
     font-size: 16px;
+    margin-bottom: 15px;
+}
+/*CART LOGO STYLING*/
+#cartLogo {
+  height: 50px;
+}
+/*CART LOGO ON HOVER*/
+#cartLogo:hover {
+  filter: invert(100%);
 }
 
-
-
-
-
-
+/*DROPDOWN MENU STYLING*/
+/*DROPDOWN WELCOME BUTTON*/
 .dropbtn {
-    background-color: rgb(3, 70, 128);
-    color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 150px;
-    font-size: 16px;
-    margin-bottom: 5px;
-    
+    color: black;
+    border: 1px solid white;
+    background-color: white;
+    width: 155px;
+    font-size: 26px;
+    background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
   }
-  
-  
+  /*DROPDOWN BUTTON HOVER*/
+  .dropdown:hover .dropbtn {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    text-transform: uppercase;
+    background-position: 0;
+}
+/*POINTER ICON*/
+#pointer {
+  height: 25px;
+  margin-left: 3px;
+  margin-bottom: 8px;
+}
+/*POINTER HOVER*/
+#pointer:hover {
+  display: none;
+}
+
+  /*DROPDOWN DIV*/
   .dropdown {
     position: relative;
     display: inline-block;
+    margin-bottom: 10px;
+    padding-right: 10px;
   }
-  
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: rgb(3, 70, 128);
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-size: 20px;
-    
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-
-  .dropdown-content a:hover {
-    background-color:  rgb(1, 0, 53);
-    border-radius: 20px;
-    color: white;
-}
-  
-
-.dropdown:hover .dropdown-content {
+  /*DROPDOWN HOVER (CONTENT)*/
+  .dropdown:hover .dropdown-content {
     display: block;
     border-radius: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 5px;
     padding-left: 5px;
+    font-size: 16px;
+    border: 1px solid #e18c79;
 }
-  
-
-.dropdown:hover .dropbtn {
-    background-color:  rgb(1, 0, 53);
-    color: white;
-}
-
-
-
-#cartLogo {
-    height: 50px;
-    filter: invert(100%);
-}
-
-#cartLogo:hover {
-    filter: invert(100%);
-}
-
-
-
-
-
-
-
-
-.button {
-    border-color: rgb(0, 28, 53);
-    background-color: rgb(3, 70, 128);
-    color: white;
-    background-image: -webkit-linear-gradient(45deg, rgb(1, 0, 53) 50%, transparent 50%);
-    background-image: linear-gradient(45deg, rgb(1, 0, 53) 50%, transparent 50%);
-    background-position: 100%;
-    background-size: 400%;
-    -webkit-transition: background 300ms ease-in-out;
-    transition: background 300ms ease-in-out;
+  /*DROPDOWN MENU*/
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(1, 0, 53);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
   }
-  .button:hover {
-    background-position: 0;
+  /*LINKS INSIDE DROPDOWN MENU*/
+  .dropdown-content a {
     color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
   }
-
-
+  /*LINKS INSIDEE DROPDOWN MENU (HOVER)*/
+  .dropdown-content a:hover {
+    background-color:  rgb(3, 70, 128);
+    border-radius: 20px;
+    border: 2px solid black;
+    color: white;
+}
+/*DROPDOWN CONTENT IMAGE ICONS*/
   #dropdownIcon {
       width: 25px;
       margin-right: 10px;
       filter: invert(100%)
   }
+
+
+
+
+
+
+
