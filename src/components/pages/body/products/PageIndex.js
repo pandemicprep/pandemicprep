@@ -11,7 +11,8 @@ export const PageIndex = ({searchObject, pageType, setPageType, setProducts, cat
 
     useEffect(() => {
         if (pageType === 'category') {
-            getProductsByCategory(category, page)
+            
+            getProductsByCategory(category.toLowerCase(), page)
             .then((response) => {
                 setProducts(response[1])
             })
@@ -32,6 +33,16 @@ export const PageIndex = ({searchObject, pageType, setPageType, setProducts, cat
             }
         }
     }, [page])
+
+    useEffect(() => {
+        setPage(1);
+    }, [pageType]);
+
+    useEffect(() => {
+        setPage(1);
+    }, [category]);
+
+
 
     const firstHandler = () => {
         if (page > 1) {

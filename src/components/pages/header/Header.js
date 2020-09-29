@@ -36,7 +36,7 @@ export const Header = ({
     function searchProducts(event) {
         event.preventDefault();
         setPageType('search');
-        if (searchString) {
+        if (searchString.length > 0) {
             getProductsByQuery(searchString, 1)
                 .then(queryProducts => {
                     setSearchObject({ pageCount: queryProducts[0], string: searchString })
