@@ -37,8 +37,14 @@ export const Productlist = ({
         <div className="productList">
             <p>List of Products</p>
             <h1>MainBody</h1>
-            <PageIndex searchObject={searchObject} pageType={pageType} 
-                           setPageType={setPageType} setProducts={setProducts}/>
+            <PageIndex 
+                searchObject={searchObject} 
+                pageType={pageType} 
+                setPageType={setPageType} 
+                setProducts={setProducts} 
+                products={products}
+                category={category}
+                />
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (

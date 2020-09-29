@@ -5,7 +5,14 @@ import './Categories.css';
 import { getProductsByCategory } from '../../../../api/products';
 
 
-export const Categories = ({setProducts, NavLink, setCategory, setPageType}) => {
+export const Categories = ({
+    setProducts, 
+    NavLink, 
+    setCategory, 
+    setPageType, 
+    pageType,
+    setSearchObject
+}) => {
 
     const cat = [
         { name: 'school', image: '../../../../../public/images/school/mathblocks.jpg' },
@@ -19,15 +26,18 @@ export const Categories = ({setProducts, NavLink, setCategory, setPageType}) => 
 
     const categoryHandler = (category) => {
         setPageType('category');
+        // console.log('page type in categories', pageType)
         setCategory(category.name);
         getProductsByCategory(category.name, 1)
             .then((response) => {
-                setProducts(response)
+                setSearchObject({pageCount: response[0], categoryName: category.name})
+                setProducts(response[1])
             })
             .catch((error) => {
                 console.error(error)
             })
     }
+    console.log('page type in categories', pageType)
 
     return (
         <div className='category'>

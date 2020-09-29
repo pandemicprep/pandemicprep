@@ -29,12 +29,15 @@ import { getUserFromToken } from '../api/users';
 import './App.css';
 
 const App = () => {
+
 	const [user, setUser] = useState({ firstName: 'Guest', isAdmin: false, isUser: false, token: '' });
+
 	const [products, setProducts] = useState([]);
 	const [promotedProducts, setPromotedProducts] = useState([]);
 	const [product, setProduct] = useState({});
 	const [searchObject, setSearchObject] = useState('');
-	const [category, setCategory] = useState('');    // const history = useHistory();
+
+	const [category, setCategory] = useState(''); // const history = useHistory();
 	const [pageType, setPageType] = useState('');
 	const [view, setView] = useState('');
 
@@ -42,11 +45,13 @@ const App = () => {
 	useEffect(() => {
 		getPromotedProducts()
 			.then((response) => {
-				setPromotedProducts(response)
-				setProducts(response)
+
+				setPromotedProducts(response);
+				setProducts(response);
 			})
 			.catch((error) => {
-				console.error(error)
+				console.error(error);
+
 			});
 		if (localStorage.getItem('panprepToken')) {
 			getUserFromToken(localStorage.getItem('panprepToken'))
@@ -60,47 +65,70 @@ const App = () => {
 				});
 		}
 
+
 	}, []);
 
 	return (
 		<Router>
-			<div className="App">
-				<Header products={products} setProducts={setProducts}
-					searchObject={searchObject} setSearchObject={setSearchObject} useHistory={useHistory}
-					NavLink={NavLink} promotedProducts={promotedProducts} setPageType={setPageType} />
+			<div className='App'>
+				<Header
+					products={products}
+					setProducts={setProducts}
+					searchObject={searchObject}
+					setSearchObject={setSearchObject}
+					useHistory={useHistory}
+					NavLink={NavLink}
+					promotedProducts={promotedProducts}
+					setPageType={setPageType}
+				/>
 				<Switch>
-					<Route exact path='/' >
-						<Productlist products={products} setProducts={setProducts} setProduct={setProduct} NavLink={NavLink}
-							searchObject={searchObject} category={category} pageType={pageType} setPageType={setPageType} />
-						<Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory} setPageType={setPageType} />
+					<Route exact path='/'>
+						<Productlist
+							products={products}
+							setProducts={setProducts}
+							setProduct={setProduct}
+							NavLink={NavLink}
+							searchObject={searchObject}
+							category={category}
+							pageType={pageType}
+							setPageType={setPageType}
+						/>
+						<Categories
+							setProducts={setProducts}
+							NavLink={NavLink}
+							setCategory={setCategory}
+							setPageType={setPageType}
+						/>
 					</Route>
 					<Route path='/register'>
 						<Profile view='register' />
 					</Route>
-					<Route path='/login' render={() =>
-						<Profile view='login' />
-					} >
-					</Route>
+					<Route path='/login' render={() => <Profile view='login' />}></Route>
 					<Route path='/guest'>
 						<Profile view='guest' />
 					</Route>
 					<Route path='/edit-user'>
 						<Profile view='edit' />
 					</Route>
-					<Route path='/product' >
+					<Route path='/product'>
 						<Product product={product} setProduct={setProduct} />
-						<Categories setProducts={setProducts} NavLink={NavLink} setCategory={setCategory} setPageType={setPageType} />
+						<Categories
+							setProducts={setProducts}
+							NavLink={NavLink}
+							setCategory={setCategory}
+							setPageType={setPageType}
+						/>
 					</Route>
-					<Route path='/cart' >
+					<Route path='/cart'>
 						<Cart />
 					</Route>
-					<Route path='/orders' >
+					<Route path='/orders'>
 						<Orders />
 					</Route>
-					<Route path='/user-list' >
+					<Route path='/user-list'>
 						<Userlist />
 					</Route>
-					<Route path='/sales' >
+					<Route path='/sales'>
 						<Sales />
 					</Route>
 					<Redirect to='/' />
@@ -109,7 +137,6 @@ const App = () => {
 			</div>
 		</Router>
 	);
-
 };
 
 export default App;
