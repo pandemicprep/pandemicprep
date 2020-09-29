@@ -16,7 +16,7 @@
     flex-wrap: wrap;
     justify-content: center;
     font-family: 'Raleway', sans-serif;
-    margin-bottom: 150px;
+    margin-bottom: 20px;
 }
 
 .product {
@@ -25,4 +25,10 @@
     border: 2px solid black;
     text-align: center;
     font-family: 'Raleway', sans-serif;
+}
+
+#products-with-page {
+    margin-bottom: 200px;
+    /* display: flex;
+    flex-direction: column; */
 }

@@ -58,12 +58,23 @@ export const PageIndex = ({searchObject, pageType, setPageType, setProducts, cat
     }
 
     return (
-        <Pagination id='pagination'>
-            <Pagination.First onClick={firstHandler} />
-            <Pagination.Prev onClick={prevHandler}/>
-            <Pagination.Item active>{page}</Pagination.Item>
-            <Pagination.Next onClick={nextHandler}/>
-            <Pagination.Last onClick={lastHandler}/>
-        </Pagination>
+        <div id='pagination'>
+            <a href='#' onClick={firstHandler}>❮❮</a>
+            <a href='#' onClick={prevHandler}>❮</a>
+            <a href='#'>{page}</a>
+            <a href='#' onClick={nextHandler}>❯</a>
+            <a href='#' onClick={lastHandler}>❯❯</a>
+        </div>
+
+
+        // <div id='pagination'>
+        //     <Pagination >
+        //         <Pagination.First onClick={firstHandler} />
+        //         <Pagination.Prev onClick={prevHandler}/>
+        //         <Pagination.Item active>{page}</Pagination.Item>
+        //         <Pagination.Next onClick={nextHandler}/>
+        //         <Pagination.Last onClick={lastHandler}/>
+        //     </Pagination>
+        // </div>
     )
 }
