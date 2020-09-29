@@ -92,15 +92,28 @@ font-size: 16px;
   }
   
 
-  .dropdown-content a:hover {background-color: rgb(0, 0, 85);}
-  
-
-  .dropdown:hover .dropdown-content {display: block;}
-  
-
-  .dropdown:hover .dropbtn {background-color:  rgb(1, 0, 53);
-color: white;
+  .dropdown-content a:hover {
+    background-color:  rgb(1, 0, 53);
+    border-radius: 20px;
+    color: white;
 }
+  
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+  
+
+.dropdown:hover .dropbtn {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+}
+
 
 
 #cartLogo {
