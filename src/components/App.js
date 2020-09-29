@@ -29,42 +29,44 @@ import { getUserFromToken } from '../api/users';
 import './App.css';
 
 const App = () => {
-	const [user, setUser] = useState({
-		firstName: 'Guest',
-		isAdmin: false,
-		isUser: false,
-		token: '',
-	});
+
+	const [user, setUser] = useState({ firstName: 'Guest', isAdmin: false, isUser: false, token: '' });
+
 	const [products, setProducts] = useState([]);
 	const [promotedProducts, setPromotedProducts] = useState([]);
 	const [product, setProduct] = useState({});
 	const [searchObject, setSearchObject] = useState('');
+
 	const [category, setCategory] = useState(''); // const history = useHistory();
 	const [pageType, setPageType] = useState('');
 	const [view, setView] = useState('');
 
+
 	useEffect(() => {
 		getPromotedProducts()
 			.then((response) => {
+
 				setPromotedProducts(response);
 				setProducts(response);
 			})
 			.catch((error) => {
 				console.error(error);
+
 			});
 		if (localStorage.getItem('panprepToken')) {
 			getUserFromToken(localStorage.getItem('panprepToken'))
 				.then((response) => {
 					console.log('the updated user on load is ', response);
 					setUser(response);
+
 				})
 				.catch((error) => {
 					console.error(error);
 				});
 		}
-	}, []);
 
-	
+
+	}, []);
 
 	return (
 		<Router>
@@ -89,15 +91,13 @@ const App = () => {
 							searchObject={searchObject}
 							category={category}
 							pageType={pageType}
-                            setPageType={setPageType}
+							setPageType={setPageType}
 						/>
 						<Categories
 							setProducts={setProducts}
 							NavLink={NavLink}
 							setCategory={setCategory}
-                            setPageType={setPageType}
-                            pageType={pageType}
-                            setSearchObject={setSearchObject}
+							setPageType={setPageType}
 						/>
 					</Route>
 					<Route path='/register'>
@@ -116,9 +116,7 @@ const App = () => {
 							setProducts={setProducts}
 							NavLink={NavLink}
 							setCategory={setCategory}
-                            setPageType={setPageType}
-                            pageType={pageType}
-                            setSearchObject={setSearchObject}
+							setPageType={setPageType}
 						/>
 					</Route>
 					<Route path='/cart'>
