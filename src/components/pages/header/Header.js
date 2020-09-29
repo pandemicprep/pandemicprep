@@ -76,18 +76,18 @@ export const Header = ({
                     setView('login');
                     history.push('/login')
                 }} >Login</button>
-
+                <h3 id="breaker">|</h3>
                 <button className="button" id="signup" onClick={() => {
                     setView('register');
                     history.push('/register')
                 }} >Sign Up</button>
-
+                <h3 id="breaker">|</h3>
                 <button className="button" id="cart" onClick={() => history.push('/cart')} >
                     <img id="cartLogo" src={process.env.PUBLIC_URL + '/styleimages/cart.png'} />
                 </button>
 
                 <div className="dropdown">
-                    <button className="dropbtn">Welcome!</button>
+                    <button className="dropbtn">Welcome!<img id="pointer" src={process.env.PUBLIC_URL + '/styleimages/pointer.png'} /></button>
                     <div className="dropdown-content">
                         <a href="#" onClick={() => history.push('/orders')} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/admin.png'} />Admin</a>
                         <a href="#" onClick={() => {

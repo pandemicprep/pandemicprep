@@ -5,17 +5,15 @@
 
 /*BUTTON STYLING*/
 .button {
-  border-color: rgb(0, 28, 53);
-  background-color: rgb(0, 28, 53);
-  color: white;
+  color: black;
   background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
   background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
   background-position: 100%;
   background-size: 400%;
+  border: 1px solid white;
+  background-color: white;
   -webkit-transition: background 300ms ease-in-out;
   transition: background 300ms ease-in-out;
-  border: 1px solid #e18c79;
-  border-radius: 50px;
 }
 /*BUTTON HOVER*/
 .button:hover {
@@ -137,17 +135,22 @@
   margin-top: -10px;
 }
 
+/*BETWEEN BUTTON BREAK*/
+#breaker {
+  margin-top:15px;
+}
+
 /*LOGIN BUTTON*/
 #login {
 width: 75px;
-font-size: 15px;
+font-size: 20px;
 margin-bottom: 15px;
 }
 
 /*SIGN UP BUTTON*/
 #signup {
-    width: 75px;
-    font-size: 16px;
+    width: 100px;
+    font-size: 20px;
     margin-bottom: 15px;
 }
 
@@ -160,7 +163,6 @@ margin-bottom: 15px;
 /*CART LOGO STYLING*/
 #cartLogo {
   height: 50px;
-  filter: invert(100%);
 }
 /*CART LOGO ON HOVER*/
 #cartLogo:hover {
@@ -170,13 +172,11 @@ margin-bottom: 15px;
 /*DROPDOWN MENU STYLING*/
 /*DROPDOWN WELCOME BUTTON*/
 .dropbtn {
-    background-color: rgb(1, 0, 53);
-    color: white;
-    border: 1px solid #e18c79;
-    border-radius: 10px;
-    width: 150px;
-    font-size: 16px;
-    margin-bottom: 5px;
+    color: black;
+    border: 1px solid white;
+    background-color: white;
+    width: 155px;
+    font-size: 26px;
     background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
     background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
     background-position: 100%;
@@ -191,11 +191,23 @@ margin-bottom: 15px;
     text-transform: uppercase;
     background-position: 0;
 }
+/*POINTER ICON*/
+#pointer {
+  height: 25px;
+  margin-left: 3px;
+  margin-bottom: 8px;
+}
+/*POINTER HOVER*/
+#pointer:hover {
+  display: none;
+}
+
   /*DROPDOWN DIV*/
   .dropdown {
     position: relative;
     display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    padding-right: 10px;
   }
   /*DROPDOWN HOVER (CONTENT)*/
   .dropdown:hover .dropdown-content {
@@ -205,6 +217,7 @@ margin-bottom: 15px;
     padding-bottom: 10px;
     padding-right: 5px;
     padding-left: 5px;
+    font-size: 16px;
     border: 1px solid #e18c79;
 }
   /*DROPDOWN MENU*/
@@ -215,7 +228,6 @@ margin-bottom: 15px;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    font-size: 20px;
   }
   /*LINKS INSIDE DROPDOWN MENU*/
   .dropdown-content a {
