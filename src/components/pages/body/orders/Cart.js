@@ -13,6 +13,7 @@ export const Cart = (product, user) => {
     const [lastUpdated, setLastUpdated] = useState('');
     const [total, setTotal] = useState('');
     const [userId, setUserId] = useState('');
+    const [cart, setCart] = useState([{productId: null, cartId: product.cartId, quantity: null, unitPrice: null, itemTotal: null}]);
     
 
     const handleStatus = (event) => {
@@ -54,39 +55,19 @@ export const Cart = (product, user) => {
             <div className='cart'>
                 <img className='image cart-field' src={product.image} />
                 <section className='title cart-field' >{product.title}</section>
-                <input className='quantity cart-field' type='dropbox'></input>
+                <label for="quantity">Quantity:</label>
+                <select name="quantity" id="quantity">
+                    onLoad={() => { 
+                        for(let i = 1; i < 101; i++ ) {
+                            return (
+                                <option key='i' value={i} >{i}</option>
+                            )
+                    } }}
+                </select> 
                 <section className='quantity cart-field'>{product.quantity}</section>
                 <section className='price cart-field'>{product.price}</section>
                 <section className='total cart-field'>{product.total}</section>
-                
             </div>
-        <form onSubmit={handleSubmit}>
-            <input
-            placeholder='status'
-            value={status}
-            onChange={handleStatus}
-            />
-
-            <input
-            placeholder='lastUpdated'
-            value={lastUpdated}
-            onChange={handleLastUpdated}
-            />
-
-            <input
-            placeholder='total'
-            value={total}
-            onChange={handleTotal}
-            />
-
-            <input
-            placeholder='userId'
-            value={userId}
-            onChange={handleUserId}
-            />
-
-            <button/>
-        </form>
         </div>
     );
 };
