@@ -69,11 +69,22 @@ export const PageIndex = ({searchObject, pageType, setPageType, setProducts, cat
 
     return (
         <div id='pagination'>
-            <a href='#' onClick={firstHandler}>❮❮</a>
-            <a href='#' onClick={prevHandler}>❮</a>
+            { page === 1 ? ''
+            :
+            <>
+                <a href='#' onClick={firstHandler}>❮❮</a>
+                <a href='#' onClick={prevHandler}>❮</a>
+            </>
+            }  
             <a href='#'>{page}</a>
-            <a href='#' onClick={nextHandler}>❯</a>
-            <a href='#' onClick={lastHandler}>❯❯</a>
+            { page === pageLimit ? ''
+            : 
+            <>
+                <a href='#' onClick={nextHandler}>❯</a>
+                <a href='#' onClick={lastHandler}>❯❯</a>
+            </>
+            }
+            
         </div>
 
     )
