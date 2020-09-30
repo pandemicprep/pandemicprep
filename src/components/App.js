@@ -165,7 +165,7 @@ const App = () => {
                         />
                     </Route>
                     <Route path="/cart">
-                        <Cart />
+                        <Cart cart={cart} setCart={setCart} user={user} />
                     </Route>
                     <Route path="/orders">
                         <Orders />

@@ -128,10 +128,7 @@ export const Header = ({
                     </a>
                 ) : (
                     <div className="dropdown">
-                        <button
-                            className="dropbtn"
-                            onClick={() => console.log("current user ", user)}
-                        >
+                        <button className="dropbtn">
                             Welcome!
                             <img
                                 id="pointer"

@@ -48,7 +48,7 @@ export async function loginHandler({ email, password1 }) {
             alert(user.message);
         } else {
             localStorage.setItem("panprepToken", user.token);
-            console.log("user from login at utils ", user);
+
             return user;
         }
     } catch (error) {

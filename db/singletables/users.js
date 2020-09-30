@@ -77,6 +77,7 @@ async function addUser({
                     total: 0,
                     userId: newUser.id,
                 });
+                activeCart.items = [{}];
                 newUser.activeCart = activeCart;
                 return newUser;
             } else {
