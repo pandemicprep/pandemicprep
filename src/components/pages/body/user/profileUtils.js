@@ -1,8 +1,15 @@
 /** @format */
 
-import { addUser, getAllUsers, getProductsByQuery, loginUser, guestUser, updateUser } from "../../../../api";
+import {
+    addUser,
+    getAllUsers,
+    getProductsByQuery,
+    loginUser,
+    guestUser,
+    updateUser,
+} from "../../../../api";
 
-export function registrationHandler({ firstName, lastName, email, password1, password2 }) {
+export async function registrationHandler({ firstName, lastName, email, password1, password2 }) {
     if (password1.length > 0) {
         const passwordCheck = checkPassword(password1, password2);
         if (!passwordCheck.valid) {
@@ -10,46 +17,43 @@ export function registrationHandler({ firstName, lastName, email, password1, pas
             return;
         }
     }
-    let newUser;
-    addUser({
-        isUser: true,
-        firstName,
-        lastName,
-        email,
-        password: password1,
-    })
-        .then((result) => {
-            if (result.message) {
-                alert(result.message);
-            } else {
-                localStorage.setItem("panprepToken", result.token);
-               newUser = result;
-            }
-        })
-        .catch((error) => {
-            console.error(error);
+    try {
+        const newUser = await addUser({
+            isUser: true,
+            firstName,
+            lastName,
+            email,
+            password: password1,
         });
-        return newUser;
+
+        if (newUser.message) {
+            alert(newUser.message);
+        } else {
+            localStorage.setItem("panprepToken", newUser.token);
+            return newUser;
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-export function loginHandler({ email, password1 }) {
-    let user;
-    loginUser({
-        email,
-        password: password1,
-    })
-        .then((result) => {
-            if (result.message) {
-                alert(result.message);
-            } else {
-                localStorage.setItem("panprepToken", result.token);
-                user = result;
-            }
-        })
-        .catch((error) => {
-            console.error(error);
+export async function loginHandler({ email, password1 }) {
+    try {
+        const user = await loginUser({
+            email,
+            password: password1,
         });
-        return user;
+
+        if (user.message) {
+            alert(user.message);
+        } else {
+            localStorage.setItem("panprepToken", user.token);
+            console.log("user from login at utils ", user);
+            return user;
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export function guestHandler({
@@ -64,7 +68,7 @@ export function guestHandler({
     country,
     phone,
 }) {
-    console.log('getting to the guest handler ');
+    console.log("getting to the guest handler ");
     guestUser({
         firstName,
         lastName,
@@ -89,21 +93,24 @@ export function guestHandler({
         });
 }
 
-export function updateHandler({
-    firstName,
-    lastName,
-    email,
-    password1,
-    password2,
-    address1,
-    address2,
-    city,
-    state,
-    zipcode,
-    country,
-    phone,
-}, token) {
-    console.log('getting to the guest handler ');
+export function updateHandler(
+    {
+        firstName,
+        lastName,
+        email,
+        password1,
+        password2,
+        address1,
+        address2,
+        city,
+        state,
+        zipcode,
+        country,
+        phone,
+    },
+    token
+) {
+    console.log("getting to the guest handler ");
     if (password1.length > 0) {
         const passwordCheck = checkPassword(password1, password2);
         if (!passwordCheck.valid) {
@@ -111,19 +118,22 @@ export function updateHandler({
             return;
         }
     }
-    updateUser({
-        firstName,
-        lastName,
-        email,
-        password: password1,
-        addressLine1: address1,
-        addressLine2: address2,
-        city,
-        state,
-        zipcode,
-        country,
-        phone,
-    }, token)
+    updateUser(
+        {
+            firstName,
+            lastName,
+            email,
+            password: password1,
+            addressLine1: address1,
+            addressLine2: address2,
+            city,
+            state,
+            zipcode,
+            country,
+            phone,
+        },
+        token
+    )
         .then((result) => {
             if (result.message) {
                 alert(result.message);
