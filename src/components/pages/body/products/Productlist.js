@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 
-// import "./Productlist.css";
+import "./Productlist.css";
 import '../MainBody.css';
 
 import { Product } from './Product'
@@ -51,7 +51,7 @@ export const Productlist = ({
                                     <p className="price">
                                         {singleProduct.price}
                                     </p>
-                                    <button>Add to Cart</button>
+                                    {/* <button>Add to Cart</button> */}
                                 </div>
                             </div>
                         </NavLink>

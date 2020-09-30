@@ -24,7 +24,9 @@ export const Header = ({
     promotedProducts,
     setPageType,
     setView,
-    setSearchTerm
+    setSearchTerm,
+    user,
+    setUser
 }) => {
     const history = useHistory();
     const [searchString, setSearchString] = useState('');
@@ -36,6 +38,7 @@ export const Header = ({
 
     const searchProducts = (event) => {
         event.preventDefault();
+        console.log(user, 'user in header')
         if (searchString.length > 0) {
             setPageType('search');
             setSearchTerm(searchString);
@@ -47,22 +50,8 @@ export const Header = ({
        
     }
 
-    // function searchProducts(event) {
-    //     event.preventDefault();
-    //     setPageType('search');
-    //     if (searchString.length > 0) {
-    //         getProductsByQuery(searchString, 1)
-    //             .then(queryProducts => {
-    //                 setSearchObject({ pageCount: queryProducts[0], string: searchString })
-    //                 setProducts(queryProducts[1])
-    //             })
-    //             .catch(error => {
-    //                 setProducts(error.message);
-    //             })
-    //         history.push('/');
-    //     } else {
-    //         alert('Must enter search term(s)');
-    //     }
+    // const logOut = () => {
+    //     setUser({ firstName: 'Guest', isAdmin: false, isUser: false, token: '' });
     // }
 
 
@@ -86,21 +75,57 @@ export const Header = ({
                     </button>
                 </form>
 
-                <button className="button" id="login" onClick={() => {
-                    setView('login');
-                    history.push('/login')
-                }} >Login</button>
-                <h3 id="breaker">|</h3>
-                <button className="button" id="signup" onClick={() => {
-                    setView('register');
-                    history.push('/register')
-                }} >Sign Up</button>
+        
+                {user.isUser === true ? 
+                    ''
+                    : 
+                    <>
+                        <button className="button" id="login" onClick={() => {
+                            setView('login');
+                            history.push('/login')
+                        }} >Login</button>
+                        
+                        <h3 id="breaker">|</h3>
+                        <button className="button" id="signup" onClick={() => {
+                            setView('register');
+                            history.push('/register')
+                        }} >Sign Up</button>
+                    </>
+                }
+
                 <h3 id="breaker">|</h3>
                 <button className="button" id="cart" onClick={() => history.push('/cart')} >
                     <img id="cartLogo" src={process.env.PUBLIC_URL + '/styleimages/cart.png'} />
                 </button>
 
-                <div className="dropdown">
+                {user.isUser === false ? 
+                        <a href="#" id='guest-checkout' onClick={() => {
+                            setView('guest');
+                            history.push('/guest')
+                        }} >Guest checkout (temporarty)</a>
+                    :
+                    <div className="dropdown">
+                        <button className="dropbtn">Welcome!<img id="pointer" src={process.env.PUBLIC_URL + '/styleimages/pointer.png'} /></button>
+                        <div className="dropdown-content">
+                            { user.isAdmin ?
+                            <a href="#" onClick={() => history.push('/admin')} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/admin.png'} />Admin</a>
+                            : ''
+                            }
+                            <a href="#" onClick={() => {
+                                setView('edit');
+                                history.push('/edit-user')
+                            }} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/settings.png'} onClick={() => history.push('/edit-user')} />Edit Profile</a>
+                            <a href="#" onClick={() => history.push('/orders')} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/shop.png'} />Orders</a>
+                            <a href="#"><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/logout.png'} onClick={() => {
+                                localStorage.clear();
+                                setUser({ firstName: 'Guest', isAdmin: false, isUser: false, token: '' });
+                            }}/>Log Out</a>
+                            
+                        </div>
+                    </div>
+                }
+
+                {/* <div className="dropdown">
                     <button className="dropbtn">Welcome!<img id="pointer" src={process.env.PUBLIC_URL + '/styleimages/pointer.png'} /></button>
                     <div className="dropdown-content">
                         <a href="#" onClick={() => history.push('/orders')} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/admin.png'} />Admin</a>
@@ -109,13 +134,16 @@ export const Header = ({
                             history.push('/edit-user')
                         }} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/settings.png'} />Edit Profile</a>
                         <a href="#" onClick={() => history.push('/orders')} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/shop.png'} />Orders</a>
-                        <a href="#"><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/logout.png'} />Log Out</a>
+                        <a href="#"><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/logout.png'} onClick={() => {
+                            localStorage.setItem("prepanToken", "")
+                            setUser({ firstName: 'Guest', isAdmin: false, isUser: false, token: '' });
+                        }}/>Log Out</a>
                         <a href="#" onClick={() => {
                             setView('guest');
                             history.push('/guest')
                         }} >Guest checkout (temporarty)</a>
                     </div>
-                </div>
+                </div> */}
 
             </div>
         </div>
@@ -123,3 +151,20 @@ export const Header = ({
 };
 
 
+ // function searchProducts(event) {
+    //     event.preventDefault();
+    //     setPageType('search');
+    //     if (searchString.length > 0) {
+    //         getProductsByQuery(searchString, 1)
+    //             .then(queryProducts => {
+    //                 setSearchObject({ pageCount: queryProducts[0], string: searchString })
+    //                 setProducts(queryProducts[1])
+    //             })
+    //             .catch(error => {
+    //                 setProducts(error.message);
+    //             })
+    //         history.push('/');
+    //     } else {
+    //         alert('Must enter search term(s)');
+    //     }
+    // }

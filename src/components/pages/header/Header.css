@@ -169,6 +169,11 @@ margin-bottom: 15px;
   filter: invert(100%);
 }
 
+/* isUser is false guest checkout */
+#guest-checkout {
+  font-size: 20px;
+}
+
 /*DROPDOWN MENU STYLING*/
 /*DROPDOWN WELCOME BUTTON*/
 .dropbtn {

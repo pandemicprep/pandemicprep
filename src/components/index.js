@@ -18,6 +18,7 @@ export {
 export { MainBody } from "./pages/body/MainBody";
 
 //admin
+export { Admin } from './pages/body/admin/Admin';
 export { Ordersactive } from './pages/body/admin/Ordersactive';
 export { Sales } from './pages/body/admin/Sales';
 export { Userlist } from './pages/body/admin/Userlist';
