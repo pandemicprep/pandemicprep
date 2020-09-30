@@ -17,13 +17,14 @@ import { Login, Register } from "../../index";
 export const Header = ({
     products,
     setProducts,
-    searchObject,
-    setSearchObject,
+    // searchObject,
+    // setSearchObject,
     useHistory,
     NavLink,
     promotedProducts,
     setPageType,
-    setView
+    setView,
+    setSearchTerm
 }) => {
     const history = useHistory();
     const [searchString, setSearchString] = useState('');
@@ -33,23 +34,36 @@ export const Header = ({
         // console.log(searchObject)
     }
 
-    function searchProducts(event) {
+    const searchProducts = (event) => {
         event.preventDefault();
-        setPageType('search');
         if (searchString.length > 0) {
-            getProductsByQuery(searchString, 1)
-                .then(queryProducts => {
-                    setSearchObject({ pageCount: queryProducts[0], string: searchString })
-                    setProducts(queryProducts[1])
-                })
-                .catch(error => {
-                    setProducts(error.message);
-                })
-            history.push('/');
+            setPageType('search');
+            setSearchTerm(searchString);
+            
+            setSearchString('');
         } else {
             alert('Must enter search term(s)');
         }
+       
     }
+
+    // function searchProducts(event) {
+    //     event.preventDefault();
+    //     setPageType('search');
+    //     if (searchString.length > 0) {
+    //         getProductsByQuery(searchString, 1)
+    //             .then(queryProducts => {
+    //                 setSearchObject({ pageCount: queryProducts[0], string: searchString })
+    //                 setProducts(queryProducts[1])
+    //             })
+    //             .catch(error => {
+    //                 setProducts(error.message);
+    //             })
+    //         history.push('/');
+    //     } else {
+    //         alert('Must enter search term(s)');
+    //     }
+    // }
 
 
 

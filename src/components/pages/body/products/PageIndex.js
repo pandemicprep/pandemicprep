@@ -6,42 +6,41 @@ import { getProductsByQuery } from '../../../../api/products';
 import { getProductsByCategory } from '../../../../api/products';
 
 
-export const PageIndex = ({searchObject, pageType, setPageType, setProducts, category}) => {
+export const PageIndex = ({searchObject, pageType, setPageType, setProducts, category, searchTerm}) => {
     const [page, setPage] = useState(1);
+    const [pageLimit, setPageLimit] = useState(0);
 
     useEffect(() => {
+        console.log('page term and type ', pageType, searchTerm, pageType, page);
         if (pageType === 'category') {
             
             getProductsByCategory(category.toLowerCase(), page)
             .then((response) => {
+                setPageLimit(response[0]);
                 setProducts(response[1])
             })
             .catch((error) => {
                 console.error(error)
             })
         } else if(pageType === 'search') {
-            if (searchObject.string) {
-                getProductsByQuery(searchObject.string, page)
+                
+                getProductsByQuery(searchTerm, page)
                 .then((response) => {
+                    setPageLimit(response[0]);
                     setProducts(response[1])
                 })
                 .catch((error) => {
                     console.error(error)
                 })
-            } else {
-                alert('Must enter search term(s)');
-            }
+            
         }
-    }, [page])
+    }, [page, category, searchTerm]);
 
     useEffect(() => {
+        if (page > 1) {
         setPage(1);
-    }, [pageType]);
-
-    useEffect(() => {
-        setPage(1);
-    }, [category]);
-
+        }
+    }, [category, searchTerm]);
 
 
     const firstHandler = () => {
@@ -57,14 +56,14 @@ export const PageIndex = ({searchObject, pageType, setPageType, setProducts, cat
     }
 
     const nextHandler = () => {
-        if (page < searchObject.pageCount) {
+        if (page < pageLimit) {
             setPage(page + 1);
         }
     }
 
     const lastHandler = () => {
-        if (page < searchObject.pageCount) {
-            setPage(searchObject.pageCount);
+        if (page < pageLimit) {
+            setPage(pageLimit);
         }
     }
 
@@ -77,15 +76,5 @@ export const PageIndex = ({searchObject, pageType, setPageType, setProducts, cat
             <a href='#' onClick={lastHandler}>❯❯</a>
         </div>
 
-
-        // <div id='pagination'>
-        //     <Pagination >
-        //         <Pagination.First onClick={firstHandler} />
-        //         <Pagination.Prev onClick={prevHandler}/>
-        //         <Pagination.Item active>{page}</Pagination.Item>
-        //         <Pagination.Next onClick={nextHandler}/>
-        //         <Pagination.Last onClick={lastHandler}/>
-        //     </Pagination>
-        // </div>
     )
 }
