@@ -201,7 +201,7 @@ async function seedingProductObject() {
             index,
             length
         ) {
-            image = "process.env.PUBLIC_URL" + image;
+            image = "/" + image;
             const newProduct = addProductAndCategory({
                 name,
                 price,
