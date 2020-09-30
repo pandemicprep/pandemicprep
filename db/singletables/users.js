@@ -3,7 +3,7 @@
 const { client } = require("../client");
 
 const bcrypt = require("bcrypt");
-const { addCart } = require("../singletables/cart.js");
+const { addCart, getActiveCart } = require("../singletables/cart.js");
 
 /**
  * Create new user by registration (first, last, email, pass minimum),
@@ -69,16 +69,15 @@ async function addUser({
                     securedCreditCard,
                 ]
             );
-            // const {
-            //     rows: [activeCart],
-            // } = await addCart({
-            //     status: "active",
-            //     lastUpdated: Date.now(),
-            //     total: 0,
-            //     userId: newUser.id,
-            // });
-            // newUser.activeCart = activeCart;
+
             if (newUser) {
+                const activeCart = await addCart({
+                    status: "active",
+                    lastUpdated: new Date(),
+                    total: 0,
+                    userId: newUser.id,
+                });
+                newUser.activeCart = activeCart;
                 return newUser;
             } else {
                 return { message: "email or credit card already exists" }; //See if need to change later
@@ -169,7 +168,11 @@ async function getUserByEmail(email) {
         `,
             [email]
         );
+
         if (user) {
+            const activeCart = await getActiveCart(user.id);
+            user.activeCart = activeCart;
+            console.log("from get user by email at the db ", user);
             return user;
         } else {
             return { message: "no user by that email" };
