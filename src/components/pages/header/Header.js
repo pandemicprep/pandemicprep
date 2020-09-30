@@ -108,7 +108,7 @@ export const Header = ({
                         <button className="dropbtn">Welcome!<img id="pointer" src={process.env.PUBLIC_URL + '/styleimages/pointer.png'} /></button>
                         <div className="dropdown-content">
                             { user.isAdmin ?
-                            <a href="#" onClick={() => history.push('/orders')} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/admin.png'} />Admin</a>
+                            <a href="#" onClick={() => history.push('/admin')} ><img id="dropdownIcon" src={process.env.PUBLIC_URL + '/styleimages/admin.png'} />Admin</a>
                             : ''
                             }
                             <a href="#" onClick={() => {

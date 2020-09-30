@@ -21,7 +21,8 @@ import {
 	Orders,
 	Userlist,
     Sales,
-    PageIndex
+    PageIndex,
+    Admin
 } from './index';
 
 import { getPromotedProducts } from '../api/products';
@@ -154,6 +155,12 @@ const App = () => {
 					<Route path='/sales'>
 						<Sales />
 					</Route>
+                    { user.isAdmin ? 
+                        <Route path='/admin'>
+                            <Admin />
+                        </Route>
+                        : ''
+                    }
 					<Redirect to='/' />
 				</Switch>
 				<Footer />

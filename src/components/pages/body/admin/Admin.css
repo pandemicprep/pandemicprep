@@ -1,0 +1,8 @@
+#admin {
+    margin-top: 250px;
+}
+
+#prod-list {
+    display: flex;
+    flex-direction: row;
+}
