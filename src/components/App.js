@@ -37,6 +37,7 @@ const App = () => {
 	const [promotedProducts, setPromotedProducts] = useState([]);
 	const [product, setProduct] = useState({});
 	const [searchObject, setSearchObject] = useState('');
+	const [searchTerm, setSearchTerm] = useState('');
 
 	const [category, setCategory] = useState(''); // const history = useHistory();
 	const [pageType, setPageType] = useState('');
@@ -82,6 +83,7 @@ const App = () => {
 					NavLink={NavLink}
 					promotedProducts={promotedProducts}
 					setPageType={setPageType}
+					setSearchTerm={setSearchTerm}
 					setView={setView}
 				/>
 				<Switch>
@@ -103,7 +105,8 @@ const App = () => {
                                 setPageType={setPageType} 
                                 setProducts={setProducts} 
                                 products={products}
-                                category={category}
+								category={category}
+								searchTerm={searchTerm}
                             />
                         </div>
                         <Categories

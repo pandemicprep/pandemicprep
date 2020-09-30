@@ -69,15 +69,15 @@ async function addUser({
                     securedCreditCard,
                 ]
             );
-            const {
-                rows: [activeCart],
-            } = await addCart({
-                status: "active",
-                lastUpdated: Date.now(),
-                total: 0,
-                userId: newUser.id,
-            });
-            newUser.activeCart = activeCart;
+            // const {
+            //     rows: [activeCart],
+            // } = await addCart({
+            //     status: "active",
+            //     lastUpdated: Date.now(),
+            //     total: 0,
+            //     userId: newUser.id,
+            // });
+            // newUser.activeCart = activeCart;
             if (newUser) {
                 return newUser;
             } else {

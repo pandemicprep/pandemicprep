@@ -201,6 +201,7 @@ async function seedingProductObject() {
             index,
             length
         ) {
+            image = "/" + image;
             const newProduct = addProductAndCategory({
                 name,
                 price,

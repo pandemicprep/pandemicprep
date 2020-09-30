@@ -26,7 +26,7 @@ export const Categories = ({
 
     const categoryHandler = (category) => {
         setPageType('category');
-        // console.log('page type in categories', pageType)
+        
         setCategory(category.name);
         getProductsByCategory(category.name.toLowerCase(), 1)
             .then((response) => {
@@ -37,7 +37,7 @@ export const Categories = ({
                 console.error(error)
             })
     }
-    console.log('page type in categories', pageType)
+    
 
     return (
         <div className='category'>
