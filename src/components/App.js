@@ -84,7 +84,9 @@ const App = () => {
 					promotedProducts={promotedProducts}
 					setPageType={setPageType}
 					setSearchTerm={setSearchTerm}
-					setView={setView}
+                    setView={setView}
+                    user={user}
+                    setUser={setUser}
 				/>
 				<Switch>
 					<Route exact path='/'>
@@ -119,16 +121,16 @@ const App = () => {
                         
 					</Route>
 					<Route path='/register'>
-						<Profile view='register' useHistory={useHistory}/>
+						<Profile view='register' useHistory={useHistory} setView={setView}/>
 					</Route>
 					<Route path='/login'>
-						<Profile view='login' useHistory={useHistory} />
+						<Profile view='login' useHistory={useHistory} setView={setView}/>
 					</Route>
 					<Route path='/guest'>
-						<Profile view='guest' useHistory={useHistory}/>
+						<Profile view='guest' useHistory={useHistory}setView={setView}/>
 					</Route>
 					<Route path='/edit-user'>
-						<Profile view='edit' useHistory={useHistory}/>
+						<Profile view='edit' useHistory={useHistory} setView={setView}/>
 					</Route>
 					<Route path='/product'>
 						<Product product={product} setProduct={setProduct} />

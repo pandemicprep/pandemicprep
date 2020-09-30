@@ -50,7 +50,7 @@ export const Profile = ({ view, setView, setUser, user={}, useHistory }) => {
 	};
 
 	const formHandler = async (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 
 		try {
 			//Registration
@@ -112,6 +112,7 @@ export const Profile = ({ view, setView, setUser, user={}, useHistory }) => {
 		}
 
 		resetForm();
+		history.push('/')
 	};
 
 	function warning(warningMessage) {
