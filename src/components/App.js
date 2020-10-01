@@ -98,7 +98,7 @@ const App = () => {
                     <Route exact path="/">
                         {/* <div id="products-with-page"> */}
                             <Promoted />
-                            <Productlist
+                            {/* <Productlist
                                 products={products}
                                 setProducts={setProducts}
                                 setProduct={setProduct}
@@ -117,8 +117,8 @@ const App = () => {
                                 category={category}
                                 searchTerm={searchTerm}
 
-                            />
-                        </div>
+                            /> */}
+                        {/* </div> */}
 
                         <Categories
                             setProducts={setProducts}
