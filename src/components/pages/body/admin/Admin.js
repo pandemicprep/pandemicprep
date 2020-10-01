@@ -44,9 +44,6 @@ export const Admin = () => {
                     return (
                     <span>
                         <form id='prod-list'>
-                            <span id='each-input'>ID:
-                                <input id='id-input' type='text' readOnly placeholder={item.id}></input>
-                            </span>
                            
                             <span id='each-input'>Title:
                                 <input type='text' readOnly placeholder={item.title}></input>
@@ -60,8 +57,8 @@ export const Admin = () => {
                                 <input type='text' readOnly placeholder={item.price}></input>
                             </span>
                         
-                            <span id='each-input'>Is Highlighted:
-                                <input id='checkbox' type='checkbox' readOnly placeholder={item.isHighlighted}></input>
+                            <span id='each-input'>ImageURL:
+                                <input id='checkbox' readOnly placeholder={item.image}></input>
                             </span>
                             
                             <button>Edit</button>
