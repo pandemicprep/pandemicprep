@@ -1,8 +1,42 @@
 #admin {
+    font-size: 16px;
     margin-top: 250px;
 }
 
+/* PRODUCTS STYLING IN ADMIN */
+
 #prod-list {
     display: flex;
-    flex-direction: row;
+    flex-flow: row nowrap;
 }
+
+
+#each-input {
+    height: 25px;
+    margin: 0px 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#each-input input {
+    position: relative;
+    bottom: 5px;
+}
+
+
+#prod-list button {
+    position: relative;
+    bottom: 30px;
+}
+
+#id-input {
+    width: 20px;
+}
+
+/* USERS STYLING IN ADMIN */
+
+
+
+/* CARTS STYLING IN ADMIN */

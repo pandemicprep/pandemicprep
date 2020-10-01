@@ -41,7 +41,7 @@ async function seed() {
         await gettingProductsByCategory();
         await makingProductCart();
         console.log("Running get all products...");
-        const allProducts = await getAllProducts();
+        const allProducts = await getAllProducts(1);
         console.log("Result: ", allProducts);
     } catch (error) {
         throw error;
