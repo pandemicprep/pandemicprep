@@ -23,6 +23,7 @@ import {
     Sales,
     PageIndex,
     Admin,
+    Promoted
 } from "./index";
 
 import { getPromotedProducts } from "../api/products";
@@ -96,7 +97,8 @@ const App = () => {
                 <Switch>
                     <Route exact path="/">
                         <div id="products-with-page">
-                            <Productlist
+                            <Promoted />
+                            {/* <Productlist
                                 products={products}
                                 setProducts={setProducts}
                                 setProduct={setProduct}
@@ -114,7 +116,7 @@ const App = () => {
                                 products={products}
                                 category={category}
                                 searchTerm={searchTerm}
-                            />
+                            /> */}
                         </div>
                         <Categories
                             setProducts={setProducts}
