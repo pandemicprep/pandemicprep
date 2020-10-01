@@ -106,13 +106,23 @@ async function addProduct({ name, price, description, image, isHighlighted }) {
 // }
 
 // gets all products
-async function getAllProducts() {
+async function getAllProducts(pageNumber = 1) {
   try {
+    const OFFSET = (LIMIT * (pageNumber-1)) + 1;
+
+    const { rowCount } = await client.query( `
+      SELECT * FROM products;
+    `)
+
     const { rows } = await client.query(`
-            SELECT * FROM products;
+            SELECT * FROM products
+            LIMIT ${LIMIT} OFFSET ${OFFSET};
         `);
 
-    return rows;
+    const pageCount = Math.ceil(rowCount / LIMIT);  
+
+
+    return [pageCount, rows];
   } catch (error) {
     throw error;
   }
