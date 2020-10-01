@@ -52,7 +52,7 @@
 #prepared {
   font: bold 42px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
-    color: black; 
+    color: white; 
 }
 /*DOOMSDAY WORD (LARGE) BANNER STYLING*/
 #doomsday {
@@ -62,15 +62,16 @@
     letter-spacing: 5px;
     font-weight: 900;
     margin-left: 10px;
-    -webkit-text-stroke: .2px black; /* width and color */
+    -webkit-text-stroke: .2px white; /* width and color */
     -webkit-text-fill-color: transparent;
 }
 /*DOOMSDAY WAVE STYLING*/
 .StreamsHero-image {
   background: #002d4d;
-  background: -moz-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
-  background: -webkit-linear-gradient(-45deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
-  background: linear-gradient(135deg, #59adeb 0%, #002d4d 52%, #e15738 100%);
+  background: -moz-linear-gradient(-45deg, black 0%, #002d4d 52%, red 100%);
+  background: -webkit-linear-gradient(-45deg, black 0%, #002d4d 52%, red 100%);
+  background: linear-gradient(135deg, black
+   0%, #002d4d 52%, red 100%);
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#59adeb', endColorstr='#34ce93', GradientType=1);
   background-size: 350% 350%;
   animation: waveColors 8s ease infinite;
@@ -143,16 +144,26 @@
 
 /*LOGIN BUTTON*/
 #login {
-width: 75px;
+width: 100px;
 font: bold 22px Helvetica, Sans-Serif; 
 letter-spacing: -1px; 
 color: black; 
 margin-bottom: 15px;
+height: 50px;
+}
+
+#login:hover {
+  color: white;
+}
+
+#signup:hover {
+  color: white;
 }
 
 /*SIGN UP BUTTON*/
 #signup {
     width: 100px;
+    height: 50px;
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: black; 
@@ -162,6 +173,7 @@ margin-bottom: 15px;
 /*CART BUTTON*/
 #cart {
     width: 75px;
+    height: 50px;
     font-size: 16px;
     margin-bottom: 15px;
 }
@@ -170,7 +182,7 @@ margin-bottom: 15px;
   height: 50px;
 }
 /*CART LOGO ON HOVER*/
-#cartLogo:hover {
+#cart img:hover {
   filter: invert(100%);
 }
 
