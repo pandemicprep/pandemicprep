@@ -13,7 +13,7 @@ export const Cart = ({ cart, setCart, user }) => {
 	const [total, setTotal] = useState('');
 	const [userId, setUserId] = useState('');
 
-	const product = cart.items[0];
+	// const product = cart.items[0];
 
 	const handleStatus = (event) => {
 		setStatus(event.target.value);
@@ -49,13 +49,13 @@ export const Cart = ({ cart, setCart, user }) => {
 		<div id='cart-container'>
 			<h1>{user.firstName !== 'Guest' ? user.firstName + "'s" : ''} Cart</h1>
 			<div className='cartGrid'>
-				<img className='image cart-field' src={process.env.PUBLIC_URL + product.image} width='50px' height='50px' />
+				{/* <img className='image cart-field' src={process.env.PUBLIC_URL + product.image} width='50px' height='50px' />
                 <input type='text' readOnly placeholder={product.title} />
                 <input type='text' readOnly placeholder={product.quantity} />
                 <span className='uptick cart-field tick'>&#11014;</span>
                 <span className='downtick cart-field tick'>&#11015;</span>
                 <input type='text' readOnly placeholder={product.price} />
-                <input type='text' readOnly placeholder={product.total} />
+                <input type='text' readOnly placeholder={product.total} /> */}
 			</div>
             <div className='total-container'>
                 <span className='total-title total'>Cart Summary</span>

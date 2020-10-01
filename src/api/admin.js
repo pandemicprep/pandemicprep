@@ -13,4 +13,14 @@ export async function getAllUsers() {
     } catch (error) {
       throw error;
     }
+}
+
+export async function getAllProducts() {
+  try {
+    const { data } = await axios.get('/api/admin');
+
+    return data;
+  } catch (error) {
+    throw error;
   }
+}

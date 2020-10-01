@@ -1,0 +1,26 @@
+/* PRODUCTS STYLING IN ADMIN */
+
+
+#each-input {
+    height: 25px;
+    margin: 0px 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#each-input input {
+    position: relative;
+    bottom: 5px;
+}
+
+
+#admin-list button {
+    position: relative;
+    bottom: 30px;
+}
+
+#id-input {
+    width: 20px;
+}

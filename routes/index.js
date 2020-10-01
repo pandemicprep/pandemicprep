@@ -52,4 +52,7 @@ apiRouter.use('/reviews', reviewsRouter);
 const categoriesRouter = require('./categories');
 apiRouter.use('/categories', categoriesRouter);
 
+const adminRouter = require('./admin');
+apiRouter.use('/admin', adminRouter);
+
 module.exports = apiRouter;
