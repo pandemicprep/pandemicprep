@@ -5,6 +5,10 @@
 	opacity: 0;
 }
 
+body {
+    background-color: white;
+}
+
 .slide button {
 	transition: all 0.3s ease;
 	-webkit-transform: translateY(20px);
@@ -121,9 +125,11 @@
     font: bold 62px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: white;
-    width: 100%; 
+    width: 500px; 
     margin-bottom: 20px;
     background-color: black;
+    width: 100%;
+    margin: 0 auto;
 }
   
   .wrapper a {
@@ -140,7 +146,7 @@
     height: 500px;
     width: 1000px;
     overflow: hidden;
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
   }
 
