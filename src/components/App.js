@@ -38,7 +38,7 @@ const App = () => {
         isUser: false,
         token: "",
     });
-    const [cart, setCart] = useState({items: []});
+    const [cart, setCart] = useState({ items: [] });
     const [products, setProducts] = useState([]);
     const [promotedProducts, setPromotedProducts] = useState([]);
     const [product, setProduct] = useState({});
@@ -186,14 +186,14 @@ const App = () => {
                     </Route>
                     {user.isAdmin ? (
                         <Route path="/admin">
-                            <Admin 
-                            product={products}
-                            setProducts={setProducts}
+                            <Admin
+                                product={products}
+                                setProducts={setProducts}
                             />
                         </Route>
                     ) : (
-                        ""
-                    )}
+                            ""
+                        )}
                     <Redirect to="/" />
                 </Switch>
                 <Footer />

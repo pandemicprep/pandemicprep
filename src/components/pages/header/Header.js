@@ -50,8 +50,8 @@ export const Header = ({
     return (
         <div>
             <div id="headerWrap" className="StreamsHero-image">
-                <h1 id="prepared">Are you prepared for</h1>
-                <h1 id="doomsday">DOOMSDAY?</h1>
+                <h1 id="prepared">Are you prepared for
+                <span id="doomsday">DOOMSDAY?</span></h1>
             </div>
             <div className="headerContainer">
                 <NavLink
@@ -84,31 +84,31 @@ export const Header = ({
                 {user.isUser === true ? (
                     ""
                 ) : (
-                    <>
-                        <button
-                            className="button"
-                            id="login"
-                            onClick={() => {
-                                setView("login");
-                                history.push("/login");
-                            }}
-                        >
-                            Login
+                        <>
+                            <button
+                                className="button"
+                                id="login"
+                                onClick={() => {
+                                    setView("login");
+                                    history.push("/login");
+                                }}
+                            >
+                                Login
                         </button>
 
-                        <h3 id="breaker">|</h3>
-                        <button
-                            className="button"
-                            id="signup"
-                            onClick={() => {
-                                setView("register");
-                                history.push("/register");
-                            }}
-                        >
-                            Sign Up
+                            <h3 id="breaker">|</h3>
+                            <button
+                                className="button"
+                                id="signup"
+                                onClick={() => {
+                                    setView("register");
+                                    history.push("/register");
+                                }}
+                            >
+                                Sign Up
                         </button>
-                    </>
-                )}
+                        </>
+                    )}
 
                 <h3 id="breaker">|</h3>
                 <button className="button" id="cart" onClick={() => history.push("/cart")}>
@@ -127,67 +127,67 @@ export const Header = ({
                         checkout
                     </a>
                 ) : (
-                    <div className="dropdown">
-                        <button className="dropbtn">
-                            Welcome!
+                        <div className="dropdown">
+                            <button className="dropbtn">
+                                Welcome!
                             <img
-                                id="pointer"
-                                src={process.env.PUBLIC_URL + "/styleimages/pointer.png"}
-                            />
-                        </button>
-                        <div className="dropdown-content">
-                            {user.isAdmin ? (
-                                <a href="#" onClick={() => history.push("/admin")}>
+                                    id="pointer"
+                                    src={process.env.PUBLIC_URL + "/styleimages/pointer.png"}
+                                />
+                            </button>
+                            <div className="dropdown-content">
+                                {user.isAdmin ? (
+                                    <a href="#" onClick={() => history.push("/admin")}>
+                                        <img
+                                            id="dropdownIcon"
+                                            src={process.env.PUBLIC_URL + "/styleimages/admin.png"}
+                                        />
+                                        Admin
+                                </a>
+                                ) : (
+                                        ""
+                                    )}
+                                <a
+                                    href="#"
+                                    onClick={() => {
+                                        setView("edit");
+                                        history.push("/edit-user");
+                                    }}
+                                >
                                     <img
                                         id="dropdownIcon"
-                                        src={process.env.PUBLIC_URL + "/styleimages/admin.png"}
+                                        src={process.env.PUBLIC_URL + "/styleimages/settings.png"}
                                     />
-                                    Admin
-                                </a>
-                            ) : (
-                                ""
-                            )}
-                            <a
-                                href="#"
-                                onClick={() => {
-                                    setView("edit");
-                                    history.push("/edit-user");
-                                }}
-                            >
-                                <img
-                                    id="dropdownIcon"
-                                    src={process.env.PUBLIC_URL + "/styleimages/settings.png"}
-                                />
-                                Edit Profile
+                                    Edit Profile
                             </a>
-                            <a href="#" onClick={() => history.push("/orders")}>
-                                <img
-                                    id="dropdownIcon"
-                                    src={process.env.PUBLIC_URL + "/styleimages/shop.png"}
-                                />
-                                Orders
+                                <a href="#" onClick={() => history.push("/orders")}>
+                                    <img
+                                        id="dropdownIcon"
+                                        src={process.env.PUBLIC_URL + "/styleimages/shop.png"}
+                                    />
+                                    Orders
                             </a>
-                            <a
-                                href="#"
-                                onClick={() => {
-                                    localStorage.removeItem("panprepToken");
-                                    setUser({
-                                        firstName: "Guest",
-                                        isAdmin: false,
-                                        isUser: false,
-                                        token: "",
-                                    });
-                                }}
-                            >
-                                <img
-                                    id="dropdownIcon"
-                                    src={process.env.PUBLIC_URL + "/styleimages/logout.png"}
-                                />
-                                Log Out
+                                <a
+                                    href="#"
+                                    onClick={() => {
+                                        localStorage.removeItem("panprepToken");
+                                        setUser({
+                                            firstName: "Guest",
+                                            isAdmin: false,
+                                            isUser: false,
+                                            token: "",
+                                        });
+                                    }}
+                                >
+                                    <img
+                                        id="dropdownIcon"
+                                        src={process.env.PUBLIC_URL + "/styleimages/logout.png"}
+                                    />
+                                    Log Out
                             </a>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
                 {/* <div className="dropdown">
                     <button className="dropbtn">Welcome!<img id="pointer" src={process.env.PUBLIC_URL + '/styleimages/pointer.png'} /></button>

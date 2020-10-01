@@ -29,7 +29,7 @@
     align-items: center;
     align-content: center;
     position: fixed;
-    top: 115px;
+    top: 60px;
     width: 100%;
     justify-content: space-evenly;
     background-color: rgb(255, 255, 255);
@@ -44,14 +44,13 @@
 /*TOP DOOMSDAY BANNER STYLING*/
 #headerWrap {
   display: block !important;
-  height: 200px;
-  position: top;
+  height: 60px;
+  position: fixed;
   background-color: rgb(1, 0, 53);
-  text-align: center;
 }
 /*ARE YOU PREPARED HEADER STYLING*/
 #prepared {
-  font: bold 28px Helvetica, Sans-Serif; 
+  font: bold 42px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: black; 
 }
@@ -59,9 +58,10 @@
 #doomsday {
     color: white;
     font-family: 'Anton', sans-serif;
-    font-size:72px;
-    font-weight: 700;
-    margin-top: -15px;
+    font-size:44px;
+    letter-spacing: 5px;
+    font-weight: 900;
+    margin-left: 10px;
     -webkit-text-stroke: .2px black; /* width and color */
     -webkit-text-fill-color: transparent;
 }
@@ -250,97 +250,3 @@ margin-bottom: 15px;
   }
 
 
-
-  @media (max-width: 1060px) {
-    #headerWrap {
-      height: 100px;
-      position: top;
-      background-color: rgb(1, 0, 53);
-      text-align: center;
-    }
-    #sbtn {
-      height: 45px;
-      margin-left: -20px;
-      margin-top: -10px;
-    }
-
-    .button:hover {
-      background-position: 0;
-      color: white;
-      text-transform: none;
-    }
-    #prepared {
-      font-size: 18px;
-    }
-    #doomsday {
-     font-size: 45px;
-     margin-top: -15px;
-    }
-    .StreamsHero-image {
-      background: #002D4D;
-      background: -moz-linear-gradient(-45deg, #59ADEB 0%, #002D4D 52%, #E15738 100%);
-      background: -webkit-linear-gradient(-45deg, #59ADEB 0%, #002D4D 52%, #E15738 100%);
-      background: linear-gradient(135deg, #59ADEB 0%, #002D4D 52%, #E15738 100%);
-      filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#59ADEB', endColorstr='#34CE93', GradientType=1);
-      background-size: 250% 250%;
-      animation: waveColors 8s ease infinite;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      margin: 0 auto;
-    }
-    .headerContainer {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      align-content: center;
-      position: fixed;
-      top: 65px;
-      width: 100%;
-      justify-content: space-evenly;
-      background-color: rgb(255, 255, 255);
-      border: 1px solid rgb(1, 0, 53);
-      width: 100%;
-      height: 75px;
-      text-align: center;
-      font-size: 50px;
-      font-family: 'Raleway', sans-serif;
-  }
-  #signup {
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.dropbtn {
-  font-size: 20px;
-}
-
-#login {
-  font-size: 14px;
-}
-
-
-#cart img {
-  height: 35px;
-}
-.dropdown:hover .dropbtn {
-  background-color:  rgb(1, 0, 53);
-  color: white;
-  text-transform: none;
-  background-position: 0;
-}
-.dropdown:hover .dropbtn img{
-  filter: invert(100%);
-}
-    }
-
-
-    @media (max-width: 980px) {
-
-    }
-
-    @media (max-width: 480px) {
- 
-    }
