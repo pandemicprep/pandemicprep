@@ -48,17 +48,52 @@ export const Cart = ({ cart, setCart, user }) => {
 	return (
 		<div id='cart-container'>
 			<h1>{user.firstName !== 'Guest' ? user.firstName + "'s" : ''} Cart</h1>
-			<div className='cart'>
+			<div className='cartGrid'>
 				<img className='image cart-field' src={process.env.PUBLIC_URL + product.image} width='50px' height='50px' />
-
-				<p className='title cart-field'>{product.title}</p>
-
-				<p className='quantity cart-field'>{product.quantity}</p>
-				<p className='uptick cart-field tick'>&#11014;</p>
-                <p className='downtick cart-field tick'>&#11015;</p>
-				<p className='price cart-field'>{product.price}</p>
-				<p className='total cart-field'>{product.total}</p>
+                <input type='text' readOnly placeholder={product.title} />
+                <input type='text' readOnly placeholder={product.quantity} />
+                <span className='uptick cart-field tick'>&#11014;</span>
+                <span className='downtick cart-field tick'>&#11015;</span>
+                <input type='text' readOnly placeholder={product.price} />
+                <input type='text' readOnly placeholder={product.total} />
 			</div>
+            <div className='total-container'>
+                <span className='total-title total'>Cart Summary</span>
+                <span className='total-amount total'>$17.00</span>
+                <span className='total-shipping total'>$5.00</span>
+                <span className='total-total total'>$23.00</span>
+            </div>
 		</div>
+    //     <div id='cartContainer'>
+        
+    //         prodDummyArr.map((item) => {
+    //             return (
+    //             <span>
+    //                 <form id='prod-list'>
+                       
+    //                     <span id='each-input'>Title:
+    //                         <input type='text' readOnly placeholder={item.title}></input>
+    //                     </span>
+                    
+    //                     <span id='each-input'>Description:
+    //                         <input type='text' readOnly placeholder={item.description}></input>
+    //                     </span>
+                    
+    //                     <span id='each-input'>Price:
+    //                         <input type='text' readOnly placeholder={item.price}></input>
+    //                     </span>
+                    
+    //                     <span id='each-input'>ImageURL:
+    //                         <input id='checkbox' readOnly placeholder={item.image}></input>
+    //                     </span>
+                        
+    //                     <button>Edit</button>
+    //                 </form>
+    //             </span>
+    //             )
+    //         })
+        
+    //     }
+    // </div>
 	);
 };

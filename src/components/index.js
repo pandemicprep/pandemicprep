@@ -36,6 +36,7 @@ export { Productlist } from './pages/body/products/Productlist';
 export { AddProduct } from './pages/body/products/AddProduct';
 export { Review } from './pages/body/products/Reviews';
 export { PageIndex } from './pages/body/products/PageIndex';
+export { Promoted } from './pages/body/products/Promoted';
 
 //user
 export { Checkout } from './pages/body/user/Checkout';
