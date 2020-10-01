@@ -37,7 +37,7 @@ const App = () => {
         isUser: false,
         token: "",
     });
-    const [cart, setCart] = useState({});
+    const [cart, setCart] = useState({items: []});
     const [products, setProducts] = useState([]);
     const [promotedProducts, setPromotedProducts] = useState([]);
     const [product, setProduct] = useState({});
@@ -62,7 +62,13 @@ const App = () => {
             getUserFromToken(localStorage.getItem("panprepToken"))
                 .then((response) => {
                     console.log("the updated user on load is ", response);
-                    setUser(response);
+                    setUser({
+                        firstName: response.firstName,
+                        isAdmin: response.isAdmin,
+                        isUser: response.isUser,
+                        token: response.token
+                    });
+                    setCart(response.activeCart);
                 })
                 .catch((error) => {
                     console.error(error);
