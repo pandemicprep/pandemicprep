@@ -4,14 +4,23 @@ footer {
     justify-content: center;
     align-items: center;
     color: white;
-    background-color: rgb(1, 0, 53);
+    background-color: black;
     border: 2px solid black;
-    font-family: 'Raleway', sans-serif;
     text-align: center;
-    height: 75px;
+    height: 55px;
     width: 100%;
     position: fixed;
     bottom: 0;
+}
+
+#footer {
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: white; 
+}
+
+#est {
+    font-size: 14px;
 }
 
 #footerLogo {
