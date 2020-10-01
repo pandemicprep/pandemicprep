@@ -7,10 +7,10 @@ export const Footer = () => {
     return (
         <footer>
             <div className="footerDiv">
-                <h2>
-                    <img id="dooms" src={process.env.PUBLIC_URL + '/styleimages/dooms.png'} />
-                    &#169; Doomsday Preppers
-                <img id="disaster" src={process.env.PUBLIC_URL + '/styleimages/disaster.png'} />
+                <h2 id="footer">
+
+                    &#169; Doomsday Preppers <br></br><span id="est">Est 2020</span>
+
                 </h2>
             </div>
         </footer>

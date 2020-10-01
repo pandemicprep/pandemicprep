@@ -111,7 +111,9 @@
 .searchTerm {
     margin-top: 20px;
      border: 1px solid rgb(1, 0, 53);
-     font-size: 16px;
+     font: bold 16px Helvetica, Sans-Serif; 
+     letter-spacing: -1px; 
+     color: lightslategray; 
      background-image: url('https://lh3.googleusercontent.com/proxy/MtxHfmhJ7rHRSvipU-1ZjUePr0gYZqSp0Acplm2J2gC8vImi7wXXyENiUKw6Vude9kW4_KaWziwu-F5GwnjffxX-GA20Dn8O4bZ7n6YK2G7Iklmu7LYAzVXZlRiIFqnCnzdICXnRSBSrzGBBb0v7D6Xb3f-dIpcyYZinxHGDc5cNtFsZxcI');
      background-size: cover;
 }
@@ -142,14 +144,18 @@
 /*LOGIN BUTTON*/
 #login {
 width: 75px;
-font-size: 20px;
+font: bold 22px Helvetica, Sans-Serif; 
+letter-spacing: -1px; 
+color: black; 
 margin-bottom: 15px;
 }
 
 /*SIGN UP BUTTON*/
 #signup {
     width: 100px;
-    font-size: 20px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: black; 
     margin-bottom: 15px;
 }
 
