@@ -96,7 +96,7 @@ const App = () => {
                 />
                 <Switch>
                     <Route exact path="/">
-                        <div id="products-with-page">
+                        {/* <div id="products-with-page"> */}
                             <Promoted />
                             {/* <Productlist
                                 products={products}
@@ -117,13 +117,45 @@ const App = () => {
                                 category={category}
                                 searchTerm={searchTerm}
                             /> */}
-                        </div>
+                        {/* </div> */}
                         <Categories
                             setProducts={setProducts}
                             NavLink={NavLink}
                             setCategory={setCategory}
                             setPageType={setPageType}
                             setSearchObject={setSearchObject}
+                            useHistory={useHistory}
+                        />
+                    </Route>
+                    <Route path='/productsview'>
+                    <div id="products-with-page">
+                        <Productlist
+                                products={products}
+                                setProducts={setProducts}
+                                setProduct={setProduct}
+                                NavLink={NavLink}
+                                searchObject={searchObject}
+                                category={category}
+                                pageType={pageType}
+                                setPageType={setPageType}
+                            />
+                            <PageIndex
+                                searchObject={searchObject}
+                                pageType={pageType}
+                                setPageType={setPageType}
+                                setProducts={setProducts}
+                                products={products}
+                                category={category}
+                                searchTerm={searchTerm}
+                            />
+                            </div>
+                            <Categories
+                            setProducts={setProducts}
+                            NavLink={NavLink}
+                            setCategory={setCategory}
+                            setPageType={setPageType}
+                            setSearchObject={setSearchObject}
+                            useHisotry={useHistory}
                         />
                     </Route>
                     <Route path="/register">
@@ -170,6 +202,7 @@ const App = () => {
                             setCategory={setCategory}
                             setPageType={setPageType}
                             setSearchObject={setSearchObject}
+                            useHistory={useHistory}
                         />
                     </Route>
                     <Route path="/cart">

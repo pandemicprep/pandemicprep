@@ -11,9 +11,10 @@ export const Categories = ({
     setCategory,
     setPageType,
     pageType,
-    setSearchObject
+    setSearchObject,
+    useHistory
 }) => {
-
+    // const history = useHistory();
     const cat = [
         { name: 'School', image: '../../../../../public/images/school/mathblocks.jpg' },
         { name: 'Work', image: '../../../../../public/images/school/mathblocks.jpg' },
@@ -24,6 +25,7 @@ export const Categories = ({
         { name: 'Entertainment', image: '../../../../../public/images/school/mathblocks.jpg' },
     ];
 
+    
     const categoryHandler = (category) => {
         setPageType('category');
         
@@ -36,6 +38,7 @@ export const Categories = ({
             .catch((error) => {
                 console.error(error)
             })
+        // history.push('/productsview');
     }
     
 
@@ -43,7 +46,7 @@ export const Categories = ({
         <div className='category'>
             {cat.map((category, i) => {
                 return (
-                    <NavLink key={i} to='/' onClick={() => { categoryHandler(category) }}>
+                    <NavLink key={i} to='/productsview' onClick={() => { categoryHandler(category) }}>
                         <div key={i} id='cat' className='category-tile' >
                             <button className='category-name'>{category.name}</button>
                         </div>

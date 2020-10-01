@@ -48,8 +48,14 @@ export const Cart = ({ cart, setCart, user }) => {
 	return (
 		<div id='cart-container'>
 			<h1>{user.firstName !== 'Guest' ? user.firstName + "'s" : ''} Cart</h1>
-			<div className='cartGrid'>
-				<img className='image cart-field' src={process.env.PUBLIC_URL + product.image} width='50px' height='50px' />
+            <div className='cart-titles'>
+                <span className='cart-title'>Product</span>
+                <span className='cart-quantity'>Quantity</span>
+                <span className='cart-price'>Price</span>
+                <span className='cart-total'>Total</span>
+            </div>
+			<div className='cart-grid'>
+				<img className='image cart-field' src={process.env.PUBLIC_URL + product.image} />
                 <input type='text' readOnly placeholder={product.title} />
                 <input type='text' readOnly placeholder={product.quantity} />
                 <span className='uptick cart-field tick'>&#11014;</span>
@@ -64,36 +70,6 @@ export const Cart = ({ cart, setCart, user }) => {
                 <span className='total-total total'>$23.00</span>
             </div>
 		</div>
-    //     <div id='cartContainer'>
-        
-    //         prodDummyArr.map((item) => {
-    //             return (
-    //             <span>
-    //                 <form id='prod-list'>
-                       
-    //                     <span id='each-input'>Title:
-    //                         <input type='text' readOnly placeholder={item.title}></input>
-    //                     </span>
-                    
-    //                     <span id='each-input'>Description:
-    //                         <input type='text' readOnly placeholder={item.description}></input>
-    //                     </span>
-                    
-    //                     <span id='each-input'>Price:
-    //                         <input type='text' readOnly placeholder={item.price}></input>
-    //                     </span>
-                    
-    //                     <span id='each-input'>ImageURL:
-    //                         <input id='checkbox' readOnly placeholder={item.image}></input>
-    //                     </span>
-                        
-    //                     <button>Edit</button>
-    //                 </form>
-    //             </span>
-    //             )
-    //         })
-        
-    //     }
-    // </div>
+    
 	);
 };

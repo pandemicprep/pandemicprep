@@ -45,6 +45,7 @@ export const Header = ({
         } else {
             alert("Must enter search term(s)");
         }
+        history.push('/productsview')
     };
 
     return (
