@@ -1,13 +1,14 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import './Cart.css';
+import "./Cart.css";
 
-import { addNewCart } from '../../../../api';
-import { Product } from '../products/Product';
+import { addNewCart } from "../../../../api";
+import { Product } from "../products/Product";
 
 export const Cart = ({ cart, setCart, user }) => {
+
 	const [status, setStatus] = useState('');
 	const [lastUpdated, setLastUpdated] = useState('');
 	const [total, setTotal] = useState('');
@@ -62,38 +63,8 @@ export const Cart = ({ cart, setCart, user }) => {
                 <span className='total-amount total'>$17.00</span>
                 <span className='total-shipping total'>$5.00</span>
                 <span className='total-total total'>$23.00</span>
+
             </div>
-		</div>
-    //     <div id='cartContainer'>
-        
-    //         prodDummyArr.map((item) => {
-    //             return (
-    //             <span>
-    //                 <form id='prod-list'>
-                       
-    //                     <span id='each-input'>Title:
-    //                         <input type='text' readOnly placeholder={item.title}></input>
-    //                     </span>
-                    
-    //                     <span id='each-input'>Description:
-    //                         <input type='text' readOnly placeholder={item.description}></input>
-    //                     </span>
-                    
-    //                     <span id='each-input'>Price:
-    //                         <input type='text' readOnly placeholder={item.price}></input>
-    //                     </span>
-                    
-    //                     <span id='each-input'>ImageURL:
-    //                         <input id='checkbox' readOnly placeholder={item.image}></input>
-    //                     </span>
-                        
-    //                     <button>Edit</button>
-    //                 </form>
-    //             </span>
-    //             )
-    //         })
-        
-    //     }
-    // </div>
-	);
+        </div>
+    );
 };
