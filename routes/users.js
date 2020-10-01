@@ -12,6 +12,7 @@ const {
     getUserById,
     getUserByEmail,
 } = require("../db/singletables/users");
+const { getActiveCart } = require('../db');
 
 usersRouter.post("/register", async (req, res, next) => {
     const user = req.body;
@@ -103,10 +104,12 @@ usersRouter.post("/guest", async (req, res, next) => {
 usersRouter.get("/verify", async (req, res, next) => {
     console.log("getting to verify with ", req.user);
     try {
+        const activeCart = await getActiveCart(req.user.id);
         res.send({
             firstName: req.user.firstName,
             isAdmin: req.user.isAdmin,
             isUser: req.user.isUser,
+            activeCart: activeCart
         });
     } catch (error) {
         throw error;
