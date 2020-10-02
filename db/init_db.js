@@ -32,7 +32,8 @@ async function createTables() {
         price NUMERIC(9,2) NOT NULL,
         image varchar(255),
         "imageDescription" varchar(255),
-        "isHighlighted" BOOLEAN DEFAULT false
+        "isHighlighted" BOOLEAN DEFAULT false,
+        "isActive" BOOLEAN DEFAULT true
       );
       
       CREATE TABLE categories (

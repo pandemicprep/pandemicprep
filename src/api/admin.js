@@ -5,9 +5,9 @@ import axios from 'axios';
  * will require the user is admin later on
  */
 
-export async function getAllUsers() {
+export async function getAllUsers(pageNumber) {
     try {
-      const { data } = await axios.get('/api/users');
+      const { data } = await axios.get(`/api/users/${pageNumber}`);
       console.log('all users in src api index: ', data);
       return data;
     } catch (error) {
@@ -15,9 +15,9 @@ export async function getAllUsers() {
     }
 }
 
-export async function getAllProducts() {
+export async function getAllProducts(pageNumber) {
   try {
-    const { data } = await axios.get('/api/admin');
+    const { data } = await axios.get(`/api/admin/${pageNumber}`);
 
     return data;
   } catch (error) {
