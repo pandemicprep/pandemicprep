@@ -33,7 +33,7 @@ export const Userlist = () => {
 
 
     useEffect(() => {
-        getAllUsers()
+        getAllUsers(userPage)
             .then((response) => {
                 console.log(response, 'response in use effect')
                 setAdminUserList(response[1]);

@@ -16,8 +16,9 @@ export const AdminProductList = () => {
 
     
     useEffect(() => {
-        getAllProducts()
+        getAllProducts(adminPage)
             .then((response) => {
+                console.log('response and adminPage', response, adminPage)
                 setAdminProductList(response[1]);
                 setAdminPageLimit(response[0]);
             })
@@ -39,11 +40,13 @@ export const AdminProductList = () => {
     const handleImageURL = (event) => {
         setImageURL(event.target.value);
     }
-    const adminAddProduct = async () => {
+    const adminAddProduct = async (event) => {
+        event.preventDefault();
+        console.log('getting into add product subimt', imageURL)
+
         try {
-            console.log('getting into add product subimt')
             const newProduct = await addNewProduct({
-                title,
+                name: title,
                 description,
                 price,
                 imageURL
@@ -120,6 +123,7 @@ export const AdminProductList = () => {
                             </span>
                             
                             <button>Edit</button>
+                            <button>Delete</button>
                         </form>
                     </span>
                     )

@@ -1,7 +1,7 @@
 
 const { client } = require('../client');
 const Promise = require('bluebird');
-const LIMIT = 10;
+const LIMIT = 5;
 
 const {
   addCategory,
@@ -302,6 +302,30 @@ async function getHighlightedProducts() {
   }
 }
 
+async function updateProduct(id, fields = {}) {
+  const setString = Object.keys(fields)
+        .map((key, index) => `"${key}"=$${index + 1}`)
+        .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
+  try {
+    const {
+      rows: [product]
+    } = await client.query(`
+      UPDATE products 
+      SET ${setString}
+      WHERE id=${id}
+      RETURNING *;
+    `, Object.values(fields));
+
+    return product;
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   getProductById,
   addProductAndCategory,
@@ -310,5 +334,6 @@ module.exports = {
   addProduct,
   getProductsForCartHistory,
   getProductsByCategory,
-  getHighlightedProducts
+  getHighlightedProducts,
+  updateProduct
 };
