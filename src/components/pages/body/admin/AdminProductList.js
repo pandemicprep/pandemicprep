@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 import './AdminProductList.css';
 
-import { getAllProducts, addNewProduct } from '../../../../api/index';
+import { getAllProducts, addNewProduct, updateProduct } from '../../../../api/index';
 
 export const AdminProductList = () => {
     const [adminProductList, setAdminProductList] = useState([]);
     const [adminPage, setAdminPage] = useState(1);
     const [adminPageLimit, setAdminPageLimit] = useState(0);
+    const [adminView, setAdminView] = useState('none');
     // input values for adding new product
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState(''); 
@@ -16,6 +17,11 @@ export const AdminProductList = () => {
 
     
     useEffect(() => {
+        setAdminView('none');
+        setTitle('');
+        setDescription('');
+        setPrice('');
+        setImageURL('');
         getAllProducts(adminPage)
             .then((response) => {
                 console.log('response and adminPage', response, adminPage)
@@ -58,6 +64,29 @@ export const AdminProductList = () => {
         }
     }
 
+    const enableEditMode = () => {
+        if (adminView === 'none') {
+            setAdminView('editOneProduct');
+        }
+    }
+    const editProduct = async (item) => {
+        try {
+            const fields = {
+                id: item.id,
+                name: item.title,
+                description: item.description,
+                price: item.price,
+                image: item.image,
+                isActive: false
+            }
+
+            const updatedProduct = await updateProduct(item.id, fields);
+           
+        } catch (error) {
+            throw error;
+        }
+    }
+
     // Pagination handlers
     const firstHandler = () => {
         if (adminPage > 1) {
@@ -80,6 +109,7 @@ export const AdminProductList = () => {
         }
     }
 
+
     return (
         <div id='admin'>
             <form id='admin-list' onSubmit={adminAddProduct}>
@@ -101,30 +131,57 @@ export const AdminProductList = () => {
                 
                 <button>Add New</button>
             </form>
-            { adminProductList.map((item) => {
+            { adminProductList.map((item, index) => {
                     return (
-                    <span>
-                        <form id='admin-list'>
-                           
-                            <span id='each-input'>Title:
-                                <input type='text' readOnly placeholder={item.title}></input>
-                            </span>
+                    <span key={index}>
                         
-                            <span id='each-input'>Description:
-                                <input type='text' readOnly placeholder={item.description}></input>
-                            </span>
-                        
-                            <span id='each-input'>Price:
-                                <input type='text' readOnly placeholder={item.price}></input>
-                            </span>
-                        
-                            <span id='each-input'>ImageURL:
-                                <input id='checkbox' readOnly placeholder={item.image}></input>
-                            </span>
+                            { adminView === 'editOneProduct'  ? /**edit mode ternary */  
+                            <form id='admin-list' onSubmit={() => editProduct(item)}>                         
+                                <span id='each-input'>Title:
+                                    <input type='text' placeholder={item.title}></input>
+                                </span>
                             
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </form>
+                                <span id='each-input'>Description:
+                                    <input type='text'placeholder={item.description}></input>
+                                </span>
+                            
+                                <span id='each-input'>Price:
+                                    <input type='text' id='price-input' placeholder={item.price}></input>
+                                </span>
+                            
+                                <span id='each-input'>ImageURL:
+                                    <input id='checkbox' placeholder={item.image}></input>
+                                </span>
+
+                                <button type='button' onClick={enableEditMode} >Edit</button>
+                                {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
+                                
+                            </form>
+                            :
+                            <form id='admin-list'>
+                                <span id='each-input'>Title:
+                                    <input type='text' readOnly placeholder={item.title}></input>
+                                </span>
+                            
+                                <span id='each-input'>Description:
+                                    <input type='text' readOnly placeholder={item.description}></input>
+                                </span>
+                            
+                                <span id='each-input'>Price:
+                                    <input type='text' id='price-input' readOnly placeholder={item.price}></input>
+                                </span>
+                            
+                                <span id='each-input'>ImageURL:
+                                    <input id='checkbox' readOnly placeholder={item.image}></input>
+                                </span>
+
+                                <button type='button' onClick={enableEditMode} >Edit</button>
+                                {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
+                                
+                            </form>
+                            }
+                            
+                            
                     </span>
                     )
                 })

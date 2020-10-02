@@ -24,3 +24,13 @@ export async function getAllProducts(pageNumber) {
     throw error;
   }
 }
+
+export async function updateProduct(id, fields = {}) {
+  try {
+    const { data } = await axios.patch('/', id, fields);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
