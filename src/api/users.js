@@ -53,6 +53,7 @@ export async function getUserFromToken(token) {
       const { data: user } = await axios.get('/api/users/verify', { headers: { authorization: "Bearer " + token}});
       user.token = token;
       console.log('user from the api ', user);
+      
       return user;
   } catch (error) {
     console.error(error);
