@@ -6,7 +6,7 @@ const { client } = require("../client");
 
 // const { getProductsForCartHistory } = require("../singletables/products");
 
-async function createProductCart({ productId, cartId, quantity, unitPrice }) {
+async function addProductCart({ productId, cartId, quantity, unitPrice }) {
     try {
         const itemTotal = quantity * unitPrice;
         const {
@@ -19,7 +19,8 @@ async function createProductCart({ productId, cartId, quantity, unitPrice }) {
           `,
             [productId, cartId, quantity, unitPrice, itemTotal]
         );
-        return prodCart;
+        const items = await getProductsCartForACartId(cartId);
+        return items;
     } catch (error) {
         throw error;
     }
@@ -58,7 +59,7 @@ async function getAllProductsCart() {
     }
 }
 module.exports = {
-    createProductCart,
+    addProductCart,
     getAllProductsCart,
     getProductsCartForACartId,
 };
