@@ -19,7 +19,7 @@ const productArray = require("./singletables/productObject");
 
 const { addCart, getCartHistoryStatusAdmin, getCartHistoryStatus } = require("./singletables/cart");
 
-const { createProductCart, getAllProductsCart } = require("./jointables/products_carts");
+const { addProductCart, getAllProductsCart } = require("./jointables/products_carts");
 
 const { addReview, getReviewsByProductId } = require("./singletables/reviews");
 
@@ -402,19 +402,19 @@ async function gettingProductsByCategory() {
 
 async function makingProductCart() {
     try {
-        const productCart1 = await createProductCart({
+        const productCart1 = await addProductCart({
             productId: 2,
             cartId: 1,
             quantity: 4,
             unitPrice: 5.99,
         });
-        const productCart2 = await createProductCart({
+        const productCart2 = await addProductCart({
             productId: 13,
             cartId: 2,
             quantity: 2,
             unitPrice: 199.99,
         });
-        const productCart3 = await createProductCart({
+        const productCart3 = await addProductCart({
             productId: 4,
             cartId: 3,
             quantity: 45,

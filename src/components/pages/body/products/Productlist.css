@@ -1,5 +1,7 @@
+/** @format */
+
 .productList {
-    margin-bottom: 200px;
+    /* margin-bottom: 200px; */
 }
 
 .productList img {
@@ -11,7 +13,7 @@
     color: black;
     text-decoration: none;
 }
-  
+
 #product a:visited {
     color: black;
     text-decoration: none;
@@ -28,7 +30,7 @@
 }
 
 body {
-    background-image: url('https://www.pngkey.com/png/full/117-1173164_black-fade-into-white.png');
+    background-image: url("https://www.pngkey.com/png/full/117-1173164_black-fade-into-white.png");
     background-repeat: repeat-x;
     width: 100%;
 }

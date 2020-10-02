@@ -1,25 +1,30 @@
-/*GOOGLE FONTS IMPORT*/
+/**
+ * /*GOOGLE FONTS IMPORT
+ *
+ * @format
+ */
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url(https://fonts.googleapis.com/css2?family=Secular+One&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Anton&display=swap);
 
 /*BUTTON STYLING*/
 .button {
-  color: black;
-  background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
-  background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
-  background-position: 100%;
-  background-size: 400%;
-  border: 1px solid white;
-  background-color: white;
-  -webkit-transition: background 300ms ease-in-out;
-  transition: background 300ms ease-in-out;
+    color: black;
+    background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    border: 1px solid white;
+    background-color: white;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
 }
 /*BUTTON HOVER*/
 .button:hover {
-  background-position: 0;
-  color: white;
-  text-transform: uppercase;
+    background-position: 0;
+    color: white;
+    text-transform: uppercase;
 }
 
 /*HEADER CONTAINER STYLING*/
@@ -38,85 +43,84 @@
     height: 85px;
     text-align: center;
     font-size: 50px;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
 }
 
 /*TOP DOOMSDAY BANNER STYLING*/
 #headerWrap {
-  display: block !important;
-  height: 60px;
-  position: fixed;
-  background-color: rgb(1, 0, 53);
+    display: block !important;
+    height: 60px;
+    position: fixed;
+    background-color: rgb(1, 0, 53);
 }
 /*ARE YOU PREPARED HEADER STYLING*/
 #prepared {
-  font: bold 42px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
-    color: white; 
+    font: bold 42px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
+    color: white;
 }
 /*DOOMSDAY WORD (LARGE) BANNER STYLING*/
 #doomsday {
     color: white;
-    font-family: 'Anton', sans-serif;
-    font-size:44px;
+    font-family: "Anton", sans-serif;
+    font-size: 44px;
     letter-spacing: 5px;
     font-weight: 900;
     margin-left: 10px;
-    -webkit-text-stroke: .2px white; /* width and color */
+    -webkit-text-stroke: 0.2px white; /* width and color */
     -webkit-text-fill-color: transparent;
 }
 /*DOOMSDAY WAVE STYLING*/
 .StreamsHero-image {
-  background: #002d4d;
-  background: -moz-linear-gradient(-45deg, black 0%, #002d4d 52%, red 100%);
-  background: -webkit-linear-gradient(-45deg, black 0%, #002d4d 52%, red 100%);
-  background: linear-gradient(135deg, black
-   0%, #002d4d 52%, red 100%);
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#59adeb', endColorstr='#34ce93', GradientType=1);
-  background-size: 350% 350%;
-  animation: waveColors 8s ease infinite;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
+    background: #002d4d;
+    background: -moz-linear-gradient(-45deg, black 0%, #002d4d 52%, red 100%);
+    background: -webkit-linear-gradient(-45deg, black 0%, #002d4d 52%, red 100%);
+    background: linear-gradient(135deg, black 0%, #002d4d 52%, red 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#59adeb', endColorstr='#34ce93', GradientType=1);
+    background-size: 350% 350%;
+    animation: waveColors 8s ease infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
 }
 
 /*WEBKIT IMPORT FOR WAVE COLORS */
 @-webkit-keyframes waveColors {
-  0% {
-    background-position: 0% 7%;
-  }
-  50% {
-    background-position: 100% 94%;
-  }
-  100% {
-    background-position: 0% 7%;
-  }
+    0% {
+        background-position: 0% 7%;
+    }
+    50% {
+        background-position: 100% 94%;
+    }
+    100% {
+        background-position: 0% 7%;
+    }
 }
 @keyframes waveColors {
-  0% {
-    background-position: 0% 7%;
-  }
-  50% {
-    background-position: 100% 94%;
-  }
-  100% {
-    background-position: 0% 7%;
-  }
+    0% {
+        background-position: 0% 7%;
+    }
+    50% {
+        background-position: 100% 94%;
+    }
+    100% {
+        background-position: 0% 7%;
+    }
 }
 
 /*SEARCH FORMS STYLING*/
 /*INPUT STYLING*/
 .searchTerm {
     margin-top: 20px;
-     border: 1px solid rgb(1, 0, 53);
-     font: bold 16px Helvetica, Sans-Serif; 
-     letter-spacing: -1px; 
-     color: lightslategray; 
-     background-image: url('https://lh3.googleusercontent.com/proxy/MtxHfmhJ7rHRSvipU-1ZjUePr0gYZqSp0Acplm2J2gC8vImi7wXXyENiUKw6Vude9kW4_KaWziwu-F5GwnjffxX-GA20Dn8O4bZ7n6YK2G7Iklmu7LYAzVXZlRiIFqnCnzdICXnRSBSrzGBBb0v7D6Xb3f-dIpcyYZinxHGDc5cNtFsZxcI');
-     background-size: cover;
+    border: 1px solid rgb(1, 0, 53);
+    font: bold 16px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
+    color: lightslategray;
+    background-image: url("https://lh3.googleusercontent.com/proxy/MtxHfmhJ7rHRSvipU-1ZjUePr0gYZqSp0Acplm2J2gC8vImi7wXXyENiUKw6Vude9kW4_KaWziwu-F5GwnjffxX-GA20Dn8O4bZ7n6YK2G7Iklmu7LYAzVXZlRiIFqnCnzdICXnRSBSrzGBBb0v7D6Xb3f-dIpcyYZinxHGDc5cNtFsZxcI");
+    background-size: cover;
 }
 /*FORM STYLING*/
 .searchForm {
@@ -124,49 +128,49 @@
 }
 /*SEARCH BUTTON*/
 #search {
-  font-size: 16px;
-  width: 60px;
-  background-color: white;
-  border: none;
-  margin-bottom: 15px;
+    font-size: 16px;
+    width: 60px;
+    background-color: white;
+    border: none;
+    margin-bottom: 15px;
 }
 /*SEARCH IMAGE*/
 #sbtn {
-  height: 65px;
-  margin-left: -20px;
-  margin-top: -10px;
+    height: 65px;
+    margin-left: -20px;
+    margin-top: -10px;
 }
 
 /*BETWEEN BUTTON BREAK*/
 #breaker {
-  margin-top:15px;
+    margin-top: 15px;
 }
 
 /*LOGIN BUTTON*/
 #login {
-width: 100px;
-font: bold 22px Helvetica, Sans-Serif; 
-letter-spacing: -1px; 
-color: black; 
-margin-bottom: 15px;
-height: 50px;
+    width: 100px;
+    font: bold 22px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
+    color: black;
+    margin-bottom: 15px;
+    height: 50px;
 }
 
 #login:hover {
-  color: white;
+    color: white;
 }
 
 #signup:hover {
-  color: white;
+    color: white;
 }
 
 /*SIGN UP BUTTON*/
 #signup {
     width: 100px;
     height: 50px;
-    font: bold 22px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
-    color: black; 
+    font: bold 22px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
+    color: black;
     margin-bottom: 15px;
 }
 
@@ -179,11 +183,11 @@ height: 50px;
 }
 /*CART LOGO STYLING*/
 #cartLogo {
-  height: 50px;
+    height: 50px;
 }
 /*CART LOGO ON HOVER*/
 #cart img:hover {
-  filter: invert(100%);
+    filter: invert(100%);
 }
 
 /*DROPDOWN MENU STYLING*/
@@ -192,7 +196,7 @@ height: 50px;
     color: black;
     border: 1px solid white;
     background-color: white;
-    width: 155px;
+    width: 350px;
     font-size: 26px;
     background-image: -webkit-linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
     background-image: linear-gradient(45deg, rgb(3, 70, 128) 50%, transparent 50%);
@@ -200,34 +204,34 @@ height: 50px;
     background-size: 400%;
     -webkit-transition: background 300ms ease-in-out;
     transition: background 300ms ease-in-out;
-  }
-  /*DROPDOWN BUTTON HOVER*/
-  .dropdown:hover .dropbtn {
-    background-color:  rgb(1, 0, 53);
+}
+/*DROPDOWN BUTTON HOVER*/
+.dropdown:hover .dropbtn {
+    background-color: rgb(1, 0, 53);
     color: white;
     text-transform: uppercase;
     background-position: 0;
 }
 /*POINTER ICON*/
 #pointer {
-  height: 25px;
-  margin-left: 3px;
-  margin-bottom: 8px;
+    height: 25px;
+    margin-left: 3px;
+    margin-bottom: 8px;
 }
 /*POINTER HOVER*/
 #pointer:hover {
-  display: none;
+    display: none;
 }
 
-  /*DROPDOWN DIV*/
-  .dropdown {
+/*DROPDOWN DIV*/
+.dropdown {
     position: relative;
     display: inline-block;
     margin-bottom: 10px;
     padding-right: 10px;
-  }
-  /*DROPDOWN HOVER (CONTENT)*/
-  .dropdown:hover .dropdown-content {
+}
+/*DROPDOWN HOVER (CONTENT)*/
+.dropdown:hover .dropdown-content {
     display: block;
     border-radius: 10px;
     padding-top: 10px;
@@ -237,34 +241,39 @@ height: 50px;
     font-size: 16px;
     border: 1px solid #e18c79;
 }
-  /*DROPDOWN MENU*/
-  .dropdown-content {
+/*DROPDOWN MENU*/
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: rgb(1, 0, 53);
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
-  /*LINKS INSIDE DROPDOWN MENU*/
-  .dropdown-content a {
+}
+/*LINKS INSIDE DROPDOWN MENU*/
+.dropdown-content a {
     color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  /*LINKS INSIDEE DROPDOWN MENU (HOVER)*/
-  .dropdown-content a:hover {
-    background-color:  rgb(3, 70, 128);
+}
+/*LINKS INSIDEE DROPDOWN MENU (HOVER)*/
+.dropdown-content a:hover {
+    background-color: rgb(3, 70, 128);
     border-radius: 20px;
     border: 2px solid black;
     color: white;
 }
 /*DROPDOWN CONTENT IMAGE ICONS*/
-  #dropdownIcon {
-      width: 25px;
-      margin-right: 10px;
-      filter: invert(100%)
-  }
+#dropdownIcon {
+    width: 25px;
+    margin-right: 10px;
+    filter: invert(100%);
+}
 
-
+#cart-size {
+    color: red;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 900;
+    margin-bottom: -20px;
+}
