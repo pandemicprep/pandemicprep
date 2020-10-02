@@ -8,7 +8,7 @@ import { addNewCart, removeProductFromCart } from "../../../../api";
 // import { Product } from '../products/Product';
 
 export const Cart = ({ cart, setCart, setCartSize, user }) => {
-    const [shipping, setShipping] = useState(5.0);
+    const [shipping, setShipping] = useState(5);
     const removeHandler = (productId) => {
         const updatedCart = cart;
         removeProductFromCart({ cartId: cart.id, products_cartsId: productId }, user.token)
@@ -79,12 +79,14 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
                     <div id="total-container">
                         <span className="total-title total">Cart Summary</span>
                         <span className="total-label total">Sub-Total:</span>
-                        <span className="total-amount total">${cart.total}</span>
+                        <span className="total-amount total">
+                            ${parseFloat(cart.total).toFixed(2)}
+                        </span>
                         <span className="total-label total">Shipping:</span>
-                        <span className="total-shipping total">${shipping}</span>
+                        <span className="total-shipping total">${shipping.toFixed(2)}</span>
                         <span className="total-label total">Total:</span>
                         <span className="total-total total">
-                            ${parseFloat(cart.total) + shipping}
+                            ${(parseFloat(cart.total) + shipping).toFixed(2)}
                         </span>
                     </div>
                 </div>
