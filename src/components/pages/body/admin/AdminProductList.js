@@ -80,11 +80,12 @@ export const AdminProductList = ({user}) => {
     const editProduct = async (event, item) => {
         event.preventDefault()
         try {
+            console.log(parseFloat(item.price).toFixed(2), 'parse float')
             const fields = {
                 title: '' ? item.title : editTitle,
                 description: '' ? item.description : editDescription,
-                price: '' ? item.price : editPrice,
-                image: ''? item.imageURL : editImageURL
+                price: '' ? parseFloat(item.price).toFixed(2) : parseFloat(editPrice).toFixed(2),
+                image: '' ? item.imageURL : editImageURL
             }
 
             const updatedProduct = await updateProduct({id: item.id, fields: fields, token: user.token});
