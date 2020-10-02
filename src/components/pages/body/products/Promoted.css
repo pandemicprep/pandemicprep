@@ -178,15 +178,15 @@ body {
           top: 50%;
           transform: translateY(-50%);
           z-index: 10;
-          background: url('https://lh3.googleusercontent.com/proxy/Ebe7P3Q5zq6Qnji5Qog-RI9zSVt6SnK6Ten7yHkvLShfYJDaFgBFKA5L3O7v0nAAwAs9o_l4Rl4ghZ8btsuZAa8L4yc667jo0_Ch7Zvt2nu7-rEqmT4oHjABWyF_s7-5GfWCz5xygVQwg0ZKGhKl2wBNJQFCOWo') no-repeat center center / 16px;
-          width: 32px;
-          height: 32px;
+          background: url('/styleimages/arrow.png') no-repeat center center / 56px;
+          width: 42px;
+          height: 42px;
           text-indent: -9999px;
           cursor: pointer;
   }
   
   .previousButton:hover, .nextButton:hover {
-    background: url('https://lh3.googleusercontent.com/proxy/Ebe7P3Q5zq6Qnji5Qog-RI9zSVt6SnK6Ten7yHkvLShfYJDaFgBFKA5L3O7v0nAAwAs9o_l4Rl4ghZ8btsuZAa8L4yc667jo0_Ch7Zvt2nu7-rEqmT4oHjABWyF_s7-5GfWCz5xygVQwg0ZKGhKl2wBNJQFCOWo') no-repeat center center / 16px;
+    background: url('/styleimages/arrow.png') no-repeat center center / 36px;
   }
   
   .previousButton {

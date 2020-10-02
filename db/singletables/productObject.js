@@ -25,14 +25,14 @@ const productArray = [
         name: "Notebook Pack",
         price: 10.99,
         description: "6 Multi colored covers Included Hot Pink, Blue, Purple, Lime Green, Yellow, Orange, 1 Subject Notebook; 70 sheets of double-sided Narrow colleged rules paper.",
-        image: "images/notebookpack.jpeg",
+        image: "images/notebookpack.jpg",
         category: "school"
     },
     {
         name: "Colored Pen Pack",
         price: 14.99,
         description: "Express yourself creatively and fearlessly with FriXion Clicker.",
-        image: "images/coloredpens.jpeg",
+        image: "images/coloredpenset.jpg",
         category: "school"
     },
     {
@@ -92,21 +92,7 @@ const productArray = [
         category: "school"
     },
     {
-        name: "Scissors",
-        price: 9.99,
-        description: "Safety Blunt Tip Blades with Protective Cover: These kids scissors made of extra strong, durable, anti-rust and wear-resistant stainless steel flat-ground blades. Smooth blades offer good performance for cutting paper.",
-        image: "images/scissors.jpg",
-        category: "school"
-    },
-    {
         name: "Fraction Calculator",
-        price: 17.99,
-        description: "Elementary/Middle School Fraction Calculator.",
-        image: "images/calculator.jpg",
-        category: "school"
-    },
-    {
-        name: "Calculator",
         price: 17.99,
         description: "Elementary/Middle School Fraction Calculator.",
         image: "images/calculator.jpg",

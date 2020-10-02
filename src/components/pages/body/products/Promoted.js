@@ -75,6 +75,8 @@ export const Promoted = () => {
                             <p>{item.description}</p>
                             <button id="promoButton">${item.price}</button>
                         </div>
+                        <p id="prev">A</p>
+                        <p id="next">A</p>
                     </div>
                 ))}
             </Slider>
