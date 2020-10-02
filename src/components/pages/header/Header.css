@@ -270,3 +270,10 @@
     margin-right: 10px;
     filter: invert(100%);
 }
+
+#cart-size {
+    color: red;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 900;
+    margin-bottom: -20px;
+}

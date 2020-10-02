@@ -7,7 +7,6 @@ const { addProductCart } = require("../db/jointables/products_carts");
 const { getActiveCart } = require("../db");
 
 cartRouter.post("/", async (req, res, next) => {
-    console.log("getting to the cart router", req.body);
     if (req.user) {
         if (req.user.isUser) {
             try {

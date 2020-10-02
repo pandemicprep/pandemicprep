@@ -6,26 +6,28 @@ import "./Product.css";
 
 import { addProductToCart } from "../../../../api/cart";
 
-export const Product = ({ product, setCart, cart, user }) => {
-    const addToCartHandler = async (event) => {
+export const Product = ({ product, setCart, cart, user, setCartSize }) => {
+    const addToCartHandler = () => {
         const newCart = cart;
-        console.log("the old cart ", cart);
-        try {
-            const newItems = await addProductToCart(
-                {
-                    productId: product.id,
-                    cartId: cart.id,
-                    quantity: 1,
-                    unitPrice: product.price,
-                },
-                user.token
-            );
-            newCart.items = newItems;
-            setCart(newCart);
-            console.log("the new cart ", cart);
-        } catch (error) {
-            console.error(error);
-        }
+        console.log("cart ", cart);
+
+        addProductToCart(
+            {
+                productId: product.id,
+                cartId: cart.id,
+                quantity: 1,
+                unitPrice: product.price,
+            },
+            user.token
+        )
+            .then((response) => {
+                newCart.items = response;
+                setCart(newCart);
+                setCartSize(newCart.items.length);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     return (

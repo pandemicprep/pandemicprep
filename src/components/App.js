@@ -39,6 +39,7 @@ const App = () => {
         token: "",
     });
     const [cart, setCart] = useState({ items: [] });
+    const [cartSize, setCartSize] = useState(0);
     const [products, setProducts] = useState([]);
     const [promotedProducts, setPromotedProducts] = useState([]);
     const [product, setProduct] = useState({});
@@ -62,7 +63,6 @@ const App = () => {
         if (localStorage.getItem("panprepToken")) {
             getUserFromToken(localStorage.getItem("panprepToken"))
                 .then((response) => {
-                    console.log("the updated user on load is ", response);
                     setUser({
                         firstName: response.firstName,
                         isAdmin: response.isAdmin,
@@ -70,7 +70,7 @@ const App = () => {
                         token: response.token,
                     });
                     setCart(response.activeCart);
-                    console.log("the cart is ", cart);
+                    setCartSize(response.activeCart.items.length);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -94,6 +94,7 @@ const App = () => {
                     setView={setView}
                     user={user}
                     setUser={setUser}
+                    cartSize={cartSize}
                 />
                 <Switch>
                     <Route exact path="/">
@@ -176,7 +177,13 @@ const App = () => {
                         />
                     </Route>
                     <Route path="/product">
-                        <Product product={product} setCart={setCart} cart={cart} user={user} />
+                        <Product
+                            product={product}
+                            setCart={setCart}
+                            cart={cart}
+                            setCartSize={setCartSize}
+                            user={user}
+                        />
                         <Categories
                             setProducts={setProducts}
                             NavLink={NavLink}
