@@ -9,6 +9,19 @@ export async function addProductToCart(product, token) {
         });
         return addedProduct;
     } catch (error) {
-        throw error;
+        console.error(error);
+    }
+}
+
+export async function removeProductFromCart({ cartId, products_cartsId }, token) {
+    console.log("getting to remove at api ", cartId, products_cartsId);
+    const query = cartId + "/product/" + products_cartsId;
+    try {
+        const { data: newItems } = await axios.delete("/api/cart/" + query, {
+            headers: { Authorization: "Bearer " + token },
+        });
+        return newItems;
+    } catch (error) {
+        console.error(error);
     }
 }

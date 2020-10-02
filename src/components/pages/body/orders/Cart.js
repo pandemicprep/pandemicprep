@@ -4,30 +4,24 @@ import React, { useState } from "react";
 
 import "./Cart.css";
 
-import { addNewCart } from "../../../../api";
+import { addNewCart, removeProductFromCart } from "../../../../api";
 // import { Product } from '../products/Product';
 
-export const Cart = ({ cart, setCart, user }) => {
-    // const [status, setStatus] = useState('');
-    // const [lastUpdated, setLastUpdated] = useState('');
-    // const [total, setTotal] = useState('');
-    // const [userId, setUserId] = useState('');
-
-    // const handleStatus = (event) => {
-    // 	setStatus(event.target.value);
-    // };
-
-    // const handleLastUpdated = (event) => {
-    // 	setLastUpdated(event.target.value);
-    // };
-
-    // const handleTotal = (event) => {
-    // 	setTotal(event.target.value);
-    // };
-
-    // const handleUserId = (event) => {
-    // 	setUserId(event.target.value);
-    // };
+export const Cart = ({ cart, setCart, setCartSize, user }) => {
+    const [shipping, setShipping] = useState(5.0);
+    const removeHandler = (productId) => {
+        const updatedCart = cart;
+        removeProductFromCart({ cartId: cart.id, products_cartsId: productId }, user.token)
+            .then((response) => {
+                updatedCart.items = response;
+                setCart(updatedCart);
+                setCartSize(updatedCart.items.length);
+                console.log("new cart ", cart);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     return (
         <div id="cart-component">
@@ -43,9 +37,9 @@ export const Cart = ({ cart, setCart, user }) => {
                         <span className="cart-total">Total</span>
                     </div>
                     <div className="cart-grid">
-                        {cart.items.map((product) => {
+                        {cart.items.map((product, i) => {
                             return (
-                                <div id="cart-row-container">
+                                <div key={i} id="cart-row-container">
                                     <img
                                         className="cart-image cart-field"
                                         src={process.env.PUBLIC_URL + product.image}
@@ -68,7 +62,14 @@ export const Cart = ({ cart, setCart, user }) => {
                                     <label className="cart-field cart-product-total">
                                         {product.itemTotal}
                                     </label>
-                                    <button className="cart-field cart-delete">remove</button>
+                                    <button
+                                        className="cart-field cart-delete"
+                                        onClick={() => {
+                                            removeHandler(product.jointId);
+                                        }}
+                                    >
+                                        remove
+                                    </button>
                                 </div>
                             );
                         })}
@@ -78,11 +79,13 @@ export const Cart = ({ cart, setCart, user }) => {
                     <div id="total-container">
                         <span className="total-title total">Cart Summary</span>
                         <span className="total-label total">Sub-Total:</span>
-                        <span className="total-amount total">$17.00</span>
+                        <span className="total-amount total">${cart.total}</span>
                         <span className="total-label total">Shipping:</span>
-                        <span className="total-shipping total">$5.00</span>
+                        <span className="total-shipping total">${shipping}</span>
                         <span className="total-label total">Total:</span>
-                        <span className="total-total total">$23.00</span>
+                        <span className="total-total total">
+                            ${parseFloat(cart.total) + shipping}
+                        </span>
                     </div>
                 </div>
             </div>

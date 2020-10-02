@@ -58,8 +58,30 @@ async function getAllProductsCart() {
         throw error;
     }
 }
+
+async function removeProductFromCart({ cartId, products_cartsId }) {
+    try {
+        const result = await client.query(
+            `
+            DELETE FROM products_carts
+            WHERE "jointId"=$1;
+        `,
+            [products_cartsId]
+        );
+        const items = await getProductsCartForACartId(cartId);
+        if (items) {
+            return items;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     addProductCart,
     getAllProductsCart,
     getProductsCartForACartId,
+    removeProductFromCart,
 };
