@@ -50,7 +50,6 @@ adminRouter.patch('/', async (req, res, next) => {
     try {
         const id = req.body.id;
         const fields = req.body.fields;
-        console.log(id, fields, 'destructure check at the route level')
 
         if (req.user) {
             if (req.user.isAdmin) {

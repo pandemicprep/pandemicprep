@@ -4,12 +4,15 @@ import './AdminProductList.css';
 
 import { getAllProducts, addNewProduct, updateProduct } from '../../../../api/index';
 
-export const AdminProductList = ({user}) => {
+export const AdminProductList = ({
+    user
+}) => {
     const [adminProductList, setAdminProductList] = useState([]);
     const [adminPage, setAdminPage] = useState(1);
     const [adminPageLimit, setAdminPageLimit] = useState(0);
     const [adminView, setAdminView] = useState('none');
-    const [clickedIndex, setClickedIndex] = useState(-1);
+    const [clickedIndex, setClickedIndex] = useState(-1); 
+    
     // input values for adding new product
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState(''); 
@@ -71,7 +74,6 @@ export const AdminProductList = ({user}) => {
 
     const enableEditMode = (index, item) => {
         setClickedIndex(index);
-        setTitle(item.title)
         if (adminView === 'none') {
             setAdminView('editOneProduct');
         }
