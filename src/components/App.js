@@ -111,7 +111,11 @@ const App = () => {
                 <Switch>
                     <Route exact path="/">
                         {/* <div id="products-with-page"> */}
-                        <Promoted />
+                        <Promoted 
+                        NavLink={NavLink}
+                        setProduct={setProduct}
+                        useHistory={useHistory}
+                        />
                         <Categories
                             setProducts={setProducts}
                             NavLink={NavLink}
