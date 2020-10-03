@@ -6,6 +6,11 @@
     margin: auto;
     width: 50%;
     margin-top: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .profileform {
@@ -43,4 +48,12 @@ select {
 
 .hide {
     display: none;
+}
+
+.profile button {
+border: 1px solid black !important; 
+border-radius: 10px !important;
+background-color: white !important;
+color: black !important;
+width: 300px;
 }

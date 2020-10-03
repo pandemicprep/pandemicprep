@@ -57,7 +57,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
 
     const formHandler = async (event) => {
         event.preventDefault();
-        
+
         try {
             //Registration
             if (view === "register") {
@@ -204,10 +204,10 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     id="reveal"
                     className={
                         view === "register" ||
-                        view === "userCheckout" ||
-                        view === "login" ||
-                        view === "guest" ||
-                        view === "fulledit"
+                            view === "userCheckout" ||
+                            view === "login" ||
+                            view === "guest" ||
+                            view === "fulledit"
                             ? "field hide"
                             : "field"
                     }
@@ -239,9 +239,9 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     placeholder="Verify Password" //
                     className={
                         view === "guest" ||
-                        view === "userCheckout" ||
-                        view === "login" ||
-                        view === "edit"
+                            view === "userCheckout" ||
+                            view === "login" ||
+                            view === "edit"
                             ? "field hide"
                             : "field"
                     }
@@ -259,9 +259,9 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     placeholder="Address Line One"
                     className={
                         view === "register" ||
-                        view === "login" ||
-                        view === "userCheckout" ||
-                        view === "edit"
+                            view === "login" ||
+                            view === "userCheckout" ||
+                            view === "edit"
                             ? "field hide"
                             : "field"
                     }
@@ -279,9 +279,9 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     placeholder="Address Line Two"
                     className={
                         view === "register" ||
-                        view === "login" ||
-                        view === "userCheckout" ||
-                        view === "edit"
+                            view === "login" ||
+                            view === "userCheckout" ||
+                            view === "edit"
                             ? "field hide"
                             : "field"
                     }

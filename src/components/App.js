@@ -1,4 +1,5 @@
 /** @format */
+import { getProductsByCategory } from '../api/products';
 
 import React, { useState, useEffect } from "react";
 import {
@@ -47,20 +48,29 @@ const App = () => {
     const [searchObject, setSearchObject] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
-    const [category, setCategory] = useState(""); // const history = useHistory();
+    const [category, setCategory] = useState("school"); // const history = useHistory();
     const [pageType, setPageType] = useState("");
     const [view, setView] = useState("");
     const history = useHistory();
 
     useEffect(() => {
-        getPromotedProducts()
+        if (!category) {
+            // history.push('/')
+            return
+        }
+        getProductsByCategory(category.toLowerCase(), 1)
             .then((response) => {
-                setPromotedProducts(response);
-                setProducts(response);
+                console.log('This is the response ', response)
+                setSearchObject({ pageCount: response[0], categoryName: category })
+                setProducts(response[1])
             })
             .catch((error) => {
-                console.error(error);
-            });
+                console.error('this is the error yall', error)
+            })
+    }, [category]);
+
+    useEffect(() => {
+
         if (localStorage.getItem("panprepToken")) {
             getUserFromToken(localStorage.getItem("panprepToken"))
                 .then((response) => {
@@ -122,6 +132,7 @@ const App = () => {
                                 category={category}
                                 pageType={pageType}
                                 setPageType={setPageType}
+                                useHistory={useHistory}
                             />
                             <PageIndex
                                 searchObject={searchObject}
@@ -134,7 +145,7 @@ const App = () => {
                             />
                         </div>
                         <Categories
-                            setProducts={setProducts}
+                            // setProducts={setProducts}
                             NavLink={NavLink}
                             setCategory={setCategory}
                             setPageType={setPageType}
@@ -213,8 +224,8 @@ const App = () => {
                             <Admin product={products} setProducts={setProducts} user={user} />
                         </Route>
                     ) : (
-                        ""
-                    )}
+                            ""
+                        )}
                     <Redirect to="/" />
                 </Switch>
                 <Footer />

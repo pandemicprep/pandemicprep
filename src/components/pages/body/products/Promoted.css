@@ -128,6 +128,11 @@ body {
     z-index: -1
 }
 
+button:active {
+  outline: none;
+  border: none;
+}
+
 .wrapper h1 {
     font: bold 62px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 

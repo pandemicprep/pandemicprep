@@ -20,7 +20,7 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
             user.token
         )
             .then((response) => {
-                
+
                 setCart(response);
                 setCartSize(response.items.length);
             })
@@ -31,13 +31,13 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
 
     return (
         <>
-            <div key={product.id} className="product">
+            <div key={product.id} className="product1">
+                <img className="image" src={process.env.PUBLIC_URL + product.image}></img>
                 <div className="info">
                     <p className="header">{product.title}</p>
-                    <p className="image">{product.imageURL}</p>
-                    <p className="description">{product.description}</p>
+                    <p className="description1">{product.description}</p>
                     <p className="price">{product.price}</p>
-                    <button onClick={addToCartHandler}>Add to Cart</button>
+                    <button id="addToCart" onClick={addToCartHandler}>Add to Cart</button>
                 </div>
             </div>
         </>

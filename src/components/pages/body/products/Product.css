@@ -1,39 +1,92 @@
 /** @format */
 
-.product {
+.product1 { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
-
-    width: 400px;
-
-    height: 450px;
+    width: 100% !important;
+    height: 750px !important;
     overflow-y: auto;
     color: black;
     text-decoration: none;
-
     background-color:white;
+    margin: auto;
+    width: 50%;
+    margin-top: 100px;
+}
 
+.header {
+    font: bold 42px Helvetica, Sans-Serif !important;
+    letter-spacing: -1px;
+    text-decoration: underline;
+}
+
+.image {
+max-width: 600px;
+float: left;
+margin-right: 45px;
+}
+
+#addToCart {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 140px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: black; 
+    margin-bottom: 5px;
+    background-image: -webkit-linear-gradient(45deg, black 50%, transparent 50%);
+    background-image: linear-gradient(45deg, black 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+#addToCart:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
+}
+
+.description1 {
+    font: bold 22px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
+    width: 300px;
+}
+
+.price {
+    font: bold 42px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
 }
 
 /* unvisited link */
-.product a:link {
-    color: black;
-    text-decoration: none;
+.product-card:link {
+    color: black !important;;
+    text-decoration: none !important;;
 }
 
 /* visited link */
-.product a:visited {
-    color: black;
-    text-decoration: none;
+.product-card:visited {
+    color: black !important;;
+    text-decoration: none !important;;
 }
 
 /* mouse over link */
-.product a:hover {
-    color: black;
-    text-decoration: none;
+.product-card:hover {
+    color: black !important;;
+    text-decoration: none !important;;
 }
 
 /* selected link */
-.product a:active {
-    color: black;
-    text-decoration: none;
+.product-card:active {
+    color: black !important;;
+    text-decoration: none !important;;
 }
+
