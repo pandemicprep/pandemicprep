@@ -8,7 +8,6 @@ import axios from 'axios';
 export async function getAllUsers(pageNumber, token) {
     try {
       const { data } = await axios.get(`/api/admin/users/${pageNumber}`, {headers: {Authorization: 'Bearer ' + token}});
-      console.log('all users in src api index: ', data);
       return data;
     } catch (error) {
       throw error;
@@ -27,7 +26,6 @@ export async function getAllProducts(pageNumber, token) {
 
 export async function updateProduct({id, fields, token}) {
   try {
-    console.log('getting to axios call', token)
     const { data } = await axios.patch('/api/admin', {id, fields}, {headers: {Authorization: 'Bearer ' + token}});
 
     return data;

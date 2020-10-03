@@ -29,9 +29,8 @@ adminRouter.get('/products/:pageNumber', async (req, res, next) => {
 // get all users
 adminRouter.get("/users/:pageNumber", async (req, res, next) => {
     try {
-        console.log(req.user, 'making it into getall users api')
 
-        const pageNumber = req.params;
+        const { pageNumber } = req.params;
         if (req.user) {
             if (req.user.isAdmin) {
                 const allUsers = await getAllUsers(pageNumber);
