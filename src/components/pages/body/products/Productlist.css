@@ -8,26 +8,15 @@
    
     height: 150px;
     margin-bottom: 20px;
+    object-fit: contain;
 }
 
-#product a:link {
-    color: black;
-    text-decoration: none;
+.header {
+    font-size: 26px !important;
 }
 
-#product a:visited {
-    color: black;
-    text-decoration: none;
-}
-
-#product a:hover {
-    color: black;
-    text-decoration: none;
-}
-
-#product a:active {
-    color: black;
-    text-decoration: none;
+.price {
+    font-size: 26px !important;
 }
 
 body {
@@ -36,3 +25,13 @@ body {
     background-image: none;
 }
 
+.product {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    width: 300px !important;
+    height: 350px !important;
+    overflow-y: auto;
+}

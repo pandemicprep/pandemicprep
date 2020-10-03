@@ -14,6 +14,7 @@ import {
     getProductsByCategory,
 } from "../../../../api/products";
 import { PageIndex } from "./PageIndex";
+import { useHistory } from "react-router-dom";
 
 export const Productlist = ({
     products,
@@ -25,10 +26,15 @@ export const Productlist = ({
     category,
     pageType,
     setPageType,
+    useHistory,
 }) => {
     const [categoryPage, setCategoryPage] = useState(1);
     const [searchPage, setSearchPage] = useState(1);
-
+    const history = useHistory();
+    console.log("products from producList", products)
+    // if (products.length === 0) {
+    //     history.push("/");
+    // }
     return (
         <div className="productList">
             <p>List of Products</p>
@@ -36,7 +42,7 @@ export const Productlist = ({
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (
-                        <NavLink className='product-card' key={i} to='/product' onClick={(event) => { setProduct(singleProduct) }}>
+                        <NavLink id="productA" className='product-card' key={i} to='/product' onClick={(event) => { setProduct(singleProduct) }}>
                             <div key={i} className="product" >
                                 <div id='product' className="info">
                                     <p className="header">
@@ -49,7 +55,7 @@ export const Productlist = ({
                                     <p className="price">
                                         $ {singleProduct.price}
                                     </p>
-                                    
+
                                     {/* <button>Add to Cart</button> */}
                                 </div>
                             </div>
