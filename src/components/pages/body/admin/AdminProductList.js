@@ -148,8 +148,6 @@ export const AdminProductList = ({
                     <input type='text' placeholder='description' value={description} onChange={handleDescription}></input>
                     </span>
 
-
-
                     <span className='each-input' id="image">ImageURL:
                     <input id='checkbox' placeholder='imageUrl' value={imageURL} onChange={handleImageURL}></input>
                         <button id="addNew">Add New</button>

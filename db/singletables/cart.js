@@ -77,7 +77,7 @@ async function getActiveCart(userId) {
 //joint products_carts
 
 async function addProductToCart({ userId, productId, cartId, quantity, unitPrice }) {
-    console.log('getting to the back end');
+    
     try {
         const itemTotal = quantity * unitPrice;
         await client.query(
@@ -89,17 +89,21 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
             [productId, cartId, quantity, unitPrice, itemTotal]
         );
         const cart = await getActiveCart(userId);
-        let total;
+        let total = 0;
         cart.items.map((item) => {
             total = total + item.itemTotal;
+            console.log('the item total is ', item.itemTotal);
         })
-        console.log('before updating the total ', cart, total);
-        const newCart = await client.query(`
+        
+        await client.query(`
             UPDATE carts
             SET total=${total}
             WHERE id=${cart.id}
             RETURNING *;
         `);
+
+        const newCart = await getActiveCart(userId);
+
         return newCart;
     } catch (error) {
         throw error;
@@ -162,6 +166,17 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
         } else {
             return {};
         }
+    } catch (error) {
+        throw error;
+    }
+}
+
+//uppdateproductquanity
+async function updateProductQuantity(jointId, quantity) {
+    try {
+        await client.query(`
+            
+        `);
     } catch (error) {
         throw error;
     }

@@ -20,7 +20,7 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
             user.token
         )
             .then((response) => {
-
+                console.log('cart coming back from add product ', response);
                 setCart(response);
                 setCartSize(response.items.length);
             })
