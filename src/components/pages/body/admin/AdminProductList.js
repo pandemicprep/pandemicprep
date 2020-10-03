@@ -30,7 +30,6 @@ export const AdminProductList = ({user}) => {
         setImageURL('');
         getAllProducts(adminPage, user.token)
             .then((response) => {
-                console.log('response and adminPage', response, adminPage)
                 setAdminProductList(response[1]);
                 setAdminPageLimit(response[0]);
             })
@@ -125,6 +124,7 @@ export const AdminProductList = ({user}) => {
 
     return (
         <div id='admin'>
+            { adminPage === 1 ? 
             <form id='admin-list' onSubmit={adminAddProduct}>
                 <span id='each-input'>Title:
                     <input type='text' placeholder='title' value={title} onChange={handleTitle}></input>
@@ -143,7 +143,7 @@ export const AdminProductList = ({user}) => {
                 </span>
                 
                 <button>Add New</button>
-            </form>
+            </form> : '' }
             { adminProductList.map((item, index) => {
                     return (
                     <span key={index}>

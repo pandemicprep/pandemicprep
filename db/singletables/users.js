@@ -110,6 +110,7 @@ async function getAllUsers(pageNumber = 1) {
         `);
         
         const pageCount = Math.ceil(rowCount / LIMIT);  
+        console.log(pageCount, 'pagecount in db')
 
 
         // console.log('all users: ', rows);

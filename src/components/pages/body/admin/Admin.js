@@ -40,7 +40,7 @@ export const Admin = ({user}) => {
         </div>
 
         {adminView === 'products' ? <AdminProductList user={user}/> : ''}
-        {adminView === 'users' ? <Userlist /> : ''}
+        {adminView === 'users' ? <Userlist user={user}/> : ''}
         </>
     )
 }

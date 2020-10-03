@@ -7,7 +7,7 @@ import "./Userlist.css";
 import { getAllUsers } from '../../../../api';
 
 
-export const Userlist = () => {
+export const Userlist = ({user}) => {
     const [adminUserList, setAdminUserList] = useState([]);
     const [userPage, setUserPage] = useState(1);
     const [userPageLimit, setUserPageLimit] = useState(0);
@@ -33,9 +33,10 @@ export const Userlist = () => {
 
 
     useEffect(() => {
-        getAllUsers(userPage)
+        setUserPage(1)
+        getAllUsers(userPage, user.token)
             .then((response) => {
-                console.log(response, 'response in use effect')
+                console.log('response and adminPage', response)
                 setAdminUserList(response[1]);
                 setUserPageLimit(response[0]);
             })
