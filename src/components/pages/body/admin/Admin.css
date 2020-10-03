@@ -4,10 +4,10 @@
 }
 
 #admin {
-    font-size: 16px;
+    font-size: 14px;
     padding-top: 20px;
     overflow: scroll;
-    margin-bottom: 250px;
+    margin-bottom: 150px;
 }
 
 #admin-nav {
