@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import "./Cart.css";
 
-import { addNewCart, removeProductFromCart } from "../../../../api";
+import { addNewCart, removeProductFromCart, patchCartItemQuantity } from "../../../../api";
 // import { Product } from '../products/Product';
 
 export const Cart = ({ cart, setCart, setCartSize, user }) => {
@@ -22,6 +22,20 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
                 console.error(error);
             });
     };
+
+    const upTickHandler = (jointId, quantity) => {
+        ticker(jointId, quantity, 1);
+    }
+
+    const downTickHandler = (jointId, quantity) => {
+        ticker(jointId, quantity, -1);
+    }
+
+    const ticker = (jointId, quantity, direction) => {
+        // patchCartItemQuantity(jointId, quantity + direction, user.token).then((result) => {
+        //     setCart(result);
+        // })
+    }
 
     return (
         <div id="cart-component">
@@ -51,8 +65,8 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
                                         {product.quantity}
                                     </label>
                                     <div className="cart-buttons">
-                                        <button className="uptick cart-field tick">&#11014;</button>
-                                        <button className="downtick cart-field tick">
+                                        <button className="uptick cart-field tick" onClick={() => {upTickHandler(product.jointId, product.quantity)}} >&#11014;</button>
+                                        <button className="downtick cart-field tick" onClick={() => {downTickHandler(product.jointId, product.quantity)}} >
                                             &#11015;
                                         </button>
                                     </div>

@@ -9,11 +9,11 @@ const { getActiveCart } = require("../db");
 
 //Add product to cart
 cartRouter.post("/", async (req, res, next) => {
-    console.log('body ', req.body)
+    console.log('body in add product at the route ', req.body)
     if (req.user) {
         if (req.user.isUser) {
             try {
-                const newProductCart = await addProductToCart({...req.body});
+                const newProductCart = await addProductToCart(req.body);
                 res.send(newProductCart);
             } catch (error) {
                 throw error;
@@ -48,5 +48,23 @@ cartRouter.delete("/:cartId/product/:products_cartsId", async (req, res, next) =
         next({ message: "Must be signed in to remove a product from your cart" });
     }
 });
+
+//patch products_carts quantity
+cartRouter.patch('/', async (req, res, next) => {
+    if (req.user) {
+        if (req.user.isUser) {
+            try {
+                const updatedCart = await updateProductQuantity(jointId, quantity);
+                res.send(updatedCart);
+            } catch (error) {
+                throw error;
+            }
+        } else {
+            next({ message: "Must be signed in to change a product quantity in your cart" });
+        }
+    } else {
+        next({ message: "Must be signed in to change a product quantity in your cart" });
+    }
+})
 
 module.exports = cartRouter;

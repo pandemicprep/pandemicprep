@@ -3,6 +3,7 @@
 import axios from "axios";
 
 export async function addProductToCart(product, token) {
+    console.log('getting to addProduct to cart at api with ', product);
     try {
         const { data: addedProduct } = await axios.post("/api/cart/", product, {
             headers: { Authorization: "Bearer " + token },
@@ -21,6 +22,14 @@ export async function removeProductFromCart({ cartId, products_cartsId }, token)
             headers: { Authorization: "Bearer " + token },
         });
         return newItems;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function patchCartItemQuantity(jointId, quantity, token) {
+    try {
+        
     } catch (error) {
         console.error(error);
     }
