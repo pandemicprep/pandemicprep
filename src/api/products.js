@@ -22,6 +22,7 @@ export async function addNewProduct(newProduct) {
 
 export async function getProductById(productId) {
     try {
+        console.log('getting to product by id api', productId);
         const { data } = await axios.get(`/api/products/${productId}`);
 
         return data;
