@@ -207,7 +207,7 @@ const App = () => {
                     </Route>
                     {user.isAdmin ? (
                         <Route path="/admin">
-                            <Admin product={products} setProducts={setProducts} />
+                            <Admin product={products} setProducts={setProducts} user={user} />
                         </Route>
                     ) : (
                         ""
