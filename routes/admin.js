@@ -47,6 +47,7 @@ adminRouter.get("/users/:pageNumber", async (req, res, next) => {
 });
 
 adminRouter.patch('/', async (req, res, next) => {
+    console.log('getting to admin patch', req.body)
     try {
         const id = req.body.id;
         const fields = req.body.fields;

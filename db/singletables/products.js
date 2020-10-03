@@ -303,6 +303,7 @@ async function getHighlightedProducts() {
 }
 
 async function updateProduct(id, fields = {}) {
+  console.log(id, fields, 'getting to updateProduct in db')
   const setString = Object.keys(fields)
         .map((key, index) => `"${key}"=$${index + 1}`)
         .join(", ");
