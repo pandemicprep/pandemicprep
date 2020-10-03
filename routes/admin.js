@@ -3,8 +3,9 @@ const adminRouter = express.Router();
 
 const {
     getAllProducts,
-    updateProduct
-} = require('../db/singletables/products');
+    updateProduct,
+    getAllUsers
+} = require('../db');
 
 // get all products
 adminRouter.get('/products/:pageNumber', async (req, res, next) => {
@@ -28,7 +29,8 @@ adminRouter.get('/products/:pageNumber', async (req, res, next) => {
 // get all users
 adminRouter.get("/users/:pageNumber", async (req, res, next) => {
     try {
-        const pageNumber = req.params;
+
+        const { pageNumber } = req.params;
         if (req.user) {
             if (req.user.isAdmin) {
                 const allUsers = await getAllUsers(pageNumber);
@@ -48,7 +50,6 @@ adminRouter.patch('/', async (req, res, next) => {
     try {
         const id = req.body.id;
         const fields = req.body.fields;
-        console.log(id, fields, 'destructure check at the route level')
 
         if (req.user) {
             if (req.user.isAdmin) {

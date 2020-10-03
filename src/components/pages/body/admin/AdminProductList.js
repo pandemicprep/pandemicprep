@@ -4,12 +4,15 @@ import './AdminProductList.css';
 
 import { getAllProducts, addNewProduct, updateProduct } from '../../../../api/index';
 
-export const AdminProductList = ({user}) => {
+export const AdminProductList = ({
+    user
+}) => {
     const [adminProductList, setAdminProductList] = useState([]);
     const [adminPage, setAdminPage] = useState(1);
     const [adminPageLimit, setAdminPageLimit] = useState(0);
     const [adminView, setAdminView] = useState('none');
-    const [clickedIndex, setClickedIndex] = useState(-1);
+    const [clickedIndex, setClickedIndex] = useState(-1); 
+    
     // input values for adding new product
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState(''); 
@@ -30,7 +33,6 @@ export const AdminProductList = ({user}) => {
         setImageURL('');
         getAllProducts(adminPage, user.token)
             .then((response) => {
-                console.log('response and adminPage', response, adminPage)
                 setAdminProductList(response[1]);
                 setAdminPageLimit(response[0]);
             })
@@ -72,7 +74,6 @@ export const AdminProductList = ({user}) => {
 
     const enableEditMode = (index, item) => {
         setClickedIndex(index);
-        setTitle(item.title)
         if (adminView === 'none') {
             setAdminView('editOneProduct');
         }
@@ -125,6 +126,7 @@ export const AdminProductList = ({user}) => {
 
     return (
         <div id='admin'>
+            { adminPage === 1 ? 
             <form id='admin-list' onSubmit={adminAddProduct}>
                 <span id='each-input'>Title:
                     <input type='text' placeholder='title' value={title} onChange={handleTitle}></input>
@@ -143,7 +145,7 @@ export const AdminProductList = ({user}) => {
                 </span>
                 
                 <button>Add New</button>
-            </form>
+            </form> : '' }
             { adminProductList.map((item, index) => {
                     return (
                     <span key={index}>

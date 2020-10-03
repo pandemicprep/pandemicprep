@@ -1,0 +1,21 @@
+.userList {
+    font-size: 16px;
+    padding-top: 20px;
+    overflow: scroll;
+    margin-bottom: 100px;
+}
+
+#admin-list-user {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 50px;
+}
+
+#admin-list-user #each-input {
+    margin: 15px;
+}
+
+#admin-list-user button {
+    position: relative;
+    bottom: 15px;
+}

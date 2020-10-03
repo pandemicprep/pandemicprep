@@ -176,6 +176,7 @@ const App = () => {
                             setView={setView}
                             setUser={setUser}
                             setCart={setCart}
+                            user={user}
                         />
                     </Route>
                     <Route path="/product">

@@ -37,6 +37,33 @@ export async function registrationHandler({ firstName, lastName, email, password
     }
 }
 
+export async function adminRegisterNewUser({ firstName, lastName, email, password1, password2 }) {
+    if (password1.length > 0) {
+        const passwordCheck = checkPassword(password1, password2);
+        if (!passwordCheck.valid) {
+            alert(passwordCheck.message);
+            return;
+        }
+    }
+    try {
+        const newUser = await addUser({
+            isUser: true,
+            firstName,
+            lastName,
+            email,
+            password: password1,
+        });
+
+        if (newUser.message) {
+            alert(newUser.message);
+        } else {
+            return newUser;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export async function loginHandler({ email, password1 }) {
     try {
         const user = await loginUser({
