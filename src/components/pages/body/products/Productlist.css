@@ -5,8 +5,8 @@
 }
 
 .productList img {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 #product a:link {
@@ -30,7 +30,8 @@
 }
 
 body {
-    background-image: url("https://www.pngkey.com/png/full/117-1173164_black-fade-into-white.png");
-    background-repeat: repeat-x;
-    width: 100%;
+
+    background-color: white;
+    background-image: none;
 }
+

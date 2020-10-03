@@ -25,14 +25,14 @@ const productArray = [
         name: "Notebook Pack",
         price: 10.99,
         description: "6 Multi colored covers Included Hot Pink, Blue, Purple, Lime Green, Yellow, Orange, 1 Subject Notebook; 70 sheets of double-sided Narrow colleged rules paper.",
-        image: "images/notebookpack.jpeg",
+        image: "images/notebookpack.jpg",
         category: "school"
     },
     {
         name: "Colored Pen Pack",
         price: 14.99,
         description: "Express yourself creatively and fearlessly with FriXion Clicker.",
-        image: "images/coloredpens.jpeg",
+        image: "images/colorpenset.jpg",
         category: "school"
     },
     {
@@ -64,13 +64,6 @@ const productArray = [
         category: "school"
     },
     {
-        name: "Organizer",
-        price: 34.99,
-        description: "This storage tub set is made of soft flexible material. Perfect for all types of manipulatives and learning supplies.",
-        image: "images/tubs.jpg",
-        category: "school"
-    },
-    {
         name: "Math Blocks",
         price: 42.99,
         description: "Set includes: 100 individual bright and colorful units, 30 rods, 10 flats, 1 cube, and 107 page Base Ten Book. Help students understand abstract base ten concepts; including place value, estimation, operations and fractions.",
@@ -92,21 +85,7 @@ const productArray = [
         category: "school"
     },
     {
-        name: "Scissors",
-        price: 9.99,
-        description: "Safety Blunt Tip Blades with Protective Cover: These kids scissors made of extra strong, durable, anti-rust and wear-resistant stainless steel flat-ground blades. Smooth blades offer good performance for cutting paper.",
-        image: "images/scissors.jpg",
-        category: "school"
-    },
-    {
         name: "Fraction Calculator",
-        price: 17.99,
-        description: "Elementary/Middle School Fraction Calculator.",
-        image: "images/calculator.jpg",
-        category: "school"
-    },
-    {
-        name: "Calculator",
         price: 17.99,
         description: "Elementary/Middle School Fraction Calculator.",
         image: "images/calculator.jpg",
@@ -172,7 +151,7 @@ const productArray = [
         name: "Construction Paper",
         price: 15.99,
         description: "This multipack of construction paper gives you more of the colors that you'll use the most - a classroom essential.",
-        image: "images/construction.jpg",
+        image: "images/constrution.jpg",
         category: "school"
     },
     {
@@ -453,7 +432,7 @@ const productArray = [
         name: "Color Journal Pens",
         price: 7.99,
         description: "SMOOTH WRITING Colorful Fine tip marker pen set with superfine, metal-clad fine tipped and outstanding performance in all areas of writing, drawing, coloring, easy and comfortable to write.",
-        image: "images/swork/colorpenset.jpg",
+        image: "images/colorpenset.jpg",
         category: "work school"
     },
     {
@@ -700,13 +679,6 @@ const productArray = [
         description: "50 high-quality sheets. Undated to help you organize your week.",
         image: "images/dailyplan.jpg",
         category: "work school"
-    },
-    {
-        name: "Succulents",
-        price: 19.99,
-        description: "HAND SELECTED: Every pack of succulents we send is hand-picked. You will receive a unique collection of species that are FULLY ROOTED IN 2 INCH POTS.",
-        image: "images/succ.jpg",
-        category: "work health"
     },
     {
         name: "Succulents",
