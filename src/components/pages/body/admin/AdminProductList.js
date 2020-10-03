@@ -16,15 +16,15 @@ export const AdminProductList = ({
     // input values for adding new product
     const [title, setTitle] = useState('');
 
-    const [description, setDescription] = useState(''); 
-    const [price, setPrice] = useState(''); 
-    const [imageURL, setImageURL] = useState(''); 
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [imageURL, setImageURL] = useState('');
     const [isActive, setIsActive] = useState(true)
     // input values for editing a product
     const [editTitle, setEditTitle] = useState('');
-    const [editDescription, setEditDescription] = useState(''); 
-    const [editPrice, setEditPrice] = useState(''); 
-    const [editImageURL, setEditImageURL] = useState(''); 
+    const [editDescription, setEditDescription] = useState('');
+    const [editPrice, setEditPrice] = useState('');
+    const [editImageURL, setEditImageURL] = useState('');
     const resetInputs = () => {
         setEditTitle('')
         setEditDescription('')
@@ -144,7 +144,7 @@ export const AdminProductList = ({
                         <input type='text' placeholder='price' value={price} onChange={handlePrice}></input>
                     </span>
 
-                    <span className='each-input' id="description">Description:
+                    <span className='each-input' id="description2">Description:
                     <input type='text' placeholder='description' value={description} onChange={handleDescription}></input>
                     </span>
 
@@ -173,6 +173,8 @@ export const AdminProductList = ({
                                 <span className='each-input' id="description">Description:
                                     <input type='text' placeholder={item.description}
                                         value={editDescription} onChange={(event) => { setEditDescription(event.target.value) }} ></input>
+                                    <span id="active">Active:
+                                    <input id="activeCheck" type='checkbox'></input></span>
                                 </span>
 
 
@@ -182,11 +184,11 @@ export const AdminProductList = ({
                                     <input id='checkbox' placeholder={item.image}
                                         value={item.image} onChange={(event) => { setEditImageURL(event.target.value) }}></input>
                                     <button id="addNew" type='button' onClick={enableEditMode} >Edit</button>
-                                    {adminView === 'editOneProduct' ? <button id="addNew" >Authorize</button> : ''}
+                                    {adminView === 'editOneProduct' ? <button id="auth" >Authorize</button> : ''}
 
 
                                 </span>
-                                
+
 
 
                             </form>
@@ -194,12 +196,13 @@ export const AdminProductList = ({
                             <form id='admin-list'>
                                 <span className='each-input' id="title">Title & Price:
                                     <input type='text' readOnly placeholder={item.title} value={item.title}></input>
-
                                     <input type='text' id='price-input' readOnly placeholder={item.price} value={item.price}></input>
                                 </span>
 
                                 <span className='each-input' id="description">Description:
-                                    <input type='text' readOnly placeholder={item.description} value={item.description}></input>
+                                    <input type='text' readOnly placeholder={item.description} value={item.description}></input><br></br>
+                                    <span id="active">Active:
+                                    <input id="activeCheck" type='checkbox'></input></span>
                                 </span>
 
 
@@ -207,19 +210,14 @@ export const AdminProductList = ({
                                 <span className='each-input' id="image">ImageURL:
                                     <input id='checkbox' readOnly placeholder={item.image} value={item.imageURL}></input>
                                     <button id="addNew" type='button' onClick={() => { enableEditMode(index, item) }} >Edit</button>
-                                    {adminView === 'editOneProduct' ? <button id="addNew">Authorize</button> : ''}
+                                    {adminView === 'editOneProduct' ? <button id="auth">Authorize</button> : ''}
 
                                 </span>
-                                : 
-                                <span id='each-input'>Active Status:
-                                    <input type='checkbox'></input>
-                                </span>
-                                
-                            
 
-                                <button type='button' onClick={() => {enableEditMode(index, item); resetInputs();}} >Edit</button>
-                                {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
-                                
+
+
+
+
 
                             </form>
                         }
