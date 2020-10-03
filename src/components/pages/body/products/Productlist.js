@@ -31,53 +31,37 @@ export const Productlist = ({
 
     return (
         <div className="productList">
+            <p>List of Products</p>
+            <h1>MainBody</h1>
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (
-
-                        <NavLink
-                            key={i}
-                            to="/product"
-                            onClick={(event) => {
-                                setProduct(singleProduct);
-                            }}
-                        >
-                            <div key={i} className="product">
-                                <div id="product" className="info">
-                                    <p className="header">{singleProduct.title}</p>
-                                    <img
-                                        className="image"
-                                        src={process.env.PUBLIC_URL + singleProduct.image}
-                                    />
-
-
-                        <NavLink key={i} to='/product' onClick={(event) => { setProduct(singleProduct) }}>
+                        <NavLink className='product-card' key={i} to='/product' onClick={(event) => { setProduct(singleProduct) }}>
                             <div key={i} className="product" >
                                 <div id='product' className="info">
                                     <p className="header">
                                         {singleProduct.title}
                                     </p>
                                     <img className="image" src={process.env.PUBLIC_URL + singleProduct.image} />
-
-                                    <p className="price">
-                                        {singleProduct.price}
-                                    </p>
                                     <p className="description">
                                         {singleProduct.description}
                                     </p>
-
+                                    <p className="price">
+                                        $ {singleProduct.price}
+                                    </p>
+                                    
                                     {/* <button>Add to Cart</button> */}
                                 </div>
                             </div>
                         </NavLink>
-                    );
+                    )
                 })}
             </div>
-            {/* <PageIndex 
-                searchObject={searchObject} 
-                pageType={pageType} 
-                setPageType={setPageType} 
-                setProducts={setProducts} 
+            {/* <PageIndex
+                searchObject={searchObject}
+                pageType={pageType}
+                setPageType={setPageType}
+                setProducts={setProducts}
                 products={products}
                 category={category}
             /> */}

@@ -5,8 +5,9 @@
 }
 
 .productList img {
-    max-width: 150px;
-    max-height: 150px;
+   
+    height: 150px;
+    margin-bottom: 20px;
 }
 
 #product a:link {

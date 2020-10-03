@@ -213,7 +213,7 @@
   /*DROPDOWN BUTTON HOVER*/
   .dropdown:hover .dropbtn {
     background-color:  rgb(1, 0, 53);
-=
+
     color: white;
     text-transform: uppercase;
     background-position: 0;
