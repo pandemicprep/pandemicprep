@@ -3,14 +3,17 @@
 const express = require("express");
 const cartRouter = express.Router();
 
-const { addProductCart, removeProductFromCart } = require("../db/jointables/products_carts");
+const { addProductToCart, removeProductFromCart } = require("../db/jointables/products_carts.js");
 const { getActiveCart } = require("../db");
 
+
+//Add product to cart
 cartRouter.post("/", async (req, res, next) => {
+    console.log('body ', req.body)
     if (req.user) {
         if (req.user.isUser) {
             try {
-                const newProductCart = await addProductCart(req.body);
+                const newProductCart = await addProductToCart({...req.body});
                 res.send(newProductCart);
             } catch (error) {
                 throw error;
@@ -23,6 +26,7 @@ cartRouter.post("/", async (req, res, next) => {
     }
 });
 
+//remove product from cart
 cartRouter.delete("/:cartId/product/:products_cartsId", async (req, res, next) => {
     console.log("getting to delete at router ", req.params);
     if (req.user) {

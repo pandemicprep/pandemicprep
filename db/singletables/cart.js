@@ -49,7 +49,7 @@ async function getCartHistoryStatusAdmin() {
         throw error;
     }
 }
-async function getActiveCart(id) {
+async function getActiveCart(userId) {
     try {
         const {
             rows: [activeCart],
@@ -58,7 +58,7 @@ async function getActiveCart(id) {
           SELECT * FROM carts
           WHERE status = 'active' AND "userId" = $1;
           `,
-            [id]
+            [userId]
         );
         const items = await getProductsCartForACartId(activeCart.id);
         activeCart.items = items;

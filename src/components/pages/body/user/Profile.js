@@ -70,6 +70,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                 });
                 console.log("new user from registration ", newUser);
                 setUser({
+                    id: newUser.id,
                     firstName: newUser.firstName,
                     isAdmin: newUser.isAdmin,
                     isUser: newUser.isUser,
@@ -83,6 +84,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                 const user = await loginHandler({ email, password1 });
                 console.log("user from login ", user);
                 setUser({
+                    id: user.id,
                     firstName: user.firstName,
                     isAdmin: user.isAdmin,
                     isUser: user.isUser,

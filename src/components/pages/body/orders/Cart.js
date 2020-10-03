@@ -10,12 +10,12 @@ import { addNewCart, removeProductFromCart } from "../../../../api";
 export const Cart = ({ cart, setCart, setCartSize, user }) => {
     const [shipping, setShipping] = useState(5);
     const removeHandler = (productId) => {
-        const updatedCart = cart;
-        removeProductFromCart({ cartId: cart.id, products_cartsId: productId }, user.token)
+        
+        removeProductFromCart({ userId: user.id, cartId: cart.id, products_cartsId: productId }, user.token)
             .then((response) => {
-                updatedCart.items = response;
-                setCart(updatedCart);
-                setCartSize(updatedCart.items.length);
+                
+                setCart(response);
+                setCartSize(response.items.length);
                 console.log("new cart ", cart);
             })
             .catch((error) => {
@@ -83,10 +83,10 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
                             ${parseFloat(cart.total).toFixed(2)}
                         </span>
                         <span className="total-label total">Shipping:</span>
-                        <span className="total-shipping total">${shipping.toFixed(2)}</span>
+                        <span className="total-shipping total">${parseFloat(cart.total) > 0 ? shipping.toFixed(2) : parseFloat(cart.total).toFixed(2)}</span>
                         <span className="total-label total">Total:</span>
                         <span className="total-total total">
-                            ${(parseFloat(cart.total) + shipping).toFixed(2)}
+                            ${parseFloat(cart.total) > 0 ? (parseFloat(cart.total) + shipping).toFixed(2) : '0.00'}
                         </span>
                     </div>
                 </div>

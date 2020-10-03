@@ -35,6 +35,22 @@ export const Productlist = ({
                 {products.map((singleProduct, i) => {
                     return (
 
+                        <NavLink
+                            key={i}
+                            to="/product"
+                            onClick={(event) => {
+                                setProduct(singleProduct);
+                            }}
+                        >
+                            <div key={i} className="product">
+                                <div id="product" className="info">
+                                    <p className="header">{singleProduct.title}</p>
+                                    <img
+                                        className="image"
+                                        src={process.env.PUBLIC_URL + singleProduct.image}
+                                    />
+
+
                         <NavLink key={i} to='/product' onClick={(event) => { setProduct(singleProduct) }}>
                             <div key={i} className="product" >
                                 <div id='product' className="info">
