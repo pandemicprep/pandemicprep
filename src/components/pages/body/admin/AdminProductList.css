@@ -25,7 +25,7 @@
     height: 70px !important;
 }
 
-#description {
+#description2 {
     margin-left: 20px; 
     margin-right: 20px;
     margin-bottom: 50px;
@@ -34,14 +34,14 @@
 
 #addNew {
     width: 300px;
-    height: 50px;
+    height: 60px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: black; 
-    margin-top: 35px;
+    margin-top: 45px;
     margin-bottom: 5px;
     background-image: -webkit-linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
     background-image: linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
@@ -61,17 +61,47 @@
     transform: scale(1.075,1.075);
 }
 
-#description input {
+#description2 input {
     width: 400px;
     height: 150px;
     font-size: 16px;
 }
 
 #image input {
-    height: 90px;
+    height: 70px;
     word-wrap: break-word;
 }
 
+#description {
+    margin-left: 20px; 
+    margin-right: 20px;
+    margin-bottom: 50px;
+}
+
+#description input {
+    width: 400px;
+    height: 70px;
+    font-size: 16px;
+}
+
+#active {
+display: flex;
+margin-top: 123px;
+justify-content: center;
+align-items: center;
+text-align: center;
+border: 1px solid black;
+width: 400px;
+height: 70px;
+padding-left: 150px;
+font-size: 22px !important;
+position: absolute;
+}
+
+#activeCheck {
+    height: 30px !important;
+    margin-left: -80px;
+}
 
 
 .each-input input {
@@ -93,3 +123,32 @@
     width: 20px;
 }
 
+
+#auth {
+    width: 300px;
+    height: 60px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: black; 
+    margin-top: 10px;
+    margin-bottom: 55px;
+    background-image: -webkit-linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+#auth:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
+}
