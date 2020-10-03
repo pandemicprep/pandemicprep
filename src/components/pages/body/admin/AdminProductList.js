@@ -174,7 +174,7 @@ export const AdminProductList = ({
                                     <input type='text' placeholder={item.description}
                                         value={editDescription} onChange={(event) => { setEditDescription(event.target.value) }} ></input>
                                 </span>
-// <<<<<<< doomy30
+
 
 
 
@@ -183,20 +183,10 @@ export const AdminProductList = ({
                                         value={item.image} onChange={(event) => { setEditImageURL(event.target.value) }}></input>
                                     <button id="addNew" type='button' onClick={enableEditMode} >Edit</button>
                                     {adminView === 'editOneProduct' ? <button id="addNew" >Authorize</button> : ''}
-// =======
-                            
-//                                 { item.isActive ?
-//                                 <span id='each-input'>Active Status:
-//                                     <input type='checkbox' defaultChecked={isActive} 
-//                                     onClick={(event) => {isActive ? setIsActive(false) : setIsActive(true)}} ></input>
-//                                 </span>
-//                                 : 
-//                                 <span id='each-input'>Active Status:
-//                                     <input type='checkbox' 
-//                                     onClick={(event) => {isActive ? setIsActive(false) : setIsActive(true)}}></input>
-// >>>>>>> master
+
+
                                 </span>
-                                }
+                                
 
 
                             </form>
@@ -211,29 +201,20 @@ export const AdminProductList = ({
                                 <span className='each-input' id="description">Description:
                                     <input type='text' readOnly placeholder={item.description} value={item.description}></input>
                                 </span>
-// <<<<<<< doomy30
+
 
 
                                 <span className='each-input' id="image">ImageURL:
                                     <input id='checkbox' readOnly placeholder={item.image} value={item.imageURL}></input>
                                     <button id="addNew" type='button' onClick={() => { enableEditMode(index, item) }} >Edit</button>
                                     {adminView === 'editOneProduct' ? <button id="addNew">Authorize</button> : ''}
-// =======
-                            
-//                                 <span id='each-input'>Price:
-//                                     <input type='text' id='price-input' readOnly placeholder={item.price} value={item.price}></input>
-//                                 </span>
 
-//                                 { item.isActive ?
-//                                 <span id='each-input'>Active Status:
-//                                     <input type='checkbox' defaultChecked={isActive} ></input>
-// >>>>>>> master
                                 </span>
                                 : 
                                 <span id='each-input'>Active Status:
                                     <input type='checkbox'></input>
                                 </span>
-                                }
+                                
                             
 
                                 <button type='button' onClick={() => {enableEditMode(index, item); resetInputs();}} >Edit</button>
