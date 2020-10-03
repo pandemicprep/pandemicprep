@@ -8,6 +8,7 @@ const {
   categoryIdByName,
   getCategoryByName,
 } = require("./categories");
+const productArray = require('./productObject');
 
 
 /**
@@ -42,7 +43,8 @@ const {
 		// 	} catch (error) {
 		// 		throw error;
 		// 	}
-		// }));
+    // }));
+    newProduct.price = parseFloat(newProduct.price);
 		return newProduct;
 
 	} catch (error) {
@@ -68,6 +70,7 @@ async function addProduct({ name, price, description, image, isHighlighted }) {
 			[name, price, description, image, isHighlighted],
 		);
 		if (newProduct) {
+      newProduct.price = parseFloat(newProduct.price);
 			return newProduct;
 		} else {
 			return false;
@@ -121,6 +124,9 @@ async function getAllProducts(pageNumber = 1) {
 
     const pageCount = Math.ceil(rowCount / LIMIT);  
 
+    rows.forEach((item) => {
+      item.price = parseFloat(item.price);
+    })
 
     return [pageCount, rows];
   } catch (error) {
@@ -131,11 +137,11 @@ async function getAllProducts(pageNumber = 1) {
 // gets specific products by a search query
 async function getProductsByQuery(query, pageNumber) {
   try {
-    const OFFSET = (LIMIT * (pageNumber-1)) + 1;
+    const OFFSET = (LIMIT * (pageNumber-1));
     // console.log('entering products query in db...');
     // console.log('query: ', query);
 
-    const uppercaseQuery = query.charAt(0).toUpperCase() + query.slice(1);
+    // const uppercaseQuery = query.charAt(0).toUpperCase() + query.slice(1);
     // console.log(uppercaseQuery, 'LOOK HERE');
 
     if (query === "") {
@@ -145,20 +151,21 @@ async function getProductsByQuery(query, pageNumber) {
     const { rowCount } = await client.query(`
       SELECT id FROM products 
       WHERE 
-      title LIKE '%${query}%'
-      OR title LIKE '%${uppercaseQuery}%';
+      title ILIKE '%${query}%'
+      OR description ILIKE '%${query}%';
     `)
 
+    
     const { rows } = await client.query(`
             SELECT id FROM products 
             WHERE 
-            title LIKE '%${query}%'
-            OR title LIKE '%${uppercaseQuery}%'
+            title ILIKE '%${query}%'
+            OR description ILIKE '%${query}%'
             LIMIT ${LIMIT} OFFSET ${OFFSET};
         `);
-        
+        console.log('this is how many are being queried ', rows);
 
-      const prodIdArray = rows.map((product) => {
+      const prodIdArray = rows.map((product) => {           //array of ids [ 1, 2, 3, etc ]
         const [newProductId] = Object.values(product);
         return newProductId;
       });
@@ -166,6 +173,11 @@ async function getProductsByQuery(query, pageNumber) {
       const productsArray = await Promise.map(prodIdArray, async function(productId) {
         return await getProductById(productId)
       }, { concurrency: 25});   
+
+      productArray.forEach((product) => {
+          product.price = parseFloat(product.price);
+      })
+
 
     const pageCount = Math.ceil(rowCount / LIMIT);  
     // console.log('LOOK HERE', pageCount, productsArray)
