@@ -1,11 +1,15 @@
 /** @format */
 
-.productList {
-    /* margin-bottom: 200px; */
+#product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .productList img {
-   
+   margin-left: 50px;
     height: 150px;
     margin-bottom: 20px;
     object-fit: contain;

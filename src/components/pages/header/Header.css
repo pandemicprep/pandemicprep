@@ -42,6 +42,7 @@
     height: 60px;
     position: fixed;
     background-color: rgb(1, 0, 53);
+    z-index: 1 !important;
 }
 /*ARE YOU PREPARED HEADER STYLING*/
 #prepared {

@@ -9,13 +9,13 @@ export const Categories = ({
 }) => {
     // const history = useHistory();
     const cat = [
-        { name: 'School', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'Work', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'Household', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'Health', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'Protection', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'Groceries', image: '../../../../../public/images/school/mathblocks.jpg' },
-        { name: 'Entertainment', image: '../../../../../public/images/school/mathblocks.jpg' },
+        { name: 'School' },
+        { name: 'Work' },
+        { name: 'Household' },
+        { name: 'Health' },
+        { name: 'Protection' },
+        { name: 'Groceries' },
+        { name: 'Entertainment' },
     ];
 
 
