@@ -29,7 +29,7 @@ async function createTables() {
         id SERIAL PRIMARY KEY,
         title varchar(255) UNIQUE NOT NULL,
         description TEXT NOT NULL,
-        price NUMERIC(9,2) NOT NULL,
+        price DECIMAL NOT NULL,
         image varchar(255),
         "imageDescription" varchar(255),
         "isHighlighted" BOOLEAN DEFAULT false,
@@ -65,7 +65,7 @@ async function createTables() {
         id SERIAL PRIMARY KEY,
         status varchar(255) NOT NULL,
         "lastUpdated" DATE,
-        total NUMERIC(9,2) NOT NULL,
+        total DECIMAL NOT NULL,
         "userId" INTEGER REFERENCES users(id)
       ); 
 
@@ -89,8 +89,8 @@ async function createTables() {
         "productId" INTEGER REFERENCES products(id),
         "cartId" INTEGER REFERENCES carts(id),
         quantity INTEGER NOT NULL,
-        "unitPrice" NUMERIC(9,2) NOT NULL,
-        "itemTotal" NUMERIC(9,2) NOT NULL
+        "unitPrice" DECIMAL NOT NULL,
+        "itemTotal" DECIMAL NOT NULL
       );
 
       

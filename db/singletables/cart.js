@@ -16,8 +16,8 @@ async function addCart({ status, lastUpdated, total, userId }) {
     `,
             [status, lastUpdated, total, userId]
         );
-
-        console.log("newCart in cart.js: ", newCart);
+        newCart.total = parseFloat(newCart.total);
+        
         return newCart;
     } catch (error) {}
 }
@@ -52,6 +52,7 @@ async function getCartHistoryStatusAdmin() {
 
 // NUMBER ONE RULE OF CODE (THINGS GO WRONG)
 async function getActiveCart(userId) {
+    
     try {
         const {
             rows: [activeCart],
@@ -62,9 +63,10 @@ async function getActiveCart(userId) {
           `,
             [userId]
         );
-
-        //TODO Null check active cart
+        
+        activeCart.total = parseFloat(activeCart.total);
         const items = await getProductsCartForACartId(activeCart.id);
+        
         activeCart.items = items;
         return activeCart;
     } catch (error) {
@@ -87,7 +89,18 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
             [productId, cartId, quantity, unitPrice, itemTotal]
         );
         const cart = await getActiveCart(userId);
-        return cart;
+        let total;
+        cart.items.map((item) => {
+            total = total + item.itemTotal;
+        })
+        console.log('before updating the total ', cart, total);
+        const newCart = await client.query(`
+            UPDATE carts
+            SET total=${total}
+            WHERE id=${cart.id}
+            RETURNING *;
+        `);
+        return newCart;
     } catch (error) {
         throw error;
     }
@@ -106,6 +119,10 @@ async function getProductsCartForACartId(id) {
             [id]
         );
         if (items) {
+            items.forEach((item) => {
+                item.unitPrice = parseFloat(item.unitPrice);
+                item.itemTotal = parseFloat(item.itemTotal);
+            })
             return items;
         } else {
             return [];
@@ -120,6 +137,10 @@ async function getAllProductsCart() {
         const { rows } = await client.query(`
             SELECT * FROM products_carts
             `);
+            rows.forEach((item) => {
+                item.unitPrice = parseFloat(item.unitPrice);
+                item.itemTotal = parseFloat(item.itemTotal);
+            })
         return rows;
     } catch (error) {
         throw error;
@@ -136,7 +157,7 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
             [products_cartsId]
         );
         const cart = await getActiveCart(userId);
-        if (items) {
+        if (cart) {
             return cart;
         } else {
             return {};
