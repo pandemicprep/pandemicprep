@@ -39,6 +39,7 @@
     text-align: center;
     font-size: 50px;
     font-family: 'Raleway', sans-serif;
+    z-index: 1;
 }
 
 /*TOP DOOMSDAY BANNER STYLING*/
@@ -200,6 +201,8 @@ height: 50px;
     background-size: 400%;
     -webkit-transition: background 300ms ease-in-out;
     transition: background 300ms ease-in-out;
+    z-index: 1;
+    position: relative;
   }
   /*DROPDOWN BUTTON HOVER*/
   .dropdown:hover .dropbtn {
@@ -207,6 +210,8 @@ height: 50px;
     color: white;
     text-transform: uppercase;
     background-position: 0;
+    z-index: 1;
+    position: relative;
 }
 /*POINTER ICON*/
 #pointer {

@@ -47,9 +47,12 @@ export const Productlist = ({
                                         {singleProduct.title}
                                     </p>
                                     <img className="image" src={process.env.PUBLIC_URL + singleProduct.image} />
-                                    
+
                                     <p className="price">
                                         {singleProduct.price}
+                                    </p>
+                                    <p className="description">
+                                        {singleProduct.description}
                                     </p>
                                     {/* <button>Add to Cart</button> */}
                                 </div>
