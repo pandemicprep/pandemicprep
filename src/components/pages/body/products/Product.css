@@ -1,10 +1,17 @@
+/** @format */
+
 .product {
     margin: 10px;
+
     width: 400px;
+
     height: 450px;
+    overflow-y: auto;
     color: black;
     text-decoration: none;
+
     background-color:white;
+
 }
 
 /* unvisited link */

@@ -6,7 +6,7 @@ const { client } = require("../client");
 
 // const { getProductsForCartHistory } = require("../singletables/products");
 
-async function createProductCart({ productId, cartId, quantity, unitPrice }) {
+async function addProductCart({ productId, cartId, quantity, unitPrice }) {
     try {
         const itemTotal = quantity * unitPrice;
         const {
@@ -19,7 +19,8 @@ async function createProductCart({ productId, cartId, quantity, unitPrice }) {
           `,
             [productId, cartId, quantity, unitPrice, itemTotal]
         );
-        return prodCart;
+        const items = await getProductsCartForACartId(cartId);
+        return items;
     } catch (error) {
         throw error;
     }
@@ -57,8 +58,30 @@ async function getAllProductsCart() {
         throw error;
     }
 }
+
+async function removeProductFromCart({ cartId, products_cartsId }) {
+    try {
+        const result = await client.query(
+            `
+            DELETE FROM products_carts
+            WHERE "jointId"=$1;
+        `,
+            [products_cartsId]
+        );
+        const items = await getProductsCartForACartId(cartId);
+        if (items) {
+            return items;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
-    createProductCart,
+    addProductCart,
     getAllProductsCart,
     getProductsCartForACartId,
+    removeProductFromCart,
 };

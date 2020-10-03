@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
+import {AdminProductList, Userlist} from '../../../index';
 import './Admin.css';
 
-export const Admin = () => {
-    const [adminInfo, setAdminInfo] = useState('products');
-    const [adminProductList, setAdminProductList] = useState([]);
-    const prodDummyArr = [
-        {id: '1', title: 'title', description: 'description', price: 'price', isHighlighted: 'true'},
-        {id: '1', title: 'title', description: 'description', price: 'price', isHighlighted: 'true'},
-        {id: '1', title: 'title', description: 'description', price: 'price', isHighlighted: 'true'},
-        {id: '1', title: 'title', description: 'description', price: 'price', isHighlighted: 'true'},
-        {id: '1', title: 'title', description: 'description', price: 'price', isHighlighted: 'true'},
-        {id: '1', title: 'title', description: 'description', price: 'price', isHighlighted: 'true'}
-    ]
+export const Admin = ({user}) => {
+    const [adminView, setAdminView] = useState('');
+    
     const usersDummyArr = [
         {id: '1', isAdmin: 'false', isUser: 'true', email: 'email', password: 'password'},
         {id: '1', isAdmin: 'false', isUser: 'true', email: 'email', password: 'password'},
@@ -38,36 +31,22 @@ export const Admin = () => {
     }
 
     return (
-        <div id='admin'>
-            {adminInfo === 'products' ?
-                prodDummyArr.map((item) => {
-                    return (
-                    <span>
-                        <form id='prod-list'>
-                           
-                            <span id='each-input'>Title:
-                                <input type='text' readOnly placeholder={item.title}></input>
-                            </span>
-                        
-                            <span id='each-input'>Description:
-                                <input type='text' readOnly placeholder={item.description}></input>
-                            </span>
-                        
-                            <span id='each-input'>Price:
-                                <input type='text' readOnly placeholder={item.price}></input>
-                            </span>
-                        
-                            <span id='each-input'>ImageURL:
-                                <input id='checkbox' readOnly placeholder={item.image}></input>
-                            </span>
-                            
-                            <button>Edit</button>
-                        </form>
-                    </span>
-                    )
-                })
-            : ''
-            }
+        <>
+        <div id='admin-nav'>
+            <button onClick={() => {setAdminView('products')}}>Products</button>
+            <button onClick={() => {setAdminView('users')}}>Users</button>
+            <button>Processing Orders</button>
+            <button>Sales Report</button>
         </div>
+
+        {adminView === 'products' ? <AdminProductList user={user}/> : ''}
+        {adminView === 'users' ? <Userlist /> : ''}
+        </>
     )
 }
+
+
+/** Products(dropdown)
+ * add product
+ * 
+ */

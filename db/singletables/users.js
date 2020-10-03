@@ -4,6 +4,8 @@ const { client } = require("../client");
 
 const bcrypt = require("bcrypt");
 const { addCart, getActiveCart } = require("../singletables/cart.js");
+const LIMIT = 10;
+
 
 /**
  * Create new user by registration (first, last, email, pass minimum),
@@ -94,14 +96,24 @@ async function addUser({
 //retrieve a user (check if admin)
 
 // retrieve all user
-async function getAllUsers() {
+async function getAllUsers(pageNumber = 1) {
     try {
+        const OFFSET = (LIMIT * (pageNumber-1)) + 1;
+
+        const { rowCount } = await client.query(`
+            SELECT * FROM users;
+        `)
+
         const { rows } = await client.query(`
-			SELECT * FROM users;
-		`);
+            SELECT * FROM users
+            LIMIT ${LIMIT} OFFSET ${OFFSET};
+        `);
+        
+        const pageCount = Math.ceil(rowCount / LIMIT);  
+
 
         // console.log('all users: ', rows);
-        return rows;
+        return [pageCount, rows];
     } catch (error) {
         throw error;
     }

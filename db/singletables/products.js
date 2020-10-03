@@ -1,7 +1,7 @@
 
 const { client } = require('../client');
 const Promise = require('bluebird');
-const LIMIT = 10;
+const LIMIT = 5;
 
 const {
   addCategory,
@@ -106,13 +106,23 @@ async function addProduct({ name, price, description, image, isHighlighted }) {
 // }
 
 // gets all products
-async function getAllProducts() {
+async function getAllProducts(pageNumber = 1) {
   try {
+    const OFFSET = (LIMIT * (pageNumber-1)) + 1;
+
+    const { rowCount } = await client.query( `
+      SELECT * FROM products;
+    `)
+
     const { rows } = await client.query(`
-            SELECT * FROM products;
+            SELECT * FROM products
+            LIMIT ${LIMIT} OFFSET ${OFFSET};
         `);
 
-    return rows;
+    const pageCount = Math.ceil(rowCount / LIMIT);  
+
+
+    return [pageCount, rows];
   } catch (error) {
     throw error;
   }
@@ -292,6 +302,30 @@ async function getHighlightedProducts() {
   }
 }
 
+async function updateProduct(id, fields = {}) {
+  const setString = Object.keys(fields)
+        .map((key, index) => `"${key}"=$${index + 1}`)
+        .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
+  try {
+    const {
+      rows: [product]
+    } = await client.query(`
+      UPDATE products 
+      SET ${setString}
+      WHERE id=${id}
+      RETURNING *;
+    `, Object.values(fields));
+
+    return product;
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   getProductById,
   addProductAndCategory,
@@ -300,5 +334,6 @@ module.exports = {
   addProduct,
   getProductsForCartHistory,
   getProductsByCategory,
-  getHighlightedProducts
+  getHighlightedProducts,
+  updateProduct
 };

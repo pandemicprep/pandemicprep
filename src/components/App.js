@@ -23,7 +23,7 @@ import {
     Sales,
     PageIndex,
     Admin,
-    Promoted
+    Promoted,
 } from "./index";
 
 import { getPromotedProducts } from "../api/products";
@@ -39,6 +39,7 @@ const App = () => {
         token: "",
     });
     const [cart, setCart] = useState({ items: [] });
+    const [cartSize, setCartSize] = useState(0);
     const [products, setProducts] = useState([]);
     const [promotedProducts, setPromotedProducts] = useState([]);
     const [product, setProduct] = useState({});
@@ -62,14 +63,14 @@ const App = () => {
         if (localStorage.getItem("panprepToken")) {
             getUserFromToken(localStorage.getItem("panprepToken"))
                 .then((response) => {
-                    console.log("the updated user on load is ", response);
                     setUser({
                         firstName: response.firstName,
                         isAdmin: response.isAdmin,
                         isUser: response.isUser,
-                        token: response.token
+                        token: response.token,
                     });
                     setCart(response.activeCart);
+                    setCartSize(response.activeCart.items.length);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -93,31 +94,12 @@ const App = () => {
                     setView={setView}
                     user={user}
                     setUser={setUser}
+                    cartSize={cartSize}
                 />
                 <Switch>
                     <Route exact path="/">
                         {/* <div id="products-with-page"> */}
-                            <Promoted />
-                            {/* <Productlist
-                                products={products}
-                                setProducts={setProducts}
-                                setProduct={setProduct}
-                                NavLink={NavLink}
-                                searchObject={searchObject}
-                                category={category}
-                                pageType={pageType}
-                                setPageType={setPageType}
-                            />
-                            <PageIndex
-                                searchObject={searchObject}
-                                pageType={pageType}
-                                setPageType={setPageType}
-                                setProducts={setProducts}
-                                products={products}
-                                category={category}
-                                searchTerm={searchTerm}
-                            /> */}
-                        {/* </div> */}
+                        <Promoted />
                         <Categories
                             setProducts={setProducts}
                             NavLink={NavLink}
@@ -127,9 +109,9 @@ const App = () => {
                             useHistory={useHistory}
                         />
                     </Route>
-                    <Route path='/productsview'>
-                    <div id="products-with-page">
-                        <Productlist
+                    <Route path="/productsview">
+                        <div id="products-with-page">
+                            <Productlist
                                 products={products}
                                 setProducts={setProducts}
                                 setProduct={setProduct}
@@ -148,8 +130,8 @@ const App = () => {
                                 category={category}
                                 searchTerm={searchTerm}
                             />
-                            </div>
-                            <Categories
+                        </div>
+                        <Categories
                             setProducts={setProducts}
                             NavLink={NavLink}
                             setCategory={setCategory}
@@ -195,7 +177,13 @@ const App = () => {
                         />
                     </Route>
                     <Route path="/product">
-                        <Product product={product} setProduct={setProduct} />
+                        <Product
+                            product={product}
+                            setCart={setCart}
+                            cart={cart}
+                            setCartSize={setCartSize}
+                            user={user}
+                        />
                         <Categories
                             setProducts={setProducts}
                             NavLink={NavLink}
@@ -206,7 +194,7 @@ const App = () => {
                         />
                     </Route>
                     <Route path="/cart">
-                        <Cart cart={cart} setCart={setCart} user={user} />
+                        <Cart cart={cart} setCart={setCart} user={user} setCartSize={setCartSize} />
                     </Route>
                     <Route path="/orders">
                         <Orders />
@@ -219,14 +207,11 @@ const App = () => {
                     </Route>
                     {user.isAdmin ? (
                         <Route path="/admin">
-                            <Admin
-                                product={products}
-                                setProducts={setProducts}
-                            />
+                            <Admin product={products} setProducts={setProducts} user={user} />
                         </Route>
                     ) : (
-                            ""
-                        )}
+                        ""
+                    )}
                     <Redirect to="/" />
                 </Switch>
                 <Footer />
