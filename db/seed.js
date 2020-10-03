@@ -7,7 +7,7 @@ const {
     getProductsByQuery,
     getProductById,
     getProductsByCategory,
-
+    getAllProductsCart,
     getHighlightedProducts,
 } = require("./singletables/products");
 
@@ -17,9 +17,9 @@ const { categoryIdByName, getAllCategories } = require("./singletables/categorie
 
 const productArray = require("./singletables/productObject");
 
-const { addCart, getCartHistoryStatusAdmin, getCartHistoryStatus } = require("./singletables/cart");
+const { addCart, getCartHistoryStatusAdmin, getCartHistoryStatus, addProductToCart } = require("./singletables/cart");
 
-const { addProductCart, getAllProductsCart } = require("./jointables/products_carts");
+
 
 const { addReview, getReviewsByProductId } = require("./singletables/reviews");
 
@@ -32,14 +32,14 @@ async function seed() {
         await gettingProductsByQuery();
         await updatingUsers();
         await gettingUserById();
-        await gettingCategoryIdsByName();
-        await addingOneCart();
-        await seedingInitialReviews();
-        await gettingSeedReviewsByProduct();
-        await gettingAllCategories();
-        await gettingProductById();
-        await gettingProductsByCategory();
-        await makingProductCart();
+        // await gettingCategoryIdsByName();
+        // await addingOneCart();
+        // await seedingInitialReviews();
+        // await gettingSeedReviewsByProduct();
+        // await gettingAllCategories();
+        // await gettingProductById();
+        // await gettingProductsByCategory();
+        // await makingProductCart();
         console.log("Running get all products...");
         const allProducts = await getAllProducts(1);
         console.log("Result: ", allProducts);
@@ -402,19 +402,19 @@ async function gettingProductsByCategory() {
 
 async function makingProductCart() {
     try {
-        const productCart1 = await addProductCart({
+        const productCart1 = await addProductToCart({
             productId: 2,
             cartId: 1,
             quantity: 4,
             unitPrice: 5.99,
         });
-        const productCart2 = await addProductCart({
+        const productCart2 = await addProductToCart({
             productId: 13,
             cartId: 2,
             quantity: 2,
             unitPrice: 199.99,
         });
-        const productCart3 = await addProductCart({
+        const productCart3 = await addProductToCart({
             productId: 4,
             cartId: 3,
             quantity: 45,

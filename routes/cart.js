@@ -3,7 +3,7 @@
 const express = require("express");
 const cartRouter = express.Router();
 
-const { addProductToCart, removeProductFromCart } = require("../db/jointables/products_carts.js");
+const { addProductToCart, removeProductFromCart } = require("../db/singletables/cart");
 const { getActiveCart } = require("../db");
 
 
