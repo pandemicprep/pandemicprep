@@ -1,18 +1,86 @@
 /* PRODUCTS STYLING IN ADMIN */
 
-
-#each-input {
-    height: 25px;
-    margin: 0px 5px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+#admin {
+    margin-left: 200px;
 }
 
-#each-input input {
+.each-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font: bold 32px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+}
+
+
+#title {
+    width: 300px !important;
+}
+
+#title input {
+    height: 70px !important;
+}
+
+#price input {
+    height: 70px !important;
+}
+
+#description {
+    margin-left: 20px; 
+    margin-right: 20px;
+    margin-bottom: 50px;
+    word-wrap: break-word;
+}
+
+#addNew {
+    width: 300px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: black; 
+    margin-top: 35px;
+    margin-bottom: 5px;
+    background-image: -webkit-linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+#addNew:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
+}
+
+#description input {
+    width: 400px;
+    height: 150px;
+    font-size: 16px;
+}
+
+#image input {
+    height: 90px;
+    word-wrap: break-word;
+}
+
+
+
+.each-input input {
     position: relative;
     bottom: 5px;
+    height: 50px;
+    border-radius: 0;
+    text-align: center;
+    font-size: 18px;
 }
 
 
@@ -25,7 +93,3 @@
     width: 20px;
 }
 
-#price-input {
-    width: 50px;
-    min-width: fit-content;
-}

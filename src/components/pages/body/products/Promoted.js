@@ -6,18 +6,18 @@ import "react-animated-slider/build/horizontal.css";
 
 const content = [
     {
-        name: "Rose Desk Kit",
-        price: 19.99,
-        description: "1* rosegold acrylic stapler, 1* rosegold acrylic tape dispenser,1* rosegold acrylic staple remover, 1000 pcs rosegold Standard staples.",
-        image: "images/roseacry.jpg",
-        category: "work"
-    },
-    {
         name: "Succulents",
         price: 19.99,
         description: "HAND SELECTED: Every pack of succulents we send is hand-picked. You will receive a unique collection of species that are FULLY ROOTED IN 2 INCH POTS.",
         image: "images/succ.jpg",
         category: "work health"
+    },
+    {
+        name: "Rose Desk Kit",
+        price: 19.99,
+        description: "1* rosegold acrylic stapler, 1* rosegold acrylic tape dispenser,1* rosegold acrylic staple remover, 1000 pcs rosegold Standard staples.",
+        image: "images/roseacry.jpg",
+        category: "work"
     },
     {
         name: "Cute Animal Erasers",
@@ -95,7 +95,6 @@ export const Promoted = () => {
         </div>
     )
 }
-
 
 
 

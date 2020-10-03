@@ -37,8 +37,6 @@ export const Productlist = ({
     // }
     return (
         <div className="productList">
-            <p>List of Products</p>
-            <h1>MainBody</h1>
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (
