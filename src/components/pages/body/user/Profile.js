@@ -57,7 +57,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
 
     const formHandler = async (event) => {
         event.preventDefault();
-
+        
         try {
             //Registration
             if (view === "register") {
