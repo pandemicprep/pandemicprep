@@ -119,19 +119,6 @@ usersRouter.get("/verify", async (req, res, next) => {
     }
 });
 
-// get all users
-usersRouter.get("/", async (req, res, next) => {
-    try {
-        console.log("entering users get router");
-        const allUsers = await getAllUsers();
-        console.log("all users: ", allUsers);
-
-        res.send(allUsers);
-    } catch (error) {
-        throw error;
-    }
-});
-
 // update user by id
 usersRouter.patch("/", async (req, res, next) => {
     try {

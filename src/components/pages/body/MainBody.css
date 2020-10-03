@@ -19,9 +19,52 @@
 }
 
 .product {
-    height: 200px;
-    width: 200px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
     border: 2px solid black;
+    border-radius: 10px;
     text-align: center;
-    font-family: 'Raleway', sans-serif;
+    font: bold 32px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
 }
+
+.description {
+display: none;
+margin-left: 0px;
+background-color: white;
+font-size: 15px;
+}
+
+.product:hover .description {
+    display: block;
+}
+
+.product:hover img {
+    display: none;
+}
+
+.product:hover .price {
+    display: none;
+}
+
+
+  a:link {
+    text-decoration: none;
+  }
+  
+  a:visited {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  
+  a:active {
+    text-decoration: none;
+  }

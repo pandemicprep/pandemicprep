@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {AdminProductList, Userlist} from '../../../index';
 import './Admin.css';
 
-export const Admin = () => {
+export const Admin = ({user}) => {
     const [adminView, setAdminView] = useState('');
     
     const usersDummyArr = [
@@ -39,7 +39,7 @@ export const Admin = () => {
             <button>Sales Report</button>
         </div>
 
-        {adminView === 'products' ? <AdminProductList /> : ''}
+        {adminView === 'products' ? <AdminProductList user={user}/> : ''}
         {adminView === 'users' ? <Userlist /> : ''}
         </>
     )

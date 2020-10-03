@@ -24,3 +24,8 @@
 #id-input {
     width: 20px;
 }
+
+#price-input {
+    width: 50px;
+    min-width: fit-content;
+}

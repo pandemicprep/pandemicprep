@@ -53,6 +53,20 @@ const content = [
         description: "Table with Storage, Adjustable Drawing Desk Rolling Art Craft Station Writing Work Table with Drawers & Wheels.",
         image: "images/table.jpg",
         category: "work"
+    },
+    {
+        name: "Sleek Filing Cabinet",
+        price: 149.99,
+        description: "The interlock system secures 3 drawers and comes with 2 keys to protect your files and valuables. As a safety mechanism to avoid tipping, only 1 drawer can be opened at a time.",
+        image: "images/cab2.jpg",
+        category: "work"
+    },
+    {
+        name: "10 inch iPad",
+        price: 299.99,
+        description: "10.2-Inch Retina Display, 8MP back camera, 1.2MP FaceTime HD Front camera, up to 10 hours of battery life.",
+        image: "images/ipad.jpg",
+        category: "school work"
     }
 ]
 

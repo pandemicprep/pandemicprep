@@ -34,6 +34,7 @@ export const Productlist = ({
             <div className="productContainer">
                 {products.map((singleProduct, i) => {
                     return (
+
                         <NavLink
                             key={i}
                             to="/product"
@@ -49,7 +50,22 @@ export const Productlist = ({
                                         src={process.env.PUBLIC_URL + singleProduct.image}
                                     />
 
-                                    <p className="price">{singleProduct.price}</p>
+
+                        <NavLink key={i} to='/product' onClick={(event) => { setProduct(singleProduct) }}>
+                            <div key={i} className="product" >
+                                <div id='product' className="info">
+                                    <p className="header">
+                                        {singleProduct.title}
+                                    </p>
+                                    <img className="image" src={process.env.PUBLIC_URL + singleProduct.image} />
+
+                                    <p className="price">
+                                        {singleProduct.price}
+                                    </p>
+                                    <p className="description">
+                                        {singleProduct.description}
+                                    </p>
+
                                     {/* <button>Add to Cart</button> */}
                                 </div>
                             </div>
