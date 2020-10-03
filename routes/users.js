@@ -36,6 +36,7 @@ usersRouter.post("/register", async (req, res, next) => {
                 }
             );
             res.send({
+                id: newUser.id,
                 firstName: newUser.firstName,
                 isAdmin: newUser.isAdmin,
                 isUser: newUser.isUser,
@@ -72,6 +73,7 @@ usersRouter.post("/login", async (req, res, next) => {
                     }
                 );
                 res.send({
+                    id: user.id,
                     firstName: user.firstName,
                     isAdmin: user.isAdmin,
                     isUser: user.isUser,
@@ -106,6 +108,7 @@ usersRouter.get("/verify", async (req, res, next) => {
     try {
         const activeCart = await getActiveCart(req.user.id);
         res.send({
+            id: req.user.id,
             firstName: req.user.firstName,
             isAdmin: req.user.isAdmin,
             isUser: req.user.isUser,

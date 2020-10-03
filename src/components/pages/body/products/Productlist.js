@@ -46,7 +46,7 @@ export const Productlist = ({
                                     <p className="header">{singleProduct.title}</p>
                                     <img
                                         className="image"
-                                        src={"%PUBLIC_URL%" + singleProduct.image}
+                                        src={process.env.PUBLIC_URL + singleProduct.image}
                                     />
 
                                     <p className="price">{singleProduct.price}</p>

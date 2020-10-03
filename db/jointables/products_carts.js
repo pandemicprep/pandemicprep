@@ -1,17 +1,19 @@
+const { get } = require('../../routes/cart');
 /** @format */
 
 const { client } = require("../client");
+
+const { getActiveCart } = require('../singletables/cart')
 
 // const { getCartHistoryStatus } = require("../singletables/cart");
 
 // const { getProductsForCartHistory } = require("../singletables/products");
 
-async function addProductCart({ productId, cartId, quantity, unitPrice }) {
+async function addProductToCart({ userId, productId, cartId, quantity, unitPrice }) {
+    console.log('getting to the back end');
     try {
         const itemTotal = quantity * unitPrice;
-        const {
-            rows: [prodCart],
-        } = await client.query(
+        await client.query(
             `
               INSERT INTO products_carts ("productId", "cartId", quantity, "unitPrice", "itemTotal")
               VALUES ($1, $2, $3, $4, $5)
@@ -19,8 +21,8 @@ async function addProductCart({ productId, cartId, quantity, unitPrice }) {
           `,
             [productId, cartId, quantity, unitPrice, itemTotal]
         );
-        const items = await getProductsCartForACartId(cartId);
-        return items;
+        const cart = await getActiveCart(userId);
+        return cart;
     } catch (error) {
         throw error;
     }
@@ -59,20 +61,20 @@ async function getAllProductsCart() {
     }
 }
 
-async function removeProductFromCart({ cartId, products_cartsId }) {
+async function removeProductFromCart({ userId, cartId, products_cartsId }) {
     try {
-        const result = await client.query(
+        await client.query(
             `
             DELETE FROM products_carts
             WHERE "jointId"=$1;
         `,
             [products_cartsId]
         );
-        const items = await getProductsCartForACartId(cartId);
+        const cart = await getActiveCart(userId);
         if (items) {
-            return items;
+            return cart;
         } else {
-            return [];
+            return {};
         }
     } catch (error) {
         throw error;
@@ -80,7 +82,7 @@ async function removeProductFromCart({ cartId, products_cartsId }) {
 }
 
 module.exports = {
-    addProductCart,
+    addProductToCart,
     getAllProductsCart,
     getProductsCartForACartId,
     removeProductFromCart,

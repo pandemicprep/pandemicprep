@@ -33,6 +33,7 @@ import "./App.css";
 
 const App = () => {
     const [user, setUser] = useState({
+        id: 0,
         firstName: "Guest",
         isAdmin: false,
         isUser: false,
@@ -64,6 +65,7 @@ const App = () => {
             getUserFromToken(localStorage.getItem("panprepToken"))
                 .then((response) => {
                     setUser({
+                        id: response.id,
                         firstName: response.firstName,
                         isAdmin: response.isAdmin,
                         isUser: response.isUser,

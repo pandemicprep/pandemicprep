@@ -116,7 +116,7 @@ export const Header = ({
 
                 <h3 id="breaker">|</h3>
                 <button className="button" id="cart" onClick={() => history.push("/cart")}>
-                    <section id="cart-size">{cartSize}</section>
+                    <section id="cart-size">{cartSize > 0 ? cartSize : ''}</section>
                     <img id="cartLogo" src={process.env.PUBLIC_URL + "/styleimages/cart.png"} />
                 </button>
 

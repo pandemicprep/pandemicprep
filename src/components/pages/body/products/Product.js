@@ -8,22 +8,21 @@ import { addProductToCart } from "../../../../api/cart";
 
 export const Product = ({ product, setCart, cart, user, setCartSize }) => {
     const addToCartHandler = () => {
-        const newCart = cart;
-        console.log("cart ", cart);
-
+        console.log('user id from product ', user);
         addProductToCart(
             {
+                userId: user.id,
                 productId: product.id,
                 cartId: cart.id,
                 quantity: 1,
-                unitPrice: product.price,
+                unitPrice: parseFloat(product.price),
             },
             user.token
         )
             .then((response) => {
-                newCart.items = response;
-                setCart(newCart);
-                setCartSize(newCart.items.length);
+                
+                setCart(response);
+                setCartSize(response.items.length);
             })
             .catch((error) => {
                 console.error(error);
