@@ -175,8 +175,17 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
 async function updateProductQuantity(jointId, quantity) {
     try {
         await client.query(`
-            
+
         `);
+    } catch (error) {
+        throw error;
+    }
+}
+
+//change cart status from active to processing, creates and returns a new empty cart
+async function deactivateCart(id, status) {
+    try {
+        
     } catch (error) {
         throw error;
     }
