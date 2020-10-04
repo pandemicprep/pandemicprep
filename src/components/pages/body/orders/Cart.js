@@ -37,6 +37,10 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
         // })
     }
 
+    const checkoutHandler = () => {
+        
+    }
+
     return (
         <div id="cart-component">
             <h1>{user.firstName !== "Guest" ? user.firstName + "'s" : ""} Cart</h1>
@@ -94,15 +98,16 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
                         <span className="total-title total">Cart Summary</span>
                         <span className="total-label total">Sub-Total:</span>
                         <span className="total-amount total">
-                            ${parseFloat(cart.total).toFixed(2)}
+                            $ {parseFloat(cart.total).toFixed(2)}
                         </span>
                         <span className="total-label total">Shipping:</span>
-                        <span className="total-shipping total">${parseFloat(cart.total) > 0 ? shipping.toFixed(2) : parseFloat(cart.total).toFixed(2)}</span>
+                        <span className="total-shipping total">$ {parseFloat(cart.total) > 0 ? shipping.toFixed(2) : parseFloat(cart.total).toFixed(2)}</span>
                         <span className="total-label total">Total:</span>
                         <span className="total-total total">
-                            ${parseFloat(cart.total) > 0 ? (parseFloat(cart.total) + shipping).toFixed(2) : '0.00'}
+                            $ {parseFloat(cart.total) > 0 ? (parseFloat(cart.total) + shipping).toFixed(2) : '0.00'}
                         </span>
                     </div>
+                    <button className='checkout-button' onClick={checkoutHandler}>checkout</button>
                 </div>
             </div>
         </div>
