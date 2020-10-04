@@ -3,7 +3,7 @@
 const express = require("express");
 const cartRouter = express.Router();
 
-const { addProductToCart, removeProductFromCart } = require("../db/singletables/cart");
+const { addProductToCart, removeProductFromCart, deactivateCart } = require("../db/singletables/cart");
 const { getActiveCart } = require("../db");
 
 
@@ -25,6 +25,8 @@ cartRouter.post("/", async (req, res, next) => {
         next({ message: "Must be signed in to add a product to your cart" });
     }
 });
+
+
 
 //remove product from cart
 cartRouter.delete("/:cartId/product/:products_cartsId", async (req, res, next) => {
@@ -50,7 +52,7 @@ cartRouter.delete("/:cartId/product/:products_cartsId", async (req, res, next) =
 });
 
 //patch products_carts quantity
-cartRouter.patch('/', async (req, res, next) => {
+cartRouter.patch('/quantity', async (req, res, next) => {
     if (req.user) {
         if (req.user.isUser) {
             try {
@@ -64,6 +66,23 @@ cartRouter.patch('/', async (req, res, next) => {
         }
     } else {
         next({ message: "Must be signed in to change a product quantity in your cart" });
+    }
+})
+
+cartRouter.patch('/status', async (req, res, next) => {
+    if (req.user) {
+        if (req.user.isUser) {
+            try {
+                const newCart = await deactivateCart(req.body);
+                res.send(newCart);
+            } catch (error) {
+                throw error;
+            }
+        } else {
+            next({ message: "Must be signed in to change a cart status" });
+        }
+    } else {
+        next({ message: "Must be signed in to change a cart status" });
     }
 })
 
