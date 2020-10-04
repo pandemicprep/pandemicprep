@@ -5,6 +5,4 @@ module.exports = {
     ...require('./singletables/products'),
     ...require('./singletables/reviews'),
     ...require('./singletables/users.js'),
-    ...require('./jointables/products_carts'),
-    ...require('./jointables/products_categories')
 }

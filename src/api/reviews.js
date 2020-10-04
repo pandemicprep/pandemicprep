@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+/**
+ * Adds new Review
+ * @param {string} newReview 
+ */
 export async function addNewReview(newReview) {
     try {
         const { data } = await axios.post('/api/reviews', newReview);
@@ -10,6 +14,10 @@ export async function addNewReview(newReview) {
     }
 }
 
+/**
+ * Gets Reviews by Product Id
+ * @param {integer} productId 
+ */
 export async function getReviewsByProductId(productId) {
     try {
         const { data } = await axios.get(`/api/reviews/${productId}`);

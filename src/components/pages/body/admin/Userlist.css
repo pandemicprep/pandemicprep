@@ -1,5 +1,6 @@
-.userList {
-    font-size: 16px;
+/* .userList {
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
     padding-top: 20px;
     overflow: scroll;
     margin-bottom: 100px;
@@ -19,3 +20,79 @@
     position: relative;
     bottom: 15px;
 }
+
+.password {
+    margin-left: 22px !important;
+}
+
+input {
+    border-radius: 0% !important;
+}
+
+.userButton {
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: black; 
+    background-image: -webkit-linear-gradient(45deg, red 50%, transparent 50%);
+    background-image: linear-gradient(45deg, red 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+.userButton:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
+}
+
+#checkbox {
+    height: 30px !important;
+    margin-left: -100px !important;
+}
+
+.userCheck {
+    margin-left: -70px !important;
+}
+
+.adminCheck {
+    margin-left: 30px !important;
+}
+
+.userButton2 {
+    width: 290px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    margin-left: -25px;
+    color: black; 
+    background-image: -webkit-linear-gradient(45deg, red 50%, transparent 50%);
+    background-image: linear-gradient(45deg, red 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+.userButton2:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
+} */

@@ -9,10 +9,10 @@ import { adminRegisterNewUser } from '../user/profileUtils';
 
 
 export const Userlist = ({
-    user, 
-    adminView, 
+    user,
+    adminView,
     setAdminView,
-    clickedIndex, 
+    clickedIndex,
     setClickedIndex,
     setUser,
     setCart
@@ -80,7 +80,7 @@ export const Userlist = ({
                 password2,
             });
             console.log("new user from registration ", newUser);
-        
+
         } catch (error) {
             throw error;
         }
@@ -93,8 +93,8 @@ export const Userlist = ({
             setAdminView('editOneProduct');
         }
     }
-     // Pagination handlers
-     const firstHandler = () => {
+    // Pagination handlers
+    const firstHandler = () => {
         setClickedIndex(-1);
         if (userPage > 1) {
             setUserPage(1);
@@ -131,89 +131,89 @@ export const Userlist = ({
                 </span>
 
                 <span id='each-input'>Email:
-                    <input type='text' placeholder='email' value={email} onChange={handleEmail}></input>
-                </span>
-                
-                <span id='each-input'>Password:
-                    <input placeholder='password' value={password} onChange={handlePassword}></input>
+                    <input type='text' placeholder='Email' value={email} onChange={handleEmail}></input>
                 </span>
 
-                <span id='each-input'>Is Admin:
-                    <input type='checkbox' placeholder='isAdmin' value={isAdmin} onChange={handleIsAdmin}></input>
+                <span className="password" id='each-input'>Password:
+                    <input placeholder='Password' value={password} onChange={handlePassword}></input>
                 </span>
-            
-                <span id='each-input'>Is User:
-                    <input type='checkbox' placeholder='isUser' value={isUser} onChange={handleIsUser}></input>
+
+                <span className="adminCheck" id='each-input'>Is Admin:
+                    <input id="checkbox" type='checkbox' placeholder='isAdmin' value={isAdmin} onChange={handleIsAdmin}></input>
                 </span>
-                
-                <button>Add New</button>
+
+                <span className="userCheck" id='each-input'>Is User:
+                    <input id="checkbox" type='checkbox' placeholder='isUser' value={isUser} onChange={handleIsUser}></input>
+                </span>
+
+                <button className="userButton2">Add New</button>
             </form>
-            { adminUserList.map((user, index) => {
+            {adminUserList.map((user, index) => {
                 return (
                     <span key={index}>
-                        { adminView === 'editOneProduct' &&  clickedIndex === index ? /**edit mode ternary */ 
+                        {adminView === 'editOneProduct' && clickedIndex === index ? /**edit mode ternary */
                             <form id='admin-list' >
-                            <span id='each-input'>Email:
+                                <span id='each-input'>Email:
                                 <input type='text' placeholder={user.email} ></input>
-                            </span>
-                        
-                            <span id='each-input'>Password:
+                                </span>
+
+                                <span id='each-input'>Password:
                                 <input id='checkbox' placeholder={user.password} ></input>
-                            </span>
+                                </span>
 
-                            <span id='each-input'>Is Admin:
+                                <span id='each-input'>Is Admin:
                                 <input type='text' placeholder={user.isAdmin} ></input>
-                            </span>
-                        
-                            <span id='each-input'>Is User:
-                                <input type='text' placeholder={user.isUser} ></input>
-                            </span>
-                            
-                            <button type='button' onClick={enableEditMode} >Edit</button>
-                            {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
-                        </form>
-                        : 
-                        <form id='admin-list' >
-                            <span id='each-input'>Email:
-                                <input type='text' placeholder={user.email} readOnly></input>
-                            </span>
-                        
-                            <span id='each-input'>Password:
-                                <input id='checkbox' placeholder={user.password} readOnly></input>
-                            </span>
+                                </span>
 
-                            <span id='each-input'>Is Admin:
+                                <span id='each-input'>Is User:
+                                <input type='text' placeholder={user.isUser} ></input>
+                                </span>
+
+                                <button className="userButton" type='button' onClick={enableEditMode} >Edit</button>
+                                {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
+                            </form>
+                            :
+                            <form id='admin-list' >
+                                <span id='each-input'>Email:
+                                <input type='text' placeholder={user.email} readOnly></input>
+                                </span>
+
+                                <span id='each-input'>Password:
+                                <input placeholder={user.password} readOnly></input>
+                                </span>
+
+                                <span id='each-input'>Is Admin:
                                 <input type='text' placeholder={user.isAdmin} readOnly></input>
-                            </span>
-                        
-                            <span id='each-input'>Is User:
+                                </span>
+
+                                <span id='each-input'>Is User:
                                 <input type='text' placeholder={user.isUser} readOnly></input>
-                            </span>
-                            
-                            <button type='button' onClick={(event) => {enableEditMode(event, index)}} >Edit</button>
-                            {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
-                        </form>
+                                </span>
+
+                                <button className="userButton" type='button' onClick={(event) => { enableEditMode(event, index) }} >Edit</button>
+                                {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
+                            </form>
                         }
                     </span>
                 )
             })}
-             <div id='pagination'>
-                { userPage === 1 ? ''
-                :
-                <>
-                    <a href='#' onClick={firstHandler}>❮❮</a>
-                    <a href='#' onClick={prevHandler}>❮</a>
-                </>
-                }  
-                <a href='#'>{userPage}</a>
-                { userPage === userPageLimit ? ''
-                : 
-                <>
-                    <a href='#' onClick={nextHandler}>❯</a>
-                    <a href='#' onClick={lastHandler}>❯❯</a>
-                </>
+            <div id='pagination'>
+                {userPage === 1 ? ''
+                    :
+                    <>
+                        <a href='#' onClick={firstHandler}>❮❮</a>
+                        <a href='#' onClick={prevHandler}>❮</a>
+                    </>
                 }
-                
+                <a href='#'>{userPage}</a>
+                {userPage === userPageLimit ? ''
+                    :
+                    <>
+                        <a href='#' onClick={nextHandler}>❯</a>
+                        <a href='#' onClick={lastHandler}>❯❯</a>
+                    </>
+                }
+
             </div>
         </div>
     );

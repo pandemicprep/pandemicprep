@@ -9,7 +9,7 @@ const {
     getHighlightedProducts
 } = require('../db/singletables/products');
 
-// gets product(s) by sending a searchString to the db
+//Gets product(s) by sending a searchString to the db
 productsRouter.get('/:query/:pageNumber', async (req, res, next) => {
     try {
         const { query, pageNumber } = req.params;
@@ -17,11 +17,11 @@ productsRouter.get('/:query/:pageNumber', async (req, res, next) => {
 
         res.send(queryProducts);
     } catch (error) {
-       next(error);
+        next(error);
     }
 });
 
-// adds a new product
+//Adds a new product
 productsRouter.post('/', async (req, res, next) => {
     try {
         const product = req.body;
@@ -33,7 +33,7 @@ productsRouter.post('/', async (req, res, next) => {
     }
 });
 
-// gets a product by id (to be used in other functions)
+//Gets a product by id (to be used in other functions)
 productsRouter.get('/:productId', async (req, res, next) => {
     try {
         const { productId } = req.params;
@@ -45,7 +45,7 @@ productsRouter.get('/:productId', async (req, res, next) => {
     }
 });
 
-// gets all products in a specific category
+//Gets all products in a specific category
 productsRouter.get('/category/:categoryName/:pageNumber', async (req, res, next) => {
     try {
         const { categoryName, pageNumber } = req.params;
@@ -55,9 +55,9 @@ productsRouter.get('/category/:categoryName/:pageNumber', async (req, res, next)
     } catch (error) {
         next(error);
     }
-}) 
+})
 
-// Initial load of main page where products.isHighlighted is true
+//Initial load of main page where products.isHighlighted is true
 productsRouter.get('/', async (req, res, next) => {
     try {
         const products = await getHighlightedProducts();

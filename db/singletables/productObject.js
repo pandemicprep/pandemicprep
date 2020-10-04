@@ -1,3 +1,7 @@
+//PRODUCT ARRAY ~
+//Array of all products we have created to use 
+//for the product pages
+
 const productArray = [
 
     {

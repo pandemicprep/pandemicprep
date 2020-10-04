@@ -2,6 +2,11 @@
 
 import axios from "axios";
 
+/**
+ * Adds Product to Cart
+ * @param {object} product 
+ * @param {string} token 
+ */
 export async function addProductToCart(product, token) {
     console.log('getting to addProduct to cart at api with ', product);
     try {
@@ -14,6 +19,11 @@ export async function addProductToCart(product, token) {
     }
 }
 
+/**
+ * Removes Product from Cart
+ * @param {object} param0 
+ * @param {string} token 
+ */
 export async function removeProductFromCart({ cartId, products_cartsId }, token) {
     console.log("getting to remove at api ", cartId, products_cartsId);
     const query = cartId + "/product/" + products_cartsId;
@@ -27,9 +37,15 @@ export async function removeProductFromCart({ cartId, products_cartsId }, token)
     }
 }
 
+/**
+ * Adjusts Item QTY in Cart
+ * @param {integer} jointId 
+ * @param {integer} quantity 
+ * @param {string} token 
+ */
 export async function patchCartItemQuantity(jointId, quantity, token) {
     try {
-        
+
     } catch (error) {
         console.error(error);
     }

@@ -6,6 +6,7 @@ const {
     getReviewsByProductId
 } = require('../db/singletables/reviews');
 
+//Add New Review
 reviewsRouter.post('/', async (req, res, next) => {
     try {
         const review = req.body;
@@ -17,6 +18,7 @@ reviewsRouter.post('/', async (req, res, next) => {
     }
 });
 
+//Gets Reviews by ProductId
 reviewsRouter.get('/:productId', async (req, res, next) => {
     try {
         const { productId } = req.params;

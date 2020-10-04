@@ -5,6 +5,7 @@ const {
     getAllCategories
 } = require('../db/singletables/categories');
 
+//Gets all categories
 categoriesRouter.get('/', async (req, res, next) => {
     try {
         const categories = await getAllCategories();
