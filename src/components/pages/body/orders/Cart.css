@@ -111,6 +111,7 @@
     color: white;
     font: bold 22px Helvetica, Sans-Serif;
     letter-spacing: -1px;
+    border-radius: 10px;
 }
 
 .total-title{

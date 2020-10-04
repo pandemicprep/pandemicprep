@@ -91,18 +91,21 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
         );
         const cart = await getActiveCart(userId);
         let total = 0;
+        let cartQuantity = 0;
         cart.items.map((item) => {
             total = total + item.itemTotal;
+            cartQuantity = cartQuantity + item.quantity;
             console.log('the item total is ', item.itemTotal);
         })
-        
+        const date = new Date();
         await client.query(`
             UPDATE carts
-            SET total=${total}
+            SET total=${total},
+            "cartQuantity"=${cartQuantity}
             WHERE id=${cart.id}
             RETURNING *;
         `);
-
+// "lastUpdated"=${date}
         const newCart = await getActiveCart(userId);
 
         return newCart;
@@ -154,16 +157,42 @@ async function getAllProductsCart() {
 
 async function removeProductFromCart({ userId, cartId, products_cartsId }) {
     try {
+        const date = new Date();
         await client.query(
             `
             DELETE FROM products_carts
             WHERE "jointId"=$1;
+
+            
         `,
             [products_cartsId]
         );
+        /*
+UPDATE carts
+            SET "lastUpdated"=${date}
+            WHERE id=$2;
+        */
         const cart = await getActiveCart(userId);
-        if (cart) {
-            return cart;
+
+        let total = 0;
+        let cartQuantity = 0;
+        cart.items.map((item) => {
+            total = total + item.itemTotal;
+            cartQuantity = cartQuantity + item.quantity;
+        })
+        
+        await client.query(`
+            UPDATE carts
+            SET total=${total},
+            "cartQuantity"=${cartQuantity}
+            WHERE id=${cart.id}
+            RETURNING *;
+        `);
+// "lastUpdated"=${date}
+        const newCart = await getActiveCart(userId);
+
+        if (newCart) {
+            return newCart;
         } else {
             return {};
         }
@@ -173,11 +202,39 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
 }
 
 //uppdateproductquanity
-async function updateProductQuantity(jointId, quantity) {
+async function updateProductQuantity({ userId, jointId, quantity, unitPrice }) {
+    console.log('getting to update with ', userId, jointId, quantity, unitPrice);
+    const itemTotal = unitPrice * quantity;
     try {
         await client.query(`
+            UPDATE products_carts
+            SET quantity=$1, 
+            "unitPrice"=$2, 
+            "itemTotal"=$3
+            WHERE "jointId"=$4;
+        `, [ quantity, unitPrice, itemTotal, jointId ]);
+        
+        const cart = await getActiveCart(userId);
 
+        let total = 0;
+        let cartQuantity = 0;
+        cart.items.map((item) => {
+            total = total + item.itemTotal;
+            cartQuantity = cartQuantity + item.quantity;
+        })
+        
+        const date = new Date();
+        await client.query(`
+            UPDATE carts
+            SET total=${total},
+            "cartQuantity"=${cartQuantity}
+            WHERE id=${cart.id}
+            RETURNING *;
         `);
+// "lastUpdated"=${date}
+        const newCart = await getActiveCart(userId);
+
+        return newCart;
     } catch (error) {
         throw error;
     }
@@ -189,16 +246,25 @@ async function deactivateCart({userId, cartId}) {
         await client.query(`
             UPDATE carts
             SET status='processing'
+            
             WHERE id=$1;
         `, [ cartId ]);
         const newCart = addCart({ status: 'active', lastUpdated: new Date(), total: 0, userId });
-    
+    // "lastUpdated"=${new Date()}
         return newCart;
     } catch (error) {
         throw error;
     }
 }
 
+async function updateDate(cartId) {
+    const date = new Date();
+    try {
+        await client.query(``);
+    } catch (error) {
+        throw error;
+    }
+}
 
 module.exports = {
     addCart,
@@ -209,5 +275,6 @@ module.exports = {
     getAllProductsCart,
     getProductsCartForACartId,
     removeProductFromCart,
-    deactivateCart
+    deactivateCart,
+    updateProductQuantity
 };

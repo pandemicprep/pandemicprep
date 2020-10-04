@@ -71,6 +71,7 @@ async function createTables() {
       CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
         status varchar(255) NOT NULL,
+        "cartQuantity" INTEGER DEFAULT 0,
         "lastUpdated" DATE,
         total DECIMAL NOT NULL,
         "userId" INTEGER REFERENCES users(id)
