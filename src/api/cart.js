@@ -34,3 +34,14 @@ export async function patchCartItemQuantity(jointId, quantity, token) {
         console.error(error);
     }
 }
+
+export async function deactivateCart(body, token) {
+    try {
+        const { data: newCart } = await axios.patch('/api/cart/status', body, {
+            headers: { Authorization: "Bearer " + token }
+        });
+        return newCart;
+    } catch (error) {
+        console.error(error);
+    }
+}

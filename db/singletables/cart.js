@@ -17,7 +17,8 @@ async function addCart({ status, lastUpdated, total, userId }) {
             [status, lastUpdated, total, userId]
         );
         newCart.total = parseFloat(newCart.total);
-        
+        newCart.items = [];
+
         return newCart;
     } catch (error) {}
 }
@@ -183,9 +184,16 @@ async function updateProductQuantity(jointId, quantity) {
 }
 
 //change cart status from active to processing, creates and returns a new empty cart
-async function deactivateCart(id, status) {
+async function deactivateCart({userId, cartId}) {
     try {
-        
+        await client.query(`
+            UPDATE carts
+            SET status='processing'
+            WHERE id=$1;
+        `, [ cartId ]);
+        const newCart = addCart({ status: 'active', lastUpdated: new Date(), total: 0, userId });
+    
+        return newCart;
     } catch (error) {
         throw error;
     }
@@ -201,4 +209,5 @@ module.exports = {
     getAllProductsCart,
     getProductsCartForACartId,
     removeProductFromCart,
+    deactivateCart
 };

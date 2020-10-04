@@ -21,6 +21,13 @@ async function buildTables() {
     }
 }
 
+/**
+ * Database
+ * products: image is a url or path
+ * categories: image is a url or path
+ * user: password and credit card are hashed
+ * carts: status could be 'active', 'processing', 'complete'
+ */
 async function createTables() {
     try {
         console.log("Creating tables");
