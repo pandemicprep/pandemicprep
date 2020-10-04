@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 import "./Userlist.css";
 
-import { getAllUsers, addUser } from '../../../../api';
+import { getAllUsers, addUser, adminUpdateUser } from '../../../../api';
 import { adminRegisterNewUser } from '../user/profileUtils';
 
 
@@ -20,33 +20,33 @@ export const Userlist = ({
     const [adminUserList, setAdminUserList] = useState([]);
     const [userPage, setUserPage] = useState(1);
     const [userPageLimit, setUserPageLimit] = useState(0);
+    const [adminView, setAdminView] = useState('none');
+    const [clickedIndex, setClickedIndex] = useState(-1);
     // Input values for add user
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
-    const [isAdmin, setIsAdmin] = useState('');
-    const [isUser, setIsUser] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isUser, setIsUser] = useState(true);
     // Input values for edit one user
     const [editEmail, setEditEmail] = useState('');
     const [editPassword, setEditPassword] = useState('');
     const [editIsAdmin, setEditIsAdmin] = useState('');
     const [editIsUser, setEditIsUser] = useState('');
+    const [edit, setEdit] = useState(false)
 
     useEffect(() => {
-        setUserPage(1)
         getAllUsers(userPage, user.token)
             .then((response) => {
-                console.log('response and adminPage', response)
                 setAdminUserList(response[1]);
                 setUserPageLimit(response[0]);
             })
             .catch((error) => {
                 console.error(error)
             })
-        console.log(adminUserList, 'adminUserList in use effect')
-    }, [userPage])
+    }, [userPage, edit])
 
     // Input value handlers
     const handleFirstName = (event) => {
@@ -63,10 +63,10 @@ export const Userlist = ({
         setPassword2(event.target.value)
     }
     const handleIsAdmin = (event) => {
-        setIsAdmin(event.target.value)
+        setIsAdmin(event.target.checked)
     }
     const handleIsUser = (event) => {
-        setIsUser(event.target.value)
+        setIsUser(event.target.checked)
     }
     // form handler that allows admin to add a new user
     const adminAddUser = async (event) => {
@@ -78,6 +78,8 @@ export const Userlist = ({
                 email,
                 password1: password,
                 password2,
+                isAdmin,
+                isUser
             });
             console.log("new user from registration ", newUser);
 
@@ -86,15 +88,42 @@ export const Userlist = ({
         }
     }
     // sets admin view which removes readonly from the inputs
-    const enableEditMode = (event, index) => {
-        event.preventDefault();
+    const enableEditMode = (item, index) => {
         setClickedIndex(index);
         if (adminView === 'none') {
-            setAdminView('editOneProduct');
+            setAdminView('editOneUser');
+        } else {
+            setAdminView('none')
         }
     }
+
     // Pagination handlers
     const firstHandler = () => {
+
+
+    const editUser = async (event, item) => {
+        event.preventDefault();
+        console.log('getting into editUser', item)
+        try {
+            const fields = {
+                email: editEmail === '' ? item.email : editEmail,
+                password: editPassword === '' ? item.password : editPassword,
+                isAdmin: isAdmin,
+                isUser: isUser
+            }
+            const updatedUser = await adminUpdateUser({id: item.id, fields: fields, token: user.token})
+            console.log(updatedUser, 'newly updated user log')
+            setAdminView('none')
+            setEdit(!edit)
+            
+        } catch (error) {
+            throw error;
+        }
+    }
+
+     // Pagination handlers
+     const firstHandler = () => {
+
         setClickedIndex(-1);
         if (userPage > 1) {
             setUserPage(1);
@@ -122,77 +151,104 @@ export const Userlist = ({
     return (
         <div className="userList">
             <form id='admin-list-user' onSubmit={adminAddUser}>
-                <span id='each-input'>First Name:
+                <span className='each-input'>First Name:
                     <input type='text' placeholder='First Name' value={firstName} onChange={handleFirstName}></input>
                 </span>
 
-                <span id='each-input'>Last Name:
+                <span className='each-input'>Last Name:
                     <input type='text' placeholder='Last Name' value={lastName} onChange={handleLastName}></input>
                 </span>
 
-                <span id='each-input'>Email:
-                    <input type='text' placeholder='Email' value={email} onChange={handleEmail}></input>
+
+                <span className='each-input'>Email:
+                    <input type='text' placeholder='email' value={email} onChange={handleEmail}></input>
+                </span>
+                
+                <span className='each-input'>Password:
+                    <input placeholder='password' value={password} onChange={handlePassword}></input>
                 </span>
 
-                <span className="password" id='each-input'>Password:
-                    <input placeholder='Password' value={password} onChange={handlePassword}></input>
+                <span className='each-input checkbox' >Is Admin:
+                    <input type='checkbox' placeholder='isAdmin' defaultChecked={false} onChange={handleIsAdmin}></input>
                 </span>
-
-                <span className="adminCheck" id='each-input'>Is Admin:
-                    <input id="checkbox" type='checkbox' placeholder='isAdmin' value={isAdmin} onChange={handleIsAdmin}></input>
-                </span>
-
-                <span className="userCheck" id='each-input'>Is User:
-                    <input id="checkbox" type='checkbox' placeholder='isUser' value={isUser} onChange={handleIsUser}></input>
-                </span>
-
-                <button className="userButton2">Add New</button>
+                
+                <button id='user-button'>Add New</button>
             </form>
-            {adminUserList.map((user, index) => {
+            { adminUserList.map((item, index) => {
                 return (
                     <span key={index}>
-                        {adminView === 'editOneProduct' && clickedIndex === index ? /**edit mode ternary */
-                            <form id='admin-list' >
-                                <span id='each-input'>Email:
-                                <input type='text' placeholder={user.email} ></input>
-                                </span>
+                        { adminView === 'editOneUser' &&  clickedIndex === index ? /**edit mode ternary */ 
+                            <form id='admin-list' onSubmit={(event) => {editUser(event, item)}} >
+                            <span className='each-input'>Email:
+                                <input type='text' placeholder={item.email} value={editEmail}
+                                onChange={(event) => setEditEmail(event.target.value)}></input>
+                            </span>
+                        
+                            <span className='each-input'>Password:
+                                <input id='checkbox' placeholder={item.password} value={editPassword}
+                                onChange={(event) => setEditPassword(event.target.value)}></input>
+                            </span>
 
-                                <span id='each-input'>Password:
-                                <input id='checkbox' placeholder={user.password} ></input>
-                                </span>
-
-                                <span id='each-input'>Is Admin:
-                                <input type='text' placeholder={user.isAdmin} ></input>
-                                </span>
-
-                                <span id='each-input'>Is User:
-                                <input type='text' placeholder={user.isUser} ></input>
-                                </span>
-
-                                <button className="userButton" type='button' onClick={enableEditMode} >Edit</button>
-                                {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
-                            </form>
+                            { item.isAdmin ?
+                            <span className='each-input checkbox'>Is Admin:
+                                <input  type='checkbox' 
+                                onChange={(event) => setIsAdmin(event.target.checked)}></input>
+                            </span>
+                            : 
+                            <span className='each-input checkbox'>Is Admin:
+                                <input  type='checkbox' 
+                                nChange={(event) => setIsAdmin(event.target.checked)}></input>
+                            </span>
+                            }
+                        
+                            { item.isUser ?
+                            <span className='each-input checkbox'>Is User:
+                                <input type='checkbox' 
+                                onChange={(event) => {setIsUser(event.target.checked)}}></input>
+                            </span>
                             :
-                            <form id='admin-list' >
-                                <span id='each-input'>Email:
-                                <input type='text' placeholder={user.email} readOnly></input>
-                                </span>
+                            <span className='each-input checkbox'>Is User:
+                                <input type='checkbox'
+                                onChange={(event) => {setIsUser(event.target.checked)}}></input>
+                            </span>}
+                            
+                            <button id='user-button' type='button' onClick={enableEditMode} >Edit</button>
+                            {adminView === 'editOneUser' ? <button id='user-button' >Authorize</button> : ''}
+                        </form>
+                        : 
+                        <form id='admin-list' >
+                            <span className='each-input'>Email:
+                                <input type='text' placeholder={item.email} value={item.email} readOnly></input>
+                            </span>
+                        
+                            <span className='each-input'>Password:
+                                <input id='checkbox' placeholder={item.password} value={item.password} readOnly></input>
+                            </span>
 
-                                <span id='each-input'>Password:
-                                <input placeholder={user.password} readOnly></input>
-                                </span>
+                            { item.isAdmin ? 
+                            <span className='each-input checkbox'>Is Admin:
+                                <input type='checkbox' checked ></input>
+                            </span>
+                            :
+                            <span className='each-input checkbox'>Is Admin:
+                                <input type='checkbox'  ></input>
+                            </span>
+                            }
+                        
+                            { item.isUser ? 
+                            <span className='each-input checkbox'>Is User:
+                                <input type='checkbox' checked ></input>
+                            </span>
+                            :
+                            <span className='each-input checkbox'>Is User:
+                                <input type='checkbox' ></input>
+                            </span>
+                            }
+                            
+                            <button id='user-button' type='button' onClick={() => {enableEditMode(item, index)}} >Edit</button>
+                            {adminView === 'editOneUser' ? <button id='user-button'>Authorize</button> : ''}
+                        </form>
 
-                                <span id='each-input'>Is Admin:
-                                <input type='text' placeholder={user.isAdmin} readOnly></input>
-                                </span>
-
-                                <span id='each-input'>Is User:
-                                <input type='text' placeholder={user.isUser} readOnly></input>
-                                </span>
-
-                                <button className="userButton" type='button' onClick={(event) => { enableEditMode(event, index) }} >Edit</button>
-                                {adminView === 'editOneProduct' ? <button >Authorize</button> : ''}
-                            </form>
                         }
                     </span>
                 )

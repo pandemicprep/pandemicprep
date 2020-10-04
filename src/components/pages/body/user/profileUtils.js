@@ -37,7 +37,7 @@ export async function registrationHandler({ firstName, lastName, email, password
     }
 }
 
-export async function adminRegisterNewUser({ firstName, lastName, email, password1, password2 }) {
+export async function adminRegisterNewUser({ firstName, lastName, email, password1, password2, isUser, isAdmin }) {
     if (password1.length > 0) {
         const passwordCheck = checkPassword(password1, password2);
         if (!passwordCheck.valid) {
@@ -52,6 +52,8 @@ export async function adminRegisterNewUser({ firstName, lastName, email, passwor
             lastName,
             email,
             password: password1,
+            isUser,
+            isAdmin
         });
 
         if (newUser.message) {

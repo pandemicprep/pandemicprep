@@ -101,7 +101,9 @@ async function addUser({
  */
 async function getAllUsers(pageNumber = 1) {
     try {
-        const OFFSET = (LIMIT * (pageNumber - 1)) + 1;
+
+        const OFFSET = (LIMIT * (pageNumber-1));
+
 
         const { rowCount } = await client.query(`
             SELECT * FROM users;
@@ -137,7 +139,7 @@ async function updateUser(id, fields = {}) {
     }
     try {
         const {
-            rows: [users],
+            rows: [user],
         } = await client.query(
             `
       UPDATE users
@@ -148,7 +150,7 @@ async function updateUser(id, fields = {}) {
             Object.values(fields)
         );
 
-        return users;
+        return user;
     } catch (error) {
         throw error;
     }

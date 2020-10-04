@@ -21,6 +21,7 @@
     bottom: 15px;
 }
 
+
 .password {
     margin-left: 22px !important;
 }
@@ -96,3 +97,13 @@ input {
     -o-transform: scale(1.075,1.075);
     transform: scale(1.075,1.075);
 } */
+
+.checkbox {
+    width: 150px;
+}
+
+#user-button {
+    position: relative;
+    top: 12px;
+}
+

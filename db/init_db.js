@@ -22,6 +22,13 @@ async function buildTables() {
   }
 }
 
+/**
+ * Database
+ * products: image is a url or path
+ * categories: image is a url or path
+ * user: password and credit card are hashed
+ * carts: status could be 'active', 'processing', 'complete'
+ */
 async function createTables() {
   try {
     console.log("Creating tables");
@@ -65,6 +72,7 @@ async function createTables() {
       CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
         status varchar(255) NOT NULL,
+        "cartQuantity" INTEGER DEFAULT 0,
         "lastUpdated" DATE,
         total DECIMAL NOT NULL,
         "userId" INTEGER REFERENCES users(id)

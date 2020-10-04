@@ -35,8 +35,21 @@ export async function getAllProducts(pageNumber, token) {
  */
 export async function updateProduct({ id, fields, token }) {
   try {
-    const { data } = await axios.patch('/api/admin', { id, fields }, { headers: { Authorization: 'Bearer ' + token } });
 
+    const { data } = await axios.patch('/api/admin/product', {id, fields}, {headers: {Authorization: 'Bearer ' + token}});
+
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function adminUpdateUser({id, fields, token}) {
+  try {
+    
+    const { data } = await axios.patch('/api/admin/user', {id, fields}, {headers: {Authorization: 'Bearer ' + token}});
+    console.log('getting into user patch axios for admin', data)
     return data;
   } catch (error) {
     throw error;

@@ -37,14 +37,31 @@ export async function removeProductFromCart({ cartId, products_cartsId }, token)
     }
 }
 
+
 /**
  * Adjusts Item QTY in Cart
  * @param {integer} jointId 
  * @param {integer} quantity 
  * @param {string} token 
  */
-export async function patchCartItemQuantity(jointId, quantity, token) {
+
+export async function patchCartItemQuantity(body, token) {
     try {
+        const { data: cart } = await axios.patch('/api/cart/quantity', body, {
+            headers: { Authorization: "Bearer " + token }
+        });
+        return cart;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function deactivateCart(body, token) {
+    try {
+        const { data: newCart } = await axios.patch('/api/cart/status', body, {
+            headers: { Authorization: "Bearer " + token }
+        });
+        return newCart;
 
     } catch (error) {
         console.error(error);

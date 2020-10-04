@@ -2,8 +2,10 @@
 const { client } = require('../client');
 //BLUEBIRD = promise handling 
 const Promise = require('bluebird');
+
 //LIMIT is the amount of products allotted per page
 const LIMIT = 24;
+
 
 const {
   addCategory,
