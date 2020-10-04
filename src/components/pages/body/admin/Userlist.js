@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 import "./Userlist.css";
 
-import { getAllUsers, addUser } from '../../../../api';
+import { getAllUsers, addUser, adminUpdateUser } from '../../../../api';
 import { adminRegisterNewUser } from '../user/profileUtils';
 
 
@@ -24,7 +24,7 @@ export const Userlist = ({
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
-    const [isAdmin, setIsAdmin] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [isUser, setIsUser] = useState(true);
     // Input values for edit one user
     const [editEmail, setEditEmail] = useState('');
@@ -95,7 +95,18 @@ export const Userlist = ({
 
     const editUser = async (event, item) => {
         event.preventDefault();
+        console.log('getting into editUser', item)
         try {
+            const fields = {
+                email: editEmail === '' ? item.email : editEmail,
+                password: editPassword === '' ? item.password : editPassword,
+                isAdmin: isAdmin,
+                isUser: isUser
+            }
+            const updatedUser = await adminUpdateUser({id: item.id, fields: fields, token: user.token})
+            console.log(updatedUser, 'newly updated user log')
+            setAdminView('none')
+            setEdit(!edit)
             
         } catch (error) {
             throw error;
@@ -151,13 +162,13 @@ export const Userlist = ({
                     <input type='checkbox' placeholder='isAdmin' defaultChecked={false} onChange={handleIsAdmin}></input>
                 </span>
                 
-                <button>Add New</button>
+                <button id='user-button'>Add New</button>
             </form>
             { adminUserList.map((item, index) => {
                 return (
                     <span key={index}>
                         { adminView === 'editOneUser' &&  clickedIndex === index ? /**edit mode ternary */ 
-                            <form id='admin-list' >
+                            <form id='admin-list' onSubmit={(event) => {editUser(event, item)}} >
                             <span className='each-input'>Email:
                                 <input type='text' placeholder={item.email} value={editEmail}
                                 onChange={(event) => setEditEmail(event.target.value)}></input>
@@ -168,15 +179,28 @@ export const Userlist = ({
                                 onChange={(event) => setEditPassword(event.target.value)}></input>
                             </span>
 
+                            { item.isAdmin ?
                             <span className='each-input checkbox'>Is Admin:
-                                <input  type='checkbox' placeholder={item.isAdmin} 
-                                value={editIsAdmin} onChange={(event) => setEditIsAdmin(event.target.checked)}></input>
+                                <input  type='checkbox' 
+                                onChange={(event) => setIsAdmin(event.target.checked)}></input>
                             </span>
+                            : 
+                            <span className='each-input checkbox'>Is Admin:
+                                <input  type='checkbox' 
+                                nChange={(event) => setIsAdmin(event.target.checked)}></input>
+                            </span>
+                            }
                         
+                            { item.isUser ?
                             <span className='each-input checkbox'>Is User:
-                                <input type='checkbox' placeholder={item.isUser} value={editIsUser}
-                                onChange={(event) => setEditIsUser(event.target.checked)}></input>
+                                <input type='checkbox' 
+                                onChange={(event) => {setIsUser(event.target.checked)}}></input>
                             </span>
+                            :
+                            <span className='each-input checkbox'>Is User:
+                                <input type='checkbox'
+                                onChange={(event) => {setIsUser(event.target.checked)}}></input>
+                            </span>}
                             
                             <button id='user-button' type='button' onClick={enableEditMode} >Edit</button>
                             {adminView === 'editOneUser' ? <button id='user-button' >Authorize</button> : ''}

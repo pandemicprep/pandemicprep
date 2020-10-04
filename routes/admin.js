@@ -4,7 +4,8 @@ const adminRouter = express.Router();
 const {
     getAllProducts,
     updateProduct,
-    getAllUsers
+    getAllUsers,
+    updateUser
 } = require('../db');
 
 // get all products
@@ -46,7 +47,7 @@ adminRouter.get("/users/:pageNumber", async (req, res, next) => {
     }
 });
 
-adminRouter.patch('/', async (req, res, next) => {
+adminRouter.patch('/product', async (req, res, next) => {
     console.log('getting to admin patch', req.body)
     try {
         const id = req.body.id;
@@ -64,6 +65,28 @@ adminRouter.patch('/', async (req, res, next) => {
         }
 
         
+    } catch (error) {
+        next(error);
+    }
+})
+
+adminRouter.patch('/user', async (req, res, next) => {
+    console.log('getting to admin router patch for users', req.user, req.body)
+
+    try {
+        const id = req.body.id;
+        const fields = req.body.fields;
+
+        if (req.user) {
+            if (req.user.isAdmin) {
+                const updatedUser = await updateUser(id, fields);
+                res.send(updatedUser);
+            } else {
+                res.send({message: 'You must be an admin to update a user!'});
+            }
+        } else {
+            res.send({message: 'You must be an admin to update a user!'});
+        }
     } catch (error) {
         next(error);
     }
