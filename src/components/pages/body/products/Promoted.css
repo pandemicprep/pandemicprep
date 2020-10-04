@@ -172,8 +172,6 @@ button:active {
   }
 
   .slider-content {
-    height:100px;
-    width:200px;
     overflow:hidden;
   }
   
