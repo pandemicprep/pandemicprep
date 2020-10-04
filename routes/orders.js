@@ -5,6 +5,7 @@ const {
     addCart
 } = require('../db/singletables/cart');
 
+//Creates new cart
 ordersRouter.post('/', async (req, res, next) => {
     try {
         const cart = req.body;

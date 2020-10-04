@@ -2,17 +2,16 @@
 
 const apiRouter = require("express").Router();
 const { getUserById } = require("../db/");
-
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
+//Header Authorization & Bearer Token (Is Admin or Is User or is Guest)
 apiRouter.use(async (req, res, next) => {
     console.log("api entry point with ", req.headers.authorization);
     const prefix = "Bearer ";
     const auth = req.headers.authorization;
 
     if (!auth) {
-        // nothing to see here
         next();
     } else if (auth.startsWith(prefix)) {
         const token = auth.slice(prefix.length);

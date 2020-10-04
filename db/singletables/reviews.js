@@ -1,5 +1,10 @@
 const { client } = require('../client');
 
+
+/**
+ * Adds user review for a product
+ * @param {object} param0 
+ */
 async function addReview({
     creatorId,
     productId,
@@ -21,6 +26,11 @@ async function addReview({
     }
 }
 
+
+/**
+ * Gets reviews by Product ID
+ * @param {integer} productId 
+ */
 async function getReviewsByProductId(productId) {
     try {
         const {

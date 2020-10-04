@@ -19,15 +19,23 @@ const productArray = require("./singletables/productObject");
 
 const { addCart, getCartHistoryStatusAdmin, getCartHistoryStatus, addProductToCart } = require("./singletables/cart");
 
-
-
 const { addReview, getReviewsByProductId } = require("./singletables/reviews");
+
+//
+//
+//
+//TEST CASES & SEED DATA TO TEST DATABASE FUNCTIONS
+//
+//
+//
+
+
 
 async function seed() {
     try {
         await createNewUsers();
         await gettingAllUsers();
-        await creatingOneNewProduct();
+        // await creatingOneNewProduct();
         await seedingProductObject();
         await gettingProductsByQuery();
         await updatingUsers();
@@ -137,56 +145,6 @@ async function gettingAllUsers() {
         console.log("Running getAllUsers...");
         const allUsers = await getAllUsers();
         console.log("all users result: ", allUsers);
-    } catch (error) {
-        throw error;
-    }
-}
-
-async function creatingOneNewProduct() {
-    try {
-        console.log("creating new product... ");
-
-        const product = await addProductAndCategory({
-            name: "New Product Name",
-            price: 999.99,
-            description: "new product description yay",
-            image: "www.imageurl.com/urlurlurl",
-
-            category: "bath",
-            isHighlighted: true,
-        });
-
-        await addProductAndCategory({
-            name: "Is Highlighted test 1",
-            price: 99.99,
-            description: "is highlighted 1 yay",
-            image: "www.imageurl.com/urlurlurl",
-
-            category: "school",
-            isHighlighted: true,
-        });
-
-        await addProductAndCategory({
-            name: "Is Highlighted test 2",
-            price: 59.99,
-            description: "is highlighted 2 yay",
-            image: "www.imageurl.com/urlurlurl",
-
-            category: "supplies",
-            isHighlighted: true,
-        });
-
-        await addProductAndCategory({
-            name: "Is Highlighted test 3",
-            price: 9.99,
-            description: "is highlighted 3 yay",
-            image: "www.imageurl.com/urlurlurl",
-
-            category: "entertainment",
-            isHighlighted: true,
-        });
-
-        console.log("the new product is ", product);
     } catch (error) {
         throw error;
     }
@@ -427,13 +385,13 @@ async function makingProductCart() {
     }
 }
 
-async function gettingHighlightedProducts() {
-    try {
-        const products = await getHighlightedProducts();
-        console.log("returning highlighted products in seed: ", products);
-    } catch (error) {
-        throw error;
-    }
-}
+// async function gettingHighlightedProducts() {
+//     try {
+//         const products = await getHighlightedProducts();
+//         console.log("returning highlighted products in seed: ", products);
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 
 module.exports = { seed };

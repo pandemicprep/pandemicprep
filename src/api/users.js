@@ -15,6 +15,10 @@ export async function addUser(user) {
     }
 }
 
+/**
+ * For Guest info to be stored in the DB
+ * @param {object} guest 
+ */
 export async function guestUser(guest) {
     try {
         const { data: newGuest } = await axios.post("/api/users/guest", guest);
@@ -24,7 +28,11 @@ export async function guestUser(guest) {
     }
 }
 
-//Update User
+/**
+ * Update User 
+ * @param {object} fields 
+ * @param {string} token 
+ */
 export async function updateUser(fields = {}, token) {
     try {
         const { data } = await axios.patch("/api/users/", fields, {
@@ -52,6 +60,10 @@ export async function loginUser(credentials) {
     }
 }
 
+/**
+ * Gets User from Token
+ * @param {string} token 
+ */
 export async function getUserFromToken(token) {
     try {
         const { data: user } = await axios.get("/api/users/verify", {

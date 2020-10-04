@@ -2,7 +2,10 @@
 
 const { client } = require("../client");
 
-
+/**
+ * Assigns a new cart to a user
+ * @param {object} status(active, processing, complete) 
+ */
 async function addCart({ status, lastUpdated, total, userId }) {
     console.log("getting into add cart with ", status, lastUpdated, total, userId);
     try {
@@ -17,12 +20,19 @@ async function addCart({ status, lastUpdated, total, userId }) {
             [status, lastUpdated, total, userId]
         );
         newCart.total = parseFloat(newCart.total);
+
         newCart.items = [];
 
+
         return newCart;
-    } catch (error) {}
+    } catch (error) { }
 }
 
+
+/**
+ * Get users cart history
+ * @param {integer} cartId 
+ */
 async function getCartHistoryStatus(id) {
     try {
         const { rows } = await client.query(
@@ -37,6 +47,11 @@ async function getCartHistoryStatus(id) {
         throw error;
     }
 }
+
+
+/**
+ * Gets all carts that are being processed
+ */
 async function getCartHistoryStatusAdmin() {
     try {
         const { rows } = await client.query(
@@ -51,9 +66,12 @@ async function getCartHistoryStatusAdmin() {
     }
 }
 
-// NUMBER ONE RULE OF CODE (THINGS GO WRONG)
+/**
+ * Gets Active Cart by User ID
+ * @param {integer} userId 
+ */
 async function getActiveCart(userId) {
-    
+
     try {
         const {
             rows: [activeCart],
@@ -64,10 +82,10 @@ async function getActiveCart(userId) {
           `,
             [userId]
         );
-        
+
         activeCart.total = parseFloat(activeCart.total);
         const items = await getProductsCartForACartId(activeCart.id);
-        
+
         activeCart.items = items;
         return activeCart;
     } catch (error) {
@@ -75,10 +93,13 @@ async function getActiveCart(userId) {
     }
 }
 
-//joint products_carts
 
+/**
+ * Adds Product To Cart by userId, productId, cartId, quantity, & unitPrice
+ * @param {object} param0 
+ */
 async function addProductToCart({ userId, productId, cartId, quantity, unitPrice }) {
-    
+
     try {
         const itemTotal = quantity * unitPrice;
         await client.query(
@@ -97,7 +118,9 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
             cartQuantity = cartQuantity + item.quantity;
             console.log('the item total is ', item.itemTotal);
         })
+
         const date = new Date();
+
         await client.query(`
             UPDATE carts
             SET total=${total},
@@ -114,6 +137,11 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
     }
 }
 
+
+/**
+ * Gets an array of Products associated with the cart
+ * @param {integer} cartId 
+ */
 async function getProductsCartForACartId(id) {
     try {
         const { rows: items } = await client.query(
@@ -140,21 +168,30 @@ async function getProductsCartForACartId(id) {
     }
 }
 
+
+/**
+ * Gets price & item total for products in the cart (sales report)
+ */
 async function getAllProductsCart() {
     try {
         const { rows } = await client.query(`
             SELECT * FROM products_carts
             `);
-            rows.forEach((item) => {
-                item.unitPrice = parseFloat(item.unitPrice);
-                item.itemTotal = parseFloat(item.itemTotal);
-            })
+        rows.forEach((item) => {
+            item.unitPrice = parseFloat(item.unitPrice);
+            item.itemTotal = parseFloat(item.itemTotal);
+        })
         return rows;
     } catch (error) {
         throw error;
     }
 }
 
+
+/**
+ * Removes a product from an active Cart
+ * @param {integer} param0 
+ */
 async function removeProductFromCart({ userId, cartId, products_cartsId }) {
     try {
         const date = new Date();
@@ -201,10 +238,17 @@ UPDATE carts
     }
 }
 
-//uppdateproductquanity
+
+/**
+ * Updates product quantity in the cart
+ * @param {integer} jointId 
+ * @param {integer} quantity 
+ */
+
 async function updateProductQuantity({ userId, jointId, quantity, unitPrice }) {
     console.log('getting to update with ', userId, jointId, quantity, unitPrice);
     const itemTotal = unitPrice * quantity;
+
     try {
         await client.query(`
             UPDATE products_carts

@@ -3,7 +3,9 @@
 const express = require("express");
 const cartRouter = express.Router();
 
+
 const { addProductToCart, removeProductFromCart, deactivateCart, updateProductQuantity } = require("../db/singletables/cart");
+
 const { getActiveCart } = require("../db");
 
 
@@ -27,8 +29,8 @@ cartRouter.post("/", async (req, res, next) => {
 });
 
 
+//Remove product from cart
 
-//remove product from cart
 cartRouter.delete("/:cartId/product/:products_cartsId", async (req, res, next) => {
     console.log("getting to delete at router ", req.params);
     if (req.user) {
@@ -51,8 +53,11 @@ cartRouter.delete("/:cartId/product/:products_cartsId", async (req, res, next) =
     }
 });
 
-//patch products_carts quantity
+
+//Patch products_carts quantity
+
 cartRouter.patch('/quantity', async (req, res, next) => {
+
     if (req.user) {
         if (req.user.isUser) {
             try {

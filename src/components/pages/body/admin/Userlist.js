@@ -10,6 +10,10 @@ import { adminRegisterNewUser } from '../user/profileUtils';
 
 export const Userlist = ({
     user,
+    adminView,
+    setAdminView,
+    clickedIndex,
+    setClickedIndex,
     setUser,
     setCart
 }) => {
@@ -78,7 +82,7 @@ export const Userlist = ({
                 isUser
             });
             console.log("new user from registration ", newUser);
-        
+
         } catch (error) {
             throw error;
         }
@@ -92,6 +96,10 @@ export const Userlist = ({
             setAdminView('none')
         }
     }
+
+    // Pagination handlers
+    const firstHandler = () => {
+
 
     const editUser = async (event, item) => {
         event.preventDefault();
@@ -115,6 +123,7 @@ export const Userlist = ({
 
      // Pagination handlers
      const firstHandler = () => {
+
         setClickedIndex(-1);
         if (userPage > 1) {
             setUserPage(1);
@@ -149,6 +158,7 @@ export const Userlist = ({
                 <span className='each-input'>Last Name:
                     <input type='text' placeholder='Last Name' value={lastName} onChange={handleLastName}></input>
                 </span>
+
 
                 <span className='each-input'>Email:
                     <input type='text' placeholder='email' value={email} onChange={handleEmail}></input>
@@ -238,27 +248,28 @@ export const Userlist = ({
                             <button id='user-button' type='button' onClick={() => {enableEditMode(item, index)}} >Edit</button>
                             {adminView === 'editOneUser' ? <button id='user-button'>Authorize</button> : ''}
                         </form>
+
                         }
                     </span>
                 )
             })}
-             <div id='pagination'>
-                { userPage === 1 ? ''
-                :
-                <>
-                    <a href='#' onClick={firstHandler}>❮❮</a>
-                    <a href='#' onClick={prevHandler}>❮</a>
-                </>
-                }  
-                <a href='#'>{userPage}</a>
-                { userPage === userPageLimit ? ''
-                : 
-                <>
-                    <a href='#' onClick={nextHandler}>❯</a>
-                    <a href='#' onClick={lastHandler}>❯❯</a>
-                </>
+            <div id='pagination'>
+                {userPage === 1 ? ''
+                    :
+                    <>
+                        <a href='#' onClick={firstHandler}>❮❮</a>
+                        <a href='#' onClick={prevHandler}>❮</a>
+                    </>
                 }
-                
+                <a href='#'>{userPage}</a>
+                {userPage === userPageLimit ? ''
+                    :
+                    <>
+                        <a href='#' onClick={nextHandler}>❯</a>
+                        <a href='#' onClick={lastHandler}>❯❯</a>
+                    </>
+                }
+
             </div>
         </div>
     );

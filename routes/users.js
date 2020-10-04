@@ -14,6 +14,7 @@ const {
 } = require("../db/singletables/users");
 const { getActiveCart } = require('../db');
 
+//Register New User
 usersRouter.post("/register", async (req, res, next) => {
     const user = req.body;
     console.log("got into user router registration ", user);
@@ -49,6 +50,7 @@ usersRouter.post("/register", async (req, res, next) => {
     }
 });
 
+//Login
 usersRouter.post("/login", async (req, res, next) => {
     const SALT_COUNT = 13;
     const { email, password } = req.body;
@@ -87,6 +89,7 @@ usersRouter.post("/login", async (req, res, next) => {
     }
 });
 
+//Guest User
 usersRouter.post("/guest", async (req, res, next) => {
     const guest = req.body;
     console.log("got into user router guest ", guest);
@@ -103,6 +106,7 @@ usersRouter.post("/guest", async (req, res, next) => {
     }
 });
 
+//Verify user information at load using token
 usersRouter.get("/verify", async (req, res, next) => {
     console.log("getting to verify with ", req.user);
     try {
@@ -119,7 +123,7 @@ usersRouter.get("/verify", async (req, res, next) => {
     }
 });
 
-// update user by id
+//Update user by id
 usersRouter.patch("/", async (req, res, next) => {
     try {
         console.log("entering update user by id route...");
@@ -133,7 +137,7 @@ usersRouter.patch("/", async (req, res, next) => {
     }
 });
 
-//get user by id
+//Get user by id
 usersRouter.get("/:userId", async (req, res, next) => {
     try {
         console.log("entering getting user by id route...");

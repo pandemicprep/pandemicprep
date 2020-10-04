@@ -1,9 +1,9 @@
 /** @format */
 
 const { client } = require("../client");
-
 const bcrypt = require("bcrypt");
 const { addCart, getActiveCart } = require("../singletables/cart.js");
+//LIMIT is the number of users per page in the Admin tab
 const LIMIT = 10;
 
 
@@ -95,10 +95,15 @@ async function addUser({
 
 //retrieve a user (check if admin)
 
-// retrieve all user
+/**
+ * Gets all users
+ * @param {integer} pageNumber 
+ */
 async function getAllUsers(pageNumber = 1) {
     try {
+
         const OFFSET = (LIMIT * (pageNumber-1));
+
 
         const { rowCount } = await client.query(`
             SELECT * FROM users;
@@ -108,26 +113,27 @@ async function getAllUsers(pageNumber = 1) {
             SELECT * FROM users
             LIMIT ${LIMIT} OFFSET ${OFFSET};
         `);
-        
-        const pageCount = Math.ceil(rowCount / LIMIT);  
+
+        const pageCount = Math.ceil(rowCount / LIMIT);
         console.log(pageCount, 'pagecount in db')
 
-
-        // console.log('all users: ', rows);
         return [pageCount, rows];
     } catch (error) {
         throw error;
     }
 }
 
-//patch a user
-
+/**
+ * Patches (updates) the user by ID & Fields
+ * @param {integer} id 
+ * @param {object} fields 
+ */
 async function updateUser(id, fields = {}) {
-    // build the set string
+    // Builds the set string
     const setString = Object.keys(fields)
         .map((key, index) => `"${key}"=$${index + 1}`)
         .join(", ");
-    // return early if this is called without fields
+    // Returns early if this is called without fields
     if (setString.length === 0) {
         return;
     }
@@ -150,6 +156,11 @@ async function updateUser(id, fields = {}) {
     }
 }
 
+
+/**
+ * Gets the user by the userID
+ * @param {integer} id 
+ */
 async function getUserById(id) {
     try {
         const {
@@ -170,6 +181,11 @@ async function getUserById(id) {
     }
 }
 
+
+/**
+ * Gets the User by their Email
+ * @param {string} email 
+ */
 async function getUserByEmail(email) {
     try {
         const {
