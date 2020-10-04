@@ -1,7 +1,7 @@
 
 const { client } = require('../client');
 const Promise = require('bluebird');
-const LIMIT = 24;
+const LIMIT = 100;
 
 const {
   addCategory,
