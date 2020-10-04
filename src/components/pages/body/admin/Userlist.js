@@ -26,16 +26,16 @@ export const Userlist = ({
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
-    const [isAdmin, setIsAdmin] = useState('');
-    const [isUser, setIsUser] = useState('');
+    const [isAdmin, setIsAdmin] = useState(true);
+    const [isUser, setIsUser] = useState(true);
     // Input values for edit one user
     const [editEmail, setEditEmail] = useState('');
     const [editPassword, setEditPassword] = useState('');
     const [editIsAdmin, setEditIsAdmin] = useState('');
     const [editIsUser, setEditIsUser] = useState('');
+    const [edit, setEdit] = useState(false)
 
     useEffect(() => {
-        setUserPage(1)
         getAllUsers(userPage, user.token)
             .then((response) => {
                 console.log('response and adminPage', response)
@@ -46,7 +46,7 @@ export const Userlist = ({
                 console.error(error)
             })
         console.log(adminUserList, 'adminUserList in use effect')
-    }, [userPage])
+    }, [userPage, edit])
 
     // Input value handlers
     const handleFirstName = (event) => {
@@ -63,10 +63,11 @@ export const Userlist = ({
         setPassword2(event.target.value)
     }
     const handleIsAdmin = (event) => {
-        setIsAdmin(event.target.value)
+        console.log(event.target.checked, 'admin checked')
+        setIsAdmin(event.target.checked)
     }
     const handleIsUser = (event) => {
-        setIsUser(event.target.value)
+        setIsUser(event.target.checked)
     }
     // form handler that allows admin to add a new user
     const adminAddUser = async (event) => {
@@ -78,6 +79,8 @@ export const Userlist = ({
                 email,
                 password1: password,
                 password2,
+                isAdmin,
+                isUser
             });
             console.log("new user from registration ", newUser);
         
@@ -93,6 +96,16 @@ export const Userlist = ({
             setAdminView('editOneProduct');
         }
     }
+
+    const editUser = async (event, item) => {
+        event.preventDefault();
+        try {
+            
+        } catch (error) {
+            throw error;
+        }
+    }
+
      // Pagination handlers
      const firstHandler = () => {
         setClickedIndex(-1);
@@ -139,11 +152,11 @@ export const Userlist = ({
                 </span>
 
                 <span id='each-input'>Is Admin:
-                    <input type='checkbox' placeholder='isAdmin' value={isAdmin} onChange={handleIsAdmin}></input>
+                    <input type='checkbox' placeholder='isAdmin' defaultChecked={false} onChange={handleIsAdmin}></input>
                 </span>
             
                 <span id='each-input'>Is User:
-                    <input type='checkbox' placeholder='isUser' value={isUser} onChange={handleIsUser}></input>
+                    <input type='checkbox' placeholder='isUser' defaultChecked={false} onChange={handleIsUser}></input>
                 </span>
                 
                 <button>Add New</button>
@@ -183,11 +196,11 @@ export const Userlist = ({
                             </span>
 
                             <span id='each-input'>Is Admin:
-                                <input type='text' placeholder={user.isAdmin} readOnly></input>
+                                <input type='checkbox'  ></input>
                             </span>
                         
                             <span id='each-input'>Is User:
-                                <input type='text' placeholder={user.isUser} readOnly></input>
+                                <input type='checkbox' ></input>
                             </span>
                             
                             <button type='button' onClick={(event) => {enableEditMode(event, index)}} >Edit</button>
