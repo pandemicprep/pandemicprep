@@ -3,7 +3,7 @@
 const express = require("express");
 const cartRouter = express.Router();
 
-const { addProductToCart, removeProductFromCart, deactivateCart } = require("../db/singletables/cart");
+const { addProductToCart, removeProductFromCart, deactivateCart, updateProductQuantity } = require("../db/singletables/cart");
 const { getActiveCart } = require("../db");
 
 
@@ -56,7 +56,7 @@ cartRouter.patch('/quantity', async (req, res, next) => {
     if (req.user) {
         if (req.user.isUser) {
             try {
-                const updatedCart = await updateProductQuantity(jointId, quantity);
+                const updatedCart = await updateProductQuantity(req.body);
                 res.send(updatedCart);
             } catch (error) {
                 throw error;

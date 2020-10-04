@@ -27,9 +27,12 @@ export async function removeProductFromCart({ cartId, products_cartsId }, token)
     }
 }
 
-export async function patchCartItemQuantity(jointId, quantity, token) {
+export async function patchCartItemQuantity(body, token) {
     try {
-        
+        const { data: cart } = await axios.patch('/api/cart/quantity', body, {
+            headers: { Authorization: "Bearer " + token }
+        });
+        return cart;
     } catch (error) {
         console.error(error);
     }

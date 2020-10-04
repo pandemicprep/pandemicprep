@@ -12,46 +12,65 @@ import {
 } from '../../../../api';
 // import { Product } from '../products/Product';
 
-export const Cart = ({ cart, setCart, setCartSize, user }) => {
+export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
 	const [shipping, setShipping] = useState(5);
 	const removeHandler = (productId) => {
 		removeProductFromCart(
-			{ userId: user.id, cartId: cart.id, products_cartsId: productId },
+			{ cartId: cart.id, products_cartsId: productId },
 			user.token,
 		)
 			.then((response) => {
 				setCart(response);
-				setCartSize(response.items.length);
-				console.log('new cart ', cart);
+				setCartSize(response.cartQuantity);
+				
 			})
 			.catch((error) => {
 				console.error(error);
 			});
 	};
 
-	const upTickHandler = (jointId, quantity) => {
-		ticker(jointId, quantity, 1);
-	};
-
-	const downTickHandler = (jointId, quantity) => {
-		ticker(jointId, quantity, -1);
-	};
-
-	const ticker = (jointId, quantity, direction) => {
-		// patchCartItemQuantity(jointId, quantity + direction, user.token).then((result) => {
-		//     setCart(result);
-		// })
+	const ticker = (jointId, quantity, unitPrice, direction) => {
+		if (quantity + direction > 0) {
+			patchCartItemQuantity(
+				{
+					userId: user.id,
+					jointId: jointId,
+					quantity: quantity + direction,
+					unitPrice: unitPrice,
+				},
+				user.token,
+			).then((result) => {
+				setCart(result);
+				setCartSize(result.cartQuantity);
+			}).catch(error => {
+                console.error(error);
+            });
+		} else {
+			removeProductFromCart(
+				{ cartId: cart.id, products_cartsId: jointId },
+				user.token,
+			)
+				.then((response) => {
+					setCart(response);
+					setCartSize(response.cartQuantity);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
 	};
 
 	const checkoutHandler = () => {
+        if (cart.quantity > 0) {
 		deactivateCart({ userId: user.id, cartId: cart.id }, user.token)
 			.then((response) => {
-                setCart(response);
-                setCartSize(0);
+				setCart(response);
+				setCartSize(response.cartQuantity);
 			})
 			.catch((error) => {
 				console.error(error);
-			});
+            });
+        }
 	};
 
 	return (
@@ -85,7 +104,12 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
 										<button
 											className='uptick cart-field tick'
 											onClick={() => {
-												upTickHandler(product.jointId, product.quantity);
+												ticker(
+													product.jointId,
+													product.quantity,
+													product.unitPrice,
+													1,
+												);
 											}}
 										>
 											&#11014;
@@ -93,7 +117,12 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
 										<button
 											className='downtick cart-field tick'
 											onClick={() => {
-												downTickHandler(product.jointId, product.quantity);
+												ticker(
+													product.jointId,
+													product.quantity,
+													product.unitPrice,
+													-1,
+												);
 											}}
 										>
 											&#11015;
@@ -130,7 +159,7 @@ export const Cart = ({ cart, setCart, setCartSize, user }) => {
 							${' '}
 							{parseFloat(cart.total) > 0
 								? shipping.toFixed(2)
-								: parseFloat(cart.total).toFixed(2)}
+								: '0.00'}
 						</span>
 						<span className='total-label total'>Total:</span>
 						<span className='total-total total'>
