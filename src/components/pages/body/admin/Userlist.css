@@ -19,3 +19,12 @@
     position: relative;
     bottom: 15px;
 }
+
+.checkbox {
+    width: 150px;
+}
+
+#user-button {
+    position: relative;
+    top: 12px;
+}
