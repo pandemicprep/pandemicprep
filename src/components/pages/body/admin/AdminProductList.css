@@ -1,17 +1,19 @@
 /* PRODUCTS STYLING IN ADMIN */
 
-#admin {
-    margin-left: 200px;
-}
+
 
 .each-input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font: bold 32px Helvetica, Sans-Serif; 
+    font: bold 24px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
+    margin: 0px 10px 20px;
 }
 
+#admin-list {
+    justify-content: center;
+}
 
 #title {
     width: 300px !important;
