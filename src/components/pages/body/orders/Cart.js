@@ -22,7 +22,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
 			.then((response) => {
 				setCart(response);
 				setCartSize(response.cartQuantity);
-				
+
 			})
 			.catch((error) => {
 				console.error(error);
@@ -43,8 +43,8 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
 				setCart(result);
 				setCartSize(result.cartQuantity);
 			}).catch(error => {
-                console.error(error);
-            });
+				console.error(error);
+			});
 		} else {
 			removeProductFromCart(
 				{ cartId: cart.id, products_cartsId: jointId },
@@ -61,17 +61,17 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
 	};
 
 	const checkoutHandler = () => {
-       
-        if (cartSize > 0) {
-		deactivateCart({ userId: user.id, cartId: cart.id }, user.token)
-			.then((response) => {
-				setCart(response);
-				setCartSize(response.cartQuantity);
-			})
-			.catch((error) => {
-				console.error(error);
-            });
-        }
+
+		if (cartSize > 0) {
+			deactivateCart({ userId: user.id, cartId: cart.id }, user.token)
+				.then((response) => {
+					setCart(response);
+					setCartSize(response.cartQuantity);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
 	};
 
 	return (
@@ -171,7 +171,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
 						</span>
 					</div>
 					<button id='check' className='checkout-button' onClick={checkoutHandler}>
-						checkout
+						Checkout
 					</button>
 				</div>
 			</div>

@@ -154,3 +154,20 @@ position: absolute;
     -o-transform: scale(1.075,1.075);
     transform: scale(1.075,1.075);
 }
+
+
+
+
+
+#productH1 {
+    font: bold 32px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    padding-left: 150px;
+    margin-bottom: 25px;
+    background-color: dodgerblue;
+    border: 3px solid black;
+    color: white;
+    height: 70px;
+    width: 100%;
+    padding-top: 15px;
+}

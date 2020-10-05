@@ -90,7 +90,7 @@ export const AdminProductList = ({
     const editProduct = async (event, item) => {
         event.preventDefault()
         try {
-           
+
             const fields = {
                 title: editTitle === '' ? item.title : editTitle,
                 description: editDescription === '' ? item.description : editDescription,
@@ -100,8 +100,8 @@ export const AdminProductList = ({
             }
 
             const updatedProduct = await updateProduct({ id: item.id, fields: fields, token: user.token });
-            
-            
+
+
             setAdminView('none');
             setEdit(!edit);
         } catch (error) {
@@ -138,25 +138,27 @@ export const AdminProductList = ({
 
     return (
         <div id='admin'>
+            <h1 id="productH1">Add New Product:</h1>
             {adminPage === 1 ?
                 <form id='admin-list' onSubmit={adminAddProduct}>
                     <span className='each-input' id="title">Title & Price:
-                    <input type='text' placeholder='title' value={title} onChange={handleTitle}></input>
+                    <input type='text' placeholder='Title' value={title} onChange={handleTitle}></input>
 
-                        <input type='text' placeholder='price' value={price} onChange={handlePrice}></input>
+                        <input type='text' placeholder='Price' value={price} onChange={handlePrice}></input>
                     </span>
 
                     <span className='each-input' id="description2">Description:
-                    <input type='text' placeholder='description' value={description} onChange={handleDescription}></input>
+                    <input type='text' placeholder='Description' value={description} onChange={handleDescription}></input>
                     </span>
 
-                    <span className='each-input' id="image">ImageURL:
-                    <input id='checkbox' placeholder='imageUrl' value={imageURL} onChange={handleImageURL}></input>
+                    <span className='each-input' id="image">Image URL:
+                    <input id='checkbox' placeholder='Image URL' value={imageURL} onChange={handleImageURL}></input>
                         <button id="addNew">Add New</button>
                     </span>
 
 
                 </form> : ''}
+            <h1 id="productH1">Edit Existing Product:</h1>
             {adminProductList.map((item, index) => {
                 return (
                     <span key={index}>
@@ -173,23 +175,23 @@ export const AdminProductList = ({
                                 <span className='each-input' id="description">Description:
                                     <input type='text' placeholder={item.description}
                                         value={editDescription} onChange={(event) => { setEditDescription(event.target.value) }} ></input>
-                                    {item.isActive ? 
-                                    <span id="active">Active:
+                                    {item.isActive ?
+                                        <span id="active">Active:
                                         <input id="activeCheck" type='checkbox' defaultChecked={item.isActive}
-                                        onClick={(event) => {isActive ? setIsActive(false) : setIsActive(true)}}></input>
-                                    </span>
-                                    : 
-                                    <span id="active">Active:
+                                                onClick={(event) => { isActive ? setIsActive(false) : setIsActive(true) }}></input>
+                                        </span>
+                                        :
+                                        <span id="active">Active:
                                         <input id="activeCheck" type='checkbox' defaultChecked={item.isActive}
-                                        onClick={(event) => {isActive ? setIsActive(false) : setIsActive(true)}}></input>
-                                    </span>
+                                                onClick={(event) => { isActive ? setIsActive(false) : setIsActive(true) }}></input>
+                                        </span>
                                     }
                                 </span>
 
 
 
 
-                                <span className='each-input' id="image">ImageURL:
+                                <span className='each-input' id="image">Image URL:
                                     <input id='checkbox' placeholder={'' + item.isActive}
                                         value={item.image} onChange={(event) => { setEditImageURL(event.target.value) }}></input>
                                     <button id="addNew" type='button' onClick={enableEditMode} >Edit</button>
@@ -210,17 +212,17 @@ export const AdminProductList = ({
 
                                 <span className='each-input' id="description">Description:
                                     <input type='text' readOnly placeholder={item.description} value={item.description}></input><br></br>
-                                    
-                                    { item.isActive ?
-                                    <span id='active'>Active Status:
+
+                                    {item.isActive ?
+                                        <span id='active'>Active Status:
                                         <input type='checkbox' id="activeCheck" checked ></input>
-                                    </span>
-                                    : 
-                                    <span id='active'>Active Status:
+                                        </span>
+                                        :
+                                        <span id='active'>Active Status:
                                         <input type='checkbox' id="activeCheck" ></input>
-                                    </span>
+                                        </span>
                                     }
-                                   
+
                                 </span>
 
 
