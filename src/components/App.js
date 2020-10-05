@@ -25,6 +25,7 @@ import {
     PageIndex,
     Admin,
     Promoted,
+    News
 } from "./index";
 
 import { getPromotedProducts } from "../api/products";
@@ -230,6 +231,11 @@ const App = () => {
                     ) : (
                             ""
                         )}
+
+                    <Route path='/news' >
+                        <News />
+                    </Route>
+
                     <Redirect to="/" />
                 </Switch>
                 <Footer />
