@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './News.css';
 
@@ -20,7 +20,7 @@ export const News = () => {
 
     return (
         <div id='all-news'>
-            { articles.map((article, index) => {
+            {articles.map((article, index) => {
                 return (
                     <div key={index}>
                         <div className='news-container' >
@@ -28,7 +28,7 @@ export const News = () => {
                                 <a className='news-title' target='_blank' href={article.url}>{article.title}</a>
                             </h2>
 
-                            <span className='news-author'>{article.author}</span>
+                            {/* <span className='news-author'>{article.author}</span> */}
 
                             <div className='news-date'>{article.published}</div>
 
@@ -37,6 +37,7 @@ export const News = () => {
                             </div>
 
                             <div className='news-description'>{article.description}</div>
+                            <h2 id="line">______________________________________________</h2>
                         </div>
 
                     </div>

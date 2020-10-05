@@ -53,7 +53,7 @@ export const Header = ({
                     <span id="doomsday">DOOMSDAY?</span>
                 </h1>
                 <NavLink to='/news'>
-                    <button>Stay Updated</button>
+                    <button id="updatedButton">Stay Updated</button>
                 </NavLink>
             </div>
             <div className="headerContainer">
