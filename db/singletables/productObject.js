@@ -781,6 +781,83 @@ const productArray = [
         description: "The infamous twinkie (Must have).",
         image: "images/hostess_twinkies.jpg",
         category: "grocery"
+    },
+    {
+        name: "Beef Jerky",
+        price: 8.99,
+        description: "Stores for a long time, high in protein.",
+        image: "images/BEEF-JERKY.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Canned Corn",
+        price: 3.99,
+        description: "Canned Sweet Corn.",
+        image: "images/canned_sweet_corn.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Canned Tuna",
+        price: 4.99,
+        description: "Canned tuna, long shelf life.",
+        image: "images/canned-tuna.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Kidney Beans",
+        price: 5.99,
+        description: "Dried kidney beans, must be soaked before cooking.",
+        image: "images/kidney-beans.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Pasta",
+        price: 7.99,
+        description: "Box of assorted pasta.",
+        image: "images/Pasta.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Peanut Butter",
+        price: 3.99,
+        description: "Long shelf life, high in protein, good tasting.",
+        image: "images/peanutbutter.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Pinto Beans",
+        price: 5.99,
+        description: "Dried kidney beans, must be soaked before cooking.",
+        image: "images/pinto-beans-dry.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Powdered Milk",
+        price: 7.99,
+        description: "Dry, powdered milk. Mix with water.",
+        image: "images/powdered-milk.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Kellogs Frosted Flakes",
+        price: 5.99,
+        description: "Dry cereal.",
+        image: "images/frosted-flakes.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Pasta Sauce",
+        price: 3.99,
+        description: "Pasta sauce. Goes good with cooked pasta.",
+        image: "images/pinto-beans-dry.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Spam",
+        price: 1.99,
+        description: "Staple of any prepper. Good shelf life.",
+        image: "images/pinto-beans-dry.jpg",
+        category: "grocery"
     }
 
 
