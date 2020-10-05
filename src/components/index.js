@@ -51,3 +51,6 @@ export { Footer } from "./pages/footer/Footer";
 //utils
 export { states, countries } from './utils';
 
+// News
+export { News } from './pages/body/News/News';
+

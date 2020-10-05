@@ -38,11 +38,18 @@
 
 /*TOP DOOMSDAY BANNER STYLING*/
 #headerWrap {
-    display: block !important;
+    display: flex !important;
+    justify-content: center;
     height: 60px;
     position: fixed;
     background-color: rgb(1, 0, 53);
     z-index: 1 !important;
+}
+
+#headerWrap button {
+    position: absolute;
+    right: 50px;
+    margin-top: 5px;
 }
 /*ARE YOU PREPARED HEADER STYLING*/
 #prepared {
