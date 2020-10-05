@@ -1,53 +1,50 @@
-/* .userList {
-    font: bold 22px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
-    padding-top: 20px;
-    overflow: scroll;
+
+
+#admin-list-user {
+    margin-left: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: center;
+    max-width: 800px;
+    flex-wrap: wrap;
     margin-bottom: 100px;
 }
 
-#admin-list-user {
-    display: flex;
-    flex-flow: row wrap;
-    margin-bottom: 50px;
-}
-
-#admin-list-user #each-input {
-    margin: 15px;
-}
-
-#admin-list-user button {
-    position: relative;
-    bottom: 15px;
+#admin-list-user input {
+    width: 300px;
 }
 
 
-.password {
-    margin-left: 22px !important;
+#addUserH1 {
+    font: bold 32px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    margin-left: 150px;
+    margin-bottom: 25px;
 }
 
-input {
-    border-radius: 0% !important;
-}
-
-.userButton {
-    width: 100px;
-    height: 50px;
+  .checkbox2 {
+      margin-left: 110px !important;
+  }
+  
+  button {
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
+    width: 140px;
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
-    color: black; 
-    background-image: -webkit-linear-gradient(45deg, red 50%, transparent 50%);
-    background-image: linear-gradient(45deg, red 50%, transparent 50%);
+    color: dodgerblue; 
+    margin-bottom: 5px;
+    background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
     background-position: 100%;
     background-size: 400%;
     -webkit-transition: background 300ms ease-in-out;
     transition: background 300ms ease-in-out;
-}
+  }
 
-.userButton:hover {
+  button:hover {
     background-color:  rgb(1, 0, 53);
     color: white;
     background-position: 0;
@@ -57,53 +54,19 @@ input {
     transform: scale(1.075,1.075);
 }
 
-#checkbox {
-    height: 30px !important;
-    margin-left: -100px !important;
+.checkbox2 input {
+    width: 25px !important;
 }
 
-.userCheck {
-    margin-left: -70px !important;
-}
-
-.adminCheck {
-    margin-left: 30px !important;
-}
-
-.userButton2 {
-    width: 290px;
-    height: 50px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    font: bold 22px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
-    margin-left: -25px;
-    color: black; 
-    background-image: -webkit-linear-gradient(45deg, red 50%, transparent 50%);
-    background-image: linear-gradient(45deg, red 50%, transparent 50%);
-    background-position: 100%;
-    background-size: 400%;
-    -webkit-transition: background 300ms ease-in-out;
-    transition: background 300ms ease-in-out;
-}
-
-.userButton2:hover {
-    background-color:  rgb(1, 0, 53);
-    color: white;
-    background-position: 0;
-    webkit-transform: scale(1.075,1.075);
-    -ms-transform: scale(1.075,1.075);
-    -o-transform: scale(1.075,1.075);
-    transform: scale(1.075,1.075);
-} */
-
-.checkbox {
-    width: 150px;
+.checkbox input {
+    width: 25px !important;
 }
 
 #user-button {
-    position: relative;
-    top: 12px;
+    margin-top: 60px;
 }
 
+#user-button2{
+    margin-left: 125px !important;
+    width: 290px !important;
+}
