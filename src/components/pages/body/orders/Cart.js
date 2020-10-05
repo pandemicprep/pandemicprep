@@ -61,7 +61,8 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
 	};
 
 	const checkoutHandler = () => {
-        if (cart.quantity > 0) {
+       
+        if (cartSize > 0) {
 		deactivateCart({ userId: user.id, cartId: cart.id }, user.token)
 			.then((response) => {
 				setCart(response);
