@@ -1,16 +1,44 @@
 /** @format */
 
+
 .profile {
-    max-width: 310px;
-    font-family: "Raleway", sans-serif;
+    max-width: 700px;
+    font: bold 24px Helvetica, Sans-Serif; 
     margin: auto;
     width: 50%;
     margin-top: 250px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+#editPro {
+    font: bold 32px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    margin-bottom: 25px;
+    width: 100%;
+    background-color: white;
+    color: black;
+    height: 70px;
+    padding-top: 15px;
+}
+
+#password2 {
+    margin-left: 305px;
+}
+
+#editPro2 {
+    margin-left: 42px;
+    font: bold 32px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    margin-bottom: 25px;
+    width: 600px;
+    background-color: white;
+    color: black;
+    height: 70px;
+    padding-top: 15px;
 }
 
 .profileform {
@@ -18,42 +46,58 @@
 }
 
 input {
-    margin-top: 10px;
-    margin-left: 5px;
     width: 300px;
     border: 1px solid black;
-    border-radius: 10px;
     height: 50px;
+    margin-top: 10px;
+    margin-right: 5px;
 }
 
 button {
     width: 100px;
     height: 50px;
     border: 1px solid black;
-    border-radius: 10px;
-    margin-right: 5px;
-    margin-left: 10px;
-    margin-top: 20px;
 }
 
 
 select {
     width: 300px;
     border: 1px solid black;
-    border-radius: 10px;
-    margin-left: 5px;
     height: 50px;
     margin-top: 10px;
+    margin-right: 5px;
 }
 
 .hide {
     display: none;
 }
 
+
 .profile button {
-border: 1px solid black !important; 
-border-radius: 10px !important;
-background-color: white !important;
-color: black !important;
-width: 300px;
+    width: 300px;
+    height: 50px;
+    margin-top: 10px;
+    margin-right: 5px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: black; 
+    background-image: -webkit-linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+.profile button:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
 }

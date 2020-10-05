@@ -8,7 +8,7 @@
     text-align: center;
     max-width: 800px;
     flex-wrap: wrap;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 #admin-list-user input {
@@ -19,8 +19,14 @@
 #addUserH1 {
     font: bold 32px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
-    margin-left: 150px;
+    padding-left: 150px;
     margin-bottom: 25px;
+    background-color: dodgerblue;
+    border: 3px solid black;
+    color: white;
+    height: 70px;
+    width: 100%;
+    padding-top: 15px;
 }
 
   .checkbox2 {

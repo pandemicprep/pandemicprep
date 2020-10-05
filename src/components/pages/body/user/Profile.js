@@ -160,7 +160,26 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
     //CURRENT VIEWS: login register guest userCheckout edit
     return (
         <div className="profile">
+
             <form className="profileForm" onSubmit={formHandler}>
+                <h1 id="editPro" className={view === "register" ||
+                    view === "login" ||
+                    view === "userCheckout"
+
+                    ? "field hide"
+                    : "field"}>Edit Profile: </h1>
+                <h1 id="editPro" className={view === "register" ||
+                    view === "fulledit" ||
+                    view === "userCheckout"
+
+                    ? "field hide"
+                    : "field"}>User Login: </h1>
+                <h1 id="editPro2" className={view === "login" ||
+                    view === "fulledit" ||
+                    view === "userCheckout"
+
+                    ? "field hide"
+                    : "field"}>Sign Up: </h1>
                 <input
                     type="text"
                     id="firstName"
@@ -260,8 +279,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     className={
                         view === "register" ||
                             view === "login" ||
-                            view === "userCheckout" ||
-                            view === "edit"
+                            view === "userCheckout"
                             ? "field hide"
                             : "field"
                     }
@@ -280,8 +298,8 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     className={
                         view === "register" ||
                             view === "login" ||
-                            view === "userCheckout" ||
-                            view === "edit"
+                            view === "userCheckout"
+
                             ? "field hide"
                             : "field"
                     }

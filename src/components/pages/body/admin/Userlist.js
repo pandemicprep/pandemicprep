@@ -155,11 +155,11 @@ export const Userlist = ({
 
 
                 <span className='each-input'>Email:
-                    <input type='text' placeholder='email' value={email} onChange={handleEmail}></input>
+                    <input type='text' placeholder='Email' value={email} onChange={handleEmail}></input>
                 </span>
 
                 <span className='each-input'>Password:
-                    <input type='password' placeholder='password' value={password} onChange={handlePassword}></input>
+                    <input type='password' placeholder='Password' value={password} onChange={handlePassword}></input>
                 </span>
 
                 <span className='each-input checkbox2' >Is Admin:
@@ -177,28 +177,28 @@ export const Userlist = ({
                                 <span className='each-input'>Email:
                                 <input type='text' placeholder={item.email} value={editEmail}
 
-                                onChange={(event) => setEditEmail(event.target.value)}></input>
-                            </span>
-                        
-                            <span className='each-input'>Password:
-                                <input id='checkbox' type='password' placeholder={item.password} value={editPassword}
-                                onChange={(event) => setEditPassword(event.target.value)}></input>
-                            </span>
+                                        onChange={(event) => setEditEmail(event.target.value)}></input>
+                                </span>
 
-                            { item.isAdmin ?
-                            <span className='each-input checkbox'>Is Admin:
-                                <input  type='checkbox' defaultChecked={item.isAdmin}
-                                onClick={(event) => setIsAdmin(event.target.checked)}></input>
-                            </span>
-                            : 
-                            <span className='each-input checkbox'>Is Admin:
-                                <input  type='checkbox' defaultChecked={item.isAdmin}
-                                onClick={(event) => setIsAdmin(event.target.checked)}></input>
-                            </span>
-                            }
-                        
-                            { item.isUser ?
-                            <span className='each-input checkbox'>Is User:
+                                <span className='each-input'>Password:
+                                <input id='checkbox' type='password' placeholder={item.password} value={editPassword}
+                                        onChange={(event) => setEditPassword(event.target.value)}></input>
+                                </span>
+
+                                {item.isAdmin ?
+                                    <span className='each-input checkbox'>Is Admin:
+                                <input type='checkbox' defaultChecked={item.isAdmin}
+                                            onClick={(event) => setIsAdmin(event.target.checked)}></input>
+                                    </span>
+                                    :
+                                    <span className='each-input checkbox'>Is Admin:
+                                <input type='checkbox' defaultChecked={item.isAdmin}
+                                            onClick={(event) => setIsAdmin(event.target.checked)}></input>
+                                    </span>
+                                }
+
+                                {item.isUser ?
+                                    <span className='each-input checkbox'>Is User:
                                 <input type='checkbox' defaultChecked={item.isUser}
                                             onChange={(event) => { setIsUser(event.target.checked) }}></input>
                                     </span>
@@ -216,11 +216,11 @@ export const Userlist = ({
                                 <span className='each-input'>Email:
                                 <input type='text' placeholder={item.email} value={item.email} readOnly></input>
 
-                            </span>
-                        
-                            <span className='each-input'>Password:
+                                </span>
+
+                                <span className='each-input'>Password:
                                 <input id='checkbox' type='password' placeholder={item.password} value={item.password} readOnly></input>
-                            </span>
+                                </span>
 
                                 {item.isAdmin ?
                                     <span className='each-input checkbox'>Is Admin:

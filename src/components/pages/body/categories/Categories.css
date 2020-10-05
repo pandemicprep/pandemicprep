@@ -4,7 +4,7 @@
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: white; 
-    height: 90px;
+    height: 80px;
     text-align: center;
     position: fixed;
     bottom: 55px;
@@ -72,4 +72,8 @@ a:active#cat {
     -ms-transform: scale(1.075,1.075);
     -o-transform: scale(1.075,1.075);
     transform: scale(1.075,1.075);
+}
+
+#cat {
+    margin-top: 15px;
 }

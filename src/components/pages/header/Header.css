@@ -116,6 +116,7 @@
 /*FORM STYLING*/
 .searchForm {
     display: flex;
+    margin-top: -10px;
 }
 /*SEARCH BUTTON*/
 #search {
@@ -123,13 +124,12 @@
     width: 60px;
     background-color: white;
     border: none;
-    margin-bottom: 15px;
 }
 /*SEARCH IMAGE*/
 #sbtn {
     height: 65px;
-    margin-left: -20px;
-    margin-top: -10px;
+    margin-left: -10px;
+    margin-top: 10px;
 }
 
 /*BETWEEN BUTTON BREAK*/
@@ -143,7 +143,7 @@
     font: bold 22px Helvetica, Sans-Serif;
     letter-spacing: -1px;
     color: black;
-    margin-bottom: 15px;
+    margin-top: 8px;
     height: 50px;
     border-radius: 0% !important; 
 }
@@ -163,7 +163,7 @@
     font: bold 22px Helvetica, Sans-Serif;
     letter-spacing: -1px;
     color: black;
-    margin-bottom: 15px;
+    margin-top: 8px;
     border-radius: 0% !important; 
 }
 
@@ -172,6 +172,7 @@
   text-align: center;
     width: 75px;
     height: 50px;
+    margin-top: 20px;
     font-size: 16px;
     border-radius: 0% !important; 
 }
@@ -194,6 +195,7 @@
     font-size: 26px;
     z-index: 1;
     position: relative;
+    margin-top: 15px;
   }
   /*DROPDOWN BUTTON HOVER*/
   .dropdown:hover .dropbtn {
