@@ -5,7 +5,8 @@ const {
     getAllProducts,
     updateProduct,
     getAllUsers,
-    updateUser
+    updateUser,
+    getProcessingCarts
 } = require('../db');
 
 //Gets all products (requires admin status)
@@ -74,6 +75,8 @@ adminRouter.patch('/product', async (req, res, next) => {
     }
 })
 
+// Updates a user (requires admin status) 
+
 adminRouter.patch('/user', async (req, res, next) => {
     console.log('getting to admin router patch for users', req.user, req.body)
 
@@ -90,6 +93,27 @@ adminRouter.patch('/user', async (req, res, next) => {
             }
         } else {
             res.send({message: 'You must be an admin to update a user!'});
+        }
+    } catch (error) {
+        next(error);
+    }
+})
+
+// Gets all processing carts (requires admin status)
+
+adminRouter.get('/processing/:pageNumber', async (req, res, next) => {
+    try {
+        const { pageNumber } = req.params;
+        
+        if (req.user) {
+            if (req.user.isAdmin) {
+                const allProcessing = await getProcessingCarts(pageNumber);
+                res.send(allProcessing);
+            } else {
+                res.send({message: 'You must be an admin to get all processing carts'})
+            }
+        } else {
+            res.send({message: 'You must be an admin to get all processing carts'})
         }
     } catch (error) {
         next(error);

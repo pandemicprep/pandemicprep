@@ -158,7 +158,7 @@ export const Userlist = ({
                 </span>
                 
                 <span className='each-input'>Password:
-                    <input placeholder='password' value={password} onChange={handlePassword}></input>
+                    <input type='password' placeholder='password' value={password} onChange={handlePassword}></input>
                 </span>
 
                 <span className='each-input checkbox' >Is Admin:
@@ -178,7 +178,7 @@ export const Userlist = ({
                             </span>
                         
                             <span className='each-input'>Password:
-                                <input id='checkbox' placeholder={item.password} value={editPassword}
+                                <input id='checkbox' type='password' placeholder={item.password} value={editPassword}
                                 onChange={(event) => setEditPassword(event.target.value)}></input>
                             </span>
 
@@ -215,7 +215,7 @@ export const Userlist = ({
                             </span>
                         
                             <span className='each-input'>Password:
-                                <input id='checkbox' placeholder={item.password} value={item.password} readOnly></input>
+                                <input id='checkbox' type='password' placeholder={item.password} value={item.password} readOnly></input>
                             </span>
 
                             { item.isAdmin ? 
