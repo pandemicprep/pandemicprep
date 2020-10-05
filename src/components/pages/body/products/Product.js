@@ -4,11 +4,17 @@ import React, { useState, useEffect } from "react";
 
 import "./Product.css";
 
-import { addProductToCart } from "../../../../api/cart";
+import { addProductToCart, patchCartItemQuantity } from "../../../../api/cart";
 
 export const Product = ({ product, setCart, cart, user, setCartSize }) => {
     const addToCartHandler = () => {
         console.log('user id from product ', user);
+        
+        const alreadyPresent = cart.items.find((item => {
+            return item.id === product.id;
+        }))
+
+        if (!alreadyPresent) {
         addProductToCart(
             {
                 userId: user.id,
@@ -27,6 +33,22 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
             .catch((error) => {
                 console.error(error);
             });
+        } else {
+            patchCartItemQuantity(
+				{
+					userId: user.id,
+					jointId: alreadyPresent.jointId,
+					quantity: alreadyPresent.quantity + 1,
+					unitPrice: alreadyPresent.unitPrice,
+				},
+				user.token,
+			).then((result) => {
+				setCart(result);
+				setCartSize(result.cartQuantity);
+			}).catch(error => {
+                console.error(error);
+            });
+        }
     };
 
     return (
