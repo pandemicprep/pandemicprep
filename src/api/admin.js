@@ -30,6 +30,20 @@ export async function getAllProducts(pageNumber, token) {
 }
 
 /**
+ * Gets all processing orders (ADMIN)
+ * @param {*} param0 
+ */
+export async function getAllProcessing(pageNumber, token) {
+  try {
+    const { data } = await axios.get(`/api/admin/processing/${pageNumber}`, {headers: { Authorization: 'Bearer ' + token}});
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+/**
  * Updates Product (ADMIN)
  * @param {object} param0 
  */

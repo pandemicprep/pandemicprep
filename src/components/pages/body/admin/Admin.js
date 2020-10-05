@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import {AdminProductList, Userlist} from '../../../index';
+import {AdminProductList, Userlist, OrdersProcessing} from '../../../index';
 import './Admin.css';
 
 export const Admin = ({
@@ -30,7 +30,7 @@ export const Admin = ({
         <div id='admin-nav'>
             <button onClick={() => {setAdminView('products')}}>Products</button>
             <button onClick={() => {setAdminView('users')}}>Users</button>
-            <button>Processing Orders</button>
+            <button onClick={() => {setAdminView('processing')}}>Processing Orders</button>
             <button>Sales Report</button>
         </div>
 
@@ -50,6 +50,8 @@ export const Admin = ({
                                 setUser={setUser}
                                 setCart={setCart}
                                 /> : ''}
+        {adminView === 'processing' ? <OrdersProcessing 
+                                    /> : ''}
         </>
     )
 }

@@ -80,7 +80,7 @@ async function addProduct({ name, price, description, image, isHighlighted }) {
  */
 async function getAllProducts(pageNumber = 1) {
   try {
-    const OFFSET = (LIMIT * (pageNumber - 1)) + 1;
+    const OFFSET = (LIMIT * (pageNumber - 1));
 
     const { rowCount } = await client.query(`
       SELECT * FROM products;

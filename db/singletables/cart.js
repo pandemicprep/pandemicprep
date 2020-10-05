@@ -1,6 +1,7 @@
 /** @format */
 
 const { client } = require("../client");
+const LIMIT = 20;
 
 /**
  * Assigns a new cart to a user
@@ -61,6 +62,35 @@ async function getCartHistoryStatusAdmin() {
           `
         );
         return rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
+/**
+ * Gets all carts where status is processing
+ */
+async function getProcessingCarts(pageNumber = 1) {
+    try {
+        const OFFSET = (LIMIT * (pageNumber - 1));
+
+        const { rowCount } = await client.query(
+            `
+          SELECT * FROM carts
+          WHERE status = 'processing';
+          `
+        );
+
+        const { rows } = await client.query(
+            `
+          SELECT * FROM carts
+          WHERE status = 'processing'
+          LIMIT ${LIMIT} OFFSET ${OFFSET};
+          `
+        );
+
+        const pageCount = Math.ceil(rowCount / LIMIT);
+        return [pageCount, rows];
     } catch (error) {
         throw error;
     }
@@ -320,5 +350,6 @@ module.exports = {
     getProductsCartForACartId,
     removeProductFromCart,
     deactivateCart,
-    updateProductQuantity
+    updateProductQuantity,
+    getProcessingCarts
 };
