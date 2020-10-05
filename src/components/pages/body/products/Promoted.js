@@ -8,7 +8,7 @@ import { getProductById } from '../../../../api/products'
 
 const content = [
     {
-        id: 102,
+        id: 98,
         name: "Succulents",
         price: 19.99,
         description: "HAND SELECTED: Every pack of succulents we send is hand-picked. You will receive a unique collection of species that are FULLY ROOTED IN 2 INCH POTS.",
@@ -16,7 +16,7 @@ const content = [
         category: "work health"
     },
     {
-        id: 105,
+        id: 101,
         name: "Rose Desk Kit",
         price: 19.99,
         description: "1* rosegold acrylic stapler, 1* rosegold acrylic tape dispenser,1* rosegold acrylic staple remover, 1000 pcs rosegold Standard staples.",
@@ -24,7 +24,7 @@ const content = [
         category: "work"
     },
     {
-        id: 86,
+        id: 82,
         name: "Cute Animal Erasers",
         price: 5.99,
         description: "Roll the eraser cleaner across paper, a desk, counter or table to pick up the annoying eraser fragments!",
@@ -32,7 +32,7 @@ const content = [
         category: "school"
     },
     {
-        id: 64,
+        id: 60,
         name: "Tea Pot",
         price: 49.99,
         description: "Brew a delicious cup of tea in this glass tea press that utilizes the same brewing system as the French press; perfect for loose teas and tea bags.",
@@ -40,7 +40,7 @@ const content = [
         category: "work household groceries health"
     },
     {
-        id: 50,
+        id: 46,
         name: "24 inch Curved Monitor",
         price: 129.99,
         description: "1800R curve monitor the curved display delivers a revolutionary visual experience with a leading 1800R screen curvature as the images appear to wrap around you for an in depth, immersive experience.",
@@ -48,7 +48,7 @@ const content = [
         category: "work school entertainment"
     },
     {
-        id: 40,
+        id: 36,
         name: "Sticky Memo Ball",
         price: 12.99,
         description: "Its 12 sticky sides each feature tear-off sticky memos in different colors so you can get creative with group brainstorming at work or keeping the whole family organized at home.",
@@ -56,7 +56,7 @@ const content = [
         category: "work school"
     },
     {
-        id: 41,
+        id: 37,
         name: "Drafting Table",
         price: 129.99,
         description: "Table with Storage, Adjustable Drawing Desk Rolling Art Craft Station Writing Work Table with Drawers & Wheels.",
@@ -64,7 +64,7 @@ const content = [
         category: "work"
     },
     {
-        id: 56,
+        id: 52,
         name: "Sleek Filing Cabinet",
         price: 149.99,
         description: "The interlock system secures 3 drawers and comes with 2 keys to protect your files and valuables. As a safety mechanism to avoid tipping, only 1 drawer can be opened at a time.",
@@ -72,7 +72,7 @@ const content = [
         category: "work"
     },
     {
-        id: 30,
+        id: 26,
         name: "10 inch iPad",
         price: 299.99,
         description: "10.2-Inch Retina Display, 8MP back camera, 1.2MP FaceTime HD Front camera, up to 10 hours of battery life.",
