@@ -10,10 +10,6 @@ import { adminRegisterNewUser } from '../user/profileUtils';
 
 export const Userlist = ({
     user,
-    adminView,
-    setAdminView,
-    clickedIndex,
-    setClickedIndex,
     setUser,
     setCart
 }) => {
@@ -96,9 +92,6 @@ export const Userlist = ({
             setAdminView('none')
         }
     }
-
-    // Pagination handlers
-    const firstHandler = () => {
 
 
     const editUser = async (event, item) => {
@@ -191,24 +184,24 @@ export const Userlist = ({
 
                             { item.isAdmin ?
                             <span className='each-input checkbox'>Is Admin:
-                                <input  type='checkbox' 
-                                onChange={(event) => setIsAdmin(event.target.checked)}></input>
+                                <input  type='checkbox' defaultChecked={item.isAdmin}
+                                onClick={(event) => setIsAdmin(event.target.checked)}></input>
                             </span>
                             : 
                             <span className='each-input checkbox'>Is Admin:
-                                <input  type='checkbox' 
-                                nChange={(event) => setIsAdmin(event.target.checked)}></input>
+                                <input  type='checkbox' defaultChecked={item.isAdmin}
+                                onClick={(event) => setIsAdmin(event.target.checked)}></input>
                             </span>
                             }
                         
                             { item.isUser ?
                             <span className='each-input checkbox'>Is User:
-                                <input type='checkbox' 
+                                <input type='checkbox' defaultChecked={item.isUser}
                                 onChange={(event) => {setIsUser(event.target.checked)}}></input>
                             </span>
                             :
                             <span className='each-input checkbox'>Is User:
-                                <input type='checkbox'
+                                <input type='checkbox' defaultChecked={item.isUser}
                                 onChange={(event) => {setIsUser(event.target.checked)}}></input>
                             </span>}
                             
@@ -272,5 +265,7 @@ export const Userlist = ({
 
             </div>
         </div>
-    );
-};
+    
+    )
+
+}
