@@ -28,7 +28,7 @@ export const News = () => {
                                 <a className='news-title' target='_blank' href={article.url}>{article.title}</a>
                             </h2>
 
-                            {/* <span className='news-author'>{article.author}</span> */}
+                            <span className='news-author'>{article.author}</span>
 
                             <div className='news-date'>{article.published}</div>
 
@@ -46,19 +46,3 @@ export const News = () => {
         </div>
     )
 }
-{/* <>
-                    <div class="container">
-                        <div>
-                            <a href="#" class="cat" data-category="${category}"></a>
-                        </div>
-                        <h2 class="title"><a class="title" target="_blank" href="${url}">${title}</a></h2>
-                    <div>
-                    <span class="author">${author}</span><br><span>
-                    <div class="date">${published}</span><br>
-                    </div>
-                                <div class="image"><a target="_blank" href="${url}"><img class="image" src="${image}" alt="${title}"></a>
-                             </div>
-                            <div class="description">${description}
-                        </div>
-                    </div>
-                    </> */}

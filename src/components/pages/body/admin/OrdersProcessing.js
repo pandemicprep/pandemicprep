@@ -8,24 +8,23 @@ import "./OrdersProcessing.css";
 
 export const OrdersProcessing = () => {
 
-    
+
     return (
         <div id='all-processing' >
+            <h1 id="ordersH1">Orders Processing:</h1>
             <div className='order-list' >
-                    <div id='initial-titles' >
-                        <p>Name:</p>
-                        <p>Email:</p>
-                        <p>Number of items:</p>
-                        <p>Total Price:</p>
-                        <p>Date Placed:</p>
-                    </div>
+                <div id='initial-titles' >
+                    <p>Name:</p>
+                    <p>Email:</p>
+                    <p>Total $:</p>
+                    <p id="date">Date Placed:</p>
+                </div>
 
                 <div className='order-content' >
 
                     <div id='initial-details' >
                         <p>Name</p>
                         <p>Email</p>
-                        <p>#</p>
                         <p>Price</p>
                         <p>Date</p>
                         <p id='dropdown-arrow' >ˇ</p>
@@ -57,7 +56,6 @@ export const OrdersProcessing = () => {
                     <div id='initial-details' >
                         <p>Name</p>
                         <p>Email</p>
-                        <p>#</p>
                         <p>Price</p>
                         <p>Date</p>
                         <p id='dropdown-arrow' >ˇ</p>
@@ -89,7 +87,6 @@ export const OrdersProcessing = () => {
                     <div id='initial-details' >
                         <p>Name</p>
                         <p>Email</p>
-                        <p>#</p>
                         <p>Price</p>
                         <p>Date</p>
                         <p id='dropdown-arrow' >ˇ</p>
@@ -117,7 +114,7 @@ export const OrdersProcessing = () => {
 
                 </div>
 
-                
+
 
             </div>
         </div>
