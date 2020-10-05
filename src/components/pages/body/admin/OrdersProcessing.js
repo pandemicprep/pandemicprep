@@ -11,22 +11,114 @@ export const OrdersProcessing = () => {
     
     return (
         <div id='all-processing' >
-            <div className='single-order' >
-                <div className='order-content' >
-                    <div id='initial-details' >
-                        <p>Name: name</p>
-                        <p>Email: email</p>
-                        <p>Number of items: #</p>
-                        <p>Date Placed: date</p>
-                        <p id='dropdown-arrow' >ˇ</p>
+            <div className='order-list' >
+                    <div id='initial-titles' >
+                        <p>Name:</p>
+                        <p>Email:</p>
+                        <p>Number of items:</p>
+                        <p>Total Price:</p>
+                        <p>Date Placed:</p>
                     </div>
-                    <div id='hidden-details'>
-                        <div id='each-hidden-item' >
 
-                        </div>
+                <div className='order-content' >
+
+                    <div id='initial-details' >
+                        <p>Name</p>
+                        <p>Email</p>
+                        <p>#</p>
+                        <p>Price</p>
+                        <p>Date</p>
+                        <p id='dropdown-arrow' >ˇ</p>
+                        <button className='processing-button' >Finalize</button>
+
                     </div>
+
+                    <div id='hidden-details'>
+
+                        <div id='hidden-titles' >
+                            <p>Product</p>
+                            <p>Quantity</p>
+                            <p>Price</p>
+                            <p>Total</p>
+                        </div>
+
+                        <div id='each-hidden-item' >
+                            <p>Product</p>
+                            <p>Quantity</p>
+                            <p>Price</p>
+                            <p>Total</p>
+                        </div>
+
+                    </div>
+
                 </div>
-                <button>Finalize</button>
+                <div className='order-content' >
+
+                    <div id='initial-details' >
+                        <p>Name</p>
+                        <p>Email</p>
+                        <p>#</p>
+                        <p>Price</p>
+                        <p>Date</p>
+                        <p id='dropdown-arrow' >ˇ</p>
+                        <button className='processing-button' >Finalize</button>
+
+                    </div>
+
+                    <div id='hidden-details'>
+
+                        <div id='hidden-titles' >
+                            <p>Product</p>
+                            <p>Quantity</p>
+                            <p>Price</p>
+                            <p>Total</p>
+                        </div>
+
+                        <div id='each-hidden-item' >
+                            <p>Product</p>
+                            <p>Quantity</p>
+                            <p>Price</p>
+                            <p>Total</p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div className='order-content' >
+
+                    <div id='initial-details' >
+                        <p>Name</p>
+                        <p>Email</p>
+                        <p>#</p>
+                        <p>Price</p>
+                        <p>Date</p>
+                        <p id='dropdown-arrow' >ˇ</p>
+                        <button className='processing-button' >Finalize</button>
+
+                    </div>
+
+                    <div id='hidden-details'>
+
+                        <div id='hidden-titles' >
+                            <p>Product</p>
+                            <p>Quantity</p>
+                            <p>Price</p>
+                            <p>Total</p>
+                        </div>
+
+                        <div id='each-hidden-item' >
+                            <p>Product</p>
+                            <p>Quantity</p>
+                            <p>Price</p>
+                            <p>Total</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+
             </div>
         </div>
     );
