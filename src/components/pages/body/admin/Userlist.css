@@ -27,7 +27,7 @@
       margin-left: 110px !important;
   }
   
-  button {
+  #user-button {
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
@@ -44,7 +44,34 @@
     transition: background 300ms ease-in-out;
   }
 
-  button:hover {
+  #user-button:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
+}
+
+#user-button2 {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 140px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: dodgerblue; 
+    margin-bottom: 5px;
+    background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+  }
+
+  #user-button2:hover {
     background-color:  rgb(1, 0, 53);
     color: white;
     background-position: 0;
