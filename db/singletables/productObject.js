@@ -718,6 +718,69 @@ const productArray = [
         description: "Typewriter themed design, faux stone.",
         image: "images/typehold.jpg",
         category: "work"
+    },
+    {
+        name: "Bounty Paper Towels",
+        price: 4.99,
+        description: "Good for cleaning as well as wounds!",
+        image: "images/bounty-papertowels.jpg",
+        category: "grocery", "household"
+    },
+    {
+        name: "Dixie Plates",
+        price: 6.99,
+        description: "Paper plates.",
+        image: "images/dixie-plates.jpeg",
+        category: "grocery", "household"
+    },
+    {
+        name: "Bushs Baked Beans",
+        price: 3.99,
+        description: "Canned baked beans.",
+        image: "images/bushs-baked-beans-orig.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Plastic Cuttlery",
+        price: 9.99,
+        description: "Disposable plastic cuttlery.",
+        image: "images/clear-dixie-cutlery.jpg",
+        category: "grocery", "household"
+    },
+    {
+        name: "Nacho Doritos",
+        price: 5.99,
+        description: "Cheese flavored chips.",
+        image: "images/doritos-nacho.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Local Honey",
+        price: 0.99,
+        description: "Get some local honey, it will have local pollin and will help build immunity.",
+        image: "images/jar-of-honey.jpg",
+        category: "grocery", "health"
+    },
+    {
+        name: "Water purification tablets",
+        price: 19.99,
+        description: "Helps disinfect and make drinking water clean.",
+        image: "images/water-purification-tabs.jpg",
+        category: "grocery"
+    },
+    {
+        name: "Life Straw",
+        price: 19.99,
+        description: "Makes any water clean and safe to drink.",
+        image: "images/lifestraw-high-res.png",
+        category: "grocery", "household"
+    },
+    {
+        name: "Hostess Twinkies",
+        price: 5.99,
+        description: "The infamous twinkie (Must have).",
+        image: "images/hostess_twinkies.jpg",
+        category: "grocery"
     }
 
 
