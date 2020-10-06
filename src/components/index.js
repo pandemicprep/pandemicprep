@@ -6,41 +6,35 @@
 export { default as App } from "./App";
 
 //api/index
-export { 
-    addUser,
-    getAllUsers,
-    getProductsByQuery,
-    addNewProduct
-} from '../api';
-
+export { addUser, getAllUsers, getProductsByQuery, addNewProduct } from "../api";
 
 //main body
 export { MainBody } from "./pages/body/MainBody";
 
 //admin
-export { Admin } from './pages/body/admin/Admin';
-export { OrdersProcessing } from './pages/body/admin/OrdersProcessing';
-export { Sales } from './pages/body/admin/Sales';
-export { Userlist } from './pages/body/admin/Userlist';
-export { AdminProductList } from './pages/body/admin/AdminProductList';
+export { Admin } from "./pages/body/admin/Admin";
+export { OrdersProcessing } from "./pages/body/admin/OrdersProcessing";
+export { Sales } from "./pages/body/admin/Sales";
+export { Userlist } from "./pages/body/admin/Userlist";
+export { AdminProductList } from "./pages/body/admin/AdminProductList";
 
 //categories
 export { Categories } from "./pages/body/categories/Categories";
 
 //orders
-export { Cart } from './pages/body/orders/Cart';
-export { Orders } from './pages/body/orders/Orders';
+export { Cart } from "./pages/body/orders/Cart";
+export { Orders } from "./pages/body/orders/Orders";
 
 //products
-export { Product } from './pages/body/products/Product';
-export { Productlist } from './pages/body/products/Productlist';
-export { AddProduct } from './pages/body/products/AddProduct';
-export { Review } from './pages/body/products/Reviews';
-export { PageIndex } from './pages/body/products/PageIndex';
-export { Promoted } from './pages/body/products/Promoted';
+export { Product } from "./pages/body/products/Product";
+export { Productlist } from "./pages/body/products/Productlist";
+export { AddProduct } from "./pages/body/products/AddProduct";
+export { Review } from "./pages/body/products/Reviews";
+export { PageIndex } from "./pages/body/products/PageIndex";
+export { Promoted } from "./pages/body/products/Promoted";
 
 //user
-export { Checkout } from './pages/body/user/Checkout';
+export { Checkout } from "./pages/body/user/Checkout";
 export { Login } from "./pages/body/user/Login";
 export { Profile } from "./pages/body/user/Profile";
 
@@ -49,8 +43,7 @@ export { Header } from "./pages/header/Header";
 export { Footer } from "./pages/footer/Footer";
 
 //utils
-export { states, countries } from './utils';
+export { states, countries } from "./pages/body/user/profileUtils";
 
 // News
-export { News } from './pages/body/News/News';
-
+export { News } from "./pages/body/News/News";
