@@ -7,6 +7,7 @@ import "./Product.css";
 import { addProductToCart, patchCartItemQuantity } from "../../../../api/cart";
 
 export const Product = ({ product, setCart, cart, user, setCartSize }) => {
+    
     const addToCartHandler = () => {
         console.log('user id from product ', user);
         
@@ -15,6 +16,7 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
         }))
 
         if (!alreadyPresent) {
+            if (user.isUser) {
         addProductToCart(
             {
                 userId: user.id,
@@ -33,6 +35,7 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
             .catch((error) => {
                 console.error(error);
             });
+        } 
         } else {
             patchCartItemQuantity(
 				{
