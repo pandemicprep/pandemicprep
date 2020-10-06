@@ -97,6 +97,7 @@ async function getProcessingCarts(pageNumber = 1) {
             cart.items = items;
             const user = await getUserById(cart.userId)
             cart.user = user
+            cart.index = index;
         })
 
         
