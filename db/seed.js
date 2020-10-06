@@ -17,7 +17,12 @@ const { categoryIdByName, getAllCategories } = require("./singletables/categorie
 
 const productArray = require("./singletables/productObject");
 
-const { addCart, getCartHistoryStatusAdmin, getCartHistoryStatus, addProductToCart } = require("./singletables/cart");
+const {
+    addCart,
+    getCartHistoryStatusAdmin,
+    getCartHistoryStatus,
+    addProductToCart,
+} = require("./singletables/cart");
 
 const { addReview, getReviewsByProductId } = require("./singletables/reviews");
 
@@ -28,8 +33,6 @@ const { addReview, getReviewsByProductId } = require("./singletables/reviews");
 //
 //
 //
-
-
 
 async function seed() {
     try {
@@ -83,8 +86,8 @@ async function createNewUsers() {
         const user2 = await addUser({
             firstName: "Joe",
             lastName: "Moe",
-            isAdmin: null,
-            isUser: null,
+            isAdmin: false,
+            isUser: true,
             email: "myemail2@you.com",
             password: "Password2",
             addressLine1: null,
@@ -102,8 +105,8 @@ async function createNewUsers() {
         const user3 = await addUser({
             firstName: "Joe",
             lastName: "Moe",
-            isAdmin: null,
-            isUser: null,
+            isAdmin: false,
+            isUser: true,
             email: "myemail3@you.com",
             password: "Password3",
             addressLine1: null,
@@ -121,10 +124,10 @@ async function createNewUsers() {
         const user4 = await addUser({
             firstName: "Joe",
             lastName: "Moe",
-            isAdmin: null,
-            isUser: null,
-            email: 'myemail4@you.com',
-            password: "Password!",
+            isAdmin: false,
+            isUser: true,
+            email: "myemail4@you.com",
+            password: "not",
             addressLine1: null,
             addressLine2: null,
             city: null,
@@ -193,7 +196,7 @@ async function updatingUsers() {
             isAdmin: false,
             isUser: true,
             email: "myemail2@you.com",
-            password: "password",
+            password: "Password2",
             firstName: "Joe",
             lastName: "Moe",
             addressLine1: "1234 Anywhere",
