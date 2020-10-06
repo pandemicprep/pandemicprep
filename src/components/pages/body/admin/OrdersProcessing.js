@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 
 import "./OrdersProcessing.css";
 
-import { getAllProcessing } from '../../../../api'
+import { getAllProcessing, completeOrder } from '../../../../api'
 
 
 export const OrdersProcessing = ({
@@ -15,6 +15,7 @@ export const OrdersProcessing = ({
     const [processingPage, setProcessingPage] = useState(1);
     const [processingPageLimit, setProcessingPageLimit] = useState(0);
     const [clickedIndex, setClickedIndex] = useState(-1)
+    const [finalized, setFinalized] = useState(true)
 
     useEffect(() => {
         getAllProcessing(processingPage, user.token)
@@ -26,10 +27,19 @@ export const OrdersProcessing = ({
             .catch((error) => {
                 console.error(error);
             })
-    }, [processingPage]);
+    }, [processingPage, finalized]);
 
     const toggleDetails = (index) => {
         setClickedIndex(index)
+    }
+
+    const finalizeOrder = async (order) => {
+        try {
+            await completeOrder(order.id, user.token);
+        } catch (error) {
+            throw error;
+        }
+        setFinalized(!finalized);
     }
 
     // Pagination handlers
@@ -73,10 +83,10 @@ export const OrdersProcessing = ({
                             <div id='initial-details' >
                                 <p>{order.user.firstName} {order.user.lastName}</p>
                                 <p>{order.user.email}</p>
-                                <p>{order.total}</p>
-                                <p>{order.lastUpdated}</p>
+                                <p>{order.total.toFixed(2)}</p>
+                                <p>{Date(order.lastUpdated)}</p>
                                 <button id='dropdown-arrow' onClick={() => toggleDetails(index)} >ˇ</button>
-                                <button className='processing-button' >Finalize</button>
+                                <button className='processing-button' onClick={() => finalizeOrder(order)} >Finalize</button>
 
                             </div>
 

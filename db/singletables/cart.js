@@ -9,7 +9,6 @@ const LIMIT = 20;
  * @param {object} status(active, processing, complete) 
  */
 async function addCart({ status, lastUpdated, total, userId }) {
-    console.log("getting into add cart with ", status, lastUpdated, total, userId);
     try {
         const {
             rows: [newCart],
@@ -179,7 +178,6 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
         cart.items.map((item) => {
             total = total + item.itemTotal;
             cartQuantity = cartQuantity + item.quantity;
-            console.log('the item total is ', item.itemTotal);
         })
 
         const date = new Date();
@@ -222,7 +220,6 @@ async function getProductsCartForACartId(id) {
                 item.unitPrice = parseFloat(item.unitPrice);
                 item.itemTotal = parseFloat(item.itemTotal);
             })
-            console.log(items, 'items in 188-214')
             return items;
         } else {
             return [];
@@ -310,7 +307,6 @@ UPDATE carts
  */
 
 async function updateProductQuantity({ userId, jointId, quantity, unitPrice }) {
-    console.log('getting to update with ', userId, jointId, quantity, unitPrice);
     const itemTotal = unitPrice * quantity;
 
     try {
@@ -365,6 +361,22 @@ async function deactivateCart({userId, cartId}) {
     }
 }
 
+// Change cart status from processing to complete
+async function completeCart (cartId) {
+    try {
+        const { rows: [completedOrder] } = await client.query(`
+            UPDATE carts 
+            SET status='complete'
+            WHERE id=$1
+            RETURNING *;
+        `, [cartId]);
+
+        return completedOrder;
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function updateDate(cartId) {
     const date = new Date();
     try {
@@ -385,5 +397,6 @@ module.exports = {
     removeProductFromCart,
     deactivateCart,
     updateProductQuantity,
-    getProcessingCarts
+    getProcessingCarts,
+    completeCart
 };
