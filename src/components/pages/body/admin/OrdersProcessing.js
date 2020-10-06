@@ -27,7 +27,7 @@ export const OrdersProcessing = () => {
                         <p>Email</p>
                         <p>Price</p>
                         <p>Date</p>
-                        <p id='dropdown-arrow' >ˇ</p>
+                        <button id='dropdown-arrow' >ˇ</button>
                         <button className='processing-button' >Finalize</button>
 
                     </div>
@@ -35,79 +35,11 @@ export const OrdersProcessing = () => {
                     <div id='hidden-details'>
 
                         <div id='hidden-titles' >
-                            <p>Product</p>
-                            <p>Quantity</p>
-                            <p>Price</p>
-                            <p>Total</p>
+                          
                         </div>
 
                         <div id='each-hidden-item' >
-                            <p>Product</p>
-                            <p>Quantity</p>
-                            <p>Price</p>
-                            <p>Total</p>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div className='order-content' >
-
-                    <div id='initial-details' >
-                        <p>Name</p>
-                        <p>Email</p>
-                        <p>Price</p>
-                        <p>Date</p>
-                        <p id='dropdown-arrow' >ˇ</p>
-                        <button className='processing-button' >Finalize</button>
-
-                    </div>
-
-                    <div id='hidden-details'>
-
-                        <div id='hidden-titles' >
-                            <p>Product</p>
-                            <p>Quantity</p>
-                            <p>Price</p>
-                            <p>Total</p>
-                        </div>
-
-                        <div id='each-hidden-item' >
-                            <p>Product</p>
-                            <p>Quantity</p>
-                            <p>Price</p>
-                            <p>Total</p>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div className='order-content' >
-
-                    <div id='initial-details' >
-                        <p>Name</p>
-                        <p>Email</p>
-                        <p>Price</p>
-                        <p>Date</p>
-                        <p id='dropdown-arrow' >ˇ</p>
-                        <button className='processing-button' >Finalize</button>
-
-                    </div>
-
-                    <div id='hidden-details'>
-
-                        <div id='hidden-titles' >
-                            <p>Product</p>
-                            <p>Quantity</p>
-                            <p>Price</p>
-                            <p>Total</p>
-                        </div>
-
-                        <div id='each-hidden-item' >
-                            <p>Product</p>
-                            <p>Quantity</p>
-                            <p>Price</p>
-                            <p>Total</p>
+                            
                         </div>
 
                     </div>
