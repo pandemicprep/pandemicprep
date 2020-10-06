@@ -28,7 +28,7 @@ export const News = () => {
                                 <a className='news-title' target='_blank' href={article.url}>{article.title}</a>
                             </h2>
 
-                            <span className='news-author'>{article.author}</span>
+                            {/* <span className='news-author'>{article.author}</span> */}
 
                             <div className='news-date'>{article.published}</div>
 

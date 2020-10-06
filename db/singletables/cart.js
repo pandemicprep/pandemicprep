@@ -1,6 +1,7 @@
 /** @format */
 
 const { client } = require("../client");
+const Promise = require('bluebird');
 const LIMIT = 20;
 
 /**
@@ -81,16 +82,38 @@ async function getProcessingCarts(pageNumber = 1) {
           `
         );
 
-        const { rows } = await client.query(
+        const { rows: carts } = await client.query(
             `
           SELECT * FROM carts
           WHERE status = 'processing'
-          LIMIT ${LIMIT} OFFSET ${OFFSET};
+          LIMIT $1 OFFSET $2;
           `
-        );
+        , [LIMIT, OFFSET]);
 
+        await Promise.mapSeries(carts, async function (cart, index, length) {
+            console.log('getting into map series')
+            cart.total = parseFloat(cart.total);
+            cart.test = 'test';
+            const items = await getProductsCartForACartId(cart.id);
+            console.log(items, 'items before adding to cart object')
+            cart.items = items;
+            console.log(cart.items, 'cart items at end of map series')
+        })
+
+        // carts.map(async (cart) => {
+        //     try {
+        //         console.log(cart, 'cart in front of carts map')
+        //         cart.total = parseFloat(cart.total);
+        //         cart.test = 'test'
+        //         cart.items = await getProductsCartForACartId(cart.id);
+        //         console.log(cart.items, 'cart items after carts map')
+        //     } catch (error) {
+        //         throw error;
+        //     }
+            
+        // })
         const pageCount = Math.ceil(rowCount / LIMIT);
-        return [pageCount, rows];
+        return [pageCount, carts];
     } catch (error) {
         throw error;
     }
@@ -189,6 +212,7 @@ async function getProductsCartForACartId(id) {
                 item.unitPrice = parseFloat(item.unitPrice);
                 item.itemTotal = parseFloat(item.itemTotal);
             })
+            console.log(items, 'items in 188-214')
             return items;
         } else {
             return [];

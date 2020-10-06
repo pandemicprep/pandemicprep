@@ -74,8 +74,9 @@
 
 #dropdown-arrow {
     font-size: 48px;
-    position: relative;
-    top: 16px;
+    width: 50px;
+    margin-right: 100px;
+    margin-left: 80px;
 }
 
 .processing-button {
@@ -127,4 +128,8 @@
     -ms-transform: scale(1.075,1.075);
     -o-transform: scale(1.075,1.075);
     transform: scale(1.075,1.075);
+}
+
+.hidden-processing {
+    display: none;
 }
