@@ -41,7 +41,7 @@ const App = () => {
         isUser: false,
         token: "",
     });
-    const [cart, setCart] = useState({ items: [] });
+    const [cart, setCart] = useState({status: 'active', cartQuantity: 0, total: 0, items: [] });
     const [cartSize, setCartSize] = useState(0);
     const [products, setProducts] = useState([]);
     const [promotedProducts, setPromotedProducts] = useState([]);
@@ -56,17 +56,17 @@ const App = () => {
 
     useEffect(() => {
         if (!category) {
-            // history.push('/')
+            history.push('/')
             return
         }
         getProductsByCategory(category.toLowerCase(), 1)
             .then((response) => {
-                console.log('This is the response ', response)
+                
                 setSearchObject({ pageCount: response[0], categoryName: category })
-                setProducts(response[1])
+                setProducts(response[1]);
             })
             .catch((error) => {
-                console.error('this is the error yall', error)
+                console.error(error);
             })
     }, [category]);
 
@@ -88,6 +88,9 @@ const App = () => {
                 .catch((error) => {
                     console.error(error);
                 });
+        }
+        if (localStorage.getItem('panprepCart')) {
+            setCart(JSON.parse(localStorage.getItem('panprepCart')));
         }
     }, []);
 
