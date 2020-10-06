@@ -724,14 +724,14 @@ const productArray = [
         price: 4.99,
         description: "Good for cleaning as well as wounds!",
         image: "images/bounty-papertowels.jpg",
-        category: "grocery", "household"
+        category: "grocery household"
     },
     {
         name: "Dixie Plates",
         price: 6.99,
         description: "Paper plates.",
         image: "images/dixie-plates.jpeg",
-        category: "grocery", "household"
+        category: "grocery household"
     },
     {
         name: "Bushs Baked Beans",
@@ -745,7 +745,7 @@ const productArray = [
         price: 9.99,
         description: "Disposable plastic cuttlery.",
         image: "images/clear-dixie-cutlery.jpg",
-        category: "grocery", "household"
+        category: "grocery household"
     },
     {
         name: "Nacho Doritos",
@@ -759,7 +759,7 @@ const productArray = [
         price: 0.99,
         description: "Get some local honey, it will have local pollin and will help build immunity.",
         image: "images/jar-of-honey.jpg",
-        category: "grocery", "health"
+        category: "grocery health"
     },
     {
         name: "Water purification tablets",
@@ -773,7 +773,7 @@ const productArray = [
         price: 19.99,
         description: "Makes any water clean and safe to drink.",
         image: "images/lifestraw-high-res.png",
-        category: "grocery", "household"
+        category: "grocery household"
     },
     {
         name: "Hostess Twinkies",
