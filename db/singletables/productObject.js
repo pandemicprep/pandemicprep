@@ -858,7 +858,442 @@ const productArray = [
         description: "Staple of any prepper. Good shelf life.",
         image: "images/pinto-beans-dry.jpg",
         category: "grocery"
-    }
+    },
+    {
+        name: "Pandemic",
+        price: 34.99,
+        description: "As skilled members of a disease fighting team, you and the other players work together to keep the world safe from outbreaks and epidemics.",
+        image: "images/pandemic.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "I Dissent",
+        price: 19.99,
+        description: "Cast your opinion. Win votes to rule the court. Stand your ground, and dissent to score even more points!",
+        image: "images/dissent.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Throw Burrito",
+        price: 24.99,
+        description: "Try to collect matching sets of cards faster than your opponents while simultaneously ducking, dodging, and throwing squishy airborne burritos. The cards you collect earn points, but getting hit by flying burritos loses them.",
+        image: "images/burrito.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "7 Wonders",
+        price: 34.99,
+        description: "A complete visual revamp of the game all while keeping its famous mechanics.",
+        image: "images/wonders.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Pool Table",
+        price: 749.99,
+        description: "CLASSIC, RUSTIC LOOK: The Kirkwood’s rustic finish and k-shaped leg construction puts a unique twist on a classic design.",
+        image: "images/pool.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Poker Chip Set",
+        price: 49.99,
+        description: "This Poker Chip Set Includes 5 different colors of chips, 2 decks of playing cards, 5 dices, and dealer button, all in a deluxe aluminum case.",
+        image: "images/poker.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Mini Ninja Turtles Arcade",
+        price: 19.99,
+        description: "A fully functional miniature version of your favorite arcade game from the summer boardwalk to the after-school Mall video arcade.",
+        image: "images/turtles.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Oculus Quest 2",
+        price: 299.99,
+        description: "All-In-One Gaming - With backward compatibility, you can explore new titles and old favorites in the expansive Quest content library.",
+        image: "images/occu.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Occulus Rift S",
+        price: 399.99,
+        description: "Top VR gaming library: Blast, slash and soar your way through the top library in VR gaming. Oculus Rift S lets you play hundreds of games and exclusives already available in the Oculus store, with so much more to come.",
+        image: "images/occu2.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Sequence",
+        price: 34.99,
+        description: "Play a card from your hand, and place a chip on a corresponding space on the game board - when you have five in a row, it’s a SEQUENCE.",
+        image: "images/sequence.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Haunted Mansion",
+        price: 34.99,
+        description: "Explore all the classic rooms of the ghost-infested manor, from the festivities-filled Ballroom to the Attic and out to the Graveyard and beyond in search of spirits.",
+        image: "images/haunted.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "PlayStation 4",
+        price: 349.99,
+        description: "Includes a new slim 1TB PlayStation  4 system, a matching DualShock 4 Wireless Controller.",
+        image: "images/ps4.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "PlayStation Portable",
+        price: 99.99,
+        description: "Piano Black PlayStation Portable includes built-in microphone.",
+        image: "images/psp.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Stranger Things Pinball",
+        price: 999.99,
+        description: "Stranger Things pinball machines will immerse players in a search to unravel the mysteries and secret government experiments taking place at the Hawkins National Laboratory.",
+        image: "images/strangerthings.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "UNO",
+        price: 9.99,
+        description: "​UNO is the classic family card game that's easy to learn and so much fun to play!",
+        image: "images/uno.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Yahtzee",
+        price: 12.99,
+        description: "Dice-rollin' battle game!!",
+        image: "images/yahtzee.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Candy Land",
+        price: 14.99,
+        description: "Players encounter all kinds of delicious surprises as they move their cute gingerbread man pawn around the path in a race to the castle!",
+        image: "images/candyland.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Clue",
+        price: 19.99,
+        description: "Ultimate mystery game! Who can solve this murder?",
+        image: "images/clue.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Sorry!",
+        price: 19.99,
+        description: "Nostalgic tabletop gameplay meets interactive digital content for an immersive gaming experience.",
+        image: "images/sorry.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Nintendo Switch",
+        price: 359.99,
+        description: "Nintendo Switch 32GB Console Neon Red/Neon Blue Joy-Con",
+        image: "images/switch.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "ChargePlay",
+        price: 29.99,
+        description: "Simultaneously charges four Joy-Con controllers.",
+        image: "images/charger.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Nintendo Switch (Gray)",
+        price: 329.99,
+        description: "Nintendo Switch allows you to get the family together and enjoy gaming on the big screen",
+        image: "images/switchb.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Nintendo Switch - Animal Crossing",
+        price: 299.99,
+        description: "New Horizons Edition!",
+        image: "images/switcha.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Star Wars Arcade",
+        price: 449.99,
+        description: "3 Games In 1 includes Star Wars, Star Wars The Empire Strikes Back, and Star Wars Return of the Jedi.",
+        image: "images/starwars.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Battleship",
+        price: 19.99,
+        description: "CLASSIC BATTLESHIP GAME: Kids ages 7 and up can enjoy playing this classic game of naval combat.",
+        image: "images/battleship.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Guess Who?",
+        price: 9.99,
+        description: "THE ORIGINAL GUESSING GAME: This edition of the Guess Who? game features classic tabletop boards, 24 Mystery cards and 48 Face cards.",
+        image: "images/guesswho.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Pun Intended",
+        price: 24.99,
+        description: "Pun Intended is for pun-loving people everywhere! Just like the vandals who destroyed the road signs, we pulled out all the stops.",
+        image: "images/pun.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Speed Charades",
+        price: 24.99,
+        description: "A fun twist on a family favorite. Players compete head-to-head in a race to act out words for their teams to guess.",
+        image: "images/charades.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Foosball",
+        price: 99.99,
+        description: "Competition-sized foosball table brings fun to any setting, perfect for home game rooms, arcades, and other entertainment areas.",
+        image: "images/foosball.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Classic Arcade",
+        price: 999.99,
+        description: "Equipped with the Highest Quality SANWA Joysticks, Trackball, 26 LCD Monitor, Thick Tempered Glass, and more! We stand behind our products because we are industry leaders in quality craftsmanship and design.",
+        image: "images/classicarcade.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Foldable Basketball Game",
+        price: 99.99,
+        description: "There are 8 game options can be selected by setting the controller at your hand. And you will find the detailed description of endless ways of play in the manual.",
+        image: "images/bball.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Life",
+        price: 19.99,
+        description: "Choose a path for a life of action, adventure, and unexpected surprises.",
+        image: "images/life.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Parcheesi",
+        price: 16.99,
+        description: "Classic game of chase, race and capture.",
+        image: "images/parche.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Gamecube",
+        price: 99.99,
+        description: "Includes Console, Power Cable, AV Cable, and Indigo Controller for Nintendo GameCube",
+        image: "images/gamecube.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Pink Gamecube Controller",
+        price: 9.99,
+        description: "2 Analogue thumb stick,8 Completely analog action buttons,4 Fire action buttons,1 Shoulder buttons , The smooth curved hand lines will make your hands completely at your disposal.",
+        image: "images/pinkcon.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Oriflame Classic Console",
+        price: 49.99,
+        description: "This is a retro TV video game consoles of the 80s of the last century, it collected a lot of last century game. Built-in 821 different games, 821 Classic Games recover your childrenhood memory. You can easily find 30-40 games that belong to your favorite classic game.",
+        image: "images/classicnin.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Jumanji",
+        price: 18.99,
+        description: "Adventurers beware: do not begin unless you intend to finish..",
+        image: "images/jumanji.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Risk",
+        price: 29.99,
+        description: "Improved mission cards speed up the game; features 12 secret missions.",
+        image: "images/risk.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Photosynthesis",
+        price: 34.99,
+        description: "Photosynthesis is one of the best environmental board games referring to the life cycle of trees, for science and biology enthusiasts.",
+        image: "images/photosyn.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Monopoly",
+        price: 19.99,
+        description: "Build houses and hotels on your properties and bankrupt your opponents to win it all.",
+        image: "images/monopoly.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Tabletop Bowling",
+        price: 49.99,
+        description: "MINI BOWLING: All the fun of bowling in a compact table top size.",
+        image: "images/bowl.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Xbox One",
+        price: 339.99,
+        description: "Bundle includes: Xbox One S 1TB Console, 1 Xbox Wireless Controller (with 3.5mm headset jack), HDMI cable (4K Capable), AC Power cable.",
+        image: "images/xbox.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Blue Xbox Controller",
+        price: 39.99,
+        description: "Experience the modernized design of the Xbox Wireless Controller – Shock Blue, featuring sculpted surfaces and refined geometry for enhanced comfort and effortless control during gameplay.",
+        image: "images/xboxconb.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "White Xbox Controller",
+        price: 39.99,
+        description: "Experience the modernized design of the Xbox Wireless Controller in Robot White, featuring sculpted surfaces and refined geometry for enhanced comfort and effortless control during gameplay.",
+        image: "images/xboxconw.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Handheld Classic Console",
+        price: 39.99,
+        description: "Retro game consoles have a variety of classic games, you can also download games in related formats.",
+        image: "images/handheld.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Operation",
+        price: 19.99,
+        description: "Players get to be the doctor and make Cavity Sam better or get the buzzer.",
+        image: "images/operation.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Pac-Man",
+        price: 19.99,
+        description: "Arcade classic - rediscover this classic arcade experience with Pac-Man the board game.",
+        image: "images/pacman.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Jenga",
+        price: 7.99,
+        description: "Pull out a block without crashing the stack to win at Jenga.",
+        image: "images/Jenga.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Cards Against Humanity",
+        price: 24.99,
+        description: "Cards Against Humanity is a party game for horrible people..",
+        image: "images/cah.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Cards Against Humanity: Absurd",
+        price: 19.99,
+        description: "The Absurd Box is an expansion to Cards Against Humanity.",
+        image: "images/caha.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Cards Against Humanity: Family",
+        price: 24.99,
+        description: "Family Edition is a new fill-in-the-blank comedy game that’s just like Cards Against Humanity, but it’s made for kids and adults to play together.",
+        image: "images/cahf.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Cards Against Humanity: Family",
+        price: 19.99,
+        description: "Contains six different themed packs you forgot to buy when they came out.",
+        image: "images/cahh.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Nintendo 64",
+        price: 299.99,
+        description: "Classic Nintendo 64 Console in Smoke, includes controller.",
+        image: "images/nintendo64.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Nintendo 64",
+        price: 299.99,
+        description: "Classic Nintendo 64 Console in Smoke, includes controller.",
+        image: "images/nintendo64g.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Cocktail Arcade Machine",
+        price: 999.99,
+        description: "ALL THE CLASSICS: Remember all of those amazing games you played as a kid - this machine has 60 of those amazing classic games.",
+        image: "images/pac.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Speedball",
+        price: 699.99,
+        description: "RUSTIC DESIGN: We recreated the essence and aesthetics of the original ball scoring game. Accented with distressed oak wood with iron metal trimming, legs and net, this table is as much a designer piece as it is high-performing sports equipment.",
+        image: "images/roll.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Arcade Claw Machine",
+        price: 38.99,
+        description: "Bring your favorite arcade game home!",
+        image: "images/claw.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Hand Puppets",
+        price: 24.99,
+        description: "ENTERTAINING HAND PUPPETS FOR KIDS: The Melissa & Doug Safari Buddies Hand Puppets set includes 6 soft and cuddly hand puppets with a safari animal theme.",
+        image: "images/puppets.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Puffin Classics",
+        price: 49.99,
+        description: "The Puffin Classic Story Collection 10 Books Set.",
+        image: "images/puffin.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Major Works of C.D.",
+        price: 99.99,
+        description: "The Major Works of Charles Dickens!",
+        image: "images/charles.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "The Bronte Sisters Set",
+        price: 69.99,
+        description: "A beautiful boxed set of four Hardcover Classics by the Brontë sisters, including Wuthering Heights, Villette, Jane Eyre, and The Tenant of Wildfell Hall.",
+        image: "images/bronte.jpg",
+        category: "entertainment"
+    },
+    {
+        name: "Complete Novels of Jane Austin",
+        price: 14.99,
+        description: "This new, enhanced leather-bound edition includes all the completed novels of beloved author Jane Austen.",
+        image: "images/jane.jpg",
+        category: "entertainment"
+    },
+
 
 
 ]
@@ -867,7 +1302,7 @@ module.exports = productArray;
 
 //school work - FALON
 //entertainment (BOARD GAMES ETC)
+//health (vitamins, masks, etc etc)
 //household (LYSOL TP ETC ETC WHATEVER)
 //protection (KNIFES, MACE, SECURITY, AMMO ETC)
-//health (vitamins, masks, etc etc)
 //groceries (NON PERISH)
