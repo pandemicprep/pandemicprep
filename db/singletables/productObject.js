@@ -1292,7 +1292,7 @@ const productArray = [
         description: "This new, enhanced leather-bound edition includes all the completed novels of beloved author Jane Austen.",
         image: "images/jane.jpg",
         category: "entertainment"
-    },
+    }
 
 
 
