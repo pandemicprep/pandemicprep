@@ -31,6 +31,7 @@ async function addCart({ status, lastUpdated, total, userId }) {
 }
 
 
+
 /**
  * Get users cart history
  * @param {integer} cartId 
@@ -91,29 +92,37 @@ async function getProcessingCarts(pageNumber = 1) {
         , [LIMIT, OFFSET]);
 
         await Promise.mapSeries(carts, async function (cart, index, length) {
-            console.log('getting into map series')
             cart.total = parseFloat(cart.total);
-            cart.test = 'test';
             const items = await getProductsCartForACartId(cart.id);
-            console.log(items, 'items before adding to cart object')
             cart.items = items;
-            console.log(cart.items, 'cart items at end of map series')
+            const user = await getUserById(cart.userId)
+            cart.user = user
         })
 
-        // carts.map(async (cart) => {
-        //     try {
-        //         console.log(cart, 'cart in front of carts map')
-        //         cart.total = parseFloat(cart.total);
-        //         cart.test = 'test'
-        //         cart.items = await getProductsCartForACartId(cart.id);
-        //         console.log(cart.items, 'cart items after carts map')
-        //     } catch (error) {
-        //         throw error;
-        //     }
-            
-        // })
+        
         const pageCount = Math.ceil(rowCount / LIMIT);
         return [pageCount, carts];
+    } catch (error) {
+        throw error;
+    }
+}
+
+// brought get user by id into this file to add the user info onto processing cart
+async function getUserById(id) {
+    try {
+        const {
+            rows: [user],
+        } = await client.query(
+            `
+		SELECT * FROM users
+		WHERE id = $1;`,
+            [id]
+        );
+        if (user) {
+            return user;
+        } else {
+            return { message: "no user by that id" };
+        }
     } catch (error) {
         throw error;
     }

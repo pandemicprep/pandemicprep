@@ -3,7 +3,7 @@
 
 //EXPORTS ALL API FUNCTIONS
 
-export { getAllUsers, getAllProducts, updateProduct, adminUpdateUser } from './admin'
+export { getAllUsers, getAllProducts, getAllProcessing, updateProduct, adminUpdateUser } from './admin'
 
 
 
