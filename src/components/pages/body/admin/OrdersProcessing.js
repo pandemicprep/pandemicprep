@@ -5,8 +5,49 @@ import React, { useState, useEffect } from "react";
 
 import "./OrdersProcessing.css";
 
+import { getAllProcessing } from '../../../../api'
 
-export const OrdersProcessing = () => {
+
+export const OrdersProcessing = ({
+    user
+}) => {
+    const [orders, setOrders] = useState([]);
+    const [processingPage, setProcessingPage] = useState(1);
+    const [processingPageLimit, setProcessingPageLimit] = useState(0);
+
+    useEffect(() => {
+        getAllProcessing(processingPage, user.token)
+            .then((response) => {
+                console.log(response)
+                setProcessingPageLimit(response[0]);
+                setOrders(response[1]);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+    }, [processingPage]);
+
+    // Pagination handlers
+    const firstHandler = () => {
+        if (processingPage > 1) {
+            setProcessingPage(1);
+        }
+    }
+    const prevHandler = () => {
+        if (processingPage > 1) {
+            setProcessingPage(processingPage - 1);
+        }
+    }
+    const nextHandler = () => {
+        if (processingPage < processingPageLimit) {
+            setProcessingPage(processingPage + 1);
+        }
+    }
+    const lastHandler = () => {
+        if (processingPage < processingPageLimit) {
+            setProcessingPage(processingPageLimit);
+        }
+    }
 
 
     return (
@@ -20,33 +61,62 @@ export const OrdersProcessing = () => {
                     <p id="date">Date Placed:</p>
                 </div>
 
-                <div className='order-content' >
+                { orders.map((order) => {
+                    return (
+                        <div className='order-content' >
 
-                    <div id='initial-details' >
-                        <p>Name</p>
-                        <p>Email</p>
-                        <p>Price</p>
-                        <p>Date</p>
-                        <button id='dropdown-arrow' >ˇ</button>
-                        <button className='processing-button' >Finalize</button>
+                            <div id='initial-details' >
+                                <p>{order.user.firstName} {order.user.lastName}</p>
+                                <p>{order.user.email}</p>
+                                <p>{order.total}</p>
+                                <p>{order.lastUpdated}</p>
+                                <button id='dropdown-arrow' >ˇ</button>
+                                <button className='processing-button' >Finalize</button>
 
-                    </div>
+                            </div>
 
-                    <div id='hidden-details'>
+                            <div className='hidden-details hidden-processing'>
 
-                        <div id='hidden-titles' >
-                          
+                                <div id='hidden-titles' >
+                                    <p>Product</p>
+                                    <p>Quantity</p>
+                                    <p>Price</p>
+                                    <p>Total</p>
+                                </div>
+
+                                {order.items.map((item) => {
+                                    return (
+                                        <div id='each-hidden-item' >
+                                            <p>{item.title}</p>
+                                            <p>{item.quantity}</p>
+                                            <p>{item.price}</p>
+                                            <p>{item.price * item.quantity}</p>
+                                        </div>
+                                    )
+                                })}
+
+                            </div>
+
                         </div>
-
-                        <div id='each-hidden-item' >
-                            
-                        </div>
-
-                    </div>
-
-                </div>
-
-
+                    )
+                })}
+            </div>
+            <div id='pagination'>
+                {processingPage === 1 ? ''
+                    :
+                    <>
+                        <a href='#' onClick={firstHandler}>❮❮</a>
+                        <a href='#' onClick={prevHandler}>❮</a>
+                    </>
+                }
+                <a href='#'>{processingPage}</a>
+                {processingPage === processingPageLimit ? ''
+                    :
+                    <>
+                        <a href='#' onClick={nextHandler}>❯</a>
+                        <a href='#' onClick={lastHandler}>❯❯</a>
+                    </>
+                }
 
             </div>
         </div>

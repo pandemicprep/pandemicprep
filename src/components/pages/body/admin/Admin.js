@@ -51,6 +51,7 @@ export const Admin = ({
                                 setCart={setCart}
                                 /> : ''}
         {adminView === 'processing' ? <OrdersProcessing 
+                                        user={user}
                                     /> : ''}
         </>
     )
