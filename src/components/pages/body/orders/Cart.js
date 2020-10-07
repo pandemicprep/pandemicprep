@@ -62,7 +62,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                 let newQuantity = 0;
                 let newTotal = 0;
                 newCart.items.map((item) => {
-                    if (item.id === productId) {
+                    if (item.id === product.id) {
                         item.quantity = item.quantity + direction;
                         item.itemTotal = item.price * item.quantity;
                     }

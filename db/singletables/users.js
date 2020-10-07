@@ -6,7 +6,6 @@ const { addCart, getActiveCart } = require("../singletables/cart.js");
 //LIMIT is the number of users per page in the Admin tab
 const LIMIT = 10;
 
-
 /**
  * Create new user by registration (first, last, email, pass minimum),
  * by guest purchase (all fields except for password),
@@ -79,7 +78,7 @@ async function addUser({
                     total: 0,
                     userId: newUser.id,
                 });
-                activeCart.items = [{}];
+                activeCart.items = [];
                 newUser.activeCart = activeCart;
                 return newUser;
             } else {
@@ -97,17 +96,15 @@ async function addUser({
 
 /**
  * Gets all users
- * @param {integer} pageNumber 
+ * @param {integer} pageNumber
  */
 async function getAllUsers(pageNumber = 1) {
     try {
-
-        const OFFSET = (LIMIT * (pageNumber-1));
-
+        const OFFSET = LIMIT * (pageNumber - 1);
 
         const { rowCount } = await client.query(`
             SELECT * FROM users;
-        `)
+        `);
 
         const { rows } = await client.query(`
             SELECT * FROM users
@@ -115,7 +112,7 @@ async function getAllUsers(pageNumber = 1) {
         `);
 
         const pageCount = Math.ceil(rowCount / LIMIT);
-        console.log(pageCount, 'pagecount in db')
+        console.log(pageCount, "pagecount in db");
 
         return [pageCount, rows];
     } catch (error) {
@@ -125,8 +122,8 @@ async function getAllUsers(pageNumber = 1) {
 
 /**
  * Patches (updates) the user by ID & Fields
- * @param {integer} id 
- * @param {object} fields 
+ * @param {integer} id
+ * @param {object} fields
  */
 async function updateUser(id, fields = {}) {
     // Builds the set string
@@ -156,10 +153,9 @@ async function updateUser(id, fields = {}) {
     }
 }
 
-
 /**
  * Gets the user by the userID
- * @param {integer} id 
+ * @param {integer} id
  */
 async function getUserById(id) {
     try {
@@ -181,10 +177,9 @@ async function getUserById(id) {
     }
 }
 
-
 /**
  * Gets the User by their Email
- * @param {string} email 
+ * @param {string} email
  */
 async function getUserByEmail(email) {
     try {

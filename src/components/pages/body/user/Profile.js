@@ -15,7 +15,7 @@ import {
 
 import "./Profile.css";
 
-export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) => {
+export const Profile = ({ view, setView, setUser, user, useHistory, setCart, setCartSize }) => {
     //CURRENT VIEWS: login register guest userCheckout edit
     //CHANGE PASSWORD BUTTON: needs onclick function to switch state to ''
     //SET UP STATES FOR DIFFERENT VIEWS! :)
@@ -77,6 +77,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     token: newUser.token,
                 });
                 setCart(newUser.activeCart);
+                setCartSize(newUser.activeCart.cartQuantity);
                 history.push("/");
             }
             //login
@@ -91,6 +92,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     token: user.token,
                 });
                 setCart(user.activeCart);
+                setCartSize(user.activeCart.cartQuantity);
                 history.push("/");
             }
             //guest
@@ -160,26 +162,37 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
     //CURRENT VIEWS: login register guest userCheckout edit
     return (
         <div className="profile">
-
             <form className="profileForm" onSubmit={formHandler}>
-                <h1 id="editPro" className={view === "register" ||
-                    view === "login" ||
-                    view === "userCheckout"
-
-                    ? "field hide"
-                    : "field"}>Edit Profile: </h1>
-                <h1 id="editPro" className={view === "register" ||
-                    view === "fulledit" ||
-                    view === "userCheckout"
-
-                    ? "field hide"
-                    : "field"}>User Login: </h1>
-                <h1 id="editPro2" className={view === "login" ||
-                    view === "fulledit" ||
-                    view === "userCheckout"
-
-                    ? "field hide"
-                    : "field"}>Sign Up: </h1>
+                <h1
+                    id="editPro"
+                    className={
+                        view === "register" || view === "login" || view === "userCheckout"
+                            ? "field hide"
+                            : "field"
+                    }
+                >
+                    Edit Profile:{" "}
+                </h1>
+                <h1
+                    id="editPro"
+                    className={
+                        view === "register" || view === "fulledit" || view === "userCheckout"
+                            ? "field hide"
+                            : "field"
+                    }
+                >
+                    User Login:{" "}
+                </h1>
+                <h1
+                    id="editPro2"
+                    className={
+                        view === "login" || view === "fulledit" || view === "userCheckout"
+                            ? "field hide"
+                            : "field"
+                    }
+                >
+                    Sign Up:{" "}
+                </h1>
                 <input
                     type="text"
                     id="firstName"
@@ -223,10 +236,10 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     id="reveal"
                     className={
                         view === "register" ||
-                            view === "userCheckout" ||
-                            view === "login" ||
-                            view === "guest" ||
-                            view === "fulledit"
+                        view === "userCheckout" ||
+                        view === "login" ||
+                        view === "guest" ||
+                        view === "fulledit"
                             ? "field hide"
                             : "field"
                     }
@@ -258,9 +271,9 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     placeholder="Verify Password" //
                     className={
                         view === "guest" ||
-                            view === "userCheckout" ||
-                            view === "login" ||
-                            view === "edit"
+                        view === "userCheckout" ||
+                        view === "login" ||
+                        view === "edit"
                             ? "field hide"
                             : "field"
                     }
@@ -277,9 +290,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     value={address1}
                     placeholder="Address Line One"
                     className={
-                        view === "register" ||
-                            view === "login" ||
-                            view === "userCheckout"
+                        view === "register" || view === "login" || view === "userCheckout"
                             ? "field hide"
                             : "field"
                     }
@@ -296,10 +307,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart }) =
                     value={address2}
                     placeholder="Address Line Two"
                     className={
-                        view === "register" ||
-                            view === "login" ||
-                            view === "userCheckout"
-
+                        view === "register" || view === "login" || view === "userCheckout"
                             ? "field hide"
                             : "field"
                     }
