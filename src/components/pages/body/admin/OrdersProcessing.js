@@ -20,7 +20,6 @@ export const OrdersProcessing = ({
     useEffect(() => {
         getAllProcessing(processingPage, user.token)
             .then((response) => {
-                console.log(response)
                 setProcessingPageLimit(response[0]);
                 setOrders(response[1]);
             })
@@ -78,7 +77,7 @@ export const OrdersProcessing = ({
 
                 { orders.map((order, index) => {
                     return (
-                        <div className='order-content' >
+                        <div key={index} className='order-content' >
 
                             <div id='initial-details' >
                                 <p>{order.user.firstName} {order.user.lastName}</p>
@@ -100,9 +99,9 @@ export const OrdersProcessing = ({
                                     <p>Total</p>
                                 </div>
 
-                                {order.items.map((item) => {
+                                {order.items.map((item, i) => {
                                     return (
-                                        <div id='each-hidden-item' >
+                                        <div key={i} id='each-hidden-item' >
                                             <p>{item.title}</p>
                                             <p>{item.quantity}</p>
                                             <p>{item.price}</p>
@@ -122,9 +121,9 @@ export const OrdersProcessing = ({
                                     <p>Total</p>
                                 </div>
 
-                                {order.items.map((item) => {
+                                {order.items.map((item, i) => {
                                     return (
-                                        <div id='each-hidden-item' >
+                                        <div key={i} id='each-hidden-item' >
                                             <p>{item.title}</p>
                                             <p>{item.quantity}</p>
                                             <p>{item.price}</p>

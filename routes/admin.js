@@ -122,11 +122,10 @@ adminRouter.get('/processing/:pageNumber', async (req, res, next) => {
 })
 
 // Sets status of cart from processing to complete by cartId
-adminRouter.patch('/processing/complete/:cartId', async (req, res, next) => {
-   
+adminRouter.patch('/finalizing', async (req, res, next) => {
     try {
-        const { cartId } = req.params;
-        
+        const { cartId } = req.body;
+        console.log(cartId, 'cart id in route')
         if (req.user) {
             if (req.user.isAdmin) {
                 const completedOrder = await completeCart(cartId);
