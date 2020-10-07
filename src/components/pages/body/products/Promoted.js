@@ -17,22 +17,26 @@ const content = [
     category: "work health",
   },
   {
-    id: 101,
-    name: "Rose Desk Kit",
-    price: 19.99,
-    description:
-      "1* rosegold acrylic stapler, 1* rosegold acrylic tape dispenser,1* rosegold acrylic staple remover, 1000 pcs rosegold Standard staples.",
-    image: "images/roseacry.jpg",
-    category: "work",
+    name: "ASAKUKI Diffuser",
+    price: 21.99,
+    description: "This ultrasonic essential oil diffuser is an amazing multifunction aromatherapy device unlike any other you've ever used.",
+    image: "images/aroma.jpg",
+    category: "health household",
   },
   {
-    id: 82,
-    name: "Cute Animal Erasers",
-    price: 5.99,
+    name: "Space Icecream",
+    price: 6.99,
+    description: "Freeze dried icecream bar.",
+    image: "images/space-icecream.jpg",
+    category: "groceries",
+  },
+  {
+    name: "Colorful Blank Notebook",
+    price: 9.99,
     description:
-      "Roll the eraser cleaner across paper, a desk, counter or table to pick up the annoying eraser fragments!",
-    image: "images/anierasers.jpg",
-    category: "school",
+      "Pretty design, made with high quality paper and covers for easy writing and durability.",
+    image: "images/colornotebook.jpg",
+    category: "work school entertainment",
   },
   {
     id: 60,
@@ -71,13 +75,11 @@ const content = [
     category: "work",
   },
   {
-    id: 52,
-    name: "Sleek Filing Cabinet",
-    price: 149.99,
-    description:
-      "The interlock system secures 3 drawers and comes with 2 keys to protect your files and valuables. As a safety mechanism to avoid tipping, only 1 drawer can be opened at a time.",
-    image: "images/cab2.jpg",
-    category: "work",
+    name: "Snow Ghillie Suit",
+    price: 1099.99,
+    description: "Be invisible in the snow.",
+    image: "images/helikon_ghillie_snow_camo.jpg",
+    category: "protection",
   },
   {
     id: 26,
@@ -94,7 +96,7 @@ const content = [
     price: 999999.99,
     description:
       "Grants one the power to code without any bugs....also tastes good.",
-    image: "images/banana.jpg",
+    image: "images/banana.png",
     category: "grocery school work protection",
   },
 ];

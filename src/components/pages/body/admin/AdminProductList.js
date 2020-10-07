@@ -143,7 +143,7 @@ export const AdminProductList = ({
 
     return (
         <div id='admin'>
-            <h1 id="productH1">Add New Product:</h1>
+            <h1 id="productH1">Add New Product</h1>
             {adminPage === 1 ?
                 <form id='admin-list' onSubmit={adminAddProduct}>
                     <span className='each-input' id="title">Title & Price:
@@ -154,7 +154,7 @@ export const AdminProductList = ({
 
                     <span className='each-input' id="description2">Description:
                     <input type='text' placeholder='Description' value={description} onChange={handleDescription}></input>
-                    <input type='text' placeholder='Category' value={categories} onChange={handleCategories}></input>
+                        <input type='text' placeholder='Category' value={categories} onChange={handleCategories}></input>
                     </span>
 
                     <span className='each-input' id="image">Image URL:
@@ -164,7 +164,7 @@ export const AdminProductList = ({
 
 
                 </form> : ''}
-            <h1 id="productH1">Edit Existing Product:</h1>
+            <h1 id="productH1">Edit Existing Product</h1>
             {adminProductList.map((item, index) => {
                 return (
                     <span key={index}>
@@ -180,9 +180,9 @@ export const AdminProductList = ({
 
                                 <span className='each-input' id="description">Description:
                                     <input type='text' placeholder={item.description}
-                                    value={editDescription} onChange={(event) => { setEditDescription(event.target.value) }} ></input>
+                                        value={editDescription} onChange={(event) => { setEditDescription(event.target.value) }} ></input>
 
-                                     <input type='text' placeholder={item.categories}></input>
+                                    <input type='text' placeholder={item.categories}></input>
                                 </span>
 
                                 <span className='each-input' id="image">Image URL:
@@ -202,7 +202,7 @@ export const AdminProductList = ({
                                         </span>
                                     }
                                 </span>
-                                
+
                                 <span id='button-span'>
                                     <button id="addNew" type='button' onClick={enableEditMode} >Edit</button>
                                     {adminView === 'editOneProduct' ? <button id="auth" >Authorize</button> : ''}
@@ -218,7 +218,7 @@ export const AdminProductList = ({
 
                                 <span className='each-input' id="description">Description:
                                     <input type='text' readOnly placeholder={item.description} value={item.description}></input><br></br>
-                                    
+
                                     <input type='text' placeholder={item.categories}></input>
                                 </span>
 

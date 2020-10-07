@@ -143,7 +143,7 @@ export const Userlist = ({
 
     return (
         <div className="userList">
-            <h1 id="addUserH1">Add New User:</h1>
+            <h1 id="addUserH1">Add New User</h1>
             <form id='admin-list-user' onSubmit={adminAddUser}>
                 <span className='each-input'>First Name:
                     <input type='text' placeholder='First Name' value={firstName} onChange={handleFirstName}></input>
@@ -168,7 +168,7 @@ export const Userlist = ({
 
                 <button id='user-button2'>Add New</button>
             </form>
-            <h1 id="addUserH1">Edit Existing Users:</h1>
+            <h1 id="addUserH1">Edit Existing Users</h1>
             {adminUserList.map((item, index) => {
                 return (
                     <span key={index}>
