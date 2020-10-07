@@ -6,7 +6,8 @@ const {
     updateProduct,
     getAllUsers,
     updateUser,
-    getProcessingCarts
+    getProcessingCarts,
+    completeCart
 } = require('../db');
 
 //Gets all products (requires admin status)
@@ -114,6 +115,27 @@ adminRouter.get('/processing/:pageNumber', async (req, res, next) => {
             }
         } else {
             res.send({message: 'You must be an admin to get all processing carts'})
+        }
+    } catch (error) {
+        next(error);
+    }
+})
+
+// Sets status of cart from processing to complete by cartId
+adminRouter.patch('/finalizing', async (req, res, next) => {
+    try {
+        const { cartId } = req.body;
+        console.log(cartId, 'cart id in route')
+        if (req.user) {
+            if (req.user.isAdmin) {
+                const completedOrder = await completeCart(cartId);
+                console.log(completedOrder, 'completed order insed admin patch')
+                res.send(completedOrder)
+            } else {
+                res.send({message: 'You must be an admin to complete an order'})
+            }
+        } else {
+            res.send({message: 'You must be an admin to complete an order'})
         }
     } catch (error) {
         next(error);

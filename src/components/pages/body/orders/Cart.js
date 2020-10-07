@@ -11,40 +11,16 @@ import {
     deactivateCart,
 } from "../../../../api";
 // import { Product } from '../products/Product';
+import { removeProductFromGuestCart } from "../../../utils";
 
 export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
+    console.log("current cart ", cart);
     const [shipping, setShipping] = useState(5);
-    const removeHandler = (productId) => {
-        removeProductFromCart({ cartId: cart.id, products_cartsId: productId }, user.token)
-            .then((response) => {
-                setCart(response);
-                setCartSize(response.cartQuantity);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    };
 
-    const ticker = (jointId, quantity, unitPrice, direction) => {
-        if (quantity + direction > 0) {
-            patchCartItemQuantity(
-                {
-                    userId: user.id,
-                    jointId: jointId,
-                    quantity: quantity + direction,
-                    unitPrice: unitPrice,
-                },
-                user.token
-            )
-                .then((result) => {
-                    setCart(result);
-                    setCartSize(result.cartQuantity);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        } else {
-            removeProductFromCart({ cartId: cart.id, products_cartsId: jointId }, user.token)
+    const removeHandler = (product) => {
+        const productId = product.id;
+        if (user.firstName !== "Guest") {
+            removeProductFromCart({ cartId: cart.id, products_cartsId: productId }, user.token)
                 .then((response) => {
                     setCart(response);
                     setCartSize(response.cartQuantity);
@@ -52,6 +28,70 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                 .catch((error) => {
                     console.error(error);
                 });
+        } else {
+            removeProductFromGuestCart(cart, product).then((result) => {
+                setCart(result);
+                setCartSize(result.quantity);
+                localStorage.setItem("panprepCart", JSON.stringify(result));
+            });
+        }
+    };
+
+    const ticker = (product, direction) => {
+        const { jointId, productId, quantity, unitPrice } = product;
+        if (quantity + direction > 0) {
+            if (user.firstName !== "Guest") {
+                patchCartItemQuantity(
+                    {
+                        userId: user.id,
+                        jointId: jointId,
+                        quantity: quantity + direction,
+                        unitPrice: unitPrice,
+                    },
+                    user.token
+                )
+                    .then((result) => {
+                        setCart(result);
+                        setCartSize(result.cartQuantity);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            } else {
+                const newCart = { ...cart };
+                let newQuantity = 0;
+                let newTotal = 0;
+                newCart.items.map((item) => {
+                    if (item.id === productId) {
+                        item.quantity = item.quantity + direction;
+                        item.itemTotal = item.price * item.quantity;
+                    }
+                    newQuantity = newQuantity + item.quantity;
+                    newTotal = newTotal + parseFloat(item.itemTotal);
+                });
+                newCart.cartQuantity = newQuantity;
+                newCart.total = newTotal;
+                setCart(newCart);
+                setCartSize(newQuantity);
+                localStorage.setItem("panprepCart", JSON.stringify(cart));
+            }
+        } else {
+            if (user.firstName !== "Guest") {
+                removeProductFromCart({ cartId: cart.id, products_cartsId: jointId }, user.token)
+                    .then((response) => {
+                        setCart(response);
+                        setCartSize(response.cartQuantity);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            } else {
+                removeProductFromGuestCart(cart, product).then((result) => {
+                    setCart(result);
+                    setCartSize(result.quantity);
+                    localStorage.setItem("panprepCart", JSON.stringify(result));
+                });
+            }
         }
     };
 
@@ -77,7 +117,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
             )}
             <div id="tables-outer-container">
                 <div id="cart-container">
-                    {cart.quantity > 0 ? (
+                    {cart.cartQuantity > 0 ? (
                         <div className="cart-titles">
                             <span className="cart-title">Product</span>
                             <span className="cart-quantity">Quantity</span>
@@ -106,12 +146,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                                               <button
                                                   className="uptick cart-field tick"
                                                   onClick={() => {
-                                                      ticker(
-                                                          product.jointId,
-                                                          product.quantity,
-                                                          product.unitPrice,
-                                                          1
-                                                      );
+                                                      ticker(product, 1);
                                                   }}
                                               >
                                                   &#11014;
@@ -119,12 +154,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                                               <button
                                                   className="downtick cart-field tick"
                                                   onClick={() => {
-                                                      ticker(
-                                                          product.jointId,
-                                                          product.quantity,
-                                                          product.unitPrice,
-                                                          -1
-                                                      );
+                                                      ticker(product, -1);
                                                   }}
                                               >
                                                   &#11015;
@@ -139,7 +169,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                                           <button
                                               className="cart-field cart-delete"
                                               onClick={() => {
-                                                  removeHandler(product.jointId);
+                                                  removeHandler(product);
                                               }}
                                           >
                                               remove

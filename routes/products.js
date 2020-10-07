@@ -3,7 +3,7 @@ const productsRouter = express.Router();
 
 const {
     getProductsByQuery,
-    addProduct,
+    addProductAndCategory,
     getProductById,
     getProductsByCategory,
     getHighlightedProducts
@@ -25,7 +25,7 @@ productsRouter.get('/:query/:pageNumber', async (req, res, next) => {
 productsRouter.post('/', async (req, res, next) => {
     try {
         const product = req.body;
-        const newProduct = await addProduct(product);
+        const newProduct = await addProductAndCategory(product);
 
         res.send(newProduct);
     } catch (error) {

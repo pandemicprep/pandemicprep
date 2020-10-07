@@ -188,12 +188,12 @@ export const Userlist = ({
                                 {item.isAdmin ?
                                     <span className='each-input checkbox'>Is Admin:
                                 <input type='checkbox' defaultChecked={item.isAdmin}
-                                            onClick={(event) => setIsAdmin(event.target.checked)}></input>
+                                            onChange={(event) => setIsAdmin(event.target.checked)}></input>
                                     </span>
                                     :
                                     <span className='each-input checkbox'>Is Admin:
                                 <input type='checkbox' defaultChecked={item.isAdmin}
-                                            onClick={(event) => setIsAdmin(event.target.checked)}></input>
+                                            onChange={(event) => setIsAdmin(event.target.checked)}></input>
                                     </span>
                                 }
 

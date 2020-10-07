@@ -69,3 +69,12 @@ export async function adminUpdateUser({id, fields, token}) {
     throw error;
   }
 }
+
+export async function completeOrder(cartId, token) {
+  try {
+    const { data } = await axios.patch(`/api/admin/finalizing`,  {cartId}, {headers: {Authorization: 'Bearer ' + token}});
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
