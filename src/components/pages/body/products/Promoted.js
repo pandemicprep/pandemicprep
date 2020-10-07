@@ -17,13 +17,7 @@ const content = [
     category: "work health",
   },
   {
-    name: "ASAKUKI Diffuser",
-    price: 21.99,
-    description: "This ultrasonic essential oil diffuser is an amazing multifunction aromatherapy device unlike any other you've ever used.",
-    image: "images/aroma.jpg",
-    category: "health household",
-  },
-  {
+    id: 182,
     name: "Space Icecream",
     price: 6.99,
     description: "Freeze dried icecream bar.",
@@ -31,6 +25,7 @@ const content = [
     category: "groceries",
   },
   {
+    id: 116,
     name: "Colorful Blank Notebook",
     price: 9.99,
     description:
@@ -75,6 +70,7 @@ const content = [
     category: "work",
   },
   {
+    id: 228,
     name: "Snow Ghillie Suit",
     price: 1099.99,
     description: "Be invisible in the snow.",
