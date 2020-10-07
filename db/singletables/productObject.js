@@ -1414,6 +1414,7 @@ const productArray = [
     category: "protection",
 
   },
+
 ];
 
 module.exports = productArray;
