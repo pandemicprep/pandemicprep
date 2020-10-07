@@ -230,9 +230,12 @@ const App = () => {
                             setCartSize={setCartSize}
                         />
                     </Route>
+                    
+                    { user.isUser ? 
                     <Route path="/orders">
                         <Orders user={user} />
-                    </Route>
+                    </Route> : ''}
+
                     <Route path="/user-list">
                         <Userlist />
                     </Route>
