@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 
 import "./OrdersProcessing.css";
 
-import { getAllProcessing } from '../../../../api'
+import { getAllProcessing, completeOrder } from '../../../../api'
 
 
 export const OrdersProcessing = ({
@@ -14,18 +14,32 @@ export const OrdersProcessing = ({
     const [orders, setOrders] = useState([]);
     const [processingPage, setProcessingPage] = useState(1);
     const [processingPageLimit, setProcessingPageLimit] = useState(0);
+    const [clickedIndex, setClickedIndex] = useState(-1)
+    const [finalized, setFinalized] = useState(true)
 
     useEffect(() => {
         getAllProcessing(processingPage, user.token)
             .then((response) => {
-                console.log(response)
                 setProcessingPageLimit(response[0]);
                 setOrders(response[1]);
             })
             .catch((error) => {
                 console.error(error);
             })
-    }, [processingPage]);
+    }, [processingPage, finalized]);
+
+    const toggleDetails = (index) => {
+        setClickedIndex(index)
+    }
+
+    const finalizeOrder = async (order) => {
+        try {
+            await completeOrder(order.id, user.token);
+        } catch (error) {
+            throw error;
+        }
+        setFinalized(!finalized);
+    }
 
     // Pagination handlers
     const firstHandler = () => {
@@ -61,21 +75,22 @@ export const OrdersProcessing = ({
                     <p id="date">Date Placed:</p>
                 </div>
 
-                { orders.map((order) => {
+                { orders.map((order, index) => {
                     return (
-                        <div className='order-content' >
+                        <div key={index} className='order-content' >
 
                             <div id='initial-details' >
                                 <p>{order.user.firstName} {order.user.lastName}</p>
                                 <p>{order.user.email}</p>
-                                <p>{order.total}</p>
-                                <p>{order.lastUpdated}</p>
-                                <button id='dropdown-arrow' >ˇ</button>
-                                <button className='processing-button' >Finalize</button>
+                                <p>{order.total.toFixed(2)}</p>
+                                <p>{Date(order.lastUpdated)}</p>
+                                <button id='dropdown-arrow' onClick={() => toggleDetails(index)} >ˇ</button>
+                                <button className='processing-button' onClick={() => finalizeOrder(order)} >Finalize</button>
 
                             </div>
 
-                            <div className='hidden-details hidden-processing'>
+                            { clickedIndex === index ?
+                            <div className='hidden-details '>
 
                                 <div id='hidden-titles' >
                                     <p>Product</p>
@@ -84,9 +99,9 @@ export const OrdersProcessing = ({
                                     <p>Total</p>
                                 </div>
 
-                                {order.items.map((item) => {
+                                {order.items.map((item, i) => {
                                     return (
-                                        <div id='each-hidden-item' >
+                                        <div key={i} id='each-hidden-item' >
                                             <p>{item.title}</p>
                                             <p>{item.quantity}</p>
                                             <p>{item.price}</p>
@@ -96,6 +111,28 @@ export const OrdersProcessing = ({
                                 })}
 
                             </div>
+                            :
+                            <div className='hidden-details hidden-processing'>
+
+                                <div id='hidden-titles' >
+                                    <p>Product</p>
+                                    <p>Quantity</p>
+                                    <p>Price</p>
+                                    <p>Total</p>
+                                </div>
+
+                                {order.items.map((item, i) => {
+                                    return (
+                                        <div key={i} id='each-hidden-item' >
+                                            <p>{item.title}</p>
+                                            <p>{item.quantity}</p>
+                                            <p>{item.price}</p>
+                                            <p>{item.price * item.quantity}</p>
+                                        </div>
+                                    )
+                                })}
+
+                            </div>}
 
                         </div>
                     )
