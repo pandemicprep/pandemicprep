@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import "./Product.css";
 
 import { addProductToCart, patchCartItemQuantity } from "../../../../api/cart";
+import { addProductToGuestCart } from '../../../index';
 
 export const Product = ({ product, setCart, cart, user, setCartSize }) => {
     
@@ -15,8 +16,8 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
             return item.id === product.id;
         }))
 
+        if (user.isUser) {
         if (!alreadyPresent) {
-            if (user.isUser) {
         addProductToCart(
             {
                 userId: user.id,
@@ -35,7 +36,7 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
             .catch((error) => {
                 console.error(error);
             });
-        } 
+         
         } else {
             patchCartItemQuantity(
 				{
@@ -52,6 +53,14 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
                 console.error(error);
             });
         }
+    } else {
+        // setCart(addProductToGuestCart(cart, product));
+        // setCartSize(cart.cartQuantity);
+        addProductToGuestCart(cart, product).then(result => {
+            setCart(result);
+            setCartSize(result.cartQuantity);
+        })
+    }
     };
 
     return (
@@ -68,3 +77,5 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
         </>
     );
 };
+
+

@@ -44,6 +44,9 @@ export { Footer } from "./pages/footer/Footer";
 
 //utils
 export { states, countries } from "./pages/body/user/profileUtils";
+export { addProductToGuestCart } from './utils';
 
 // News
 export { News } from "./pages/body/News/News";
+
+
