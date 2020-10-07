@@ -66,7 +66,7 @@ export const OrdersProcessing = ({
 
     return (
         <div id='all-processing' >
-            <h1 id="ordersH1">Orders Processing:</h1>
+            <h1 id="ordersH1">Orders Processing</h1>
             <div className='order-list' >
                 <div id='initial-titles' >
                     <p>Name</p>
@@ -75,69 +75,69 @@ export const OrdersProcessing = ({
                     <p id="date">Date Placed</p>
                 </div>
 
-                { orders.length < 1 ? <h1 id='empty-h1'>Currently no processing orders.</h1> :
-                  orders.map((order, index) => {
-                    return (
-                        <div key={index} className='order-content' >
+                {orders.length < 1 ? <h1 id='empty-h1'>Currently no processing orders.</h1> :
+                    orders.map((order, index) => {
+                        return (
+                            <div key={index} className='order-content' >
 
-                            <div id='initial-details' >
-                                <p>{order.user.firstName} {order.user.lastName}</p>
-                                <p>{order.user.email}</p>
-                                <p>{order.total.toFixed(2)}</p>
-                                <p>{Date(order.lastUpdated)}</p>
-                                <button id='dropdown-arrow' onClick={() => toggleDetails(index)} >ˇ</button>
-                                <button className='processing-button' onClick={() => finalizeOrder(order)} >Finalize</button>
+                                <div id='initial-details' >
+                                    <p>{order.user.firstName} {order.user.lastName}</p>
+                                    <p>{order.user.email}</p>
+                                    <p>{order.total.toFixed(2)}</p>
+                                    <p>{Date(order.lastUpdated)}</p>
+                                    <button id='dropdown-arrow' onClick={() => toggleDetails(index)} >ˇ</button>
+                                    <button className='processing-button' onClick={() => finalizeOrder(order)} >Finalize</button>
 
-                            </div>
-
-                            { clickedIndex === index ?
-                            <div className='hidden-details '>
-
-                                <div id='hidden-titles' >
-                                    <p>Product</p>
-                                    <p>Quantity</p>
-                                    <p>Price</p>
-                                    <p>Total</p>
                                 </div>
 
-                                {order.items.map((item, i) => {
-                                    return (
-                                        <div key={i} id='each-hidden-item' >
-                                            <p>{item.title}</p>
-                                            <p>{item.quantity}</p>
-                                            <p>{item.price}</p>
-                                            <p>{item.price * item.quantity}</p>
+                                {clickedIndex === index ?
+                                    <div className='hidden-details '>
+
+                                        <div id='hidden-titles' >
+                                            <p>Product</p>
+                                            <p>Quantity</p>
+                                            <p>Price</p>
+                                            <p>Total</p>
                                         </div>
-                                    )
-                                })}
+
+                                        {order.items.map((item, i) => {
+                                            return (
+                                                <div key={i} id='each-hidden-item' >
+                                                    <p>{item.title}</p>
+                                                    <p>{item.quantity}</p>
+                                                    <p>{item.price}</p>
+                                                    <p>{item.price * item.quantity}</p>
+                                                </div>
+                                            )
+                                        })}
+
+                                    </div>
+                                    :
+                                    <div className='hidden-details hidden-processing'>
+
+                                        <div id='hidden-titles' >
+                                            <p>Product</p>
+                                            <p>Quantity</p>
+                                            <p>Price</p>
+                                            <p>Total</p>
+                                        </div>
+
+                                        {order.items.map((item, i) => {
+                                            return (
+                                                <div key={i} id='each-hidden-item' >
+                                                    <p>{item.title}</p>
+                                                    <p>{item.quantity}</p>
+                                                    <p>{item.price}</p>
+                                                    <p>{item.price * item.quantity}</p>
+                                                </div>
+                                            )
+                                        })}
+
+                                    </div>}
 
                             </div>
-                            :
-                            <div className='hidden-details hidden-processing'>
-
-                                <div id='hidden-titles' >
-                                    <p>Product</p>
-                                    <p>Quantity</p>
-                                    <p>Price</p>
-                                    <p>Total</p>
-                                </div>
-
-                                {order.items.map((item, i) => {
-                                    return (
-                                        <div key={i} id='each-hidden-item' >
-                                            <p>{item.title}</p>
-                                            <p>{item.quantity}</p>
-                                            <p>{item.price}</p>
-                                            <p>{item.price * item.quantity}</p>
-                                        </div>
-                                    )
-                                })}
-
-                            </div>}
-
-                        </div>
-                    )
-                })}
+                        )
+                    })}
             </div>
             <div id='pagination'>
                 {processingPage === 1 ? ''

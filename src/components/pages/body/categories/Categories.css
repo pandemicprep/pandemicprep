@@ -77,3 +77,8 @@ a:active#cat {
 #cat {
     margin-top: 15px;
 }
+
+.active-button {
+    color: red;
+    background-color: black;
+}

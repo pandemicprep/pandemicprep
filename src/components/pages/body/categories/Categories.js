@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 
 import './Categories.css';
 
+
 export const Categories = ({
     NavLink,
     setCategory,
     setPageType,
 }) => {
     // const history = useHistory();
+    const [clickedIndex, setClickedIndex] = useState(-1)
     const cat = [
         { name: 'School' },
         { name: 'Work' },
@@ -19,22 +21,23 @@ export const Categories = ({
     ];
 
 
-    const categoryHandler = (category) => {
+    const categoryHandler = (category, i) => {
+        setClickedIndex(i)
         setPageType('category');
-
         setCategory(category.name);
-
-        // history.push('/productsview');
     }
-
 
     return (
         <div className='category'>
             {cat.map((category, i) => {
                 return (
-                    <NavLink key={i} to='/productsview' onClick={() => { categoryHandler(category) }}>
+                    <NavLink key={i} to='/productsview' onClick={() => { categoryHandler(category, i) }}>
                         <div key={i} id='cat' className='category-tile' >
-                            <button className='category-name'>{category.name}</button>
+                            {clickedIndex === i ?
+                                <button className='category-name active-button'>{category.name}</button>
+                                :
+                                <button className='category-name'>{category.name}</button>
+                            }
                         </div>
                     </NavLink>
                 )
