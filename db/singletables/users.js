@@ -82,10 +82,10 @@ async function addUser({
                 newUser.activeCart = activeCart;
                 return newUser;
             } else {
-                return { message: "email or credit card already exists" }; //See if need to change later
+                return { message: "Sorry, the email or credit card already exists" }; //See if need to change later
             }
         } else {
-            return { message: "must enter unique email" };
+            return { message: "Sorry, please enter unique email" };
         }
     } catch (error) {
         throw error;
@@ -127,6 +127,11 @@ async function getAllUsers(pageNumber = 1) {
  */
 async function updateUser(id, fields = {}) {
     // Builds the set string
+
+    if (fields.password) {
+        fields.password = await bcrypt.hash(field.password, SALT_COUNT);
+    }
+
     const setString = Object.keys(fields)
         .map((key, index) => `"${key}"=$${index + 1}`)
         .join(", ");
@@ -170,7 +175,7 @@ async function getUserById(id) {
         if (user) {
             return user;
         } else {
-            return { message: "no user by that id" };
+            return { message: "Sorry, no user by that id" };
         }
     } catch (error) {
         throw error;
@@ -200,7 +205,7 @@ async function getUserByEmail(email) {
             console.log("from get user by email at the db ", user);
             return user;
         } else {
-            return { message: "no user by that email" };
+            return { message: "Sorry, no user by that email" };
         }
     } catch (error) {
         throw error;

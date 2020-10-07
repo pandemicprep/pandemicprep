@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+
 }
 
 #editPro {
@@ -43,6 +44,7 @@
 
 .profileform {
     display: flex;
+
 }
 
 input {
@@ -100,4 +102,8 @@ select {
     -ms-transform: scale(1.075,1.075);
     -o-transform: scale(1.075,1.075);
     transform: scale(1.075,1.075);
+}
+
+#submit {
+    margin-bottom: 120px;
 }
