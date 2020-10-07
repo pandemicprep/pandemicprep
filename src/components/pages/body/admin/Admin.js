@@ -35,6 +35,8 @@ export const Admin = ({
             <button onClick={() => {setAdminView('sales')}}>Sales Report</button>
         </div>
 
+        {adminView === 'none' ? <div id="adminDiv"><h1 id="adminh1">Welcome Admin!</h1></div>: ''}
+
         {adminView === 'products' ? <AdminProductList 
                                     user={user}
                                     adminView={adminView}
