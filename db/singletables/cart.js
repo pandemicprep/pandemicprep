@@ -386,6 +386,43 @@ async function updateDate(cartId) {
     }
 }
 
+// Gets carts of all status for an individual user
+async function getUserOrderHistory(userId, pageNumber = 1) {
+    try {
+        const OFFSET = (LIMIT * (pageNumber - 1));
+
+        const { rowCount } = await client.query(
+            `
+          SELECT * FROM carts
+          WHERE "userId"=$1;
+          `, [userId]
+        );
+
+        const { rows: carts } = await client.query(
+            `
+          SELECT * FROM carts
+          WHERE "userId"=$1
+          LIMIT $2 OFFSET $3;
+          `
+        , [userId, LIMIT, OFFSET]);
+
+        await Promise.mapSeries(carts, async function (cart, index, length) {
+            cart.total = parseFloat(cart.total);
+            const items = await getProductsCartForACartId(cart.id);
+            cart.items = items;
+            const user = await getUserById(cart.userId)
+            cart.user = user
+            cart.index = index;
+        })
+
+        
+        const pageCount = Math.ceil(rowCount / LIMIT);
+        return [pageCount, carts];
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     addCart,
     getCartHistoryStatus,
@@ -399,4 +436,6 @@ module.exports = {
     updateProductQuantity,
     getProcessingCarts,
     completeCart,
+    getUserOrderHistory
+
 };

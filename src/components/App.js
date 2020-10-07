@@ -231,7 +231,7 @@ const App = () => {
                         />
                     </Route>
                     <Route path="/orders">
-                        <Orders />
+                        <Orders user={user} />
                     </Route>
                     <Route path="/user-list">
                         <Userlist />
