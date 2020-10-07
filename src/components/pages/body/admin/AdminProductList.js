@@ -15,7 +15,7 @@ export const AdminProductList = ({
 
     // input values for adding new product
     const [title, setTitle] = useState('');
-
+    const [categories, setCategories] = useState('')
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [imageURL, setImageURL] = useState('');
@@ -26,6 +26,7 @@ export const AdminProductList = ({
     const [editDescription, setEditDescription] = useState('');
     const [editPrice, setEditPrice] = useState('');
     const [editImageURL, setEditImageURL] = useState('');
+    const [editCategories, setEditCategories] = useState('')
     const resetInputs = () => {
         setEditTitle('')
         setEditDescription('')
@@ -63,6 +64,9 @@ export const AdminProductList = ({
     const handleImageURL = (event) => {
         setImageURL(event.target.value);
     }
+    const handleCategories = (event) => {
+        setCategories(event.target.value)
+    }
     const adminAddProduct = async (event) => {
         event.preventDefault();
         console.log('getting into add product subimt', imageURL)
@@ -72,7 +76,8 @@ export const AdminProductList = ({
                 name: title,
                 description,
                 price,
-                imageURL
+                imageURL,
+                category: categories
             })
             console.log(newProduct, 'newProduct in addproduct submit')
             return newProduct;
@@ -149,6 +154,7 @@ export const AdminProductList = ({
 
                     <span className='each-input' id="description2">Description:
                     <input type='text' placeholder='Description' value={description} onChange={handleDescription}></input>
+                    <input type='text' placeholder='Category' value={categories} onChange={handleCategories}></input>
                     </span>
 
                     <span className='each-input' id="image">Image URL:
@@ -162,7 +168,7 @@ export const AdminProductList = ({
             {adminProductList.map((item, index) => {
                 return (
                     <span key={index}>
-
+                        {/* ternary that renders two different forms, one of which allowing the inputs to be edited */}
                         {adminView === 'editOneProduct' && clickedIndex === index ? /**edit mode ternary */
                             <form id='admin-list' onSubmit={(event) => editProduct(event, item)}>
                                 <span className='each-input' id="title">Title & Price:
@@ -174,33 +180,33 @@ export const AdminProductList = ({
 
                                 <span className='each-input' id="description">Description:
                                     <input type='text' placeholder={item.description}
-                                        value={editDescription} onChange={(event) => { setEditDescription(event.target.value) }} ></input>
+                                    value={editDescription} onChange={(event) => { setEditDescription(event.target.value) }} ></input>
+
+                                     <input type='text' placeholder={item.categories}></input>
+                                </span>
+
+                                <span className='each-input' id="image">Image URL:
+                                    <input id='checkbox' placeholder={item.image}
+                                        value={item.image} onChange={(event) => { setEditImageURL(event.target.value) }}></input>
+
+
                                     {item.isActive ?
                                         <span id="active">Active:
-                                        <input id="activeCheck" type='checkbox' defaultChecked={item.isActive}
+                                            <input id="activeCheck" type='checkbox' defaultChecked={item.isActive}
                                                 onClick={(event) => { isActive ? setIsActive(false) : setIsActive(true) }}></input>
                                         </span>
                                         :
                                         <span id="active">Active:
-                                        <input id="activeCheck" type='checkbox' defaultChecked={item.isActive}
+                                        <   input id="activeCheck" type='checkbox' defaultChecked={item.isActive}
                                                 onClick={(event) => { isActive ? setIsActive(false) : setIsActive(true) }}></input>
                                         </span>
                                     }
                                 </span>
-
-
-
-
-                                <span className='each-input' id="image">Image URL:
-                                    <input id='checkbox' placeholder={'' + item.isActive}
-                                        value={item.image} onChange={(event) => { setEditImageURL(event.target.value) }}></input>
+                                
+                                <span id='button-span'>
                                     <button id="addNew" type='button' onClick={enableEditMode} >Edit</button>
                                     {adminView === 'editOneProduct' ? <button id="auth" >Authorize</button> : ''}
-
-
                                 </span>
-
-
 
                             </form>
                             :
@@ -212,29 +218,29 @@ export const AdminProductList = ({
 
                                 <span className='each-input' id="description">Description:
                                     <input type='text' readOnly placeholder={item.description} value={item.description}></input><br></br>
+                                    
+                                    <input type='text' placeholder={item.categories}></input>
+                                </span>
 
+
+
+                                <span className='each-input' id="image">Image URL:
+                                    <input id='checkbox' readOnly placeholder={item.imageURL} value={item.image}></input>
                                     {item.isActive ?
-                                        <span id='active'>Active Status:
-                                        <input type='checkbox' id="activeCheck" checked ></input>
+                                        <span id='active'>Active:
+                                            <input type='checkbox' id="activeCheck" checked ></input>
                                         </span>
                                         :
-                                        <span id='active'>Active Status:
-                                        <input type='checkbox' id="activeCheck" ></input>
+                                        <span id='active'>Active:
+                                            <input type='checkbox' id="activeCheck" ></input>
                                         </span>
                                     }
-
                                 </span>
 
-
-
-                                <span className='each-input' id="image">ImageURL:
-                                    <input id='checkbox' readOnly placeholder={'' + item.isActive} value={item.imageURL}></input>
+                                <span id='button-span' >
                                     <button id="addNew" type='button' onClick={() => { enableEditMode(index, item) }} >Edit</button>
                                     {adminView === 'editOneProduct' ? <button id="auth">Authorize</button> : ''}
-
                                 </span>
-
-
 
 
 

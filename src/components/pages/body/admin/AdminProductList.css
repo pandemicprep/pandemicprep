@@ -13,6 +13,7 @@
 
 #admin-list {
     justify-content: center;
+    margin: auto;
 }
 
 #title {
@@ -32,6 +33,7 @@
     margin-right: 20px;
     margin-bottom: 50px;
     word-wrap: break-word;
+    height: 185px !important;
 }
 
 #addNew {
@@ -51,6 +53,11 @@
     background-size: 400%;
     -webkit-transition: background 300ms ease-in-out;
     transition: background 300ms ease-in-out;
+}
+
+#button-span {
+    max-width: 400px;
+    margin-top: 20px;
 }
 
 #addNew:hover {
@@ -88,14 +95,15 @@
 
 #active {
 display: flex;
-margin-top: 123px;
+margin-top: 108px;
+margin-left: -5px;
+padding-left: 110px;
 justify-content: center;
 align-items: center;
 text-align: center;
 border: 1px solid black;
-width: 400px;
+width: 300px;
 height: 70px;
-padding-left: 150px;
 font-size: 22px !important;
 position: absolute;
 }
