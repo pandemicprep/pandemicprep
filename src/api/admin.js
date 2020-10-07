@@ -71,10 +71,8 @@ export async function adminUpdateUser({id, fields, token}) {
 }
 
 export async function completeOrder(cartId, token) {
-  console.log('getting into processing admin axios', parseInt(cartId), token)
   try {
-    const { data } = await axios.patch(`/api/admin/processing/complete/${cartId}`, {headers: {Authorization: 'Bearer ' + token}});
-
+    const { data } = await axios.patch(`/api/admin/finalizing`,  {cartId}, {headers: {Authorization: 'Bearer ' + token}});
     return data;
   } catch (error) {
     throw error;
