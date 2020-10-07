@@ -110,7 +110,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
 
     return (
         <div id="cart-component">
-            {cart.quantity > 0 ? (
+            {cart.cartQuantity > 0 ? (
                 <h1>{user.firstName !== "Guest" ? user.firstName + "'s" : ""} Cart</h1>
             ) : (
                 <h1>Empty Cart</h1>
