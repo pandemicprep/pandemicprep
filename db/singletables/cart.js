@@ -1,12 +1,12 @@
 /** @format */
 
 const { client } = require("../client");
-const Promise = require('bluebird');
+const Promise = require("bluebird");
 const LIMIT = 20;
 
 /**
  * Assigns a new cart to a user
- * @param {object} status(active, processing, complete) 
+ * @param {object} status(active, processing, complete)
  */
 async function addCart({ status, lastUpdated, total, userId }) {
     try {
@@ -24,16 +24,13 @@ async function addCart({ status, lastUpdated, total, userId }) {
 
         newCart.items = [];
 
-
         return newCart;
-    } catch (error) { }
+    } catch (error) {}
 }
-
-
 
 /**
  * Get users cart history
- * @param {integer} cartId 
+ * @param {integer} cartId
  */
 async function getCartHistoryStatus(id) {
     try {
@@ -49,7 +46,6 @@ async function getCartHistoryStatus(id) {
         throw error;
     }
 }
-
 
 /**
  * Gets all carts that are being processed
@@ -73,7 +69,7 @@ async function getCartHistoryStatusAdmin() {
  */
 async function getProcessingCarts(pageNumber = 1) {
     try {
-        const OFFSET = (LIMIT * (pageNumber - 1));
+        const OFFSET = LIMIT * (pageNumber - 1);
 
         const { rowCount } = await client.query(
             `
@@ -87,19 +83,19 @@ async function getProcessingCarts(pageNumber = 1) {
           SELECT * FROM carts
           WHERE status = 'processing'
           LIMIT $1 OFFSET $2;
-          `
-        , [LIMIT, OFFSET]);
+          `,
+            [LIMIT, OFFSET]
+        );
 
         await Promise.mapSeries(carts, async function (cart, index, length) {
             cart.total = parseFloat(cart.total);
             const items = await getProductsCartForACartId(cart.id);
             cart.items = items;
-            const user = await getUserById(cart.userId)
-            cart.user = user
+            const user = await getUserById(cart.userId);
+            cart.user = user;
             cart.index = index;
-        })
+        });
 
-        
         const pageCount = Math.ceil(rowCount / LIMIT);
         return [pageCount, carts];
     } catch (error) {
@@ -130,10 +126,9 @@ async function getUserById(id) {
 
 /**
  * Gets Active Cart by User ID
- * @param {integer} userId 
+ * @param {integer} userId
  */
 async function getActiveCart(userId) {
-
     try {
         const {
             rows: [activeCart],
@@ -155,13 +150,11 @@ async function getActiveCart(userId) {
     }
 }
 
-
 /**
  * Adds Product To Cart by userId, productId, cartId, quantity, & unitPrice
- * @param {object} param0 
+ * @param {object} param0
  */
 async function addProductToCart({ userId, productId, cartId, quantity, unitPrice }) {
-
     try {
         const itemTotal = quantity * unitPrice;
         await client.query(
@@ -178,7 +171,7 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
         cart.items.map((item) => {
             total = total + item.itemTotal;
             cartQuantity = cartQuantity + item.quantity;
-        })
+        });
 
         const date = new Date();
 
@@ -189,7 +182,7 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
             WHERE id=${cart.id}
             RETURNING *;
         `);
-// "lastUpdated"=${date}
+        // "lastUpdated"=${date}
         const newCart = await getActiveCart(userId);
 
         return newCart;
@@ -198,10 +191,9 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
     }
 }
 
-
 /**
  * Gets an array of Products associated with the cart
- * @param {integer} cartId 
+ * @param {integer} cartId
  */
 async function getProductsCartForACartId(id) {
     try {
@@ -219,7 +211,7 @@ async function getProductsCartForACartId(id) {
             items.forEach((item) => {
                 item.unitPrice = parseFloat(item.unitPrice);
                 item.itemTotal = parseFloat(item.itemTotal);
-            })
+            });
             return items;
         } else {
             return [];
@@ -228,7 +220,6 @@ async function getProductsCartForACartId(id) {
         throw error;
     }
 }
-
 
 /**
  * Gets price & item total for products in the cart (sales report)
@@ -241,17 +232,16 @@ async function getAllProductsCart() {
         rows.forEach((item) => {
             item.unitPrice = parseFloat(item.unitPrice);
             item.itemTotal = parseFloat(item.itemTotal);
-        })
+        });
         return rows;
     } catch (error) {
         throw error;
     }
 }
 
-
 /**
  * Removes a product from an active Cart
- * @param {integer} param0 
+ * @param {integer} param0
  */
 async function removeProductFromCart({ userId, cartId, products_cartsId }) {
     try {
@@ -277,8 +267,8 @@ UPDATE carts
         cart.items.map((item) => {
             total = total + item.itemTotal;
             cartQuantity = cartQuantity + item.quantity;
-        })
-        
+        });
+
         await client.query(`
             UPDATE carts
             SET total=${total},
@@ -286,7 +276,7 @@ UPDATE carts
             WHERE id=${cart.id}
             RETURNING *;
         `);
-// "lastUpdated"=${date}
+        // "lastUpdated"=${date}
         const newCart = await getActiveCart(userId);
 
         if (newCart) {
@@ -299,25 +289,27 @@ UPDATE carts
     }
 }
 
-
 /**
  * Updates product quantity in the cart
- * @param {integer} jointId 
- * @param {integer} quantity 
+ * @param {integer} jointId
+ * @param {integer} quantity
  */
 
 async function updateProductQuantity({ userId, jointId, quantity, unitPrice }) {
     const itemTotal = unitPrice * quantity;
 
     try {
-        await client.query(`
+        await client.query(
+            `
             UPDATE products_carts
             SET quantity=$1, 
             "unitPrice"=$2, 
             "itemTotal"=$3
             WHERE "jointId"=$4;
-        `, [ quantity, unitPrice, itemTotal, jointId ]);
-        
+        `,
+            [quantity, unitPrice, itemTotal, jointId]
+        );
+
         const cart = await getActiveCart(userId);
 
         let total = 0;
@@ -325,8 +317,8 @@ async function updateProductQuantity({ userId, jointId, quantity, unitPrice }) {
         cart.items.map((item) => {
             total = total + item.itemTotal;
             cartQuantity = cartQuantity + item.quantity;
-        })
-        
+        });
+
         const date = new Date();
         await client.query(`
             UPDATE carts
@@ -335,7 +327,7 @@ async function updateProductQuantity({ userId, jointId, quantity, unitPrice }) {
             WHERE id=${cart.id}
             RETURNING *;
         `);
-// "lastUpdated"=${date}
+        // "lastUpdated"=${date}
         const newCart = await getActiveCart(userId);
 
         return newCart;
@@ -345,16 +337,19 @@ async function updateProductQuantity({ userId, jointId, quantity, unitPrice }) {
 }
 
 //change cart status from active to processing, creates and returns a new empty cart
-async function deactivateCart({userId, cartId}) {
+async function deactivateCart({ userId, cartId }) {
     try {
-        await client.query(`
+        await client.query(
+            `
             UPDATE carts
             SET status='processing'
             
             WHERE id=$1;
-        `, [ cartId ]);
-        const newCart = addCart({ status: 'active', lastUpdated: new Date(), total: 0, userId });
-    // "lastUpdated"=${new Date()}
+        `,
+            [cartId]
+        );
+        const newCart = addCart({ status: "active", lastUpdated: new Date(), total: 0, userId });
+        // "lastUpdated"=${new Date()}
         return newCart;
     } catch (error) {
         throw error;
@@ -362,14 +357,19 @@ async function deactivateCart({userId, cartId}) {
 }
 
 // Change cart status from processing to complete
-async function completeCart (cartId) {
+async function completeCart(cartId) {
     try {
-        const { rows: [completedOrder] } = await client.query(`
+        const {
+            rows: [completedOrder],
+        } = await client.query(
+            `
             UPDATE carts 
             SET status='complete'
             WHERE id=$1
             RETURNING *;
-        `, [cartId]);
+        `,
+            [cartId]
+        );
 
         return completedOrder;
     } catch (error) {
@@ -437,4 +437,5 @@ module.exports = {
     getProcessingCarts,
     completeCart,
     getUserOrderHistory
+
 };
