@@ -69,10 +69,10 @@ export const OrdersProcessing = ({
             <h1 id="ordersH1">Orders Processing:</h1>
             <div className='order-list' >
                 <div id='initial-titles' >
-                    <p>Name:</p>
-                    <p>Email:</p>
-                    <p>Total $:</p>
-                    <p id="date">Date Placed:</p>
+                    <p>Name</p>
+                    <p>Email</p>
+                    <p>Total $</p>
+                    <p id="date">Date Placed</p>
                 </div>
 
                 { orders.length < 1 ? <h1 id='empty-h1'>Currently no processing orders.</h1> :

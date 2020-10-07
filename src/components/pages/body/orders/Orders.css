@@ -1,11 +1,15 @@
 .orders{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     margin-top: 280px;
 }
 
 .orders-h1 {
     font: bold 32px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
-    padding-left: 150px;
     margin-bottom: 25px;
     background-color: black;
     border: 3px solid black;
@@ -14,3 +18,73 @@
     width: 100%;
     padding-top: 15px;
 }
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid black;
+    width: 90%;
+}
+
+.history-titles {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-left: -220px;
+    width: 80%;
+    font: bold 24px Helvetica, Sans-Serif; 
+}
+
+.history-titles p {
+
+}
+
+.history-initial {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 100px;
+    width: 80%;
+    padding: 5px;
+}
+
+#first-map-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    width: 100%;
+    padding: 5px;
+}
+
+.history-initial p {
+    margin-top: 10px;
+    margin-right: 300px;
+}
+
+#dropdown-arrow {
+    position: relative;
+    bottom: 50px;
+    left: 800px;
+}
+
+.hidden-details {
+    width: 100%;
+    margin-left: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hidden-processing {
+    display: none;
+}
+
+#hidden-titles {
+    margin-top: 5px;
+}
+
