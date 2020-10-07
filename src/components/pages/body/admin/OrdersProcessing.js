@@ -75,7 +75,8 @@ export const OrdersProcessing = ({
                     <p id="date">Date Placed:</p>
                 </div>
 
-                { orders.map((order, index) => {
+                { orders.length < 1 ? <h1 id='empty-h1'>Currently no processing orders.</h1> :
+                  orders.map((order, index) => {
                     return (
                         <div key={index} className='order-content' >
 
