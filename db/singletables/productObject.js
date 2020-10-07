@@ -1096,6 +1096,7 @@ const productArray = [
   {
     name: "Natalies' Bananas",
     price: 999999.99,
+
     description:
       "Grants one the power to code without any bugs....also tastes good.",
     image: "images/banana.png",
@@ -1411,6 +1412,7 @@ const productArray = [
     description: "Be invisible in the swamp or forest.",
     image: "images/camosystems_ghillie_suit_jackal_wood_1.jpg",
     category: "protection",
+
   },
 ];
 
