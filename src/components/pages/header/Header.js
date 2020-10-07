@@ -22,6 +22,8 @@ export const Header = ({
     user,
     setUser,
     cartSize,
+    setCart,
+    setCartSize,
 }) => {
     const history = useHistory();
     const [searchString, setSearchString] = useState("");
@@ -52,7 +54,7 @@ export const Header = ({
                     Are you prepared for
                     <span id="doomsday">DOOMSDAY?</span>
                 </h1>
-                <NavLink to='/news'>
+                <NavLink to="/news">
                     <button id="updatedButton">Stay Updated</button>
                 </NavLink>
             </div>
@@ -87,105 +89,110 @@ export const Header = ({
                 {user.isUser === true ? (
                     ""
                 ) : (
-                        <>
-                            <button
-                                className="button"
-                                id="login"
-                                onClick={() => {
-                                    setView("login");
-                                    history.push("/login");
-                                }}
-                            >
-                                Login
+                    <>
+                        <button
+                            className="button"
+                            id="login"
+                            onClick={() => {
+                                setView("login");
+                                history.push("/login");
+                            }}
+                        >
+                            Login
                         </button>
 
-                            <h3 id="breaker">|</h3>
-                            <button
-                                className="button"
-                                id="signup"
-                                onClick={() => {
-                                    setView("register");
-                                    history.push("/register");
-                                }}
-                            >
-                                Sign Up
+                        <h3 id="breaker">|</h3>
+                        <button
+                            className="button"
+                            id="signup"
+                            onClick={() => {
+                                setView("register");
+                                history.push("/register");
+                            }}
+                        >
+                            Sign Up
                         </button>
-                        </>
-                    )}
+                    </>
+                )}
 
                 <h3 id="breaker">|</h3>
                 <button className="button" id="cart" onClick={() => history.push("/cart")}>
-                    <section id="cart-size">{cartSize > 0 ? cartSize : ''}</section>
+                    <section id="cart-size">{cartSize > 0 ? cartSize : ""}</section>
                     <img id="cartLogo" src={process.env.PUBLIC_URL + "/styleimages/cart.png"} />
                 </button>
 
                 {user.isUser === false ? (
                     ""
                 ) : (
-                        <div className="dropdown">
-                            <button className="dropbtn">
-                                Welcome {user.firstName}!
+                    <div className="dropdown">
+                        <button className="dropbtn">
+                            Welcome {user.firstName}!
                             <img
-                                    id="pointer"
-                                    src={process.env.PUBLIC_URL + "/styleimages/pointer.png"}
-                                />
-                            </button>
-                            <div className="dropdown-content">
-                                {user.isAdmin ? (
-                                    <a href="#" onClick={() => history.push("/admin")}>
-                                        <img
-                                            id="dropdownIcon"
-                                            src={process.env.PUBLIC_URL + "/styleimages/admin.png"}
-                                        />
-                                        Admin
+                                id="pointer"
+                                src={process.env.PUBLIC_URL + "/styleimages/pointer.png"}
+                            />
+                        </button>
+                        <div className="dropdown-content">
+                            {user.isAdmin ? (
+                                <a href="#" onClick={() => history.push("/admin")}>
+                                    <img
+                                        id="dropdownIcon"
+                                        src={process.env.PUBLIC_URL + "/styleimages/admin.png"}
+                                    />
+                                    Admin
                                 </a>
-                                ) : (
-                                        ""
-                                    )}
-                                <a
-                                    href="#"
-                                    onClick={() => {
-                                        setView("edit");
-                                        history.push("/edit-user");
-                                    }}
-                                >
-                                    <img
-                                        id="dropdownIcon"
-                                        src={process.env.PUBLIC_URL + "/styleimages/settings.png"}
-                                    />
-                                    Edit Profile
+                            ) : (
+                                ""
+                            )}
+                            <a
+                                href="#"
+                                onClick={() => {
+                                    setView("edit");
+                                    history.push("/edit-user");
+                                }}
+                            >
+                                <img
+                                    id="dropdownIcon"
+                                    src={process.env.PUBLIC_URL + "/styleimages/settings.png"}
+                                />
+                                Edit Profile
                             </a>
-                                <a href="#" onClick={() => history.push("/orders")}>
-                                    <img
-                                        id="dropdownIcon"
-                                        src={process.env.PUBLIC_URL + "/styleimages/shop.png"}
-                                    />
-                                    Orders
+                            <a href="#" onClick={() => history.push("/orders")}>
+                                <img
+                                    id="dropdownIcon"
+                                    src={process.env.PUBLIC_URL + "/styleimages/shop.png"}
+                                />
+                                Orders
                             </a>
-                                <a
-                                    href="#"
-                                    onClick={() => {
-                                        localStorage.removeItem("panprepToken");
-                                        setUser({
-                                            firstName: "Guest",
-                                            isAdmin: false,
-                                            isUser: false,
-                                            token: "",
-                                        });
-                                    }}
-                                >
-                                    <img
-                                        id="dropdownIcon"
-                                        src={process.env.PUBLIC_URL + "/styleimages/logout.png"}
-                                    />
-                                    Log Out
+                            <a
+                                href="#"
+                                onClick={() => {
+                                    localStorage.removeItem("panprepToken");
+                                    setUser({
+                                        firstName: "Guest",
+                                        isAdmin: false,
+                                        isUser: false,
+                                        token: "",
+                                    });
+                                    setCart({
+                                        status: "active",
+                                        cartQuantity: 0,
+                                        total: 0,
+                                        items: [],
+                                    });
+                                    setCartSize(0);
+                                }}
+                            >
+                                <img
+                                    id="dropdownIcon"
+                                    src={process.env.PUBLIC_URL + "/styleimages/logout.png"}
+                                />
+                                Log Out
                             </a>
-                            </div>
                         </div>
-                    )}
-
+                    </div>
+                )}
             </div>
         </div>
     );
 };
-

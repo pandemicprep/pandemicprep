@@ -1,5 +1,5 @@
 /** @format */
-import { getProductsByCategory } from '../api/products';
+import { getProductsByCategory } from "../api/products";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -25,7 +25,7 @@ import {
     PageIndex,
     Admin,
     Promoted,
-    News
+    News,
 } from "./index";
 
 import { getPromotedProducts } from "../api/products";
@@ -41,7 +41,7 @@ const App = () => {
         isUser: false,
         token: "",
     });
-    const [cart, setCart] = useState({status: 'active', cartQuantity: 0, total: 0, items: [] });
+    const [cart, setCart] = useState({ status: "active", cartQuantity: 0, total: 0, items: [] });
     const [cartSize, setCartSize] = useState(0);
     const [products, setProducts] = useState([]);
     const [promotedProducts, setPromotedProducts] = useState([]);
@@ -56,22 +56,20 @@ const App = () => {
 
     useEffect(() => {
         if (!category) {
-            history.push('/')
-            return
+            history.push("/");
+            return;
         }
         getProductsByCategory(category.toLowerCase(), 1)
             .then((response) => {
-                
-                setSearchObject({ pageCount: response[0], categoryName: category })
+                setSearchObject({ pageCount: response[0], categoryName: category });
                 setProducts(response[1]);
             })
             .catch((error) => {
                 console.error(error);
-            })
+            });
     }, [category]);
 
     useEffect(() => {
-
         if (localStorage.getItem("panprepToken")) {
             getUserFromToken(localStorage.getItem("panprepToken"))
                 .then((response) => {
@@ -83,14 +81,16 @@ const App = () => {
                         token: response.token,
                     });
                     setCart(response.activeCart);
-                    setCartSize(response.activeCart.items.length);
+                    setCartSize(response.activeCart.cartQuantity);
                 })
                 .catch((error) => {
                     console.error(error);
                 });
         }
-        if (localStorage.getItem('panprepCart')) {
-            setCart(JSON.parse(localStorage.getItem('panprepCart')));
+        if (localStorage.getItem("panprepCart")) {
+            const newCart = JSON.parse(localStorage.getItem("panprepCart"));
+            setCart(newCart);
+            setCartSize(newCart.cartQuantity);
         }
     }, []);
 
@@ -111,14 +111,16 @@ const App = () => {
                     user={user}
                     setUser={setUser}
                     cartSize={cartSize}
+                    setCart={setCart}
+                    setCartSize={setCartSize}
                 />
                 <Switch>
                     <Route exact path="/">
                         {/* <div id="products-with-page"> */}
-                        <Promoted 
-                        NavLink={NavLink}
-                        setProduct={setProduct}
-                        useHistory={useHistory}
+                        <Promoted
+                            NavLink={NavLink}
+                            setProduct={setProduct}
+                            useHistory={useHistory}
                         />
                         <Categories
                             setProducts={setProducts}
@@ -168,6 +170,7 @@ const App = () => {
                             setView={setView}
                             setUser={setUser}
                             setCart={setCart}
+                            setCartSize={setCartSize}
                         />
                     </Route>
                     <Route path="/login">
@@ -177,6 +180,7 @@ const App = () => {
                             setView={setView}
                             setUser={setUser}
                             setCart={setCart}
+                            setCartSize={setCartSize}
                         />
                     </Route>
                     <Route path="/guest">
@@ -186,6 +190,7 @@ const App = () => {
                             setView={setView}
                             setUser={setUser}
                             setCart={setCart}
+                            setCartSize={setCartSize}
                         />
                     </Route>
                     <Route path="/edit-user">
@@ -195,6 +200,7 @@ const App = () => {
                             setView={setView}
                             setUser={setUser}
                             setCart={setCart}
+                            setCartSize={setCartSize}
                             user={user}
                         />
                     </Route>
@@ -216,7 +222,13 @@ const App = () => {
                         />
                     </Route>
                     <Route path="/cart">
-                        <Cart cart={cart} setCart={setCart} user={user} cartSize={cartSize} setCartSize={setCartSize} />
+                        <Cart
+                            cart={cart}
+                            setCart={setCart}
+                            user={user}
+                            cartSize={cartSize}
+                            setCartSize={setCartSize}
+                        />
                     </Route>
                     <Route path="/orders">
                         <Orders />
@@ -232,10 +244,10 @@ const App = () => {
                             <Admin product={products} setProducts={setProducts} user={user} />
                         </Route>
                     ) : (
-                            ""
-                        )}
+                        ""
+                    )}
 
-                    <Route path='/news' >
+                    <Route path="/news">
                         <News />
                     </Route>
 

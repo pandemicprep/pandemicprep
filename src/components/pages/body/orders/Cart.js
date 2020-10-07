@@ -62,7 +62,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                 let newQuantity = 0;
                 let newTotal = 0;
                 newCart.items.map((item) => {
-                    if (item.id === productId) {
+                    if (item.id === product.id) {
                         item.quantity = item.quantity + direction;
                         item.itemTotal = item.price * item.quantity;
                     }
@@ -110,7 +110,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
 
     return (
         <div id="cart-component">
-            {cart.quantity > 0 ? (
+            {cart.cartQuantity > 0 ? (
                 <h1>{user.firstName !== "Guest" ? user.firstName + "'s" : ""} Cart</h1>
             ) : (
                 <h1>Empty Cart</h1>
