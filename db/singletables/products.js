@@ -93,11 +93,13 @@ async function getAllProducts(pageNumber = 1) {
 
     const pageCount = Math.ceil(rowCount / LIMIT);
 
-    rows.forEach((item) => {
-      item.price = parseFloat(item.price);
+    const productsInfo = await Promise.mapSeries(rows, async function (product, length, index) {
+      product.price = parseFloat(product.price);
+      const newProduct = await getProductById(product.id);
+      return newProduct
     })
 
-    return [pageCount, rows];
+    return [pageCount, productsInfo];
   } catch (error) {
     throw error;
   }
