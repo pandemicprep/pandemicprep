@@ -1022,73 +1022,74 @@ const productArray = [
     description: "Espresso powder. Good for a caffine boost.",
     image: "images/medalgia-doro-espresso-powder.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Instant Coffee",
     price: 7.99,
     description: "Coffee powder. Good for a caffine boost.",
     image: "images/instant-coffee.jpeg",
     category: "grocery",
-  },{
+  }, {
     name: "Wise Food Bucket",
     price: 29.99,
     description: "Bucket of freeze dried meals. Just add water!",
     image: "images/food-bucket-wise.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Space Icecream",
     price: 6.99,
     description: "Freeze dried icecream bar.",
     image: "images/space-icecream.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Mountain House",
     price: 15.99,
     description: "Freeze dried food. Just add water.",
     image: "images/freeze-dried-chicken-rice.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Z-Ration",
     price: 19.99,
     description: "Packaged food with included heater.",
     image: "images/z-ration.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "MRE",
     price: 10.99,
     description: "Military style packaged food with included heater.",
     image: "images/MRE.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Ready Hour Food Ammo Box",
     price: 29.99,
     description: "Ammo crate full of ready made food.",
     image: "images/RH.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Wise Food Pallet",
     price: 149.99,
     description: "Pallet full of Wise Food packaged food.",
     image: "images/wise-food-pallet.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Canned Chicken",
     price: 1.99,
     description: "Long lasting can of chicken.",
     image: "images/Canned_Chicken_Breast.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Canned Boiled Peanuts",
     price: 8.99,
     description: "Can of boiled peanuts.",
     image: "images/boiled-peanuts.jpg",
     category: "grocery",
-  },{
+  }, {
     name: "Natalies' Bananas",
     price: 999999.99,
     description: "Grants one the power to code without any bugs....also tastes good.",
     image: "images/banana.jpg",
     category: "grocery school work protection",
   },
+
 ];
 
 module.exports = productArray;
