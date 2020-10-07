@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import {AdminProductList, Userlist, OrdersProcessing} from '../../../index';
 import './Admin.css';
+import { Sales } from './Sales';
 
 export const Admin = ({
     user,
@@ -31,7 +32,7 @@ export const Admin = ({
             <button onClick={() => {setAdminView('products')}}>Products</button>
             <button onClick={() => {setAdminView('users')}}>Users</button>
             <button onClick={() => {setAdminView('processing')}}>Processing Orders</button>
-            <button>Sales Report</button>
+            <button onClick={() => {setAdminView('sales')}}>Sales Report</button>
         </div>
 
         {adminView === 'products' ? <AdminProductList 
@@ -53,6 +54,8 @@ export const Admin = ({
         {adminView === 'processing' ? <OrdersProcessing 
                                         user={user}
                                     /> : ''}
+        {adminView === 'sales' ? <Sales 
+                                /> : ''}
         </>
     )
 }

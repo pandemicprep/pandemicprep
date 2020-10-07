@@ -16,6 +16,6 @@ export {
 
 export { addUser, updateUser, loginUser, guestUser } from "./users";
 export { getProductsByQuery, addNewProduct } from "./products";
-export { addNewCart } from "./orders";
+export { addNewCart, getOrderHistory } from "./orders";
 export { addProductToCart, removeProductFromCart, deactivateCart, patchCartItemQuantity } from "./cart";
 export { fetchNews } from './news'

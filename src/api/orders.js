@@ -13,3 +13,12 @@ export async function addNewCart(newCart) {
         throw error;
     }
 }
+
+export async function getOrderHistory(pageNumber, token) {
+    try {
+        const { data } = await axios.get(`/api/orders/${pageNumber}`,  {headers: {Authorization: 'Bearer ' + token}});
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
