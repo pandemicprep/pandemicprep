@@ -1,43 +1,36 @@
-import React, { useState } from 'react';
+/** @format */
 
-import './Categories.css';
+import React, { useState } from "react";
 
+import "./Categories.css";
 
-export const Categories = ({
-    NavLink,
-    setCategory,
-    setPageType,
-}) => {
-    // const history = useHistory();
-    const [clickedIndex, setClickedIndex] = useState(-1)
-    const cat = [
-        { name: 'School' },
-        { name: 'Work' },
-        { name: 'Household' },
-        { name: 'Health' },
-        { name: 'Protection' },
-        { name: 'Groceries' },
-        { name: 'Entertainment' },
-    ];
-
-
-    const categoryHandler = (category, i) => {
-        setClickedIndex(i)
-        setPageType('category');
-        setCategory(category.name);
-    }
+export const Categories = ({ NavLink, category, setCategory, categoryList, setPageType }) => {
+    const categoryHandler = (selectedCat, i) => {
+        setPageType("category");
+        setCategory(selectedCat.name);
+    };
 
     return (
-        <div className='category'>
-            {cat.map((category, i) => {
+        <div className="category">
+            {categoryList.map((item, i) => {
                 return (
-                    <NavLink key={i} to='/productsview' onClick={() => { categoryHandler(category, i) }}>
-                        <div key={i} id='cat' className='category-tile' >
-                            <button className='category-name'>{category.name}</button>
+                    <NavLink
+                        key={i}
+                        to="/productsview"
+                        onClick={() => {
+                            categoryHandler(item, i);
+                        }}
+                    >
+                        <div key={i} id="cat" className="category-tile">
+                            {category === item.name ? (
+                                <button className="category-name redCat">{item.name}</button>
+                            ) : (
+                                <button className="category-name">{item.name}</button>
+                            )}
                         </div>
                     </NavLink>
-                )
+                );
             })}
         </div>
-    )
-}
+    );
+};

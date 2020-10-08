@@ -32,6 +32,7 @@ import { getPromotedProducts } from "../api/products";
 import { getUserFromToken } from "../api/users";
 
 import "./App.css";
+import { getAllCategories } from "../api/categories";
 
 const App = () => {
     const [user, setUser] = useState({
@@ -48,15 +49,15 @@ const App = () => {
     const [product, setProduct] = useState({});
     const [searchObject, setSearchObject] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-
-    const [category, setCategory] = useState("school"); // const history = useHistory();
+    const [categoryList, setCategoryList] = useState([]);
+    const [category, setCategory] = useState(""); // const history = useHistory();
     const [pageType, setPageType] = useState("");
     const [view, setView] = useState("");
     const history = useHistory();
 
     useEffect(() => {
-        if (!category) {
-            history.push("/");
+        if (category === "") {
+            // history.push("/");
             return;
         }
         getProductsByCategory(category.toLowerCase(), 1)
@@ -70,6 +71,7 @@ const App = () => {
     }, [category]);
 
     useEffect(() => {
+        //get user from token if present
         if (localStorage.getItem("panprepToken")) {
             getUserFromToken(localStorage.getItem("panprepToken"))
                 .then((response) => {
@@ -87,11 +89,20 @@ const App = () => {
                     console.error(error);
                 });
         }
-        if (localStorage.getItem("panprepCart")) {
-            const newCart = JSON.parse(localStorage.getItem("panprepCart"));
-            setCart(newCart);
-            setCartSize(newCart.cartQuantity);
+        //get cart from local storage if present (guest only)
+        if (user.firstName === "Guest") {
+            if (localStorage.getItem("panprepCart")) {
+                const newCart = JSON.parse(localStorage.getItem("panprepCart"));
+                setCart(newCart);
+                setCartSize(newCart.cartQuantity);
+            }
         }
+        //get categories
+        getAllCategories()
+            .then((result) => {
+                setCategoryList(result);
+            })
+            .catch((error) => console.error(error));
     }, []);
 
     return (
@@ -113,6 +124,7 @@ const App = () => {
                     cartSize={cartSize}
                     setCart={setCart}
                     setCartSize={setCartSize}
+                    setCategory={setCategory}
                 />
                 <Switch>
                     <Route exact path="/">
@@ -126,6 +138,8 @@ const App = () => {
                             setProducts={setProducts}
                             NavLink={NavLink}
                             setCategory={setCategory}
+                            category={category}
+                            categoryList={categoryList}
                             setPageType={setPageType}
                             setSearchObject={setSearchObject}
                             useHistory={useHistory}
@@ -157,7 +171,9 @@ const App = () => {
                         <Categories
                             // setProducts={setProducts}
                             NavLink={NavLink}
+                            category={category}
                             setCategory={setCategory}
+                            categoryList={categoryList}
                             setPageType={setPageType}
                             setSearchObject={setSearchObject}
                             useHisotry={useHistory}
@@ -215,7 +231,9 @@ const App = () => {
                         <Categories
                             setProducts={setProducts}
                             NavLink={NavLink}
+                            category={category}
                             setCategory={setCategory}
+                            categoryList={categoryList}
                             setPageType={setPageType}
                             setSearchObject={setSearchObject}
                             useHistory={useHistory}
@@ -230,11 +248,14 @@ const App = () => {
                             setCartSize={setCartSize}
                         />
                     </Route>
-                    
-                    { user.isUser ? 
-                    <Route path="/orders">
-                        <Orders user={user} />
-                    </Route> : ''}
+
+                    {user.isUser ? (
+                        <Route path="/orders">
+                            <Orders user={user} />
+                        </Route>
+                    ) : (
+                        ""
+                    )}
 
                     <Route path="/user-list">
                         <Userlist />

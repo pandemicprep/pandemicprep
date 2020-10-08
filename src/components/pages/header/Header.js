@@ -24,13 +24,13 @@ export const Header = ({
     cartSize,
     setCart,
     setCartSize,
+    setCategory,
 }) => {
     const history = useHistory();
     const [searchString, setSearchString] = useState("");
 
     const handleSearchString = (event) => {
         setSearchString(event.target.value);
-        // console.log(searchObject)
     };
 
     const searchProducts = (event) => {
@@ -38,6 +38,7 @@ export const Header = ({
         console.log(user, "user in header");
         if (searchString.length > 0) {
             setPageType("search");
+            setCategory("");
             setSearchTerm(searchString);
 
             setSearchString("");
@@ -55,7 +56,9 @@ export const Header = ({
                     <span id="doomsday">DOOMSDAY?</span>
                 </h1>
                 <NavLink to="/news">
-                    <button id="updatedButton">Stay Updated</button>
+                    <button id="updatedButton" onClick={() => setCategory("")}>
+                        Stay Updated
+                    </button>
                 </NavLink>
             </div>
             <div className="headerContainer">
@@ -63,6 +66,7 @@ export const Header = ({
                     to="/"
                     onClick={() => {
                         setProducts(promotedProducts);
+                        setCategory("");
                     }}
                 >
                     <img
@@ -95,6 +99,7 @@ export const Header = ({
                             id="login"
                             onClick={() => {
                                 setView("login");
+                                setCategory("");
                                 history.push("/login");
                             }}
                         >
@@ -107,6 +112,7 @@ export const Header = ({
                             id="signup"
                             onClick={() => {
                                 setView("register");
+                                setCategory("");
                                 history.push("/register");
                             }}
                         >
@@ -116,7 +122,14 @@ export const Header = ({
                 )}
 
                 <h3 id="breaker">|</h3>
-                <button className="button" id="cart" onClick={() => history.push("/cart")}>
+                <button
+                    className="button"
+                    id="cart"
+                    onClick={() => {
+                        setCategory("");
+                        history.push("/cart");
+                    }}
+                >
                     <section id="cart-size">{cartSize > 0 ? cartSize : ""}</section>
                     <img id="cartLogo" src={process.env.PUBLIC_URL + "/styleimages/cart.png"} />
                 </button>
