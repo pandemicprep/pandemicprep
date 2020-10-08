@@ -39,3 +39,10 @@ body {
     height: 350px !important;
     overflow-y: auto;
 }
+
+
+
+#productH1 {
+    font-size: 72px;
+    color: blue;
+}

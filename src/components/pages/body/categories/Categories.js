@@ -33,11 +33,7 @@ export const Categories = ({
                 return (
                     <NavLink key={i} to='/productsview' onClick={() => { categoryHandler(category, i) }}>
                         <div key={i} id='cat' className='category-tile' >
-                            {clickedIndex === i ?
-                                <button className='category-name active-button'>{category.name}</button>
-                                :
-                                <button className='category-name'>{category.name}</button>
-                            }
+                            <button className='category-name'>{category.name}</button>
                         </div>
                     </NavLink>
                 )
