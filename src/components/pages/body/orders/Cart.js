@@ -38,7 +38,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
     };
 
     const ticker = (product, direction) => {
-        const { jointId, productId, quantity, unitPrice } = product;
+        const { jointId, id: productId, quantity, unitPrice } = product;
         if (quantity + direction > 0) {
             if (user.firstName !== "Guest") {
                 patchCartItemQuantity(
@@ -62,18 +62,19 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                 let newQuantity = 0;
                 let newTotal = 0;
                 newCart.items.map((item) => {
-                    if (item.id === product.id) {
+                    if (item.id === productId) {
                         item.quantity = item.quantity + direction;
                         item.itemTotal = item.price * item.quantity;
                     }
                     newQuantity = newQuantity + item.quantity;
                     newTotal = newTotal + parseFloat(item.itemTotal);
                 });
+
                 newCart.cartQuantity = newQuantity;
                 newCart.total = newTotal;
                 setCart(newCart);
                 setCartSize(newQuantity);
-                localStorage.setItem("panprepCart", JSON.stringify(cart));
+                localStorage.setItem("panprepCart", JSON.stringify(newCart));
             }
         } else {
             if (user.firstName !== "Guest") {
