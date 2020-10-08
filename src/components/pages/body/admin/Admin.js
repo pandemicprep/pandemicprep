@@ -56,7 +56,8 @@ export const Admin = ({
         {adminView === 'processing' ? <OrdersProcessing 
                                         user={user}
                                     /> : ''}
-        {adminView === 'sales' ? <Sales 
+        {adminView === 'sales' ? <Sales
+                                    user={user} 
                                 /> : ''}
         </>
     )
