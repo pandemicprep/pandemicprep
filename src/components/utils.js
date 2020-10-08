@@ -8,7 +8,7 @@ export async function addProductToGuestCart(cartState, product) {
     });
     if (alreadyPresent) {
         cart.items.map((item) => {
-            if (item.productId === product.id) {
+            if (item.id === product.id) {
                 item.quantity = item.quantity + 1;
                 item.total = item.quantity * parseFloat(item.unitPrice);
             }
