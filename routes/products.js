@@ -9,6 +9,17 @@ const {
     getHighlightedProducts
 } = require('../db/singletables/products');
 
+//Initial load of main page where products.isHighlighted is true
+productsRouter.get('/', async (req, res, next) => {
+    try {
+        const products = await getHighlightedProducts();
+
+        res.send(products);
+    } catch (error) {
+        next(error);
+    }
+});
+
 //Gets product(s) by sending a searchString to the db
 productsRouter.get('/:query/:pageNumber', async (req, res, next) => {
     try {
@@ -55,18 +66,7 @@ productsRouter.get('/category/:categoryName/:pageNumber', async (req, res, next)
     } catch (error) {
         next(error);
     }
-})
-
-//Initial load of main page where products.isHighlighted is true
-productsRouter.get('/', async (req, res, next) => {
-    try {
-        const products = await getHighlightedProducts();
-
-        res.send(products);
-    } catch (error) {
-        next(error);
-    }
-})
+});
 
 
 module.exports = productsRouter;

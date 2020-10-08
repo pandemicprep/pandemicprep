@@ -158,7 +158,7 @@ async function seedingProductObject() {
     const length = productArray.length;
     try {
         await Promise.mapSeries(productArray, function (
-            { name, price, description, image, category },
+            { name, price, description, image, category, isHighlighted = false },
             index,
             length
         ) {
@@ -169,6 +169,7 @@ async function seedingProductObject() {
                 description,
                 image,
                 category,
+                isHighlighted
             });
 
             return newProduct;
