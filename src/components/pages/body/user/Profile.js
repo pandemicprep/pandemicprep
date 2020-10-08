@@ -385,32 +385,31 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 <select
                     id="states"
                     className={view === "login" || view === "register" ? "field hide" : "field"}
+                    
                     value={state}
                     onChange={(event) => {
-                        const stateTag = document.getElementById("states");
-                        console.log("state ", stateTag.value);
-                        setState(stateTag.value);
+                        setState(event.target.value);
                     }}
                 >
                     {states.map((state, i) => {
                         return (
-                            <option key={i} value="">
+                            <option key={i} value={state}>
                                 {state}
                             </option>
                         );
                     })}
                 </select>
                 <select
+                id='countries'
                     className={view === "register" || view === "login" ? "field hide" : "field"}
                     value={country}
                     onChange={(event) => {
                         setCountry(event.target.value);
-                        console.log("country ", event.target.value);
                     }}
                 >
                     {countries.map((country, i) => {
                         return (
-                            <option key={i} value="">
+                            <option key={i} value={country}>
                                 {country}
                             </option>
                         );
