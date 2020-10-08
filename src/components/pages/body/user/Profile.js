@@ -2,7 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 
-import { addUser, getAllUsers, getProductsByQuery, loginUser, getFullUserFromToken } from "../../../../api";
+import {
+    addUser,
+    getAllUsers,
+    getProductsByQuery,
+    loginUser,
+    getFullUserFromToken,
+} from "../../../../api";
 
 import {
     states,
@@ -39,10 +45,6 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
     const [searchString, setSearchString] = useState("");
     const history = useHistory();
 
-
-    
-
-
     if (view === "edit" || view === "fulledit") {
         if (!user.isUser) {
             history.push("/");
@@ -50,8 +52,8 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
     }
 
     useEffect(() => {
-        if (view === 'edit' || view === 'fulledit') {
-            getFullUserFromToken(user.id, user.token).then(result => {
+        if (view === "edit" || view === "fulledit") {
+            getFullUserFromToken(user.id, user.token).then((result) => {
                 setFirstName(result.firstName);
                 setLastName(result.lastName);
                 setEmail(result.email);
@@ -62,15 +64,17 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 setZipcode(result.zipcode);
                 setCountry(result.country);
                 setPhone(result.phone);
-            })
-            
+            });
         }
-    }, [])
-
+    }, []);
 
     const cancelHandler = (event) => {
         event.preventDefault();
-        resetForm();
+        if (view === "edit" || view === "fulledit") {
+            history.push("/");
+        } else {
+            resetForm();
+        }
     };
 
     const passwordButtonHandler = (event) => {
@@ -136,16 +140,26 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
             }
             //edit and full edit
             if ((view === "edit" || view === "fulledit") && user.isUser) {
-                const editObject = { firstName, lastName, email, password1, password2, addressLine1: address1, addressLine2: address2, city, state, zipcode, country, phone};
-                if (password1 === '') {
+                const editObject = {
+                    firstName,
+                    lastName,
+                    email,
+                    password1,
+                    password2,
+                    addressLine1: address1,
+                    addressLine2: address2,
+                    city,
+                    state,
+                    zipcode,
+                    country,
+                    phone,
+                };
+                if (password1 === "") {
                     delete editObject.password1;
                     delete editObject.password2;
-                } 
+                }
 
-                updateHandler(
-                    editObject,
-                    user.token
-                );
+                updateHandler(editObject, user.token);
                 history.push("/");
             }
         } catch (error) {
@@ -192,7 +206,11 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 <h1
                     id="editPro"
                     className={
-                        view === "register" || view === "fulledit" || view === "userCheckout" || view === 'edit' || view === 'fulledit'
+                        view === "register" ||
+                        view === "fulledit" ||
+                        view === "userCheckout" ||
+                        view === "edit" ||
+                        view === "fulledit"
                             ? "field hide"
                             : "field"
                     }
@@ -202,7 +220,11 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 <h1
                     id="editPro2"
                     className={
-                        view === "login" || view === "fulledit" || view === "userCheckout" || view === 'edit' || view === 'fulledit'
+                        view === "login" ||
+                        view === "fulledit" ||
+                        view === "userCheckout" ||
+                        view === "edit" ||
+                        view === "fulledit"
                             ? "field hide"
                             : "field"
                     }
@@ -361,9 +383,14 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     }
                 />
                 <select
+                    id="states"
                     className={view === "login" || view === "register" ? "field hide" : "field"}
                     value={state}
-                    onChange={(event) => setState(event.target.value)}
+                    onChange={(event) => {
+                        const stateTag = document.getElementById("states");
+                        console.log("state ", stateTag.value);
+                        setState(stateTag.value);
+                    }}
                 >
                     {states.map((state, i) => {
                         return (
@@ -376,7 +403,10 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 <select
                     className={view === "register" || view === "login" ? "field hide" : "field"}
                     value={country}
-                    onChange={(event) => setCountry(event.target.value)}
+                    onChange={(event) => {
+                        setCountry(event.target.value);
+                        console.log("country ", event.target.value);
+                    }}
                 >
                     {countries.map((country, i) => {
                         return (
