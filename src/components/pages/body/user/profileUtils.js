@@ -123,44 +123,19 @@ export function guestHandler({
 }
 
 export function updateHandler(
-    {
-        firstName,
-        lastName,
-        email,
-        password1,
-        password2,
-        address1,
-        address2,
-        city,
-        state,
-        zipcode,
-        country,
-        phone,
-    },
+    editObject,
     token
 ) {
     console.log("getting to the guest handler ");
-    if (password1.length > 0) {
-        const passwordCheck = checkPassword(password1, password2);
+    if (editObject.password1) {
+        const passwordCheck = checkPassword(editObject.password1, editObject.password2);
         if (!passwordCheck.valid) {
             alert(passwordCheck.message);
             return;
         }
     }
     updateUser(
-        {
-            firstName,
-            lastName,
-            email,
-            password: password1,
-            addressLine1: address1,
-            addressLine2: address2,
-            city,
-            state,
-            zipcode,
-            country,
-            phone,
-        },
+        editObject,
         token
     )
         .then((result) => {

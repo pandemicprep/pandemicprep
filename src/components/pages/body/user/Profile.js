@@ -1,8 +1,8 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { addUser, getAllUsers, getProductsByQuery, loginUser } from "../../../../api";
+import { addUser, getAllUsers, getProductsByQuery, loginUser, getFullUserFromToken } from "../../../../api";
 
 import {
     states,
@@ -39,11 +39,34 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
     const [searchString, setSearchString] = useState("");
     const history = useHistory();
 
+
+    
+
+
     if (view === "edit" || view === "fulledit") {
         if (!user.isUser) {
             history.push("/");
         }
     }
+
+    useEffect(() => {
+        if (view === 'edit' || view === 'fulledit') {
+            getFullUserFromToken(user.id, user.token).then(result => {
+                setFirstName(result.firstName);
+                setLastName(result.lastName);
+                setEmail(result.email);
+                setAddress1(result.addressLine1);
+                setAddress2(result.addressLine2);
+                setCity(result.city);
+                setState(result.state);
+                setZipcode(result.zipcode);
+                setCountry(result.country);
+                setPhone(result.phone);
+            })
+            
+        }
+    }, [])
+
 
     const cancelHandler = (event) => {
         event.preventDefault();
@@ -113,21 +136,14 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
             }
             //edit and full edit
             if ((view === "edit" || view === "fulledit") && user.isUser) {
+                const editObject = { firstName, lastName, email, password1, password2, addressLine1: address1, addressLine2: address2, city, state, zipcode, country, phone};
+                if (password1 === '') {
+                    delete editObject.password1;
+                    delete editObject.password2;
+                } 
+
                 updateHandler(
-                    {
-                        firstName,
-                        lastName,
-                        email,
-                        password1,
-                        password2,
-                        address1,
-                        address2,
-                        city,
-                        state,
-                        zipcode,
-                        country,
-                        phone,
-                    },
+                    editObject,
                     user.token
                 );
                 history.push("/");
@@ -176,7 +192,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 <h1
                     id="editPro"
                     className={
-                        view === "register" || view === "fulledit" || view === "userCheckout"
+                        view === "register" || view === "fulledit" || view === "userCheckout" || view === 'edit' || view === 'fulledit'
                             ? "field hide"
                             : "field"
                     }
@@ -186,7 +202,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 <h1
                     id="editPro2"
                     className={
-                        view === "login" || view === "fulledit" || view === "userCheckout"
+                        view === "login" || view === "fulledit" || view === "userCheckout" || view === 'edit' || view === 'fulledit'
                             ? "field hide"
                             : "field"
                     }
