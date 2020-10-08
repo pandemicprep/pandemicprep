@@ -78,3 +78,13 @@ export async function completeOrder(cartId, token) {
     throw error;
   }
 }
+
+export async function getAllOrderHistory(pageNumber, token) {
+  try {
+    const { data } = await axios.get(`/api/admin/sales/${pageNumber}`, {headers: {Authorization: 'Bearer ' + token}})
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

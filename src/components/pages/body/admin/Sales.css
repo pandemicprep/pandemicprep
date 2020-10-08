@@ -1,19 +1,15 @@
-.sales {
-    margin: auto;
-    width: 100%;
-    border: 1px solid black;
+.orders {
+    margin-top: -50px !important;
 }
 
-#sales-h1 {
-    font: bold 32px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
-    padding-left: 150px;
-    margin-bottom: 25px;
-    background-color: black;
-    border: 3px solid black;
-    color: white;
-    height: 70px;
-    width: 100%;
-    padding-top: 15px;
-    text-align: center;
+.history-initial {
+    margin-left: -250px !important;
+}
+
+#dropdown-arrow {
+    margin-left: -100px !important;
+}
+
+.hidden-details {
+    margin-left: 350px !important;
 }

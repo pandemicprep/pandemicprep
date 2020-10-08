@@ -7,7 +7,8 @@ const {
     getAllUsers,
     updateUser,
     getProcessingCarts,
-    completeCart
+    completeCart,
+    getOrderHistory
 } = require('../db');
 
 //Gets all products (requires admin status)
@@ -125,7 +126,6 @@ adminRouter.get('/processing/:pageNumber', async (req, res, next) => {
 adminRouter.patch('/finalizing', async (req, res, next) => {
     try {
         const { cartId } = req.body;
-        console.log(cartId, 'cart id in route')
         if (req.user) {
             if (req.user.isAdmin) {
                 const completedOrder = await completeCart(cartId);
@@ -136,6 +136,25 @@ adminRouter.patch('/finalizing', async (req, res, next) => {
             }
         } else {
             res.send({message: 'You must be an admin to complete an order'})
+        }
+    } catch (error) {
+        next(error);
+    }
+})
+
+// gets all cart history
+adminRouter.get('/sales/:pageNumber', async (req, res, next) => {
+    try {
+        const { pageNumber } = req.params;
+        if (req.user) {
+            if (req.user.isAdmin) {
+                const allOrderHistory = await getOrderHistory(pageNumber);
+                res.send(allOrderHistory);
+            } else {
+                res.send({message: 'You must be an admin to retrieve the sales report!'})
+            }
+        } else {
+            res.send({message: 'You must be an admin to retrieve the sales report!'})
         }
     } catch (error) {
         next(error);

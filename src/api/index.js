@@ -9,7 +9,8 @@ export {
     getAllProcessing, 
     updateProduct, 
     adminUpdateUser, 
-    completeOrder
+    completeOrder,
+    getAllOrderHistory
 } from './admin'
 
 
