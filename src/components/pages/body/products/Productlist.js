@@ -54,7 +54,7 @@ export const Productlist = ({
                                         <p className="price">
                                             $ {singleProduct.price}
                                         </p>
-    
+
                                         {/* <button>Add to Cart</button> */}
                                     </div>
                                 </div>
