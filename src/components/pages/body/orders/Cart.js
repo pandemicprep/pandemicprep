@@ -161,10 +161,16 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                                               </button>
                                           </div>
                                           <label className="cart-field cart-product-price">
-                                              {product.unitPrice}
+                                              ${" "}
+                                              {product.unitPrice.toLocaleString("en-US", {
+                                                  minimumFractionDigits: 2,
+                                              })}
                                           </label>
                                           <label className="cart-field cart-product-total">
-                                              {product.itemTotal}
+                                              ${" "}
+                                              {product.itemTotal.toLocaleString("en-US", {
+                                                  minimumFractionDigits: 2,
+                                              })}
                                           </label>
                                           <button
                                               className="cart-field cart-delete"
@@ -185,17 +191,25 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                         <span className="total-title total">Cart Summary</span>
                         <span className="total-label total">Sub-Total:</span>
                         <span className="total-amount total">
-                            $ {parseFloat(cart.total).toFixed(2)}
+                            ${" "}
+                            {parseFloat(cart.total).toLocaleString("en-US", {
+                                minimumFractionDigits: 2,
+                            })}
                         </span>
                         <span className="total-label total">Shipping:</span>
                         <span className="total-shipping total">
-                            $ {parseFloat(cart.total) > 0 ? shipping.toFixed(2) : "0.00"}
+                            ${" "}
+                            {parseFloat(cart.total) > 0
+                                ? shipping.toLocaleString("en-US", { minimumFractionDigits: 2 })
+                                : "0.00"}
                         </span>
                         <span className="total-label total">Total:</span>
                         <span className="total-total total">
                             ${" "}
                             {parseFloat(cart.total) > 0
-                                ? (parseFloat(cart.total) + shipping).toFixed(2)
+                                ? (parseFloat(cart.total) + shipping).toLocaleString("en-US", {
+                                      minimumFractionDigits: 2,
+                                  })
                                 : "0.00"}
                         </span>
                     </div>

@@ -68,7 +68,12 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
                 <div className="info">
                     <p className="header">{product.title}</p>
                     <p className="description1">{product.description}</p>
-                    <p className="price">{product.price}</p>
+                    <p className="price">
+                        ${" "}
+                        {parseFloat(product.price).toLocaleString("en-US", {
+                            minimumFractionDigits: 2,
+                        })}
+                    </p>
                     <button id="addToCart" onClick={addToCartHandler}>
                         Add to Cart
                     </button>

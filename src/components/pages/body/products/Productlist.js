@@ -31,7 +31,7 @@ export const Productlist = ({
     const [categoryPage, setCategoryPage] = useState(1);
     const [searchPage, setSearchPage] = useState(1);
     const history = useHistory();
-    console.log("products from producList", products)
+    console.log("products from producList", products);
     // if (products.length === 0) {
     //     history.push("/");
     // }
@@ -41,27 +41,40 @@ export const Productlist = ({
                 {products.map((singleProduct, i) => {
                     if (singleProduct.isActive) {
                         return (
-                            <NavLink id="productA" className='product-card' key={i} to='/product' onClick={(event) => { setProduct(singleProduct) }}>
-                                <div key={i} className="product" >
-                                    <div id='product' className="info">
-                                        <p className="header">
-                                            {singleProduct.title}
-                                        </p>
-                                        <img className="image" src={process.env.PUBLIC_URL + singleProduct.image} />
-                                        <p className="description">
-                                            {singleProduct.description}
-                                        </p>
+                            <NavLink
+                                id="productA"
+                                className="product-card"
+                                key={i}
+                                to="/product"
+                                onClick={(event) => {
+                                    setProduct(singleProduct);
+                                }}
+                            >
+                                <div key={i} className="product">
+                                    <div id="product" className="info">
+                                        <p className="header">{singleProduct.title}</p>
+                                        <img
+                                            className="image"
+                                            src={process.env.PUBLIC_URL + singleProduct.image}
+                                        />
+                                        <p className="description">{singleProduct.description}</p>
                                         <p className="price">
-                                            $ {singleProduct.price}
+                                            ${" "}
+                                            {parseFloat(singleProduct.price).toLocaleString(
+                                                "en-US",
+                                                {
+                                                    minimumFractionDigits: 2,
+                                                }
+                                            )}
                                         </p>
 
                                         {/* <button>Add to Cart</button> */}
                                     </div>
                                 </div>
                             </NavLink>
-                        )
+                        );
                     } else {
-                        return '';
+                        return "";
                     }
                 })}
             </div>

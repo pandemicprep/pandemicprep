@@ -134,7 +134,12 @@ export const Promoted = ({ NavLink, setProduct, useHistory }) => {
                         <div className="inner">
                             <h1>{item.name}</h1>
                             <p>{item.description}</p>
-                            <button id="promoButton">${item.price}</button>
+                            <button id="promoButton">
+                                ${" "}
+                                {item.price.toLocaleString("en-US", {
+                                    minimumFractionDigits: 2,
+                                })}
+                            </button>
                         </div>
                     </div>
                 ))}
