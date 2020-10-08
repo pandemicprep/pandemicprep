@@ -20,7 +20,10 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
     const removeHandler = (product) => {
         const productId = product.id;
         if (user.firstName !== "Guest") {
-            removeProductFromCart({ cartId: cart.id, products_cartsId: productId }, user.token)
+            removeProductFromCart(
+                { cartId: cart.id, products_cartsId: product.jointId },
+                user.token
+            )
                 .then((response) => {
                     setCart(response);
                     setCartSize(response.cartQuantity);
@@ -78,7 +81,10 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
             }
         } else {
             if (user.firstName !== "Guest") {
-                removeProductFromCart({ cartId: cart.id, products_cartsId: jointId }, user.token)
+                removeProductFromCart(
+                    { cartId: cart.id, products_cartsId: product.jointId },
+                    user.token
+                )
                     .then((response) => {
                         setCart(response);
                         setCartSize(response.cartQuantity);

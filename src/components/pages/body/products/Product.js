@@ -30,7 +30,7 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
                     .then((response) => {
                         console.log("cart coming back from add product ", response);
                         setCart(response);
-                        setCartSize(response.items.length);
+                        setCartSize(response.cartQuantity);
                     })
                     .catch((error) => {
                         console.error(error);
