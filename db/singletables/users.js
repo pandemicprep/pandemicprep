@@ -127,7 +127,7 @@ async function getAllUsers(pageNumber = 1) {
  */
 async function updateUser(id, fields = {}) {
     // Builds the set string
-
+    console.log('getting to update users at the back with ', fields);
     if (fields.password) {
         fields.password = await bcrypt.hash(field.password, SALT_COUNT);
     }

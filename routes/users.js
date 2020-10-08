@@ -13,6 +13,7 @@ const {
     getUserByEmail,
 } = require("../db/singletables/users");
 const { getActiveCart } = require('../db');
+const users = require('../db/singletables/users');
 
 //Register New User
 usersRouter.post("/register", async (req, res, next) => {
@@ -137,8 +138,13 @@ usersRouter.patch("/", async (req, res, next) => {
     }
 });
 
+
+
+
+
 //Get user by id
 usersRouter.get("/:userId", async (req, res, next) => {
+   
     try {
         console.log("entering getting user by id route...");
         const id = req.params.userId;

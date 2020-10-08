@@ -77,3 +77,18 @@ export async function getUserFromToken(token) {
         console.error(error);
     }
 }
+
+
+export async function getFullUserFromToken(id, token) {
+    try {
+        const { data: user } = await axios.get(`/api/users/${id}`, {
+            headers: { authorization: "Bearer " + token },
+        });
+        user.token = token;
+        
+
+        return user;
+    } catch (error) {
+        console.error(error);
+    }
+}
