@@ -4,6 +4,15 @@
 
 const productArray = [
   {
+    name: "Succulents",
+    price: 19.99,
+    description:
+      "HAND SELECTED: Every pack of succulents we send is hand-picked. You will receive a unique collection of species that are FULLY ROOTED IN 2 INCH POTS.",
+    image: "images/succ.jpg",
+    category: "work health",
+    isHighlighted: true
+  },
+  {
     name: "Desk Lamp",
     price: 39.99,
     description:
@@ -524,6 +533,7 @@ const productArray = [
       "10.2-Inch Retina Display, 8MP back camera, 1.2MP FaceTime HD Front camera, up to 10 hours of battery life.",
     image: "images/ipad.jpg",
     category: "school work",
+    isHighlighted: true
   },
   {
     name: "Merriam-Webster 3 Pack",
@@ -605,6 +615,7 @@ const productArray = [
       "Its 12 sticky sides each feature tear-off sticky memos in different colors so you can get creative with group brainstorming at work or keeping the whole family organized at home.",
     image: "images/stickymemoball.jpg",
     category: "work school",
+    isHighlighted: true
   },
   {
     name: "Drafting Table",
@@ -613,6 +624,7 @@ const productArray = [
       "Table with Storage, Adjustable Drawing Desk Rolling Art Craft Station Writing Work Table with Drawers & Wheels.",
     image: "images/table.jpg",
     category: "work",
+    isHighlighted: true
   },
   {
     name: "Ergonomic Office Chair",
@@ -683,6 +695,7 @@ const productArray = [
       "1800R curve monitor the curved display delivers a revolutionary visual experience with a leading 1800R screen curvature as the images appear to wrap around you for an in depth, immersive experience.",
     image: "images/curved.jpg",
     category: "work school entertainment",
+    isHighlighted: true
   },
   {
     name: "Laptop Stand",
@@ -794,6 +807,7 @@ const productArray = [
       "Brew a delicious cup of tea in this glass tea press that utilizes the same brewing system as the French press; perfect for loose teas and tea bags.",
     image: "images/teapos.jpg",
     category: "work household groceries health",
+    isHighlighted: true
   },
   {
     name: "Dual Sided Leather Desk Mat",
@@ -882,6 +896,7 @@ const productArray = [
       "Pretty design, made with high quality paper and covers for easy writing and durability.",
     image: "images/colornotebook.jpg",
     category: "work school entertainment",
+    isHighlighted: true
   },
   {
     name: "Sticky Organizer",
@@ -1094,14 +1109,6 @@ const productArray = [
       "50 high-quality sheets. Undated to help you organize your week.",
     image: "images/dailyplan.jpg",
     category: "work school",
-  },
-  {
-    name: "Succulents",
-    price: 19.99,
-    description:
-      "HAND SELECTED: Every pack of succulents we send is hand-picked. You will receive a unique collection of species that are FULLY ROOTED IN 2 INCH POTS.",
-    image: "images/succ.jpg",
-    category: "work health",
   },
   {
     name: "Funny Notepad",
@@ -1372,6 +1379,7 @@ const productArray = [
     description: "Freeze dried icecream bar.",
     image: "images/space-icecream.jpg",
     category: "groceries",
+    isHighlighted: true
   },
   {
     name: "Mountain House",
@@ -1423,6 +1431,7 @@ const productArray = [
       "Grants one the power to code without any bugs....also tastes good.",
     image: "images/banana.png",
     category: "groceries school work protection",
+    isHighlighted: true
   },
   {
     name: "223 Ammo",
@@ -1698,6 +1707,7 @@ const productArray = [
     description: "Be invisible in the snow.",
     image: "images/helikon_ghillie_snow_camo.jpg",
     category: "protection",
+    isHighlighted: true
   },
   {
     name: "Forest Ghillie Suit",

@@ -60,12 +60,12 @@ export async function getProductsByCategory(categoryName, pageNumber) {
 }
 
 //BELOW FUNCTION IS FOR FUTURE PRODUCTION
-// export async function getPromotedProducts() {
-//     try {
-//         const { data } = await axios.get('/api/products');
+export async function getPromotedProducts() {
+    try {
+        const { data } = await axios.get('/api/products');
 
-//         return data;
-//     } catch (error) {
-//         throw error;
-//     }
-// }
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}

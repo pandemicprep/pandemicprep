@@ -269,33 +269,32 @@ async function getProductsByCategory(category, pageNumber) {
 }
 
 
-//IS THIS NEEDED????????
-// /**
-//  * Gets all highlighted products
-//  */
-// async function getHighlightedProducts() {
-//   try {
-//     const {
-//       rows
-//     } = await client.query(`
-//      SELECT id FROM products 
-//      WHERE "isHighlighted" = true;
-//     `);
+/**
+ * Gets all highlighted products
+ */
+async function getHighlightedProducts() {
+  try {
+    const {
+      rows
+    } = await client.query(`
+     SELECT id FROM products 
+     WHERE "isHighlighted" = true;
+    `);
 
-//     const prodIdArray = rows.map((product) => {
-//       const [newProductId] = Object.values(product);
-//       return newProductId;
-//     });
+    const prodIdArray = rows.map((product) => {
+      const [newProductId] = Object.values(product);
+      return newProductId;
+    });
 
-//     const productsArray = await Promise.map(prodIdArray, async function (productId) {
-//       return await getProductById(productId)
-//     }, { concurrency: 25 });
+    const productsArray = await Promise.map(prodIdArray, async function (productId) {
+      return await getProductById(productId)
+    }, { concurrency: 25 });
 
-//     return productsArray;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+    return productsArray;
+  } catch (error) {
+    throw error;
+  }
+}
 
 
 /**
@@ -330,7 +329,7 @@ async function updateProduct(id, fields = {}) {
 
 
 /**
- * 
+ * Populates the joint table between products and categories to be used in other functions
  * @param {integer} productId 
  * @param {integer} categoryId
  */
@@ -368,5 +367,6 @@ module.exports = {
   getProductsForCartHistory,
   getProductsByCategory,
   updateProduct,
-  addProduct_Categories
+  addProduct_Categories,
+  getHighlightedProducts
 };
