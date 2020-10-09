@@ -76,3 +76,23 @@
 .hid-con {
     background-color: silver;
 }
+
+.hist-tit {
+    font: bold 20px Helvetica, Sans-Serif;
+}
+
+.hid-tit {
+    font: bold 18px Helvetica, Sans-Serif;
+}
+
+.orders-h1 {
+    font: bold 32px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
+    margin-bottom: 25px;
+    background-color: black;
+    border: 3px solid black;
+    color: white;
+    height: 70px;
+    width: 100%;
+    padding-top: 15px;
+}
