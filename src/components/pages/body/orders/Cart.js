@@ -34,7 +34,7 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
         } else {
             removeProductFromGuestCart(cart, product).then((result) => {
                 setCart(result);
-                setCartSize(result.quantity);
+                setCartSize(result.cartQuantity);
                 localStorage.setItem("panprepCart", JSON.stringify(result));
             });
         }
