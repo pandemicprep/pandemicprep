@@ -83,7 +83,9 @@ export const OrdersProcessing = ({
                                 <div id='initial-details' >
                                     <p>{order.user.firstName} {order.user.lastName}</p>
                                     <p>{order.user.email}</p>
-                                    <p>{order.total.toFixed(2)}</p>
+                                    <span>{'$ ' + order.total.toLocaleString("en-US", {
+                                        minimumFractionDigits: 2,
+                                    })}</span>
                                     <p>{Date(order.lastUpdated)}</p>
                                     <button id='dropdown-arrow' onClick={() => toggleDetails(index)} >ˇ</button>
                                     <button className='processing-button' onClick={() => finalizeOrder(order)} >Finalize</button>
@@ -105,8 +107,12 @@ export const OrdersProcessing = ({
                                                 <div key={i} id='each-hidden-item' >
                                                     <p>{item.title}</p>
                                                     <p>{item.quantity}</p>
-                                                    <p>{item.price}</p>
-                                                    <p>{item.price * item.quantity}</p>
+                                                    <span>{'$ ' + item.price.toLocaleString("en-US", {
+                                                        minimumFractionDigits: 2,
+                                                    })}</span>
+                                                    <span>{('$ ' + item.price * item.quantity).toLocaleString("en-US", {
+                                                        minimumFractionDigits: 2,
+                                                    })}</span>
                                                 </div>
                                             )
                                         })}
@@ -127,8 +133,12 @@ export const OrdersProcessing = ({
                                                 <div key={i} id='each-hidden-item' >
                                                     <p>{item.title}</p>
                                                     <p>{item.quantity}</p>
-                                                    <p>{item.price}</p>
-                                                    <p>{item.price * item.quantity}</p>
+                                                    <span>{'$ ' + item.price.toLocaleString("en-US", {
+                                                        minimumFractionDigits: 2,
+                                                    })}</span>
+                                                    <span>{'$ ' + (item.price * item.quantity).toLocaleString("en-US", {
+                                                        minimumFractionDigits: 2,
+                                                    })}</span>
                                                 </div>
                                             )
                                         })}
