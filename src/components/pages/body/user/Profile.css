@@ -33,7 +33,7 @@
     /* margin-left: -150px; */
 }
 
-.editPro2 {
+/* .editPro2 {
     font: bold 32px Helvetica, Sans-Serif;
     letter-spacing: -1px;
     margin-bottom: 25px;
@@ -44,8 +44,9 @@
     height: 70px;
     padding-top: 15px;
     text-align: center;
-    /* margin-left: -150px; */
-}
+    
+} 
+*/
 
 .profileform {
     display: flex;

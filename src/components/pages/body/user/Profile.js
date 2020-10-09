@@ -79,7 +79,9 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 
     const passwordButtonHandler = (event) => {
         event.preventDefault();
+
         setView("fulledit");
+        console.log("button clicked", view);
     };
 
     const formHandler = async (event) => {
