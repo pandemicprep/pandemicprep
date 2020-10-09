@@ -181,7 +181,7 @@ const App = () => {
                     </Route>
                     <Route path="/register">
                         <Profile
-                            view="register"
+                            view={view}
                             useHistory={useHistory}
                             setView={setView}
                             setUser={setUser}
@@ -191,7 +191,7 @@ const App = () => {
                     </Route>
                     <Route path="/login">
                         <Profile
-                            view="login"
+                            view={view}
                             useHistory={useHistory}
                             setView={setView}
                             setUser={setUser}
@@ -211,7 +211,7 @@ const App = () => {
                     </Route>
                     <Route path="/edit-user">
                         <Profile
-                            view="edit"
+                            view={view}
                             useHistory={useHistory}
                             setView={setView}
                             setUser={setUser}
