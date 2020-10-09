@@ -207,10 +207,10 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     id="editPro"
                     className={
                         view === "register" ||
-                        view === "fulledit" ||
-                        view === "userCheckout" ||
-                        view === "edit" ||
-                        view === "fulledit"
+                            view === "fulledit" ||
+                            view === "userCheckout" ||
+                            view === "edit" ||
+                            view === "fulledit"
                             ? "field hide"
                             : "field"
                     }
@@ -221,10 +221,10 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     id="editPro2"
                     className={
                         view === "login" ||
-                        view === "fulledit" ||
-                        view === "userCheckout" ||
-                        view === "edit" ||
-                        view === "fulledit"
+                            view === "fulledit" ||
+                            view === "userCheckout" ||
+                            view === "edit" ||
+                            view === "fulledit"
                             ? "field hide"
                             : "field"
                     }
@@ -274,10 +274,10 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     id="reveal"
                     className={
                         view === "register" ||
-                        view === "userCheckout" ||
-                        view === "login" ||
-                        view === "guest" ||
-                        view === "fulledit"
+                            view === "userCheckout" ||
+                            view === "login" ||
+                            view === "guest" ||
+                            view === "fulledit"
                             ? "field hide"
                             : "field"
                     }
@@ -309,9 +309,9 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     placeholder="Verify Password" //
                     className={
                         view === "guest" ||
-                        view === "userCheckout" ||
-                        view === "login" ||
-                        view === "edit"
+                            view === "userCheckout" ||
+                            view === "login" ||
+                            view === "edit"
                             ? "field hide"
                             : "field"
                     }
@@ -385,7 +385,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 <select
                     id="states"
                     className={view === "login" || view === "register" ? "field hide" : "field"}
-                    
+
                     value={state}
                     onChange={(event) => {
                         setState(event.target.value);
@@ -400,7 +400,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     })}
                 </select>
                 <select
-                id='countries'
+                    id='countries'
                     className={view === "register" || view === "login" ? "field hide" : "field"}
                     value={country}
                     onChange={(event) => {
@@ -440,7 +440,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 <br></br>
                 <button id="submit" type="submit">
                     Submit
-                </button>
+                </button><br></br>
                 <button id="cancel" onClick={cancelHandler}>
                     Cancel
                 </button>

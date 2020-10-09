@@ -18,6 +18,7 @@
     justify-content: space-around;
     position: relative;
     bottom: 100px;
+    z-index: 1;
 }
 
 #admin-nav button {
@@ -53,11 +54,15 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 100%;
+    width: 100%;
+    margin-top:-150px;
 	display: flex;
 	align-items: center;
     justify-content: center;
-    margin-top: 150px;
+    background-image: url('https://images.wallpaperscraft.com/image/stars_sky_space_car_113629_3840x2160.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 900px;
 }
 
 
