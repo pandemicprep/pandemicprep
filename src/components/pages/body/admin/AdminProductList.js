@@ -173,9 +173,16 @@ export const AdminProductList = ({
                             <form id='admin-list' onSubmit={(event) => editProduct(event, item)}>
                                 <span className='each-input' id="title">Title & Price:
                                     <input type='text' placeholder={item.title}
-                                        value={editTitle} onChange={(event) => { setEditTitle(event.target.value) }}></input>
-                                    <input type='text' id='price-input' placeholder={item.price}
-                                        value={editPrice} onChange={(event) => { setEditPrice(event.target.value) }}></input>
+                                        value={editTitle} onChange={(event) => { setEditTitle(event.target.value) }}>                                        
+                                    </input>
+
+                                    <input type='text' id='price-input' 
+                                        placeholder={'$ ' + item.price.toLocaleString("en-US", {
+                                            minimumFractionDigits: 2,
+                                        })}
+                                        value={editPrice.toLocaleString("en-US", {
+                                            minimumFractionDigits: 2,
+                                        })} onChange={(event) => { setEditPrice(event.target.value) }}></input>
                                 </span>
 
                                 <span className='each-input' id="description">Description:
@@ -213,7 +220,12 @@ export const AdminProductList = ({
                             <form id='admin-list'>
                                 <span className='each-input' id="title">Title & Price:
                                     <input type='text' readOnly placeholder={item.title} value={item.title}></input>
-                                    <input type='text' id='price-input' readOnly placeholder={item.price} value={item.price}></input>
+                                    <input type='text' id='price-input' readOnly placeholder={'$ ' + item.price.toLocaleString("en-US", {
+                                            minimumFractionDigits: 2,
+                                        })} 
+                                        value={'$ ' + item.price.toLocaleString("en-US", {
+                                            minimumFractionDigits: 2,
+                                        })}></input>
                                 </span>
 
                                 <span className='each-input' id="description">Description:
