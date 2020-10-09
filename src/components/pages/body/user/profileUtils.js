@@ -126,12 +126,16 @@ export function updateHandler(
     editObject,
     token
 ) {
-    console.log("getting to the guest handler ");
+    
     if (editObject.password1) {
         const passwordCheck = checkPassword(editObject.password1, editObject.password2);
         if (!passwordCheck.valid) {
             alert(passwordCheck.message);
             return;
+        } else {
+            editObject.password = editObject.password1;
+            delete editObject.password1;
+            delete editObject.password2;
         }
     }
     updateUser(

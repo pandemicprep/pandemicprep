@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const { addCart, getActiveCart } = require("../singletables/cart.js");
 //LIMIT is the number of users per page in the Admin tab
 const LIMIT = 10;
+const SALT_COUNT = 13;
 
 /**
  * Create new user by registration (first, last, email, pass minimum),
@@ -30,7 +31,7 @@ async function addUser({
     phone = null,
     creditCard = null,
 }) {
-    const SALT_COUNT = 13;
+    
     let securedPassword = null;
     let securedCreditCard = null;
 
@@ -128,8 +129,9 @@ async function getAllUsers(pageNumber = 1) {
 async function updateUser(id, fields = {}) {
     // Builds the set string
     console.log('getting to update users at the back with ', fields);
+    delete fields.id;
     if (fields.password) {
-        fields.password = await bcrypt.hash(field.password, SALT_COUNT);
+        fields.password = await bcrypt.hash(fields.password, SALT_COUNT);
     }
 
     const setString = Object.keys(fields)

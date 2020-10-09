@@ -167,7 +167,7 @@ position: absolute;
 
 
 
-#productH1 {
+.productH1 {
     font: bold 32px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     padding-left: 150px;

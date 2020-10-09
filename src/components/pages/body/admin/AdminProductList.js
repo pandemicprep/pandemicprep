@@ -143,7 +143,7 @@ export const AdminProductList = ({
 
     return (
         <div id='admin'>
-            <h1 id="productH1">Add New Product</h1>
+            <h1 className="productH1">Add New Product</h1>
             {adminPage === 1 ?
                 <form id='admin-list' onSubmit={adminAddProduct}>
                     <span className='each-input' id="title">Title & Price:
@@ -164,7 +164,7 @@ export const AdminProductList = ({
 
 
                 </form> : ''}
-            <h1 id="productH1">Edit Existing Product</h1>
+            <h1 className="productH1">Edit Existing Product</h1>
             {adminProductList.map((item, index) => {
                 return (
                     <span key={index}>
