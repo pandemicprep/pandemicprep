@@ -33,70 +33,99 @@ export const Orders = ({ user }) => {
             <h1 className="orders-h1">Order History</h1>
 
             <div className="orders-list">
-                <div className="history-titles">
-                    <p>Date Placed</p>
-                    <p>Number Of Items</p>
-                    <p>Order Total</p>
-                    <p>Status</p>
-                </div>
-
                 {orderHistory.map((order, index) => {
                     if (order.status === "active") {
                         return "";
                     } else {
                         return (
                             <div key={index} className="first-map-div">
-                                <div className="history-initial">
-                                    <p>{order.lastUpdated}</p>
-                                    <p>{order.cartQuantity}</p>
-                                    <p>{order.total.toFixed(2)}</p>
-                                    <p>{order.status}</p>
+                                <div className="history-top">
+                                    <p className="hist-tit">Date Placed</p>
+                                    <p className="hist-tit">Number Of Items</p>
+                                    <p className="hist-tit">Order Total</p>
+                                    <p className="hist-tit">Status</p>
+                                    <p className="hist-con">{order.lastUpdated}</p>
+                                    <p className="hist-con">{order.cartQuantity}</p>
+                                    <p className="hist-con">
+                                        ${" "}
+                                        {order.total.toLocaleString("en-US", {
+                                            minimumFractionDigits: 2,
+                                        })}
+                                    </p>
+                                    <p className="hist-con">{order.status}</p>
                                 </div>
-                                <button id="dropdown-arrow" onClick={() => toggleDetails(index)}>
+                                <button
+                                    className="dropdown-arrow"
+                                    onClick={() => toggleDetails(index)}
+                                >
                                     ˇ
                                 </button>
 
-                                {clickedIndex === index ? (
-                                    <div className="hidden-details ">
-                                        <div id="hidden-titles">
-                                            <p>Product</p>
-                                            <p>Quantity</p>
-                                            <p>Price</p>
-                                            <p>Total</p>
-                                        </div>
+                                {
+                                    clickedIndex === index ? (
+                                        <div className="hidden-details-cont ">
+                                            <div className="hidden-titles">
+                                                <p className="hid-tit">Product</p>
+                                                <p className="hid-tit">Quantity</p>
+                                                <p className="hid-tit">Price</p>
+                                                <p className="hid-tit">Total</p>
+                                            </div>
 
-                                        {order.items.map((item, i) => {
-                                            return (
-                                                <div key={i} id="each-hidden-item">
-                                                    <p>{item.title}</p>
-                                                    <p>{item.quantity}</p>
-                                                    <p>{item.price}</p>
-                                                    <p>{(item.price * item.quantity).toFixed(2)}</p>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                ) : (
-                                    <div className="hidden-details hidden-processing">
-                                        <div id="hidden-titles">
-                                            <p>Product</p>
-                                            <p>Quantity</p>
-                                            <p>Price</p>
-                                            <p>Total</p>
+                                            <div className="hidden-item-cont">
+                                                {order.items.map((item, i) => {
+                                                    return (
+                                                        <div key={i} className="each-hidden-item">
+                                                            <p className="hid-con">{item.title}</p>
+                                                            <p className="hid-con">
+                                                                {item.quantity}
+                                                            </p>
+                                                            <p className="hid-con">
+                                                                ${" "}
+                                                                {item.price.toLocaleString(
+                                                                    "en-US",
+                                                                    {
+                                                                        minimumFractionDigits: 2,
+                                                                    }
+                                                                )}
+                                                            </p>
+                                                            <p className="hid-con">
+                                                                ${" "}
+                                                                {(
+                                                                    item.price * item.quantity
+                                                                ).toLocaleString("en-US", {
+                                                                    minimumFractionDigits: 2,
+                                                                })}
+                                                            </p>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
                                         </div>
+                                    ) : (
+                                        ""
+                                    )
+                                    // (
+                                    // <div className="hidden-details hidden-processing">
+                                    //     <div className="hidden-titles">
+                                    //         <p>Product</p>
+                                    //         <p>Quantity</p>
+                                    //         <p>Price</p>
+                                    //         <p>Total</p>
+                                    //     </div>
 
-                                        {order.items.map((item, i) => {
-                                            return (
-                                                <div key={i} id="each-hidden-item">
-                                                    <p>{item.title}</p>
-                                                    <p>{item.quantity}</p>
-                                                    <p>{item.price}</p>
-                                                    <p>{item.price * item.quantity}</p>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                )}
+                                    //     {order.items.map((item, i) => {
+                                    //         return (
+                                    //             <div key={i} className="each-hidden-item">
+                                    //                 <p>{item.title}</p>
+                                    //                 <p>{item.quantity}</p>
+                                    //                 <p>{item.price}</p>
+                                    //                 <p>{item.price * item.quantity}</p>
+                                    //             </div>
+                                    //         );
+                                    //     })}
+                                    // </div>
+                                    // )
+                                }
                             </div>
                         );
                     }
