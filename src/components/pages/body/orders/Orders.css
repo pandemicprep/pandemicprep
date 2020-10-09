@@ -1,4 +1,6 @@
-.orders{
+/** @format */
+
+.orders {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,8 +11,8 @@
 }
 
 .orders-h1 {
-    font: bold 32px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
+    font: bold 32px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
     margin-bottom: 25px;
     background-color: black;
     border: 3px solid black;
@@ -36,11 +38,10 @@
     margin-top: 15px;
     margin-left: -220px;
     width: 80%;
-    font: bold 24px Helvetica, Sans-Serif; 
+    font: bold 24px Helvetica, Sans-Serif;
 }
 
 .history-titles p {
-
 }
 
 .history-initial {
@@ -52,7 +53,7 @@
     padding: 5px;
 }
 
-#first-map-div {
+.first-map-div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -60,6 +61,7 @@
     border: 1px solid black;
     width: 100%;
     padding: 5px;
+    line-height: 0.6rem;
 }
 
 .history-initial p {
@@ -88,4 +90,3 @@
 #hidden-titles {
     margin-top: 5px;
 }
-
