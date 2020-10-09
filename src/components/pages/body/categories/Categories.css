@@ -51,6 +51,7 @@ a:active#cat {
     border: 1px solid black;
     border-radius: 10px;
     width: 140px;
+    height: 50px;
     font: bold 22px Helvetica, Sans-Serif;
     letter-spacing: -1px;
     color: black;

@@ -2,17 +2,18 @@
 
 
 .profile {
-    max-width: 700px;
     font: bold 24px Helvetica, Sans-Serif; 
-    margin: auto;
-    width: 50%;
-    margin-top: 250px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    text-align: center;
-
+    align-items: center;
+    background-image: url('https://www.lefthudson.com/wp-content/uploads/2019/11/black-minimalist-wallpaper-awesome-192-minimalist-wallpaper-examples-for-a-simple-desktop-background-this-month-of-black-minimalist-wallpaper.jpg') !important;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 1000px;
+    padding-left: 200px;
+    padding-bottom: 75px;
 }
 
 #editPro {
@@ -24,27 +25,31 @@
     color: black;
     height: 70px;
     padding-top: 15px;
+    text-align: center;
+    width: 600px;
+    margin-left: -150px;
 }
 
-#password2 {
-    margin-left: 305px;
-}
+
+
 
 #editPro2 {
-    margin-left: 42px;
     font: bold 32px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     margin-bottom: 25px;
+    margin-top: 175px;
     width: 600px;
     background-color: white;
     color: black;
     height: 70px;
     padding-top: 15px;
+    text-align: center;
+    margin-left: -150px;
 }
 
 .profileform {
     display: flex;
-
+    flex-direction: column;
 }
 
 input {
@@ -52,14 +57,10 @@ input {
     border: 1px solid black;
     height: 50px;
     margin-top: 10px;
-    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
-button {
-    width: 100px;
-    height: 50px;
-    border: 1px solid black;
-}
 
 
 select {
@@ -68,6 +69,8 @@ select {
     height: 50px;
     margin-top: 10px;
     margin-right: 5px;
+    display: flex;
+    flex-direction: row;
 }
 
 .hide {
@@ -79,15 +82,14 @@ select {
     width: 300px;
     height: 50px;
     margin-top: 10px;
-    margin-right: 5px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: black; 
-    background-image: -webkit-linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
-    background-image: linear-gradient(45deg, rgb(55, 0, 55) 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(45deg, black 50%, transparent 50%);
+    background-image: linear-gradient(45deg, black 50%, transparent 50%);
     background-position: 100%;
     background-size: 400%;
     -webkit-transition: background 300ms ease-in-out;
@@ -102,8 +104,4 @@ select {
     -ms-transform: scale(1.075,1.075);
     -o-transform: scale(1.075,1.075);
     transform: scale(1.075,1.075);
-}
-
-#submit {
-    margin-bottom: 120px;
 }
