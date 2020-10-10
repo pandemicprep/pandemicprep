@@ -108,7 +108,7 @@ export const OrdersProcessing = ({ user }) => {
 								</div>
 
 								{clickedIndex === index ? (
-									<div className='hidden-details '>
+									<div className='hidden-details-orders'>
 										<div id='hidden-titles'>
 											<p>Product</p>
 											<p>Quantity</p>

@@ -72,12 +72,13 @@
     padding-top: 15px; 
 }
 
-.hidden-details {
+.hidden-details-orders {
     width: 1170px;
-    margin-left: -170px;
+    /* margin-left: -170px; */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #dropdown-arrow {
@@ -94,7 +95,9 @@
 
 #hidden-titles {
     border: 1px solid black;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
     justify-content: space-between;
     width: 800px;
     font: bold 18px Helvetica, Sans-Serif; 
@@ -103,7 +106,9 @@
 }
 
 #each-hidden-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
     justify-content: space-between;
     width: 800px;
     font: 18px Helvetica, Sans-Serif; 
