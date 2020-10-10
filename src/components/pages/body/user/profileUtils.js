@@ -161,7 +161,7 @@ function checkPassword(password1, password2) {
         return { valid: false, message: "Passwords must match" };
     }
     if (password.length < 8) {
-        return { valid: false, message: "This password is too short. 8 characters or more" };
+        return { valid: false, message: "- 1+ numbers\n- 1+ uppercase\n- 8+ characters" };
     }
     const passwordCharacters = password.split("");
     let hasNumber = false;
@@ -177,12 +177,12 @@ function checkPassword(password1, password2) {
     if (hasNumber) {
         return { valid: true, message: "valid" };
     } else {
-        return { valid: false, message: "Password must have at least one number" };
+        return { valid: false, message: "- 1+ numbers\n- 1+ uppercase\n- 8+ characters" };
     }
     if (hasUpper) {
         return { valid: true, message: "valid" };
     } else {
-        return { valid: false, message: "Password must have at least one uppercase letter" };
+        return { valid: false, message: "- 1+ numbers\n- 1+ uppercase\n- 8+ characters" };
     }
 }
 
