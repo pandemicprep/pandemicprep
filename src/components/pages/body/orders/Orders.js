@@ -47,28 +47,42 @@ export const Orders = ({ user }) => {
                                 className="first-map-div"
                                 onClick={() => toggleDetails(index)}
                             >
+
                                 <div className="history-top">
+
                                     <p className="hist-tit">Date Placed</p>
+
                                     <p className="hist-tit">Number Of Items</p>
+
                                     <p className="hist-tit">Order Total</p>
+
                                     <p className="hist-tit">Status</p>
+                                    <span id="clickMe">Click to Expand</span>
                                     <p className="hist-con">{order.lastUpdated}</p>
+
                                     <p className="hist-con">{order.cartQuantity}</p>
+
+
                                     <p className="hist-con">
                                         ${" "}
                                         {order.total.toLocaleString("en-US", {
                                             minimumFractionDigits: 2,
                                         })}
                                     </p>
+
                                     <p className="hist-con">{order.status}</p>
                                 </div>
 
                                 {clickedIndex === index ? (
                                     <div className="hidden-details-cont ">
                                         <div className="hidden-titles">
+
                                             <p className="hid-tit">Product</p>
+
                                             <p className="hid-tit">Quantity</p>
+
                                             <p className="hid-tit">Price</p>
+
                                             <p className="hid-tit">Total</p>
                                         </div>
 
@@ -98,8 +112,8 @@ export const Orders = ({ user }) => {
                                         </div>
                                     </div>
                                 ) : (
-                                    ""
-                                )}
+                                        ""
+                                    )}
                             </div>
                         );
                     }
