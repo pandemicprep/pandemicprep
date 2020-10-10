@@ -31,7 +31,6 @@ export const Productlist = ({
     const [categoryPage, setCategoryPage] = useState(1);
     const [searchPage, setSearchPage] = useState(1);
     const history = useHistory();
-    console.log("products from producList", products);
     // if (products.length === 0) {
     //     history.push("/");
     // }

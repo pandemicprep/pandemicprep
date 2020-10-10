@@ -77,7 +77,6 @@ export const Userlist = ({
                 isAdmin,
                 isUser
             });
-            console.log("new user from registration ", newUser);
 
         } catch (error) {
             throw error;
@@ -96,7 +95,6 @@ export const Userlist = ({
 
     const editUser = async (event, item) => {
         event.preventDefault();
-        console.log('getting into editUser', item)
         try {
             const fields = {
                 email: editEmail === '' ? item.email : editEmail,
@@ -108,7 +106,6 @@ export const Userlist = ({
                 delete fields.password
             }
             const updatedUser = await adminUpdateUser({ id: item.id, fields: fields, token: user.token })
-            console.log(updatedUser, 'newly updated user log')
             setAdminView('none')
             setEdit(!edit)
 

@@ -9,7 +9,6 @@ import { addProductToGuestCart } from "../../../index";
 
 export const Product = ({ product, setCart, cart, user, setCartSize }) => {
     const addToCartHandler = () => {
-        console.log("user id from product ", user);
 
         const alreadyPresent = cart.items.find((item) => {
             return item.id === product.id;
@@ -28,7 +27,6 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
                     user.token
                 )
                     .then((response) => {
-                        console.log("cart coming back from add product ", response);
                         setCart(response);
                         setCartSize(response.cartQuantity);
                     })

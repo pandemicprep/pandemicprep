@@ -10,7 +10,6 @@ export const News = () => {
     useEffect(() => {
         fetchNews()
             .then((response) => {
-                console.log(response)
                 setArticles(response.news);
             })
             .catch((error) => {

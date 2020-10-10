@@ -50,10 +50,8 @@ export async function updateUser(fields = {}, token) {
  * @param {Object} {requires email, password}
  */
 export async function loginUser(credentials) {
-    console.log("getting to the axios call");
     try {
         const { data: user } = await axios.post("/api/users/login", credentials);
-        console.log("getting from the back end ", user);
         return user;
     } catch (error) {
         throw error;
@@ -70,7 +68,6 @@ export async function getUserFromToken(token) {
             headers: { authorization: "Bearer " + token },
         });
         user.token = token;
-        console.log("user from the api ", user);
 
         return user;
     } catch (error) {

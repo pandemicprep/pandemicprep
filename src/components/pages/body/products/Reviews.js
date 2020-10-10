@@ -29,7 +29,6 @@ export const Review = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('getting into addReview form submit...');
 
         const newReview = await addNewReview({
             creatorId,
@@ -38,16 +37,13 @@ export const Review = () => {
             description
         });
 
-        console.log('the new review is: ', newReview);
     }
 
     const logReviewsByProduct = async (event) => {
         event.preventDefault();
-        console.log('getting into logReviewsByProduct');
 
         const reviewsByProduct = await getReviewsByProductId(productId);
 
-        console.log('reviews by product: ', reviewsByProduct);
     }
     
 

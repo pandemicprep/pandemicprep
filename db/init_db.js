@@ -28,7 +28,6 @@ async function buildTables() {
  */
 async function createTables() {
     try {
-        console.log("Creating tables");
         await client.query(`
       CREATE TABLE products (
         id SERIAL PRIMARY KEY,
@@ -101,7 +100,6 @@ async function createTables() {
 
       
     `);
-        console.log("Tables created");
     } catch (error) {
         throw error;
     }
@@ -109,7 +107,6 @@ async function createTables() {
 
 async function dropTables() {
     try {
-        console.log("Dropping tables");
         await client.query(`
       DROP TABLE IF EXISTS products_carts;
       DROP TABLE IF EXISTS products_categories;
@@ -119,7 +116,6 @@ async function dropTables() {
       DROP TABLE IF EXISTS categories;
       DROP TABLE IF EXISTS products;
     `);
-        console.log("Tables dropped");
     } catch (error) {
         throw error;
     }

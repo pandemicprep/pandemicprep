@@ -35,7 +35,6 @@ export const Header = ({
 
     const searchProducts = (event) => {
         event.preventDefault();
-        console.log(user, "user in header");
         if (searchString.length > 0) {
             setPageType("search");
             setCategory("");

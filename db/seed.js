@@ -51,9 +51,7 @@ async function seed() {
         // await gettingProductById();
         // await gettingProductsByCategory();
         // await makingProductCart();
-        console.log("Running get all products...");
         const allProducts = await getAllProducts(1);
-        console.log("Result: ", allProducts);
     } catch (error) {
         throw error;
     }
@@ -63,7 +61,6 @@ async function createNewUsers() {
     try {
         //creating a new user
 
-        console.log("creating user one");
         const user1 = await addUser({
             firstName: "Nicolas",
             lastName: "Olivares",
@@ -80,9 +77,7 @@ async function createNewUsers() {
             phone: "555-555-5555",
             creditCard: 45454545454545455,
         });
-        console.log("this is user 1 ", user1);
 
-        console.log("creating user two, login in with minimum info ");
         const user2 = await addUser({
             firstName: "Joe",
             lastName: "Moe",
@@ -99,9 +94,7 @@ async function createNewUsers() {
             phone: null,
             creditCard: null,
         });
-        console.log("user2 with minimum data ", user2);
 
-        console.log("creating user three, login in with minimum info and repeated email ");
         const user3 = await addUser({
             firstName: "Joe",
             lastName: "Moe",
@@ -118,9 +111,7 @@ async function createNewUsers() {
             phone: null,
             creditCard: null,
         });
-        console.log("user3 with minimum data ", user3);
 
-        console.log("creating user four, missing info ");
         const user4 = await addUser({
             firstName: "Joe",
             lastName: "Moe",
@@ -137,7 +128,6 @@ async function createNewUsers() {
             phone: null,
             creditCard: null,
         });
-        console.log("user4 with minimum data ", user4);
     } catch (error) {
         throw error;
     }
@@ -145,16 +135,13 @@ async function createNewUsers() {
 
 async function gettingAllUsers() {
     try {
-        console.log("Running getAllUsers...");
         const allUsers = await getAllUsers();
-        console.log("all users result: ", allUsers);
     } catch (error) {
         throw error;
     }
 }
 
 async function seedingProductObject() {
-    console.log("Adding all products in product array to db...");
     const length = productArray.length;
     try {
         await Promise.mapSeries(productArray, function (
@@ -181,9 +168,7 @@ async function seedingProductObject() {
 
 async function gettingProductsByQuery() {
     try {
-        console.log("getting products by query...");
         const allProductsByQuery = await getProductsByQuery("desk", 1);
-        console.log("Result: ", allProductsByQuery);
     } catch (error) {
         throw error;
     }
@@ -191,7 +176,6 @@ async function gettingProductsByQuery() {
 
 async function updatingUsers() {
     try {
-        console.log("Updating User 2...");
         const user2 = await updateUser({
             id: 2,
             isAdmin: false,
@@ -209,7 +193,6 @@ async function updatingUsers() {
             phone: "123-456-7890",
             creditCard: 1234567891234567,
         });
-        console.log("Updated User2", user2);
     } catch (error) {
         throw error;
     }
@@ -217,26 +200,13 @@ async function updatingUsers() {
 
 async function gettingUserById() {
     try {
-        console.log("Getting User By Id...");
         const user = await getUserById(1);
-        console.log("Got user by id 1", user);
     } catch (error) {
         throw error;
     }
 }
 
-async function gettingCategoryIdsByName() {
-    try {
-        console.log("getting category ids by name");
-        console.log("getting bath id 1 ", await categoryIdByName("bath"));
-        console.log("getting car id by name (non existent) 2 ", await categoryIdByName("car"));
-        console.log("getting bath id 1 ", await categoryIdByName("bath"));
-        console.log("getting null id, should be false ", await categoryIdByName(null));
-        console.log('getting "" id, should be false ', await categoryIdByName(""));
-    } catch (error) {
-        throw error;
-    }
-}
+
 
 async function addingOneCart() {
     try {
@@ -264,7 +234,6 @@ async function addingOneCart() {
             total: 19.99,
             userId: 2,
         });
-        console.log("four new carts in seed: ", newCart, cart2, cart3, cart4);
     } catch (error) {
         throw error;
     }
@@ -273,7 +242,6 @@ async function addingOneCart() {
 async function gettingNonActiveCartAdmin() {
     try {
         const history = await getCartHistoryStatusAdmin();
-        console.log("non-active carts:", history);
     } catch (error) {
         throw error;
     }
@@ -283,7 +251,6 @@ async function gettingNonActiveCart() {
     try {
         // const id = await getUserById(2);
         const userHistory = await getCartHistoryStatus(2);
-        console.log("user history:", userHistory);
     } catch (error) {
         throw error;
     }
@@ -327,7 +294,6 @@ async function gettingSeedReviewsByProduct() {
     try {
         const reviews = await getReviewsByProductId(5);
 
-        console.log("reviews by specific product: ", reviews);
     } catch (error) {
         throw error;
     }
@@ -337,7 +303,6 @@ async function gettingAllCategories() {
     try {
         const categories = await getAllCategories();
 
-        console.log("all categories: ", categories);
     } catch (error) {
         throw error;
     }
@@ -347,7 +312,6 @@ async function gettingProductById() {
     try {
         const product = await getProductById(9);
 
-        console.log("product by id in seed: ", product);
     } catch (error) {
         throw error;
     }
@@ -356,7 +320,6 @@ async function gettingProductById() {
 async function gettingProductsByCategory() {
     try {
         const products = await getProductsByCategory("school", 1);
-        console.log("returning products by category in seed: ", products);
     } catch (error) {
         throw error;
     }
@@ -383,19 +346,9 @@ async function makingProductCart() {
             unitPrice: 1.99,
         });
 
-        console.log("product cart test: ", productCart1, productCart2, productCart3);
     } catch (error) {
         throw error;
     }
 }
-
-// async function gettingHighlightedProducts() {
-//     try {
-//         const products = await getHighlightedProducts();
-//         console.log("returning highlighted products in seed: ", products);
-//     } catch (error) {
-//         throw error;
-//     }
-// }
 
 module.exports = { seed };

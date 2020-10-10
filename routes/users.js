@@ -18,10 +18,8 @@ const users = require('../db/singletables/users');
 //Register New User
 usersRouter.post("/register", async (req, res, next) => {
     const user = req.body;
-    console.log("got into user router registration ", user);
     try {
         const newUser = await addUser(user);
-        console.log("new user ", newUser);
         if (newUser.message) {
             res.send(newUser);
         } else {
@@ -93,10 +91,8 @@ usersRouter.post("/login", async (req, res, next) => {
 //Guest User
 usersRouter.post("/guest", async (req, res, next) => {
     const guest = req.body;
-    console.log("got into user router guest ", guest);
     try {
         const newGuest = await addUser(guest);
-        console.log("new guest ", newGuest);
         if (newGuest.message) {
             res.send(newGuest);
         } else {
@@ -109,7 +105,6 @@ usersRouter.post("/guest", async (req, res, next) => {
 
 //Verify user information at load using token
 usersRouter.get("/verify", async (req, res, next) => {
-    console.log("getting to verify with ", req.user);
     try {
         const activeCart = await getActiveCart(req.user.id);
         res.send({
@@ -127,11 +122,9 @@ usersRouter.get("/verify", async (req, res, next) => {
 //Update user by id
 usersRouter.patch("/", async (req, res, next) => {
     try {
-        console.log("entering update user by id route...");
         const fields = req.body;
         const id = req.user.id;
         const updateUserById = await updateUser(id, fields);
-        console.log("updated userId:", updateUserById);
         res.send(updateUserById);
     } catch (error) {
         throw error;
@@ -146,10 +139,8 @@ usersRouter.patch("/", async (req, res, next) => {
 usersRouter.get("/:userId", async (req, res, next) => {
    
     try {
-        console.log("entering getting user by id route...");
         const id = req.params.userId;
         const getUser = await getUserById(id);
-        console.log("getting user by id....", getUser);
         res.send(getUser);
     } catch (error) {
         throw error;

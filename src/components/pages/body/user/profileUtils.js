@@ -97,7 +97,6 @@ export function guestHandler({
     country,
     phone,
 }) {
-    console.log("getting to the guest handler ");
     guestUser({
         firstName,
         lastName,

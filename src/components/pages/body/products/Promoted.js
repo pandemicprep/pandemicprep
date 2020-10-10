@@ -17,7 +17,6 @@ export const Promoted = ({ NavLink, setProduct, useHistory }) => {
     useEffect(() => {
         getPromotedProducts()
             .then((response) => {
-                console.log(response, 'promoted response')
                 setContent(response);
             })
             .catch((error) => {

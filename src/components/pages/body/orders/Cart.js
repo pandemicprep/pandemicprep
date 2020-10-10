@@ -14,7 +14,6 @@ import {
 import { removeProductFromGuestCart } from "../../../utils";
 
 export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
-    console.log("current cart ", cart);
     const [shipping, setShipping] = useState(5);
 
     const removeHandler = (product) => {

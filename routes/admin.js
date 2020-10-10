@@ -55,7 +55,6 @@ adminRouter.get("/users/:pageNumber", async (req, res, next) => {
 
 adminRouter.patch('/product', async (req, res, next) => {
 
-    console.log('getting to admin patch', req.body)
     try {
         const id = req.body.id;
         const fields = req.body.fields;
@@ -80,7 +79,6 @@ adminRouter.patch('/product', async (req, res, next) => {
 // Updates a user (requires admin status) 
 
 adminRouter.patch('/user', async (req, res, next) => {
-    console.log('getting to admin router patch for users', req.user, req.body)
 
     try {
         const id = req.body.id;
@@ -129,7 +127,6 @@ adminRouter.patch('/finalizing', async (req, res, next) => {
         if (req.user) {
             if (req.user.isAdmin) {
                 const completedOrder = await completeCart(cartId);
-                console.log(completedOrder, 'completed order insed admin patch')
                 res.send(completedOrder)
             } else {
                 res.send({message: 'You must be an admin to complete an order'})

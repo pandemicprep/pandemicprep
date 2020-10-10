@@ -81,7 +81,6 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
         event.preventDefault();
 
         setView("fulledit");
-        console.log("button clicked", view);
     };
 
     const formHandler = async (event) => {
@@ -97,7 +96,6 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     password1,
                     password2,
                 });
-                console.log("new user from registration ", newUser);
                 setUser({
                     id: newUser.id,
                     firstName: newUser.firstName,
@@ -112,7 +110,6 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
             //login
             if (view === "login") {
                 const user = await loginHandler({ email, password1 });
-                console.log("user from login ", user);
                 setUser({
                     id: user.id,
                     firstName: user.firstName,

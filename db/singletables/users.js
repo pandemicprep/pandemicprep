@@ -43,7 +43,6 @@ async function addUser({
             if (creditCard > 0) {
                 securedCreditCard = await bcrypt.hash("" + creditCard, SALT_COUNT);
             }
-            console.log("last check of secured password ", securedPassword);
             const {
                 rows: [newUser],
             } = await client.query(
@@ -133,7 +132,6 @@ async function getAllUsers(pageNumber = 1, user) {
  */
 async function updateUser(id, fields = {}) {
     // Builds the set string
-    console.log('getting to update users at the back with ', fields);
     delete fields.id;
     if (fields.password) {
         fields.password = await bcrypt.hash(fields.password, SALT_COUNT);
@@ -209,7 +207,6 @@ async function getUserByEmail(email) {
         if (user) {
             const activeCart = await getActiveCart(user.id);
             user.activeCart = activeCart;
-            console.log("from get user by email at the db ", user);
             return user;
         } else {
             return { message: "Sorry, no user by that email" };

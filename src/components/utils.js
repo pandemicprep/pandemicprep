@@ -2,7 +2,6 @@
 
 export async function addProductToGuestCart(cartState, product) {
     const cart = { ...cartState };
-    console.log("cart and product from utils ", cart, product);
     const alreadyPresent = cart.items.find((item) => {
         return item.id === product.id;
     });
@@ -35,7 +34,6 @@ export async function addProductToGuestCart(cartState, product) {
     cart.items.map((item) => {
         cartQuantity = cartQuantity + item.quantity;
         cartTotal = cartTotal + parseFloat(item.itemTotal);
-        console.log("cartTotal, itemTotal ", cartTotal);
     });
     cart.cartQuantity = cartQuantity;
     cart.total = cartTotal;
@@ -52,7 +50,6 @@ export async function removeProductFromGuestCart(cartState, product) {
             index = i;
         }
     });
-    console.log("the index is ", index);
 
     newCart.items.splice(index, 1);
 

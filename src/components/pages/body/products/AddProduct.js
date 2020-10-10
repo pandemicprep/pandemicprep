@@ -32,7 +32,6 @@ export const AddProduct = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('getting into addProduct form submit...');
 
         const newProduct = await addNewProduct({
             name,
@@ -41,7 +40,6 @@ export const AddProduct = () => {
             image
         });
 
-        console.log('the new product is: ', newProduct);
     }
     
 

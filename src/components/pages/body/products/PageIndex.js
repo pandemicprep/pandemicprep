@@ -11,7 +11,6 @@ export const PageIndex = ({searchObject, pageType, setPageType, setProducts, cat
     const [pageLimit, setPageLimit] = useState(0);
 
     useEffect(() => {
-        console.log('page term and type ', pageType, searchTerm, pageType, page);
         if (pageType === 'category') {
             
             getProductsByCategory(category.toLowerCase(), page)

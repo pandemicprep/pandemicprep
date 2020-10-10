@@ -134,7 +134,6 @@ async function getProductsByQuery(query, pageNumber) {
             OR description ILIKE '%${query}%'
             LIMIT ${LIMIT} OFFSET ${OFFSET};
         `);
-    console.log('this is how many are being queried ', rows);
 
     const prodIdArray = rows.map((product) => {
       const [newProductId] = Object.values(product);
@@ -225,7 +224,6 @@ async function getProductById(id) {
  * @param {integer} pageNumber 
  */
 async function getProductsByCategory(category, pageNumber) {
-  console.log(pageNumber, 'pageNumber in db')
 
   try {
     const OFFSET = (LIMIT * (pageNumber - 1)) + 1;
@@ -249,7 +247,6 @@ async function getProductsByCategory(category, pageNumber) {
           LIMIT ${LIMIT} OFFSET ${OFFSET};
       `, [category]);
 
-    console.log(productIds, 'counting product ids')
 
     const prodIdArray = productIds.map((product) => {
       const [newProductId] = Object.values(product);
@@ -303,7 +300,6 @@ async function getHighlightedProducts() {
  * @param {object} fields (product fields)
  */
 async function updateProduct(id, fields = {}) {
-  console.log(id, fields, 'getting to updateProduct in db')
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");

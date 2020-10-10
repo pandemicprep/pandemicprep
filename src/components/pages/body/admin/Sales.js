@@ -15,10 +15,8 @@ export const Sales = ({
     const [clickedIndex, setClickedIndex] = useState(-1);
 
     useEffect(() => {
-        console.log(user, 'before axios call in orders')
         getAllOrderHistory(orderPage, user.token)
             .then((response) => {
-                console.log(response, 'response in orders')
                 setOrderPageLimit(response[0]);
                 setOrderHistory(response[1]);
             })

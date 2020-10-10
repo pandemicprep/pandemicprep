@@ -15,7 +15,6 @@ export const Orders = ({ user }) => {
     useEffect(() => {
         getOrderHistory(orderPage, user.token)
             .then((response) => {
-                console.log(response, "response in orders");
                 setOrderPageLimit(response[0]);
                 setOrderHistory(response[1]);
             })

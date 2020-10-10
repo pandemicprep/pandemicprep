@@ -69,7 +69,6 @@ export const AdminProductList = ({
     }
     const adminAddProduct = async (event) => {
         event.preventDefault();
-        console.log('getting into add product subimt', imageURL)
 
         try {
             const newProduct = await addNewProduct({
@@ -79,7 +78,6 @@ export const AdminProductList = ({
                 imageURL,
                 category: categories
             })
-            console.log(newProduct, 'newProduct in addproduct submit')
             return newProduct;
         } catch (error) {
             throw error;

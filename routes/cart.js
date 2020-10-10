@@ -11,7 +11,6 @@ const { getActiveCart } = require("../db");
 
 //Add product to cart
 cartRouter.post("/", async (req, res, next) => {
-    console.log('body in add product at the route ', req.body)
     if (req.user) {
         if (req.user.isUser) {
             try {
@@ -32,7 +31,6 @@ cartRouter.post("/", async (req, res, next) => {
 //Remove product from cart
 
 cartRouter.delete("/:cartId/product/:products_cartsId", async (req, res, next) => {
-    console.log("getting to delete at router ", req.params);
     if (req.user) {
         if (req.user.isUser) {
             try {
