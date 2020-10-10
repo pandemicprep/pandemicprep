@@ -12,12 +12,12 @@
 
 #admin-nav {
     font-size: 16px;
-    margin-top: 300px;
+    margin-top: 240px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
     position: relative;
-    bottom: 100px;
+    bottom: 50px;
     z-index: 1;
 }
 
@@ -71,4 +71,18 @@
     letter-spacing: -2px;
     color: white;
     text-shadow: 1px 1px 2px white, 0 0 25px black, 0 0 5px black;
+}
+
+.adminH1 {
+    font: bold 32px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    padding-left: 150px;
+    margin-bottom: 25px;
+    background-color: black;
+    border: 3px solid black;
+    color: white;
+    height: 70px;
+    width: 100%;
+    padding-top: 15px;
+    text-align: center;
 }

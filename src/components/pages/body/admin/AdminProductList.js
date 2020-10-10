@@ -143,7 +143,7 @@ export const AdminProductList = ({
 
     return (
         <div id='admin'>
-            <h1 className="productH1">Add New Product</h1>
+            
             {adminPage === 1 ?
                 <form id='admin-list' onSubmit={adminAddProduct}>
                     <span className='each-input' id="title">Title & Price:

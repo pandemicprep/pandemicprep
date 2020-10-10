@@ -35,7 +35,7 @@ export const Sales = ({
     return (
         <div className="orders">
 
-            <h1 className='orders-h1'>Order History</h1>
+            
 
             <div className='orders-list'>
 

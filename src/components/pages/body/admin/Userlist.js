@@ -146,7 +146,7 @@ export const Userlist = ({
 
     return (
         <div className="userList">
-            <h1 id="addUserH1">Add New User</h1>
+            
             <form id='admin-list-user' onSubmit={adminAddUser}>
                 <span className='each-input'>First Name:
                     <input type='text' placeholder='First Name' value={firstName} onChange={handleFirstName}></input>
@@ -166,7 +166,7 @@ export const Userlist = ({
                 </span>
 
                 <span className='each-input checkbox2' >Is Admin:
-                    <input type='checkbox' placeholder='isAdmin' defaultChecked={false} onChange={handleIsAdmin}></input>
+                    <input id='admin-checkbox' type='checkbox' placeholder='isAdmin' defaultChecked={false} onChange={handleIsAdmin}></input>
                 </span>
 
                 <button id='user-button2'>Add New</button>

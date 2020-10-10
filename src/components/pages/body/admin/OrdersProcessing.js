@@ -66,7 +66,7 @@ export const OrdersProcessing = ({ user }) => {
 
 	return (
 		<div id='all-processing'>
-			<h1 id='ordersH1'>Orders Processing</h1>
+			
 			<div className='order-list'>
 				<div id='initial-titles'>
 					<p>Name</p>
