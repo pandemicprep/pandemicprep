@@ -100,9 +100,12 @@ export const Userlist = ({
         try {
             const fields = {
                 email: editEmail === '' ? item.email : editEmail,
-                password: editPassword === '' ? item.password : editPassword,
+                password: editPassword,
                 isAdmin: isAdmin,
                 isUser: isUser
+            }
+            if (editPassword === '') {
+                delete fields.password
             }
             const updatedUser = await adminUpdateUser({ id: item.id, fields: fields, token: user.token })
             console.log(updatedUser, 'newly updated user log')
@@ -181,7 +184,7 @@ export const Userlist = ({
                                 </span>
 
                                 <span className='each-input'>Password:
-                                <input id='checkbox' type='password' placeholder={item.password} value={editPassword}
+                                <input id='checkbox' type='password' placeholder='Password'
                                         onChange={(event) => setEditPassword(event.target.value)}></input>
                                 </span>
 
@@ -219,7 +222,7 @@ export const Userlist = ({
                                 </span>
 
                                 <span className='each-input'>Password:
-                                <input id='checkbox' type='password' placeholder={item.password} value={item.password} readOnly></input>
+                                <input id='checkbox' type='password' placeholder='Password' readOnly></input>
                                 </span>
 
                                 {item.isAdmin ?
