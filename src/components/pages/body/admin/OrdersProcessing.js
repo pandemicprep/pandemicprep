@@ -26,7 +26,11 @@ export const OrdersProcessing = ({ user }) => {
 	}, [processingPage, finalized]);
 
 	const toggleDetails = (index) => {
-		setClickedIndex(index);
+		if (clickedIndex === index) {
+			setClickedIndex(-1);
+		} else {
+			setClickedIndex(index);
+		}
 	};
 
 	const finalizeOrder = async (order) => {
@@ -68,7 +72,7 @@ export const OrdersProcessing = ({ user }) => {
 					<p>Name</p>
 					<p>Email</p>
 					<p>Total $</p>
-					<p id='date'>Date Placed</p>
+					<p>Date Placed</p>
 				</div>
 
 				{orders.length < 1 ? (
@@ -76,14 +80,15 @@ export const OrdersProcessing = ({ user }) => {
 				) : (
 					orders.map((order, index) => {
 						return (
-							<div key={index} className='order-content'>
-								<div id='initial-details'>
+							<div key={index} className='order-content' onClick={() => toggleDetails(index)}>
+								<div id='initial-details' >
 									<p>
 										{order.user.firstName} {order.user.lastName}
 									</p>
 									<p>{order.user.email}</p>
 									<p>
-										$ {order.total.toLocaleString('en-US', {
+										${' '}
+										{order.total.toLocaleString('en-US', {
 											minimumFractionDigits: 2,
 										})}
 									</p>
@@ -117,12 +122,14 @@ export const OrdersProcessing = ({ user }) => {
 													<p>{item.title}</p>
 													<p>{item.quantity}</p>
 													<p>
-														$ {item.price.toLocaleString('en-US', {
+														${' '}
+														{item.price.toLocaleString('en-US', {
 															minimumFractionDigits: 2,
 														})}
 													</p>
 													<p>
-														$ {(
+														${' '}
+														{(
 															item.price * item.quantity
 														).toLocaleString('en-US', {
 															minimumFractionDigits: 2,
@@ -132,9 +139,9 @@ export const OrdersProcessing = ({ user }) => {
 											);
 										})}
 									</div>
-								) : 
-                                ''
-                                }
+								) : (
+									''
+								)}
 							</div>
 						);
 					})

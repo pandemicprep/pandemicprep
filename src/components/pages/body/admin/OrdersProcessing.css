@@ -53,7 +53,7 @@
 
 #initial-titles p {
     display: flex;
-    margin-right: 150px;
+    /* margin-right: 150px; */
     font: bold 26px Helvetica, Sans-Serif; 
 }
 
