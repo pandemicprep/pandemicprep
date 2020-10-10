@@ -37,7 +37,7 @@ adminRouter.get("/users/:pageNumber", async (req, res, next) => {
         const { pageNumber } = req.params;
         if (req.user) {
             if (req.user.isAdmin) {
-                const allUsers = await getAllUsers(pageNumber);
+                const allUsers = await getAllUsers(pageNumber, req.user);
                 res.send(allUsers);
             } else {
                 res.send({ message: 'You must be an admin to get all users!' });

@@ -99,7 +99,7 @@ async function addUser({
  * Gets all users
  * @param {integer} pageNumber
  */
-async function getAllUsers(pageNumber = 1) {
+async function getAllUsers(pageNumber = 1, user) {
     try {
         const OFFSET = LIMIT * (pageNumber - 1);
 
@@ -113,8 +113,13 @@ async function getAllUsers(pageNumber = 1) {
         `);
 
         const pageCount = Math.ceil(rowCount / LIMIT);
-        console.log(pageCount, "pagecount in db");
-
+        let index;
+        rows.map((row, i) => {
+            if (row.id === user.id) {
+                index = i;
+            }
+        });        
+        rows.splice(index, 1);
         return [pageCount, rows];
     } catch (error) {
         throw error;
