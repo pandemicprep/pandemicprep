@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
+import { Stripe } from '../orders/Stripe';
 
 import "./Cart.css";
 
@@ -13,8 +14,8 @@ import {
 // import { Product } from '../products/Product';
 import { removeProductFromGuestCart } from "../../../utils";
 
-export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
-    console.log("current cart ", cart);
+export const Cart = ({ cart, setCart, cartSize, setCartSize, user, setView, useHistory }) => {
+    const history = useHistory();
     const [shipping, setShipping] = useState(5);
 
     const removeHandler = (product) => {
@@ -103,17 +104,29 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
     };
 
     const checkoutHandler = () => {
-        if (cartSize > 0) {
-            deactivateCart({ userId: user.id, cartId: cart.id }, user.token)
-                .then((response) => {
-                    setCart(response);
-                    setCartSize(response.cartQuantity);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
+        setView('userCheckout');
+        history.push('/checkout')
+        // if (cartSize > 0) {
+        //     deactivateCart({ userId: user.id, cartId: cart.id }, user.token)
+        //         .then((response) => {
+        //             setCart(response);
+        //             setCartSize(response.cartQuantity);
+        //         })
+        //         .catch((error) => {
+        //             console.error(error);
+        //         });
+        // }
     };
+
+    const guestCheckout = () => {
+        setView('guest');
+        history.push('/checkout');
+    }
+
+    const newUserCheckout = () => {
+        setView('register');
+        history.push('/register');
+    }
 
     return (
         <div id="cart-component">
@@ -223,6 +236,11 @@ export const Cart = ({ cart, setCart, cartSize, setCartSize, user }) => {
                     <button id="check" className="checkout-button" onClick={checkoutHandler}>
                         Checkout
                     </button>
+                    <Stripe />
+                    <div className='options'>
+                        <button id='asguest' onClick={guestCheckout}>As a guest</button>
+                        <button id='asuser' onClick={newUserCheckout}>Create Account</button>
+                    </div>
                 </div>
             </div>
         </div>

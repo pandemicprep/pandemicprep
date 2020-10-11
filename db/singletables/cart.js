@@ -42,7 +42,7 @@ async function getCartHistoryStatus(id) {
         `,
 			[id],
 		);
-		console.log('carts for order ', rows);
+
 		return rows;
 	} catch (error) {
 		throw error;
@@ -250,7 +250,6 @@ async function getAllProductsCart() {
  * @param {integer} param0
  */
 async function removeProductFromCart({ userId, cartId, products_cartsId }) {
-	console.log('getting to remove product from cart');
 	try {
 		const date = getDate();
 		const deleted = await client.query(
@@ -262,9 +261,8 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
 			[products_cartsId],
 		);
 
-		console.log('item was deleted ', deleted);
 		const cart = await getActiveCart(userId);
-		console.log('got the cart without it ', cart);
+
 		let total = 0;
 		let cartQuantity = 0;
 		cart.items.map((item) => {
@@ -282,7 +280,7 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
         `,
 			[total, cartQuantity, cartId],
 		);
-		console.log('got updated cart ', newUpdatedCart);
+
 		await lastUpdated(cartId);
 
 		const newCart = await getActiveCart(userId);
@@ -424,7 +422,6 @@ async function getUserOrderHistory(userId, pageNumber = 1) {
 			cart.index = index;
 		});
 
-		console.log('products comming from the back ', carts);
 		const pageCount = Math.ceil(rowCount / LIMIT);
 		return [pageCount, carts];
 	} catch (error) {
@@ -468,7 +465,6 @@ async function getOrderHistory(pageNumber = 1) {
 }
 
 async function lastUpdated(cartId) {
-	console.log('got to lastUpdated function');
 	try {
 		const date = getDate();
 		await client.query(
