@@ -24,6 +24,9 @@ export { Categories } from "./pages/body/categories/Categories";
 //orders
 export { Cart } from "./pages/body/orders/Cart";
 export { Orders } from "./pages/body/orders/Orders";
+export { Payment } from "./pages/body/orders/Payment";
+export { Stripe, stripeConnection } from "./pages/body/orders/Stripe";
+export { Success } from "./pages/body/orders/Success";
 
 //products
 export { Product } from "./pages/body/products/Product";

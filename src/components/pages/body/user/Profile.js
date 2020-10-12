@@ -1,6 +1,8 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { Stripe, stripeConnection } from "../orders/Stripe";
 
 import {
     addUser,
@@ -21,8 +23,17 @@ import {
 
 import "./Profile.css";
 
-export const Profile = ({ view, setView, setUser, user, useHistory, setCart, setCartSize }) => {
-    //CURRENT VIEWS: login register guest userCheckout edit
+export const Profile = ({
+    view,
+    setView,
+    setUser,
+    user,
+    // useHistory,
+    setCart,
+    setCartSize,
+    setProfileCompleted,
+}) => {
+    //CURRENT VIEWS: login register guest userCheckout edit fulledit checkout-register
     //CHANGE PASSWORD BUTTON: needs onclick function to switch state to ''
     //SET UP STATES FOR DIFFERENT VIEWS! :)
 
@@ -45,6 +56,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
     const [searchString, setSearchString] = useState("");
     const history = useHistory();
 
+    console.log("the view is ", view);
     if (view === "edit" || view === "fulledit") {
         if (!user.isUser) {
             history.push("/");
@@ -52,7 +64,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
     }
 
     useEffect(() => {
-        if (view === "edit" || view === "fulledit") {
+        if (view === "edit" || view === "fulledit" || view === "userCheckout") {
             getFullUserFromToken(user.id, user.token).then((result) => {
                 setFirstName(result.firstName);
                 setLastName(result.lastName);
@@ -88,13 +100,20 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 
         try {
             //Registration
-            if (view === "register") {
+            if (view === "register" || view === "checkout-register") {
                 const newUser = await registrationHandler({
                     firstName,
                     lastName,
                     email,
                     password1,
                     password2,
+                    addressLine1: address1,
+                    addressLine2: address2,
+                    city,
+                    state,
+                    zipcode,
+                    country,
+                    phone,
                 });
                 setUser({
                     id: newUser.id,
@@ -103,9 +122,17 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     isUser: newUser.isUser,
                     token: newUser.token,
                 });
-                setCart(newUser.activeCart);
-                setCartSize(newUser.activeCart.cartQuantity);
-                history.push("/");
+
+                if (view === "register") {
+                    setCart(newUser.activeCart);
+                    setCartSize(newUser.activeCart.cartQuantity);
+                    history.push("/");
+                    return;
+                } else if (view === "checkout-register") {
+                    setProfileCompleted(true);
+                    await stripeConnection();
+                    return;
+                }
             }
             //login
             if (view === "login") {
@@ -120,6 +147,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 setCart(user.activeCart);
                 setCartSize(user.activeCart.cartQuantity);
                 history.push("/");
+                return;
             }
             //guest
             if (view === "guest") {
@@ -135,10 +163,15 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                     country,
                     phone,
                 });
-                history.push("/");
+                console.log("getting to the strip Connection line");
+                setProfileCompleted(true);
+                await stripeConnection();
             }
             //edit and full edit
-            if ((view === "edit" || view === "fulledit") && user.isUser) {
+            if (
+                (view === "edit" || view === "fulledit" || view === "userCheckout") &&
+                user.isUser
+            ) {
                 const editObject = {
                     firstName,
                     lastName,
@@ -159,7 +192,14 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                 }
 
                 updateHandler(editObject, user.token);
-                history.push("/");
+                if (view === "edit" || view === "fulledit") {
+                    history.push("/");
+                    return;
+                } else if (view === "userCheckout") {
+                    setProfileCompleted(true);
+                    await stripeConnection();
+                    return;
+                }
             }
         } catch (error) {
             console.error(error);
@@ -192,41 +232,22 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
     return (
         <div className="profile">
             <form className="profileForm" onSubmit={formHandler}>
-                <h1
-                    className={
-                        view === "register" || view === "login" || view === "userCheckout"
-                            ? "editPro hide"
-                            : "editPro"
-                    }
-                >
-                    Edit Profile:{" "}
+                <h1 className="editPro">
+                    {view === "register"
+                        ? "Sign Up"
+                        : view === "login"
+                        ? "Log In"
+                        : view === "edit" || view === "fulledit"
+                        ? "Edit Profile"
+                        : view === "guest"
+                        ? "Guest Checkout"
+                        : view === "userCheckout"
+                        ? "User Checkout"
+                        : view === "checkout-register"
+                        ? "Create Account"
+                        : ""}
                 </h1>
-                <h1
-                    className={
-                        view === "register" ||
-                        view === "fulledit" ||
-                        view === "userCheckout" ||
-                        view === "edit" ||
-                        view === "fulledit"
-                            ? "editPro hide"
-                            : "editPro"
-                    }
-                >
-                    User Login:{" "}
-                </h1>
-                <h1
-                    className={
-                        view === "login" ||
-                        view === "fulledit" ||
-                        view === "userCheckout" ||
-                        view === "edit" ||
-                        view === "fulledit"
-                            ? "editPro hide"
-                            : "editPro"
-                    }
-                >
-                    Sign Up:{" "}
-                </h1>
+
                 <input
                     type="text"
                     id="firstName"
@@ -273,7 +294,8 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
                         view === "userCheckout" ||
                         view === "login" ||
                         view === "guest" ||
-                        view === "fulledit"
+                        view === "fulledit" ||
+                        view === "checkout-register"
                             ? "field hide"
                             : "field"
                     }
@@ -434,7 +456,9 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 
                 <br></br>
                 <button id="submit" type="submit">
-                    Submit
+                    {view === "userCheckout" || view === "guest" || view === "checkout-register"
+                        ? "Proceed to Pay"
+                        : "Submit"}
                 </button>
                 <br></br>
                 <button id="cancel" onClick={cancelHandler}>
@@ -444,3 +468,12 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
         </div>
     );
 };
+
+/*
+In form handler add stripe function if view is a checkout view. The stripe function will be hosted
+in its own file and will trigger the stripe payment.
+The cart info has to be sent in the stripe function.
+We won't return to the cart, but instead go straight to payment and see the total amount there.
+
+
+*/

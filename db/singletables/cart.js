@@ -40,12 +40,13 @@ async function getCartHistoryStatus(id) {
         SELECT * FROM carts
         WHERE (status = 'processing' OR status = 'shipped' OR status = 'cancelled') AND "userId" = $1;
         `,
-            [id]
-        );
-        return rows;
-    } catch (error) {
-        throw error;
-    }
+			[id],
+		);
+
+		return rows;
+	} catch (error) {
+		throw error;
+	}
 }
 
 /**
@@ -249,19 +250,23 @@ async function getAllProductsCart() {
  * @param {integer} param0
  */
 async function removeProductFromCart({ userId, cartId, products_cartsId }) {
-
-    try {
-        const date = getDate();
-        const deleted = await client.query(
-            `
-
+	try {
+		const date = getDate();
+		const deleted = await client.query(
+			`
             DELETE FROM products_carts
             WHERE "jointId"=$1;
 
-        `,
+        `, [products_cartsId] );
 
-            [products_cartsId]
-        );
+		const cart = await getActiveCart(userId);
+
+		let total = 0;
+		let cartQuantity = 0;
+		cart.items.map((item) => {
+			total = total + item.itemTotal;
+			cartQuantity = cartQuantity + item.quantity;
+		});
 
         const cart = await getActiveCart(userId);
         let total = 0;
@@ -279,20 +284,21 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
             WHERE id=$3
             RETURNING *;
         `,
-            [total, cartQuantity, cartId]
-        );
-        await lastUpdated(cartId);
+			[total, cartQuantity, cartId],
+		);
 
-        const newCart = await getActiveCart(userId);
+		await lastUpdated(cartId);
 
-        if (newCart) {
-            return newCart;
-        } else {
-            return {};
-        }
-    } catch (error) {
-        throw error;
-    }
+		const newCart = await getActiveCart(userId);
+
+		if (newCart) {
+			return newCart;
+		} else {
+			return {};
+		}
+	} catch (error) {
+		throw error;
+	}
 }
 
 /**
@@ -465,10 +471,10 @@ async function getOrderHistory(pageNumber = 1) {
 }
 
 async function lastUpdated(cartId) {
-    try {
-        const date = getDate();
-        await client.query(
-            `
+	try {
+		const date = getDate();
+		await client.query(
+			`
             UPDATE carts
             SET "lastUpdated"=$1
             WHERE id=$2;

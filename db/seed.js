@@ -37,12 +37,12 @@ const { addReview, getReviewsByProductId } = require("./singletables/reviews");
 async function seed() {
     try {
         await createNewUsers();
-        await gettingAllUsers();
+        // await gettingAllUsers();
         // await creatingOneNewProduct();
         await seedingProductObject();
         await gettingProductsByQuery();
-        await updatingUsers();
-        await gettingUserById();
+        // await updatingUsers();
+        // await gettingUserById();
         // await gettingCategoryIdsByName();
         // await addingOneCart();
         // await seedingInitialReviews();
@@ -156,7 +156,7 @@ async function seedingProductObject() {
                 description,
                 image,
                 category,
-                isHighlighted
+                isHighlighted,
             });
 
             return newProduct;

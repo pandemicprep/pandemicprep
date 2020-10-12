@@ -22,3 +22,12 @@ export async function getOrderHistory(pageNumber, token) {
         throw error;
     }
 }
+
+export async function stripeRequest() {
+    try {
+        const {data} = await axios.post('/api/orders/create-checkout-session', {})
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}

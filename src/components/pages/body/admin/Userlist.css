@@ -1,12 +1,12 @@
 
 
 #admin-list-user {
-    margin-left: 250px;
+    margin-left: 50px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     text-align: center;
-    max-width: 800px;
+    max-width: 90%;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
@@ -15,6 +15,9 @@
     width: 300px;
 }
 
+#admin-checkbox {
+    width: 150px;
+}
 
 #addUserH1 {
     font: bold 32px Helvetica, Sans-Serif; 
@@ -31,7 +34,7 @@
 }
 
   .checkbox2 {
-      margin-left: 110px !important;
+      margin-left: 20px !important;
   }
   
   #user-button {
@@ -65,11 +68,12 @@
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
-    width: 140px;
+    width: 100px;
+    height: 60px;
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: dodgerblue; 
-    margin-bottom: 5px;
+    margin-top: 25px;
     background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
     background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
     background-position: 100%;
@@ -101,6 +105,6 @@
 }
 
 #user-button2{
-    margin-left: 125px !important;
-    width: 290px !important;
+    margin-left: 25px !important;
+    width: 150px !important;
 }
