@@ -9,7 +9,20 @@ import {
 	updateUser,
 } from '../../../../api';
 
-export async function registrationHandler({ firstName, lastName, email, password1, password2 }) {
+export async function registrationHandler({
+	firstName,
+	lastName,
+	email,
+	password1,
+	password2,
+	addressLine1 = '',
+	addressLine2 = '',
+	city = '',
+	state = '',
+	zipcode = '',
+	country = '',
+	phone = null,
+}) {
 	if (password1.length > 0) {
 		const passwordCheck = checkPassword(password1, password2);
 		if (!passwordCheck.valid) {
@@ -24,6 +37,13 @@ export async function registrationHandler({ firstName, lastName, email, password
 			lastName,
 			email,
 			password: password1,
+			addressLine1,
+			addressLine2,
+			city,
+			state,
+			zipcode,
+			country,
+			phone
 		});
 
 		if (newUser.message) {

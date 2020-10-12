@@ -128,6 +128,7 @@ const App = () => {
 					setCart={setCart}
 					setCartSize={setCartSize}
 					setCategory={setCategory}
+					setProfileCompleted={setProfileCompleted}
 				/>
 				<Switch>
 					<Route exact path='/'>
@@ -190,6 +191,7 @@ const App = () => {
 							setUser={setUser}
 							setCart={setCart}
 							setCartSize={setCartSize}
+							setProfileCompleted={setProfileCompleted}
 						/>
 					</Route>
 					<Route path='/login'>
@@ -200,6 +202,7 @@ const App = () => {
 							setUser={setUser}
 							setCart={setCart}
 							setCartSize={setCartSize}
+							setProfileCompleted={setProfileCompleted}
 						/>
 					</Route>
 					<Route path='/guest'>
@@ -210,6 +213,7 @@ const App = () => {
 							setUser={setUser}
 							setCart={setCart}
 							setCartSize={setCartSize}
+							setProfileCompleted={setProfileCompleted}
 						/>
 					</Route>
 					<Route path='/edit-user'>
@@ -221,6 +225,7 @@ const App = () => {
 							setCart={setCart}
 							setCartSize={setCartSize}
 							user={user}
+							setProfileCompleted={setProfileCompleted}
 						/>
 					</Route>
 					<Route path='/checkout'>
@@ -232,6 +237,7 @@ const App = () => {
 							setCart={setCart}
 							setCartSize={setCartSize}
 							user={user}
+							setProfileCompleted={setProfileCompleted}
 						/>
 					</Route>
 					<Route path='/product'>

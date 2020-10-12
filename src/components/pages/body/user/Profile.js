@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
 	addUser,
@@ -21,8 +22,17 @@ import {
 
 import './Profile.css';
 
-export const Profile = ({ view, setView, setUser, user, useHistory, setCart, setCartSize }) => {
-	//CURRENT VIEWS: login register guest userCheckout edit fulledit
+export const Profile = ({
+	view,
+	setView,
+	setUser,
+	user,
+	// useHistory,
+	setCart,
+	setCartSize,
+	setProfileCompleted,
+}) => {
+	//CURRENT VIEWS: login register guest userCheckout edit fulledit checkout-register
 	//CHANGE PASSWORD BUTTON: needs onclick function to switch state to ''
 	//SET UP STATES FOR DIFFERENT VIEWS! :)
 
@@ -52,7 +62,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 	}
 
 	useEffect(() => {
-		if (view === 'edit' || view === 'fulledit' || 'userCheckout') {
+		if (view === 'edit' || view === 'fulledit' || view === 'userCheckout') {
 			getFullUserFromToken(user.id, user.token).then((result) => {
 				setFirstName(result.firstName);
 				setLastName(result.lastName);
@@ -88,13 +98,20 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 
 		try {
 			//Registration
-			if (view === 'register') {
+			if (view === 'register' || view === 'checkout-register') {
 				const newUser = await registrationHandler({
 					firstName,
 					lastName,
 					email,
 					password1,
 					password2,
+					addressLine1: address1,
+					addressLine2: address2,
+					city,
+					state,
+					zipcode,
+					country,
+					phone,
 				});
 
 				setUser({
@@ -104,9 +121,17 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 					isUser: newUser.isUser,
 					token: newUser.token,
 				});
-				setCart(newUser.activeCart);
-				setCartSize(newUser.activeCart.cartQuantity);
-				history.push('/');
+
+				if (view === 'register') {
+					setCart(newUser.activeCart);
+					setCartSize(newUser.activeCart.cartQuantity);
+					history.push('/');
+					return;
+				} else {
+					setProfileCompleted(true);
+					history.push('/cart');
+					return;
+				}
 			}
 			//login
 			if (view === 'login') {
@@ -122,6 +147,7 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 				setCart(user.activeCart);
 				setCartSize(user.activeCart.cartQuantity);
 				history.push('/');
+				return;
 			}
 			//guest
 			if (view === 'guest') {
@@ -137,10 +163,15 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 					country,
 					phone,
 				});
+				setProfileCompleted(true);
 				history.push('/cart');
+				return;
 			}
 			//edit and full edit
-			if ((view === 'edit' || view === 'fulledit' || 'userCheckout') && user.isUser) {
+			if (
+				(view === 'edit' || view === 'fulledit' || view === 'userCheckout') &&
+				user.isUser
+			) {
 				const editObject = {
 					firstName,
 					lastName,
@@ -163,9 +194,12 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 				updateHandler(editObject, user.token);
 				if (view === 'edit' || view === 'fulledit') {
 					history.push('/');
+					return;
 				} else {
-					setView('userCheckout');
+					console.log('im getting to the send to cart part');
+					setProfileCompleted(true);
 					history.push('/cart');
+					return;
 				}
 			}
 		} catch (error) {
@@ -210,6 +244,8 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 						? 'Guest Checkout'
 						: view === 'userCheckout'
 						? 'User Checkout'
+						: view === 'checkout-register'
+						? 'Create Account'
 						: ''}
 				</h1>
 
@@ -259,7 +295,8 @@ export const Profile = ({ view, setView, setUser, user, useHistory, setCart, set
 						view === 'userCheckout' ||
 						view === 'login' ||
 						view === 'guest' ||
-						view === 'fulledit'
+						view === 'fulledit' ||
+						view === 'checkout-register'
 							? 'field hide'
 							: 'field'
 					}

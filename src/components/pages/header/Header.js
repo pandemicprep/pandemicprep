@@ -25,6 +25,7 @@ export const Header = ({
 	setCart,
 	setCartSize,
 	setCategory,
+	setProfileCompleted
 }) => {
 	const history = useHistory();
 	const [searchString, setSearchString] = useState('');
@@ -194,6 +195,7 @@ export const Header = ({
 										items: [],
 									});
 									setCartSize(0);
+									setProfileCompleted(false);
 								}}
 							>
 								<img
