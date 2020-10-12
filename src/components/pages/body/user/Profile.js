@@ -115,7 +115,6 @@ export const Profile = ({
                     country,
                     phone,
                 });
-
                 setUser({
                     id: newUser.id,
                     firstName: newUser.firstName,
@@ -138,7 +137,6 @@ export const Profile = ({
             //login
             if (view === "login") {
                 const user = await loginHandler({ email, password1 });
-
                 setUser({
                     id: user.id,
                     firstName: user.firstName,
