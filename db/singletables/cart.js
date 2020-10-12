@@ -257,21 +257,19 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
             DELETE FROM products_carts
             WHERE "jointId"=$1;
 
-        `,
-			[products_cartsId],
-		);
+        `, [products_cartsId] );
 
 		const cart = await getActiveCart(userId);
 
 		let total = 0;
 		let cartQuantity = 0;
-		cart.items.map((item) => {
+		cart.items.forEach((item) => {
 			total = total + item.itemTotal;
 			cartQuantity = cartQuantity + item.quantity;
 		});
 
-		const { rows: newUpdatedCart } = await client.query(
-			`
+        const { rows: newUpdatedCart } = await client.query(
+            `
             UPDATE carts
             SET total=$1,
             "cartQuantity"=$2
@@ -410,23 +408,23 @@ async function getUserOrderHistory(userId, pageNumber = 1) {
           WHERE "userId"=$1
           LIMIT $2 OFFSET $3;
           `,
-			[userId, LIMIT, OFFSET],
-		);
+            [userId, LIMIT, OFFSET]
+        );
 
-		await Promise.mapSeries(carts, async function (cart, index, length) {
-			cart.total = parseFloat(cart.total);
-			const items = await getProductsCartForACartId(cart.id);
-			cart.items = items;
-			const user = await getUserById(cart.userId);
-			cart.user = user;
-			cart.index = index;
-		});
+        await Promise.mapSeries(carts, async function (cart, index, length) {
+            cart.total = parseFloat(cart.total);
+            const items = await getProductsCartForACartId(cart.id);
+            cart.items = items;
+            const user = await getUserById(cart.userId);
+            cart.user = user;
+            cart.index = index;
+        });
 
-		const pageCount = Math.ceil(rowCount / LIMIT);
-		return [pageCount, carts];
-	} catch (error) {
-		throw error;
-	}
+        const pageCount = Math.ceil(rowCount / LIMIT);
+        return [pageCount, carts];
+    } catch (error) {
+        throw error;
+    }
 }
 
 // gets order history for all users

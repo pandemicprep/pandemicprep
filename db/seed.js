@@ -1,31 +1,25 @@
-/** @format */
 const Promise = require("bluebird");
-
+// ALL DATABASE FUNCTIONS BEING IMPORTED FROM THE DB INDEX FOLDER
 const {
-    addProductAndCategory,
-    getAllProducts,
-    getProductsByQuery,
     getProductById,
     getProductsByCategory,
     getAllProductsCart,
     getHighlightedProducts,
-} = require("./singletables/products");
-
-const { addUser, getAllUsers, updateUser, getUserById } = require("./singletables/users");
-
-const { categoryIdByName, getAllCategories } = require("./singletables/categories");
-
-const productArray = require("./singletables/productObject");
-
-const {
+    getAllUsers,
+    categoryIdByName,
+    getAllCategories,
     addCart,
     getCartHistoryStatusAdmin,
     getCartHistoryStatus,
     addProductToCart,
-} = require("./singletables/cart");
-
-const { addReview, getReviewsByProductId } = require("./singletables/reviews");
-
+    addReview,
+    getReviewsByProductId
+} = require('./index')
+// FUNCTIONS REQUIRED WITH A MORE ACCURATE PATH TO AVOID CIRCULAR DEPENDENCIES
+const { addUser, updateUser, getUserById } = require('./singletables/users');
+const { addProductAndCategory, getProductsByQuery, getAllProducts } = require('./singletables/products');
+// IMPORTED ARRAY FROM FILE CONTAINING ALL OF OUR SEEDED PRODUCTS
+const productArray = require("./singletables/productObject");
 //
 //
 //
@@ -33,11 +27,10 @@ const { addReview, getReviewsByProductId } = require("./singletables/reviews");
 //
 //
 //
-
 async function seed() {
     try {
         await createNewUsers();
-        await gettingAllUsers();
+        // await gettingAllUsers();
         // await creatingOneNewProduct();
         await seedingProductObject();
         await gettingProductsByQuery();
@@ -58,11 +51,9 @@ async function seed() {
         throw error;
     }
 }
-
 async function createNewUsers() {
     try {
         //creating a new user
-
         console.log("creating user one");
         const user1 = await addUser({
             firstName: "Nicolas",
@@ -81,7 +72,6 @@ async function createNewUsers() {
             creditCard: 45454545454545455,
         });
         console.log("this is user 1 ", user1);
-
         console.log("creating user two, login in with minimum info ");
         const user2 = await addUser({
             firstName: "Joe",
@@ -100,7 +90,6 @@ async function createNewUsers() {
             creditCard: null,
         });
         console.log("user2 with minimum data ", user2);
-
         console.log("creating user three, login in with minimum info and repeated email ");
         const user3 = await addUser({
             firstName: "Joe",
@@ -119,7 +108,6 @@ async function createNewUsers() {
             creditCard: null,
         });
         console.log("user3 with minimum data ", user3);
-
         console.log("creating user four, missing info ");
         const user4 = await addUser({
             firstName: "Joe",
@@ -142,7 +130,6 @@ async function createNewUsers() {
         throw error;
     }
 }
-
 async function gettingAllUsers() {
     try {
         console.log("Running getAllUsers...");
@@ -152,7 +139,6 @@ async function gettingAllUsers() {
         throw error;
     }
 }
-
 async function seedingProductObject() {
     console.log("Adding all products in product array to db...");
     const length = productArray.length;
@@ -171,14 +157,12 @@ async function seedingProductObject() {
                 category,
                 isHighlighted
             });
-
             return newProduct;
         });
     } catch (error) {
         throw error;
     }
 }
-
 async function gettingProductsByQuery() {
     try {
         console.log("getting products by query...");
@@ -188,7 +172,6 @@ async function gettingProductsByQuery() {
         throw error;
     }
 }
-
 async function updatingUsers() {
     try {
         console.log("Updating User 2...");
@@ -214,7 +197,6 @@ async function updatingUsers() {
         throw error;
     }
 }
-
 async function gettingUserById() {
     try {
         console.log("Getting User By Id...");
@@ -224,7 +206,6 @@ async function gettingUserById() {
         throw error;
     }
 }
-
 async function gettingCategoryIdsByName() {
     try {
         console.log("getting category ids by name");
@@ -237,7 +218,6 @@ async function gettingCategoryIdsByName() {
         throw error;
     }
 }
-
 async function addingOneCart() {
     try {
         const newCart = await addCart({
@@ -269,7 +249,6 @@ async function addingOneCart() {
         throw error;
     }
 }
-
 async function gettingNonActiveCartAdmin() {
     try {
         const history = await getCartHistoryStatusAdmin();
@@ -278,7 +257,6 @@ async function gettingNonActiveCartAdmin() {
         throw error;
     }
 }
-
 async function gettingNonActiveCart() {
     try {
         // const id = await getUserById(2);
@@ -288,7 +266,6 @@ async function gettingNonActiveCart() {
         throw error;
     }
 }
-
 async function seedingInitialReviews() {
     try {
         await addReview({
@@ -297,21 +274,18 @@ async function seedingInitialReviews() {
             score: 5,
             description: "Very pleased with this product!",
         });
-
         await addReview({
             creatorId: 1,
             productId: 5,
             score: 3,
             description: "Pleased",
         });
-
         await addReview({
             creatorId: 2,
             productId: 30,
             score: 1,
             description: "Very disappointed!",
         });
-
         await addReview({
             creatorId: 2,
             productId: 5,
@@ -322,37 +296,30 @@ async function seedingInitialReviews() {
         throw error;
     }
 }
-
 async function gettingSeedReviewsByProduct() {
     try {
         const reviews = await getReviewsByProductId(5);
-
         console.log("reviews by specific product: ", reviews);
     } catch (error) {
         throw error;
     }
 }
-
 async function gettingAllCategories() {
     try {
         const categories = await getAllCategories();
-
         console.log("all categories: ", categories);
     } catch (error) {
         throw error;
     }
 }
-
 async function gettingProductById() {
     try {
         const product = await getProductById(9);
-
         console.log("product by id in seed: ", product);
     } catch (error) {
         throw error;
     }
 }
-
 async function gettingProductsByCategory() {
     try {
         const products = await getProductsByCategory("school", 1);
@@ -361,7 +328,6 @@ async function gettingProductsByCategory() {
         throw error;
     }
 }
-
 async function makingProductCart() {
     try {
         const productCart1 = await addProductToCart({
@@ -382,13 +348,11 @@ async function makingProductCart() {
             quantity: 45,
             unitPrice: 1.99,
         });
-
         console.log("product cart test: ", productCart1, productCart2, productCart3);
     } catch (error) {
         throw error;
     }
 }
-
 // async function gettingHighlightedProducts() {
 //     try {
 //         const products = await getHighlightedProducts();
@@ -397,5 +361,4 @@ async function makingProductCart() {
 //         throw error;
 //     }
 // }
-
 module.exports = { seed };
