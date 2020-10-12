@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Stripe } from "../orders/Stripe";
+import { Stripe, stripeConnection } from "../orders/Stripe";
 
 import {
     addUser,
@@ -56,6 +56,7 @@ export const Profile = ({
     const [searchString, setSearchString] = useState("");
     const history = useHistory();
 
+    console.log("the view is ", view);
     if (view === "edit" || view === "fulledit") {
         if (!user.isUser) {
             history.push("/");
@@ -128,9 +129,9 @@ export const Profile = ({
                     setCartSize(newUser.activeCart.cartQuantity);
                     history.push("/");
                     return;
-                } else {
+                } else if (view === "checkout-register") {
                     setProfileCompleted(true);
-                    history.push("/cart");
+                    await stripeConnection();
                     return;
                 }
             }
@@ -164,9 +165,9 @@ export const Profile = ({
                     country,
                     phone,
                 });
+                console.log("getting to the strip Connection line");
                 setProfileCompleted(true);
-                history.push("/cart");
-                return;
+                await stripeConnection();
             }
             //edit and full edit
             if (
@@ -196,10 +197,9 @@ export const Profile = ({
                 if (view === "edit" || view === "fulledit") {
                     history.push("/");
                     return;
-                } else {
-                    console.log("im getting to the send to cart part");
+                } else if (view === "userCheckout") {
                     setProfileCompleted(true);
-                    history.push("/cart");
+                    await stripeConnection();
                     return;
                 }
             }
