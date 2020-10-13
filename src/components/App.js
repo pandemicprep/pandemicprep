@@ -189,6 +189,7 @@ const App = () => {
 							useHistory={useHistory}
 							setView={setView}
 							setUser={setUser}
+							cart={cart}
 							setCart={setCart}
 							setCartSize={setCartSize}
 							setProfileCompleted={setProfileCompleted}
@@ -200,6 +201,7 @@ const App = () => {
 							useHistory={useHistory}
 							setView={setView}
 							setUser={setUser}
+							cart={cart}
 							setCart={setCart}
 							setCartSize={setCartSize}
 							setProfileCompleted={setProfileCompleted}
@@ -211,6 +213,7 @@ const App = () => {
 							useHistory={useHistory}
 							setView={setView}
 							setUser={setUser}
+							cart={cart}
 							setCart={setCart}
 							setCartSize={setCartSize}
 							setProfileCompleted={setProfileCompleted}
@@ -222,6 +225,7 @@ const App = () => {
 							useHistory={useHistory}
 							setView={setView}
 							setUser={setUser}
+							cart={cart}
 							setCart={setCart}
 							setCartSize={setCartSize}
 							user={user}
@@ -234,6 +238,7 @@ const App = () => {
 							useHistory={useHistory}
 							setView={setView}
 							setUser={setUser}
+							cart={cart}
 							setCart={setCart}
 							setCartSize={setCartSize}
 							user={user}

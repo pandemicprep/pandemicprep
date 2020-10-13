@@ -23,9 +23,9 @@ export async function getOrderHistory(pageNumber, token) {
     }
 }
 
-export async function stripeRequest() {
+export async function stripeRequest(cart) {
     try {
-        const {data} = await axios.post('/api/orders/create-checkout-session', {})
+        const {data} = await axios.post('/api/orders/create-checkout-session', {cart})
         return data;
     } catch (error) {
         console.error(error);

@@ -36,19 +36,11 @@ ordersRouter.post('/', async (req, res, next) => {
 
 ordersRouter.post('/create-checkout-session', async (req, res) => {
    
+  const {cart} = req.body;
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'T-shirt',
-            },
-            unit_amount: 2000,
-          },
-          quantity: 1,
-        },
+        cart
       ],
       mode: 'payment',
       success_url: 'http://localhost:3000/success',

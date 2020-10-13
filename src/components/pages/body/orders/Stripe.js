@@ -37,13 +37,13 @@ export const Stripe = () => {
     );
 };
 
-export const stripeConnection = async () => {
+export const stripeConnection = async (cart) => {
     console.log("getting to stripe function");
     // Get Stripe.js instance
     const stripe = await stripePromise;
 
     // Call your backend to create the Checkout Session
-    const response = await stripeRequest();
+    const response = await stripeRequest(cart);
     console.log("the raw response ", response);
     const session = await response;
 

@@ -28,7 +28,7 @@ export const Profile = ({
     setView,
     setUser,
     user,
-    // useHistory,
+    cart,
     setCart,
     setCartSize,
     setProfileCompleted,
@@ -130,7 +130,7 @@ export const Profile = ({
                     return;
                 } else if (view === "checkout-register") {
                     setProfileCompleted(true);
-                    await stripeConnection();
+                    await stripeConnection(cart);
                     return;
                 }
             }
@@ -165,7 +165,7 @@ export const Profile = ({
                 });
                 console.log("getting to the strip Connection line");
                 setProfileCompleted(true);
-                await stripeConnection();
+                await stripeConnection(cart);
                 return;
             }
             //edit and full edit
@@ -198,7 +198,7 @@ export const Profile = ({
                     return;
                 } else if (view === "userCheckout") {
                     setProfileCompleted(true);
-                    await stripeConnection();
+                    await stripeConnection(cart);
                     return;
                 }
             }
