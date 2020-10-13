@@ -8,18 +8,18 @@ const LIMIT = 20;
  * Assigns a new cart to a user
  * @param {object} status(active, processing, complete)
  */
-async function addCart({ status, lastUpdated, total, userId }) {
+async function addCart({ status, total, userId }) {
 	// lastUpdated = getDate();
 	try {
 		const {
 			rows: [newCart],
 		} = await client.query(
 			`
-        INSERT INTO carts (status, "lastUpdated", total, "userId")
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO carts (status, date, time, total, "userId")
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING *;
     `,
-			[status, getDate(), total, userId],
+			[status, getDate().date, getDate().time, total, userId],
 		);
 		newCart.total = parseFloat(newCart.total);
 
@@ -251,7 +251,6 @@ async function getAllProductsCart() {
  */
 async function removeProductFromCart({ userId, cartId, products_cartsId }) {
 	try {
-		const date = getDate();
 		const deleted = await client.query(
 			`
             DELETE FROM products_carts
@@ -358,7 +357,7 @@ async function deactivateCart({ userId, cartId }) {
 
 		await lastUpdated(cartId);
 
-		const newCart = addCart({ status: 'active', lastUpdated: getDate(), total: 0, userId });
+		const newCart = addCart({ status: 'active', total: 0, userId });
 
 		return newCart;
 	} catch (error) {
@@ -464,14 +463,13 @@ async function getOrderHistory(pageNumber = 1) {
 
 async function lastUpdated(cartId) {
 	try {
-		const date = getDate();
 		await client.query(
 			`
             UPDATE carts
-            SET "lastUpdated"=$1
-            WHERE id=$2;
+			SET date=$1, time=$2
+            WHERE id=$3;
         `,
-			[date, cartId],
+			[getDate().date, getDate().time, cartId],
 		);
 	} catch (error) {
 		throw error;
@@ -480,20 +478,40 @@ async function lastUpdated(cartId) {
 
 function getDate() {
 	const newDate = new Date();
-	let dateString =
+	let date =
 		newDate.getFullYear() +
 		'-' +
 		(newDate.getMonth() + 1) +
 		'-' +
-		newDate.getDate() +
-		' @ ' +
+		newDate.getDate();
+		const time = 
 		(newDate.getHours() < 10 ? '0' + newDate.getHours() : newDate.getHours()) +
 		':' +
 		(newDate.getMinutes() < 10 ? '0' + newDate.getMinutes() : newDate.getMinutes()) +
 		':' +
 		(newDate.getSeconds() < 10 ? '0' + newDate.getSeconds() : newDate.getSeconds());
 
-	return dateString;
+	return {date, time};
+}
+
+async function getSalesReport() {
+	try {
+		const {
+			rows
+		} = await client.query(`
+			SELECT date,
+			sum("cartQuantity") AS "cartQuantity", 
+			sum(total) AS total
+			FROM carts
+			WHERE date LIKE '2020%'
+			GROUP BY date;
+		`);
+
+		return rows;
+
+	} catch (error) {
+		throw error;
+	}
 }
 
 module.exports = {
@@ -511,4 +529,5 @@ module.exports = {
 	completeCart,
 	getUserOrderHistory,
 	getOrderHistory,
+	getSalesReport
 };
