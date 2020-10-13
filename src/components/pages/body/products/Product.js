@@ -1,81 +1,88 @@
 /** @format */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
-import './Product.css';
+import "./Product.css";
 
-import { addProductToCart, patchCartItemQuantity } from '../../../../api/cart';
-import { addProductToGuestCart } from '../../../index';
+import { addProductToCart, patchCartItemQuantity } from "../../../../api/cart";
+import { addProductToGuestCart } from "../../../index";
 
 export const Product = ({ product, setCart, cart, user, setCartSize }) => {
-	const addToCartHandler = () => {
-		const alreadyPresent = cart.items.find((item) => {
-			return item.id === product.id;
-		});
+    const history = useHistory();
+    console.log("the product is ", product);
+    if (!product) {
+        history.push("/");
+    }
 
-		if (user.isUser) {
-			if (!alreadyPresent) {
-				addProductToCart(
-					{
-						userId: user.id,
-						productId: product.id,
-						cartId: cart.id,
-						quantity: 1,
-						unitPrice: parseFloat(product.price),
-					},
-					user.token,
-				)
-					.then((response) => {
-						setCart(response);
-						setCartSize(response.cartQuantity);
-					})
-					.catch((error) => {
-						console.error(error);
-					});
-			} else {
-				patchCartItemQuantity(
-					{
-						userId: user.id,
-						jointId: alreadyPresent.jointId,
-						quantity: alreadyPresent.quantity + 1,
-						unitPrice: alreadyPresent.unitPrice,
-					},
-					user.token,
-				)
-					.then((result) => {
-						setCart(result);
-						setCartSize(result.cartQuantity);
-					})
-					.catch((error) => {
-						console.error(error);
-					});
-			}
-		} else {
-			addProductToGuestCart(cart, product).then((result) => {
-				setCart(result);
-				setCartSize(result.cartQuantity);
-			});
-		}
-	};
+    const addToCartHandler = () => {
+        const alreadyPresent = cart.items.find((item) => {
+            return item.id === product.id;
+        });
 
-	return (
-		<>
-			<div key={product.id} className='product1'>
-				<img className='image' src={process.env.PUBLIC_URL + product.image}></img>
-				<div className='info'>
-					<p className='header'>{product.title}</p>
-					<p className='description1'>{product.description}</p>
-					<p className='price'>
-						${' '}
-						{parseFloat(product.price).toLocaleString('en-US', {
-							minimumFractionDigits: 2,
-						})}
-					</p>
-					<button id='addToCart' onClick={addToCartHandler}>
-						Add to Cart
-					</button>
-				</div>
-			</div>
-		</>
-	);
+        if (user.isUser) {
+            if (!alreadyPresent) {
+                addProductToCart(
+                    {
+                        userId: user.id,
+                        productId: product.id,
+                        cartId: cart.id,
+                        quantity: 1,
+                        unitPrice: parseFloat(product.price),
+                    },
+                    user.token
+                )
+                    .then((response) => {
+                        setCart(response);
+                        setCartSize(response.cartQuantity);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            } else {
+                patchCartItemQuantity(
+                    {
+                        userId: user.id,
+                        jointId: alreadyPresent.jointId,
+                        quantity: alreadyPresent.quantity + 1,
+                        unitPrice: alreadyPresent.unitPrice,
+                    },
+                    user.token
+                )
+                    .then((result) => {
+                        setCart(result);
+                        setCartSize(result.cartQuantity);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+        } else {
+            addProductToGuestCart(cart, product).then((result) => {
+                setCart(result);
+                setCartSize(result.cartQuantity);
+            });
+        }
+    };
+
+    return (
+        <>
+            <div key={product.id} className="product1">
+                <img className="image" src={process.env.PUBLIC_URL + product.image}></img>
+                <div className="info">
+                    <p className="header">{product.title}</p>
+                    <p className="description1">{product.description}</p>
+                    <p className="price">
+                        ${" "}
+                        {parseFloat(product.price).toLocaleString("en-US", {
+                            minimumFractionDigits: 2,
+                        })}
+                    </p>
+                    <button id="addToCart" onClick={addToCartHandler}>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </>
+    );
 };
