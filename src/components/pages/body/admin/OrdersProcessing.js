@@ -92,7 +92,7 @@ export const OrdersProcessing = ({ user }) => {
 											minimumFractionDigits: 2,
 										})}
 									</p>
-									<p>{order.lastUpdated}</p>
+									<p>{order.date}</p>
 									{/* <button
 										id='dropdown-arrow'
 										onClick={() => toggleDetails(index)}

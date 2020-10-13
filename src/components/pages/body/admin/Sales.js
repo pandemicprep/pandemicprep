@@ -43,7 +43,7 @@ export const Sales = ({ user }) => {
 						return (
 							<div key={index} id='first-map-div'>
 								<div className='history-initial'>
-									<p maxLength='10'>{order.lastUpdated}</p>
+									<p maxLength='10'>{order.date}</p>
 									<p>{order.cartQuantity}</p>
 									<p>${order.total.toFixed(2)}</p>
 									<p>{order.status}</p>

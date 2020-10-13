@@ -74,7 +74,6 @@ async function addUser({
 			if (newUser) {
 				const activeCart = await addCart({
 					status: 'active',
-					lastUpdated: new Date(),
 					total: 0,
 					userId: newUser.id,
 				});

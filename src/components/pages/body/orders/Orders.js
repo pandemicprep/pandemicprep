@@ -55,7 +55,7 @@ export const Orders = ({ user }) => {
 
 									<p className='hist-tit'>Status</p>
 									<span id='clickMe'>Click to Expand</span>
-									<p className='hist-con'>{order.lastUpdated}</p>
+									<p className='hist-con'>{order.date}</p>
 
 									<p className='hist-con'>{order.cartQuantity}</p>
 
