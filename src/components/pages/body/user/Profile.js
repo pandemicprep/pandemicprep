@@ -166,6 +166,7 @@ export const Profile = ({
                 console.log("getting to the strip Connection line");
                 setProfileCompleted(true);
                 await stripeConnection();
+                return;
             }
             //edit and full edit
             if (

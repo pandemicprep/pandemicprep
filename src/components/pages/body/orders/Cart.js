@@ -119,6 +119,7 @@ export const Cart = ({
 	};
 
 	const guestCheckout = () => {
+		console.log('setting view to guest');
 		setView('guest');
 		history.push('/checkout');
 	};
