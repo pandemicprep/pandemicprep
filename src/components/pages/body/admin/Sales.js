@@ -8,7 +8,7 @@ import { getSalesReport } from '../../../../api';
 export const Sales = ({ user }) => {
 	const [salesReport, setSalesReport] = useState([]);
 	const [clickedIndex, setClickedIndex] = useState(-1);
-	const twentyTwenty = {
+	const [twentyTwenty, setTwentyTwenty] = useState({
 		january: [],
 		february: [],
 		march: [],
@@ -21,7 +21,7 @@ export const Sales = ({ user }) => {
 		october: [],
 		november: [],
 		december: []
-	}
+	})
 
 	useEffect(() => {
 		getSalesReport(user.token)
@@ -53,6 +53,7 @@ export const Sales = ({ user }) => {
 						twentyTwenty.december.push(item)
 					}
 				});
+				console.log(twentyTwenty)
 				setSalesReport(response.sort( compare ));
 			})
 			.catch((error) => {
@@ -76,22 +77,33 @@ export const Sales = ({ user }) => {
 	return (
 		<div className='sales-container'>
 			<div className='sales-report'>
-			{Object.values(twentyTwenty).map((month, index) => {
-				console.log(month, 'test')
+			{Object.entries(twentyTwenty).map((month, index) => {
+				console.log(month[0], 'test')
+				if (month[1].length === 0) {
+					return '';
+				}
 				return(
-					<div key={index} className='month-container'>
-						<p className='month-h1'>{month}</p>
-						<div className='report-titles'>
-							<p className='each-title'>Date</p>
-							<p className='each-title'>Total Items</p>
-							<p className='each-title'>Total Revenue</p>
+					  
+						<div key={index} className='month-container'>
+							<p className='month-h1'>{month[0]}</p>
+							<div className='report-titles'>
+								<p className='each-title'>Date</p>
+								<p className='each-title'>Total Items</p>
+								<p className='each-title'>Total Revenue</p>
+							</div>
+
+							{ month[1].map((day, i) => {
+								return (
+									<div key={i} className='month-data'>
+										<p className='each-data'>{day.date}</p>
+										<p className='each-data'>{day.cartQuantity}</p>
+										<p className='each-data'>{'$ ' + day.total}</p>
+									</div>
+								)
+							})}
+
 						</div>
-
-						<div>
-
-						</div>
-
-					</div>
+					
 				)
 			})}
 			</div>
