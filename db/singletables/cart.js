@@ -504,6 +504,8 @@ async function getSalesReport() {
 			sum(total) AS total
 			FROM carts
 			WHERE date LIKE '2020%'
+			AND status = 'processing' 
+			OR status = 'completed'
 			GROUP BY date;
 		`);
 
