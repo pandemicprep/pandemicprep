@@ -1,52 +1,50 @@
 /* PRODUCTS STYLING IN ADMIN */
-
-
-
-.each-input {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font: bold 24px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
-    margin: 0px 10px 20px;
+/*input span titles*/
+.each-input h1{
+    font: bold 22px Helvetica, Sans-Serif; 
+    margin-left: 20px;
 }
 
+/*inputs*/
+.each-input input{
+    height: 40px;
+    width: 300px;
+    margin-left: 20px;
+}
+
+/*active checkbox*/
+#activeCheck {
+    height: 20px !important;
+    margin-top: -35px;
+    margin-left: -40px;
+}
+
+/*MAIN div for the entire page*/
 #admin-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    margin: auto;
+    align-items: flex-start;
 }
 
-#title {
-    width: 300px !important;
+#active h1 {
+    margin-top: 20px;
 }
 
-#title input {
-    height: 70px !important;
-}
-
-#price input {
-    height: 70px !important;
-}
-
-#description2 {
-    margin-left: 20px; 
-    margin-right: 20px;
-    margin-bottom: 50px;
-    word-wrap: break-word;
-    height: 185px !important;
-}
-
+/*add new button*/
 #addNew {
     width: 300px;
-    height: 60px;
+    height: 40px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 25px;
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: dodgerblue; 
-    margin-top: 45px;
-    margin-bottom: 5px;
     background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
     background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
     background-position: 100%;
@@ -55,11 +53,7 @@
     transition: background 300ms ease-in-out;
 }
 
-#button-span {
-    max-width: 400px;
-    margin-top: 20px;
-}
-
+/*add new button hover*/
 #addNew:hover {
     background-color:  rgb(1, 0, 53);
     color: white;
@@ -70,81 +64,24 @@
     transform: scale(1.075,1.075);
 }
 
-#description2 input {
-    width: 400px;
-    height: 150px;
-    font-size: 16px;
+/*description to adjust margin on bottom*/
+#description input{
+    margin-bottom: -22px;
 }
 
-#image input {
-    height: 70px;
-    word-wrap: break-word;
-}
-
-#description {
-    margin-left: 20px; 
-    margin-right: 20px;
-    margin-bottom: 50px;
-}
-
-#description input {
-    width: 400px;
-    height: 70px;
-    font-size: 16px;
-}
-
-#active {
-display: flex;
-margin-top: 108px;
-margin-left: -5px;
-padding-left: 110px;
-justify-content: center;
-align-items: center;
-text-align: center;
-border: 1px solid black;
-width: 300px;
-height: 70px;
-font-size: 22px !important;
-position: absolute;
-}
-
-#activeCheck {
-    height: 30px !important;
-    margin-left: -80px;
-}
-
-
-.each-input input {
-    position: relative;
-    bottom: 5px;
-    height: 50px;
-    border-radius: 0;
-    text-align: center;
-    font-size: 18px;
-}
-
-
-#admin-list button {
-    position: relative;
-    bottom: 30px;
-}
-
-#id-input {
-    width: 20px;
-}
-
-
-#auth {
-    width: 300px;
-    height: 60px;
+/*authorize button*/
+#edit {
+    width: 150px;
+    height: 40px;
+    margin-top: 85px;
+    margin-left: -150px;
+    margin-bottom: 30px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: dodgerblue; 
-    margin-top: 10px;
-    margin-bottom: 55px;
     background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
     background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
     background-position: 100%;
@@ -153,7 +90,8 @@ position: absolute;
     transition: background 300ms ease-in-out;
 }
 
-#auth:hover {
+/*authorize button hover*/
+#edit:hover {
     background-color:  rgb(1, 0, 53);
     color: white;
     background-position: 0;
@@ -163,10 +101,11 @@ position: absolute;
     transform: scale(1.075,1.075);
 }
 
+#edit:active {
+    display: none;
+}
 
-
-
-
+/*page headings*/
 .productH1 {
     font: bold 32px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
@@ -179,4 +118,32 @@ position: absolute;
     width: 100%;
     padding-top: 15px;
     text-align: center;
+}
+
+#auth {
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: dodgerblue; 
+    background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+/*authorize button hover*/
+#auth:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
 }

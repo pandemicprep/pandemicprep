@@ -1,29 +1,64 @@
-
-
+/*add new user*/
 #admin-list-user {
-    margin-left: 50px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: column;
     text-align: center;
-    max-width: 90%;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
-#admin-list-user input {
-    width: 300px;
+/*add new user headings*/
+#admin-list-user span {
+    font: bold 22px Helvetica, Sans-Serif; 
 }
 
+/*add new user checkbox*/
 #admin-checkbox {
-    width: 150px;
+    height: 20px;
 }
 
+/*add new user inputs*/
+#admin-list-user input {
+    margin-bottom: 10px;
+}
+
+/*add new user button*/
+#user-button2 {
+    width: 300px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-left: 10px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: dodgerblue; 
+    background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+/*add new user button hover*/
+#user-button2:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
+}
+
+/*edit user big heading*/
 #addUserH1 {
     font: bold 32px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     padding-left: 150px;
     margin-bottom: 25px;
+    margin-top: 30px;
     background-color: black;
     border: 3px solid black;
     color: white;
@@ -33,78 +68,56 @@
     text-align: center;
 }
 
-  .checkbox2 {
-      margin-left: 20px !important;
-  }
-  
-  #user-button {
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 140px;
+/*edit user headings*/
+#admin-list span {
     font: bold 22px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
-    color: dodgerblue; 
-    margin-bottom: 5px;
-    background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
-    background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
-    background-position: 100%;
-    background-size: 400%;
-    -webkit-transition: background 300ms ease-in-out;
-    transition: background 300ms ease-in-out;
-  }
-
-  #user-button:hover {
-    background-color:  rgb(1, 0, 53);
-    color: white;
-    background-position: 0;
-    webkit-transform: scale(1.075,1.075);
-    -ms-transform: scale(1.075,1.075);
-    -o-transform: scale(1.075,1.075);
-    transform: scale(1.075,1.075);
+    margin-bottom: 25px;
 }
 
-#user-button2 {
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 100px;
-    height: 60px;
-    font: bold 22px Helvetica, Sans-Serif; 
-    letter-spacing: -1px; 
-    color: dodgerblue; 
-    margin-top: 25px;
-    background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
-    background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
-    background-position: 100%;
-    background-size: 400%;
-    -webkit-transition: background 300ms ease-in-out;
-    transition: background 300ms ease-in-out;
-  }
-
-  #user-button2:hover {
-    background-color:  rgb(1, 0, 53);
-    color: white;
-    background-position: 0;
-    webkit-transform: scale(1.075,1.075);
-    -ms-transform: scale(1.075,1.075);
-    -o-transform: scale(1.075,1.075);
-    transform: scale(1.075,1.075);
+/*edit user inputs*/
+#admin-list input {
+    width: 300px;
+    height: 40px;
 }
 
-.checkbox2 input {
-    width: 25px !important;
+/*edit user checkboxes*/
+#checkbox2 {
+    height: 20px !important;
+    margin-left: -50px;
 }
 
-.checkbox input {
-    width: 25px !important;
-}
-
+/*edit user button*/
 #user-button {
-    margin-top: 60px;
+    width: 150px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: -100px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    font: bold 22px Helvetica, Sans-Serif; 
+    letter-spacing: -1px; 
+    color: dodgerblue; 
+    background-image: -webkit-linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-image: linear-gradient(45deg, dodgerblue 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
 }
 
-#user-button2{
-    margin-left: 25px !important;
-    width: 150px !important;
+/*edit user button hover*/
+#user-button:hover {
+    background-color:  rgb(1, 0, 53);
+    color: white;
+    background-position: 0;
+    webkit-transform: scale(1.075,1.075);
+    -ms-transform: scale(1.075,1.075);
+    -o-transform: scale(1.075,1.075);
+    transform: scale(1.075,1.075);
+}
+
+#isUser {
+    margin-left: -100px;
+    margin-right: 50px;
 }
