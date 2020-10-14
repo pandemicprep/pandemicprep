@@ -78,10 +78,19 @@ export const Sales = ({ user }) => {
 		<div className='sales-container'>
 			<div className='sales-report'>
 			{Object.entries(twentyTwenty).map((month, index) => {
-				console.log(month[0], 'test')
+
+				console.log(month, 'test')
 				if (month[1].length === 0) {
 					return '';
 				}
+				let total = 0.00;
+				let cartQuantity = 0;
+				for (let i = 0; i < month[1].length; i++) {
+					total = total + parseFloat(month[1][i].total);
+					cartQuantity = cartQuantity + parseInt(month[1][i].cartQuantity);
+				}
+				month[1].push({date: 'Monthly Total', cartQuantity: cartQuantity, total: total})
+
 				return(
 					  
 						<div key={index} className='month-container'>
@@ -91,7 +100,7 @@ export const Sales = ({ user }) => {
 								<p className='each-title'>Total Items</p>
 								<p className='each-title'>Total Revenue</p>
 							</div>
-
+							
 							{ month[1].map((day, i) => {
 								return (
 									<div key={i} className='month-data'>
