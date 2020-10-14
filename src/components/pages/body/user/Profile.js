@@ -10,6 +10,7 @@ import {
     getProductsByQuery,
     loginUser,
     getFullUserFromToken,
+    addProductToCart, deactivateCart
 } from "../../../../api";
 
 import {
@@ -22,6 +23,7 @@ import {
 } from "./profileUtils";
 
 import "./Profile.css";
+import { getUserFromToken } from '../../../../api/users';
 
 export const Profile = ({
     view,
@@ -100,8 +102,9 @@ export const Profile = ({
 
         try {
             //Registration
+            let newUser = {};
             if (view === "register" || view === "checkout-register") {
-                const newUser = await registrationHandler({
+                newUser = await registrationHandler({
                     firstName,
                     lastName,
                     email,
@@ -129,8 +132,30 @@ export const Profile = ({
                     history.push("/");
                     return;
                 } else if (view === "checkout-register") {
-                    setProfileCompleted(true);
-                    await stripeConnection(cart);
+                    cart.items.forEach(async (item) => {
+                        await addProductToCart({
+                            userId: newUser.id,
+                            productId: item.id,
+                            cartId: newUser.activeCart.id,
+                            quantity: item.quantity,
+                            unitPrice: parseFloat(item.price),
+                        },
+                        newUser.token);
+                    })
+                    // setCart(await deactivateCart({userId: newUser.id, cartId: newUser.activeCart.id}, newUser.token));
+                    deactivateCart({userId: newUser.id, cartId: newUser.activeCart.id}, newUser.token).then((result) => {
+                        console.log('new cart for new user ', result);
+                        setCart(result);
+                        setCartSize(result.cartQuantity);
+                    })
+                    setUser({id: newUser.id,
+                        firstName: newUser.firstName,
+                        isAdmin: newUser.isAdmin,
+                        isUser: newUser.isUser,
+                        token: newUser.token });
+                    
+                    // setCartSize(cart.cartQuantity);
+                    history.push('/success');
                     return;
                 }
             }
@@ -150,8 +175,9 @@ export const Profile = ({
                 return;
             }
             //guest
+            let newGuest = {};
             if (view === "guest") {
-                guestHandler({
+                newGuest = guestHandler({
                     firstName,
                     lastName,
                     email,
@@ -163,9 +189,29 @@ export const Profile = ({
                     country,
                     phone,
                 });
-                console.log("getting to the strip Connection line");
-                setProfileCompleted(true);
-                await stripeConnection(cart);
+                // .then((result) => {
+                //     newGuest = result;
+                //     console.log ('new guest ', newGuest, result);
+                // })
+                console.log('new guest in the front ', newGuest);
+                cart.items.forEach(async (item) => {
+                    await addProductToCart({
+                        userId: newGuest.id,
+                        productId: item.id,
+                        cartId: newGuest.activeCart.id,
+                        quantity: item.quantity,
+                        unitPrice: parseFloat(item.price),
+                    },
+                    newGuest.token);
+                })
+                // setCart(await deactivateCart({userId: newUser.id, cartId: newUser.activeCart.id}, newUser.token));
+                deactivateCart({userId: newUser.id, cartId: newUser.activeCart.id}, newUser.token).then((result) => {
+                    
+                    setCart({ status: 'active', cartQuantity: 0, total: 0, items: [] });
+                    setCartSize(0);
+                })
+
+
                 return;
             }
             //edit and full edit
@@ -197,8 +243,9 @@ export const Profile = ({
                     history.push("/");
                     return;
                 } else if (view === "userCheckout") {
-                    setProfileCompleted(true);
-                    await stripeConnection(cart);
+                    setCart(deactivateCart({userId: user.id, cartId: cart.id}, user.token));
+                    setCartSize(0);
+                    history.push('/success');
                     return;
                 }
             }
@@ -458,7 +505,7 @@ export const Profile = ({
                 <br></br>
                 <button id="submit" type="submit">
                     {view === "userCheckout" || view === "guest" || view === "checkout-register"
-                        ? "Proceed to Pay"
+                        ? "Complete Payment"
                         : "Submit"}
                 </button>
                 <br></br>

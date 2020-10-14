@@ -98,7 +98,7 @@ usersRouter.post('/guest', async (req, res, next) => {
 		const newGuest = await addUser(guest);
 
 		if (newGuest.message) {
-			res.send(newGuest);
+			res.send(newGuest.message);
 		} else {
 			res.send(newGuest);
 		}

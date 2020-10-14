@@ -56,7 +56,7 @@ ordersRouter.post('/create-checkout-session', async (req, res) => {
       cancel_url: 'http://localhost:3000/',
     });
   
-    res.send({ id: session.id });
+    res.send({ id: session.id, session: session});
     
   });
 
