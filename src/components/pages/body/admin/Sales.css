@@ -68,3 +68,8 @@
     align-items: center;
 }
 
+.month-data:last-child {
+    font: bolder 24px Helvetica, Sans-Serif;
+    background-color: lightslategray;
+}
+
