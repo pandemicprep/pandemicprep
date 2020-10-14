@@ -177,7 +177,8 @@ export const Profile = ({
             //guest
             let newGuest = {};
             if (view === "guest") {
-                newGuest = guestHandler({
+                console.log('getting to the guest if');
+                newGuest = await guestHandler({
                     firstName,
                     lastName,
                     email,
@@ -193,7 +194,7 @@ export const Profile = ({
                 //     newGuest = result;
                 //     console.log ('new guest ', newGuest, result);
                 // })
-                console.log('new guest in the front ', newGuest);
+                console.log('new guest in the front ', await newGuest);
                 cart.items.forEach(async (item) => {
                     await addProductToCart({
                         userId: newGuest.id,
@@ -243,7 +244,8 @@ export const Profile = ({
                     history.push("/");
                     return;
                 } else if (view === "userCheckout") {
-                    setCart(deactivateCart({userId: user.id, cartId: cart.id}, user.token));
+                    
+                    setCart(await deactivateCart({userId: user.id, cartId: cart.id}, user.token));
                     setCartSize(0);
                     history.push('/success');
                     return;
