@@ -94,9 +94,9 @@ export async function completeOrder(cartId, token) {
 	}
 }
 
-export async function getAllOrderHistory(pageNumber, token) {
+export async function getSalesReport(token) {
 	try {
-		const { data } = await axios.get(`/api/admin/sales/${pageNumber}`, {
+		const { data } = await axios.get(`/api/admin/sales`, {
 			headers: { Authorization: 'Bearer ' + token },
 		});
 

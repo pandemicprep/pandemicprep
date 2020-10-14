@@ -1,29 +1,75 @@
-.orders {
-    margin-top: 120px !important;
+.sales-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100vw;
+    margin-bottom: 100px;
 }
 
-.history-initial {
-    margin-left: -250px !important;
+.sales-report {
+    width: 70%;
+    display:  flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: scroll;
 }
 
-#dropdown-arrow {
-    margin-left: -100px !important;
-}
-
-.hidden-details {
-    margin-left: 350px !important;
-}
-
-.orders-list {
+.month-container {
+    width: 90%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 80%;
+    justify-content: center;
+    margin: auto;
+
 }
 
-.history-titles {
+.report-titles {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    width: 80%;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+}
+
+.report-titles p{
+    display: grid;
+    align-content: center;
+    margin-top: 20px;
+    font: bold 24px Helvetica, Sans-Serif;
+    padding: 5px;
+    border: solid 1px black;
+    margin-bottom: -2px;
+}
+
+.month-h1 {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font: bold 28px Helvetica, Sans-Serif;
+    text-transform: capitalize;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: -20px;
+    width: 100%;
+}
+
+.month-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+}
+
+.each-data {
+    border: solid 1px black;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.month-data:last-child {
+    font: bolder 24px Helvetica, Sans-Serif;
+    background-color: lightslategray;
 }
 
