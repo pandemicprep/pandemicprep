@@ -45,6 +45,7 @@ export const stripeConnection = async (cart) => {
     // Call your backend to create the Checkout Session
     const response = await stripeRequest(cart);
     console.log("the raw response ", response);
+    localStorage.setItem('response', JSON.stringify(response));
     const session = await response;
 
     // When the customer clicks on the button, redirect them to Checkout.

@@ -53,9 +53,9 @@ export async function patchCartItemQuantity(body, token) {
 	}
 }
 
-export async function deactivateCart(body, token) {
+export async function deactivateCart({userId, cartId}, token) {
 	try {
-		const { data: newCart } = await axios.patch('/api/cart/status', body, {
+		const { data: newCart } = await axios.patch('/api/cart/status', {userId, cartId}, {
 			headers: { Authorization: 'Bearer ' + token },
 		});
 		return newCart;
