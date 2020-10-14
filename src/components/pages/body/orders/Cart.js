@@ -240,10 +240,10 @@ export const Cart = ({
 						</button>
 					) : !user.isUser && !profileCompleted ? (
 						<div className='options'>
-							<button id='asguest' onClick={guestCheckout}>
+							<button className='checkout-guest asguest' onClick={guestCheckout}>
 								As a guest
 							</button>
-							<button id='asuser' onClick={newUserCheckout}>
+							<button className='checkout-guest asuser' onClick={newUserCheckout}>
 								Create Account
 							</button>
 						</div>
