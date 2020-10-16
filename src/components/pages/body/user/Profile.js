@@ -178,41 +178,38 @@ export const Profile = ({
             let newGuest = {};
             if (view === "guest") {
                 console.log('getting to the guest if');
-                newGuest = await guestHandler({
+                addUser({
                     firstName,
                     lastName,
                     email,
-                    address1,
-                    address2,
+                    addressLine1: address1,
+                    addressLine2: address2,
                     city,
                     state,
                     zipcode,
                     country,
                     phone,
-                });
-                // .then((result) => {
-                //     newGuest = result;
-                //     console.log ('new guest ', newGuest, result);
-                // })
-                console.log('new guest in the front ', await newGuest);
-                cart.items.forEach(async (item) => {
-                    await addProductToCart({
-                        userId: newGuest.id,
-                        productId: item.id,
-                        cartId: newGuest.activeCart.id,
-                        quantity: item.quantity,
-                        unitPrice: parseFloat(item.price),
-                    },
-                    newGuest.token);
                 })
-                // setCart(await deactivateCart({userId: newUser.id, cartId: newUser.activeCart.id}, newUser.token));
-                deactivateCart({userId: newUser.id, cartId: newUser.activeCart.id}, newUser.token).then((result) => {
+                .then((result) => {
+                    newGuest = result;
+                    console.log ('new guest ', newGuest, result);
+                    cart.items.forEach(async (item) => {
+                        await addProductToCart({
+                            userId: newGuest.id,
+                            productId: item.id,
+                            cartId: newGuest.activeCart.id,
+                            quantity: item.quantity,
+                            unitPrice: parseFloat(item.price),
+                        },
+                        newGuest.token);
+                    })
+                    deactivateCart({userId: newGuest.id, cartId: newGuest.activeCart.id}, newGuest.token).then(() => {
                     
-                    setCart({ status: 'active', cartQuantity: 0, total: 0, items: [] });
-                    setCartSize(0);
+                        setCart({ status: 'active', cartQuantity: 0, total: 0, items: [] });
+                        setCartSize(0);
+                    })
                 })
-
-
+                
                 return;
             }
             //edit and full edit

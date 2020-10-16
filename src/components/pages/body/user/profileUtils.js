@@ -113,7 +113,7 @@ export async function loginHandler({ email, password1 }) {
 	}
 }
 
-export function guestHandler({
+export async function guestHandler({
 	firstName,
 	lastName,
 	email,
