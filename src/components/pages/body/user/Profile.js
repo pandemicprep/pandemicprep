@@ -201,13 +201,18 @@ export const Profile = ({
                             quantity: item.quantity,
                             unitPrice: parseFloat(item.price),
                         },
-                        newGuest.token);
+                            newGuest.token);
                     })
-                    deactivateCart({userId: newGuest.id, cartId: newGuest.activeCart.id}, newGuest.token).then(() => {
                     
-                        setCart({ status: 'active', cartQuantity: 0, total: 0, items: [] });
-                        setCartSize(0);
-                    })
+                    
+                }).then(() => {
+                        console.log('new guest is ready ', newGuest);
+                        deactivateCart({ userId: newGuest.id, cartId: newGuest.activeCart.id }, newGuest.token).then(() => {
+                    
+                            setCart({ status: 'active', cartQuantity: 0, total: 0, items: [] });
+                            setCartSize(0);
+                        })
+
                 })
                 
                 return;

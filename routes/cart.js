@@ -15,16 +15,14 @@ const { getActiveCart } = require('../db');
 //Add product to cart
 cartRouter.post('/', async (req, res, next) => {
 	if (req.user) {
-		if (req.user.isUser) {
+		
 			try {
 				const newProductCart = await addProductToCart(req.body);
 				res.send(newProductCart);
 			} catch (error) {
 				throw error;
 			}
-		} else {
-			next({ message: 'Must be signed in to add a product to your cart' });
-		}
+		
 	} else {
 		next({ message: 'Must be signed in to add a product to your cart' });
 	}
@@ -72,18 +70,16 @@ cartRouter.patch('/quantity', async (req, res, next) => {
 	}
 });
 
+//deactivate cart
 cartRouter.patch('/status', async (req, res, next) => {
 	if (req.user) {
-		if (req.user.isUser) {
+		
 			try {
 				const newCart = await deactivateCart(req.body);
 				res.send(newCart);
 			} catch (error) {
 				throw error;
 			}
-		} else {
-			next({ message: 'Must be signed in to change a cart status' });
-		}
 	} else {
 		next({ message: 'Must be signed in to change a cart status' });
 	}
