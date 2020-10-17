@@ -53,7 +53,7 @@ export const Sales = ({ user }) => {
 						twentyTwenty.december.push(item)
 					}
 				});
-				console.log(twentyTwenty)
+				
 				setSalesReport(response.sort( compare ));
 			})
 			.catch((error) => {
@@ -79,7 +79,7 @@ export const Sales = ({ user }) => {
 			<div className='sales-report'>
 			{Object.entries(twentyTwenty).map((month, index) => {
 
-				console.log(month, 'test')
+				
 				if (month[1].length === 0) {
 					return '';
 				}

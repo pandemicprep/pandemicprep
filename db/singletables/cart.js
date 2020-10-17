@@ -173,9 +173,7 @@ async function getActiveCartAlone(userId) {
  * @param {object} param0
  */
 async function addProductToCart({ userId, productId, cartId, quantity, unitPrice }) {
-	console.log(
-		`back end. userId ${userId}, productId ${productId}, cartId ${cartId}, quantity ${quantity}, unitPrice ${unitPrice}`,
-	);
+	
 	try {
 		const itemTotal = quantity * unitPrice;
 		await client.query(
@@ -187,7 +185,7 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
 			[productId, cartId, quantity, unitPrice, itemTotal],
 		);
 		const cart = await getActiveCart(userId);
-		console.log('the active cart is ', await cart);
+		
 		let total = 0;
 		let cartQuantity = 0;
 		cart.items.map((item) => {

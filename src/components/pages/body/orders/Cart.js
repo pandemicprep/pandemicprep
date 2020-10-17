@@ -26,7 +26,7 @@ export const Cart = ({
 }) => {
 	const history = useHistory();
 	const [shipping, setShipping] = useState(5);
-    console.log('got to cart');
+    
 	const removeHandler = (product) => {
 		const productId = product.id;
 		if (user.firstName !== 'Guest') {
@@ -54,7 +54,7 @@ export const Cart = ({
 		const { jointId, id: productId, quantity, unitPrice } = product;
 		if (quantity + direction > 0) {
 			if (user.firstName !== 'Guest') {
-				console.log('user right now is ', user);
+				
 				patchCartItemQuantity(
 					{
 						userId: user.id,
@@ -72,7 +72,7 @@ export const Cart = ({
 						console.error(error);
 					});
 			} else {
-				console.log('got to the guest part of the ticker');
+				
 				const newCart = { ...cart };
 				let newQuantity = 0;
 				let newTotal = 0;
@@ -121,7 +121,7 @@ export const Cart = ({
 	};
 
 	const guestCheckout = () => {
-		console.log('setting view to guest');
+		
 		setView('guest');
 		history.push('/checkout');
 	};

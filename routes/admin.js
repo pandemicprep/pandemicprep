@@ -155,13 +155,12 @@ adminRouter.patch('/finalizing', async (req, res, next) => {
 // });
 
 adminRouter.get('/sales', async (req, res, next) => {
-	console.log('getting into sales report router')
+	
 	try {
 		if (req.user) {
 			if (req.user.isAdmin) {
 				const sales = await getSalesReport()
-				console.log(sales)
-
+				
 				res.send(sales)
 			} else {
 				res.send({ message: 'You must be an admin to retrieve the sales report!' });

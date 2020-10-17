@@ -58,7 +58,7 @@ export const Profile = ({
     const [searchString, setSearchString] = useState("");
     const history = useHistory();
 
-    console.log("the view is ", view);
+    
     if (view === "edit" || view === "fulledit") {
         if (!user.isUser) {
             history.push("/");
@@ -144,7 +144,7 @@ export const Profile = ({
                     })
                     // setCart(await deactivateCart({userId: newUser.id, cartId: newUser.activeCart.id}, newUser.token));
                     deactivateCart({userId: newUser.id, cartId: newUser.activeCart.id}, newUser.token).then((result) => {
-                        console.log('new cart for new user ', result);
+                        
                         setCart(result);
                         setCartSize(result.cartQuantity);
                     })
@@ -177,7 +177,7 @@ export const Profile = ({
             //guest
             let newGuest = {};
             if (view === "guest") {
-                console.log('getting to the guest if');
+                
                 addUser({
                     firstName,
                     lastName,
@@ -192,7 +192,7 @@ export const Profile = ({
                 })
                 .then((result) => {
                     newGuest = result;
-                    console.log ('new guest ', newGuest, result);
+                    
                     cart.items.forEach(async (item) => {
                         await addProductToCart({
                             userId: newGuest.id,
@@ -206,7 +206,7 @@ export const Profile = ({
                     
                     
                 }).then(() => {
-                        console.log('new guest is ready ', newGuest);
+                        
                         deactivateCart({ userId: newGuest.id, cartId: newGuest.activeCart.id }, newGuest.token).then(() => {
                             
                             setCart({ status: 'active', cartQuantity: 0, total: 0, items: [] });

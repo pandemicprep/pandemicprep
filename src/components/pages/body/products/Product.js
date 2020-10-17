@@ -9,7 +9,7 @@ import { addProductToCart, patchCartItemQuantity } from '../../../../api/cart';
 import { addProductToGuestCart } from '../../../index';
 
 export const Product = ({ product, setCart, cart, user, setCartSize }) => {
-	console.log('the product ', product);
+	
 	const history = useHistory();
 	if (!('id' in product)) {
 		history.push('/');

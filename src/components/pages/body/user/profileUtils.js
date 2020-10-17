@@ -141,7 +141,7 @@ export async function guestHandler({
 			if (result.message) {
 				alert(result.message);
 			} else {
-				console.log('new guest in api ', result);
+				
 				localStorage.setItem('panprepToken', result.token);
 				return result;
 			}

@@ -17,7 +17,7 @@ export const Stripe = () => {
 
         // Call your backend to create the Checkout Session
         const response = await stripeRequest();
-        console.log("the raw response ", response);
+        
         const session = await response;
 
         // When the customer clicks on the button, redirect them to Checkout.
@@ -38,13 +38,13 @@ export const Stripe = () => {
 };
 
 export const stripeConnection = async (cart) => {
-    console.log("getting to stripe function");
+    
     // Get Stripe.js instance
     const stripe = await stripePromise;
 
     // Call your backend to create the Checkout Session
     const response = await stripeRequest(cart);
-    console.log("the raw response ", response);
+    
     localStorage.setItem('response', JSON.stringify(response));
     const session = await response;
 
