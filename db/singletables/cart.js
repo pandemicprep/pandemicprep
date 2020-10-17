@@ -134,58 +134,15 @@ async function getUserById(id) {
 async function getActiveCart(userId) {
 	try {
 		const activeCart = await getActiveCartAlone(userId);
+
 		const items = await getProductsCartForACartId(await activeCart.id);
 
 		activeCart.total = parseFloat(activeCart.total);
 		activeCart.items = items;
-		console.log('activeCart from the get active cart ', activeCart);
-		return activeCart;
 
-
-
-
-
-		// let activeCart = {};
-		// Promise.resolve(getActiveCartAlone(userId))
-		// 	.then((cart) => {
-		// 		activeCart = cart;
-		// 		Promise.delay(500).then(() => {
-		// 			getProductsCartForACartId(activeCart.id).then((items) => {
-		// 			activeCart.total = parseFloat(activeCart.total);
-		// 		activeCart.items = items;
-		// 			})
-		// 		})
-		// 	})
-			// .then(({ activeCart, items }) => {
-			// 	console.log(
-			// 		'the second part of active cart inside get active cart is ',
-			// 		activeCart, items
-			// 	);
-			// 	activeCart.total = parseFloat(activeCart.total);
-			// 	activeCart.items = items;
-			// 	return activeCart;
-			// })
-			// .finally((activeCart) => {
-			// 	console.log('the active cart inside get active cart is ', activeCart);
-			// 	return activeCart;
-			// });
-			// return activeCart;
-
-		// activeCart.total = parseFloat(await activeCart.total);
-		// const items = getProductsCartForACartId(activeCart.id);
-
-		// Promise.join(activeCart, (cart) => {
-		// 	const items = getProductsCartForACartId(cart.id)
-		// 	cart.total = parseFloat(cart.total);
-		// 	cart.items = items;
-		// 	return cart;
-		// });
-		// cart.total = paseFloat(cart.total);
-		// cart.items = theItems;
-
-		// activeCart.items = items;
-		// return activeCart;
-		// return cart;
+		if (activeCart !== undefined) {
+			return activeCart;
+		}
 	} catch (error) {
 		throw error;
 	}
@@ -203,7 +160,9 @@ async function getActiveCartAlone(userId) {
 			[userId],
 		);
 
-		return activeCart;
+		if (activeCart !== undefined) {
+			return activeCart;
+		}
 	} catch (error) {
 		throw error;
 	}
