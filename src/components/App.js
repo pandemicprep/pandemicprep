@@ -27,7 +27,7 @@ import {
 	Promoted,
 	News,
 	Payment,
-	Success
+	Success,
 } from './index';
 
 import { getPromotedProducts } from '../api/products';
@@ -78,15 +78,32 @@ const App = () => {
 		if (localStorage.getItem('panprepToken')) {
 			getUserFromToken(localStorage.getItem('panprepToken'))
 				.then((response) => {
-					setUser({
-						id: response.id,
-						firstName: response.firstName,
-						isAdmin: response.isAdmin,
-						isUser: response.isUser,
-						token: response.token,
-					});
-					setCart(response.activeCart);
-					setCartSize(response.activeCart.cartQuantity);
+					if (response.isUser) {
+						setUser({
+							id: response.id,
+							firstName: response.firstName,
+							isAdmin: response.isAdmin,
+							isUser: response.isUser,
+							token: response.token,
+						});
+						setCart(response.activeCart);
+						setCartSize(response.activeCart.cartQuantity);
+					} else {
+						setUser({
+							id: 0,
+							firstName: 'Guest',
+							isAdmin: false,
+							isUser: false,
+							token: '',
+						});
+						setCart({
+							status: 'active',
+							cartQuantity: 0,
+							total: 0,
+							items: [],
+						});
+						setCartSize(0);
+					}
 				})
 				.catch((error) => {
 					console.error(error);

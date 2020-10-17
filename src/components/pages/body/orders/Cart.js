@@ -54,6 +54,7 @@ export const Cart = ({
 		const { jointId, id: productId, quantity, unitPrice } = product;
 		if (quantity + direction > 0) {
 			if (user.firstName !== 'Guest') {
+				console.log('user right now is ', user);
 				patchCartItemQuantity(
 					{
 						userId: user.id,
@@ -71,6 +72,7 @@ export const Cart = ({
 						console.error(error);
 					});
 			} else {
+				console.log('got to the guest part of the ticker');
 				const newCart = { ...cart };
 				let newQuantity = 0;
 				let newTotal = 0;

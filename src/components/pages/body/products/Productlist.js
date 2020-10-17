@@ -32,6 +32,8 @@ export const Productlist = ({
 	const [searchPage, setSearchPage] = useState(1);
 	const history = useHistory();
 
+	
+
 	return (
 		<div className='productList'>
 			<div className='productContainer'>

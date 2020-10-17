@@ -4,6 +4,15 @@
 
 const productArray = [
   {
+    name: "Survival Backpack Kit",
+    price: 69.99,
+    description:
+      "The Wise Company® 5 Day Emergency Survival Backpack Kit delivers the goods that keep your belly full and keep you alive at home, on the hunt, or on the trail. This 5-day nutritional and first aid package includes a rugged camouflage backpack complete with a roomy main compartment, zippered exterior pockets, and padded shoulder straps. The inside contents of this survival kit include 32 servings of breakfasts, entrees, and drinks to feed a single person for 5 full days; a portable stove with fuel tablets; stainless steel cup; squeeze flashlight; 42-piece first aid and survival kit; 5-in-1 survival whistle; waterproof matches; emergency poncho; Mylar® blanket; and a deck of playing cards to pass the time until help arrives. The Wise Company 5 Day Emergency Survival Backpack Kit's tasty entrees include creamy pasta, whey milk, Southwest beans and rice, cereal, soup and water pouches. Made in USA.",
+    image: "images/survival.png",
+    category: "protection health",
+    isHighlighted: true
+  },
+  {
     name: "Succulents",
     price: 19.99,
     description:
@@ -1422,16 +1431,6 @@ const productArray = [
     description: "SkinnyDipped Almonds are made with whole roasted almonds that are kissed with organic maple sugar and sea salt.",
     image: "images/boiled-peanuts.jpg",
     category: "groceries",
-  },
-  {
-    name: "Natalies' Bananas",
-    price: 999999.99,
-
-    description:
-      "Grants one the power to code without any bugs....also tastes good.",
-    image: "images/banana.png",
-    category: "groceries school work protection",
-    isHighlighted: true
   },
   {
     name: "223 Ammo",

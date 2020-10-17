@@ -208,13 +208,13 @@ export const Profile = ({
                 }).then(() => {
                         console.log('new guest is ready ', newGuest);
                         deactivateCart({ userId: newGuest.id, cartId: newGuest.activeCart.id }, newGuest.token).then(() => {
-                    
+                            
                             setCart({ status: 'active', cartQuantity: 0, total: 0, items: [] });
                             setCartSize(0);
                         })
 
                 })
-                
+                history.push('/success');
                 return;
             }
             //edit and full edit
