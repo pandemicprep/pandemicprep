@@ -133,6 +133,66 @@ async function getUserById(id) {
  */
 async function getActiveCart(userId) {
 	try {
+		const activeCart = await getActiveCartAlone(userId);
+		const items = await getProductsCartForACartId(await activeCart.id);
+
+		activeCart.total = parseFloat(activeCart.total);
+		activeCart.items = items;
+		console.log('activeCart from the get active cart ', activeCart);
+		return activeCart;
+
+
+
+
+
+		// let activeCart = {};
+		// Promise.resolve(getActiveCartAlone(userId))
+		// 	.then((cart) => {
+		// 		activeCart = cart;
+		// 		Promise.delay(500).then(() => {
+		// 			getProductsCartForACartId(activeCart.id).then((items) => {
+		// 			activeCart.total = parseFloat(activeCart.total);
+		// 		activeCart.items = items;
+		// 			})
+		// 		})
+		// 	})
+			// .then(({ activeCart, items }) => {
+			// 	console.log(
+			// 		'the second part of active cart inside get active cart is ',
+			// 		activeCart, items
+			// 	);
+			// 	activeCart.total = parseFloat(activeCart.total);
+			// 	activeCart.items = items;
+			// 	return activeCart;
+			// })
+			// .finally((activeCart) => {
+			// 	console.log('the active cart inside get active cart is ', activeCart);
+			// 	return activeCart;
+			// });
+			// return activeCart;
+
+		// activeCart.total = parseFloat(await activeCart.total);
+		// const items = getProductsCartForACartId(activeCart.id);
+
+		// Promise.join(activeCart, (cart) => {
+		// 	const items = getProductsCartForACartId(cart.id)
+		// 	cart.total = parseFloat(cart.total);
+		// 	cart.items = items;
+		// 	return cart;
+		// });
+		// cart.total = paseFloat(cart.total);
+		// cart.items = theItems;
+
+		// activeCart.items = items;
+		// return activeCart;
+		// return cart;
+	} catch (error) {
+		throw error;
+	}
+}
+
+async function getActiveCartAlone(userId) {
+	try {
 		const {
 			rows: [activeCart],
 		} = await client.query(
@@ -143,10 +203,6 @@ async function getActiveCart(userId) {
 			[userId],
 		);
 
-		activeCart.total = parseFloat(activeCart.total);
-		const items = await getProductsCartForACartId(activeCart.id);
-
-		activeCart.items = items;
 		return activeCart;
 	} catch (error) {
 		throw error;
@@ -158,6 +214,9 @@ async function getActiveCart(userId) {
  * @param {object} param0
  */
 async function addProductToCart({ userId, productId, cartId, quantity, unitPrice }) {
+	console.log(
+		`back end. userId ${userId}, productId ${productId}, cartId ${cartId}, quantity ${quantity}, unitPrice ${unitPrice}`,
+	);
 	try {
 		const itemTotal = quantity * unitPrice;
 		await client.query(
@@ -169,6 +228,7 @@ async function addProductToCart({ userId, productId, cartId, quantity, unitPrice
 			[productId, cartId, quantity, unitPrice, itemTotal],
 		);
 		const cart = await getActiveCart(userId);
+		console.log('the active cart is ', await cart);
 		let total = 0;
 		let cartQuantity = 0;
 		cart.items.map((item) => {
@@ -256,7 +316,9 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
             DELETE FROM products_carts
             WHERE "jointId"=$1;
 
-        `, [products_cartsId] );
+        `,
+			[products_cartsId],
+		);
 
 		const cart = await getActiveCart(userId);
 
@@ -267,8 +329,8 @@ async function removeProductFromCart({ userId, cartId, products_cartsId }) {
 			cartQuantity = cartQuantity + item.quantity;
 		});
 
-        const { rows: newUpdatedCart } = await client.query(
-            `
+		const { rows: newUpdatedCart } = await client.query(
+			`
             UPDATE carts
             SET total=$1,
             "cartQuantity"=$2
@@ -407,23 +469,23 @@ async function getUserOrderHistory(userId, pageNumber = 1) {
           WHERE "userId"=$1
           LIMIT $2 OFFSET $3;
           `,
-            [userId, LIMIT, OFFSET]
-        );
+			[userId, LIMIT, OFFSET],
+		);
 
-        await Promise.mapSeries(carts, async function (cart, index, length) {
-            cart.total = parseFloat(cart.total);
-            const items = await getProductsCartForACartId(cart.id);
-            cart.items = items;
-            const user = await getUserById(cart.userId);
-            cart.user = user;
-            cart.index = index;
-        });
+		await Promise.mapSeries(carts, async function (cart, index, length) {
+			cart.total = parseFloat(cart.total);
+			const items = await getProductsCartForACartId(cart.id);
+			cart.items = items;
+			const user = await getUserById(cart.userId);
+			cart.user = user;
+			cart.index = index;
+		});
 
-        const pageCount = Math.ceil(rowCount / LIMIT);
-        return [pageCount, carts];
-    } catch (error) {
-        throw error;
-    }
+		const pageCount = Math.ceil(rowCount / LIMIT);
+		return [pageCount, carts];
+	} catch (error) {
+		throw error;
+	}
 }
 
 // gets order history for all users
@@ -478,27 +540,20 @@ async function lastUpdated(cartId) {
 
 function getDate() {
 	const newDate = new Date();
-	let date =
-		newDate.getFullYear() +
-		'-' +
-		(newDate.getMonth() + 1) +
-		'-' +
-		newDate.getDate();
-		const time = 
+	let date = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
+	const time =
 		(newDate.getHours() < 10 ? '0' + newDate.getHours() : newDate.getHours()) +
 		':' +
 		(newDate.getMinutes() < 10 ? '0' + newDate.getMinutes() : newDate.getMinutes()) +
 		':' +
 		(newDate.getSeconds() < 10 ? '0' + newDate.getSeconds() : newDate.getSeconds());
 
-	return {date, time};
+	return { date, time };
 }
 
 async function getSalesReport() {
 	try {
-		const {
-			rows
-		} = await client.query(`
+		const { rows } = await client.query(`
 			SELECT date,
 			sum("cartQuantity") AS "cartQuantity", 
 			sum(total) AS total
@@ -510,7 +565,6 @@ async function getSalesReport() {
 		`);
 
 		return rows;
-
 	} catch (error) {
 		throw error;
 	}
@@ -531,5 +585,5 @@ module.exports = {
 	completeCart,
 	getUserOrderHistory,
 	getOrderHistory,
-	getSalesReport
+	getSalesReport,
 };
