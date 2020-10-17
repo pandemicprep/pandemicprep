@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 
 import './Product.css';
 
@@ -8,10 +9,17 @@ import { addProductToCart, patchCartItemQuantity } from '../../../../api/cart';
 import { addProductToGuestCart } from '../../../index';
 
 export const Product = ({ product, setCart, cart, user, setCartSize }) => {
+	console.log('the product ', product);
+	const history = useHistory();
+	if (!('id' in product)) {
+		history.push('/');
+	}
+
 	const addToCartHandler = () => {
 		const alreadyPresent = cart.items.find((item) => {
 			return item.id === product.id;
 		});
+		
 
 		if (user.isUser) {
 			if (!alreadyPresent) {
