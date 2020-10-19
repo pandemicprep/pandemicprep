@@ -58,7 +58,10 @@ const App = () => {
 	const history = useHistory();
 	const [profileCompleted, setProfileCompleted] = useState(false);
 
+	
+	
 	useEffect(() => {
+		
 		if (category === '') {
 			// history.push("/");
 			return;

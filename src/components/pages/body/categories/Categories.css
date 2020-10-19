@@ -16,6 +16,10 @@
     justify-content: space-around;
 }
 
+.category-name {
+    text-transform: capitalize;
+}
+
 .productCategories {
     display: flex;
     flex-direction: row;

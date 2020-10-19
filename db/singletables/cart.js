@@ -517,10 +517,10 @@ async function getSalesReport() {
 			FROM carts
 			WHERE date LIKE '2020%'
 			AND status = 'processing' 
-			OR status = 'completed'
+			OR status = 'complete'
 			GROUP BY date;
 		`);
-
+		console.log(rows, 'rows in db ')
 		return rows;
 	} catch (error) {
 		throw error;
