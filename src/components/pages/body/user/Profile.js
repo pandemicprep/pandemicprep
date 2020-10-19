@@ -58,7 +58,10 @@ export const Profile = ({
     const [searchString, setSearchString] = useState("");
     const history = useHistory();
 
-    
+    if (view === '') {
+        history.push('/')
+    }
+
     if (view === "edit" || view === "fulledit") {
         if (!user.isUser) {
             history.push("/");

@@ -26,6 +26,7 @@ export const Sales = ({ user }) => {
 	useEffect(() => {
 		getSalesReport(user.token)
 			.then((response) => {
+				console.log(response, 'response in sales')
 				response.forEach((item) => {
 					if (item.date.substring(0, 7) === '2020-01') {
 						twentyTwenty.january.push(item)
@@ -77,7 +78,8 @@ export const Sales = ({ user }) => {
 	return (
 		<div className='sales-container'>
 			<div className='sales-report'>
-			{Object.entries(twentyTwenty).map((month, index) => {
+			{Object.values(twentyTwenty) === null ? <h1>No Sales to Report</h1> :
+			Object.entries(twentyTwenty).map((month, index) => {
 
 				
 				if (month[1].length === 0) {
@@ -106,7 +108,9 @@ export const Sales = ({ user }) => {
 									<div key={i} className='month-data'>
 										<p className='each-data'>{day.date}</p>
 										<p className='each-data'>{day.cartQuantity}</p>
-										<p className='each-data'>{'$ ' + day.total}</p>
+										<p className='each-data'>{'$ ' + parseFloat(day.total).toLocaleString('en-US', {
+											minimumFractionDigits: 2,
+										})}</p>
 									</div>
 								)
 							})}
