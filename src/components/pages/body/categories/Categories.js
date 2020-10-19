@@ -1,14 +1,21 @@
 /** @format */
 
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 
 import "./Categories.css";
 
 export const Categories = ({ NavLink, category, setCategory, categoryList, setPageType }) => {
+    const history = useHistory();
+
     const categoryHandler = (selectedCat, i) => {
         setPageType("category");
         setCategory(selectedCat.name);
     };
+
+    if (category === '') {
+        history.push('/');
+    }
 
     return (
         <div className="category">

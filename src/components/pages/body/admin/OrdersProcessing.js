@@ -25,11 +25,14 @@ export const OrdersProcessing = ({ user }) => {
 			});
 	}, [processingPage, finalized]);
 
-	const toggleDetails = (index) => {
-		if (clickedIndex === index) {
-			setClickedIndex(-1);
-		} else {
-			setClickedIndex(index);
+	const toggleDetails = (event, index) => {
+		if (event.target.value !== 'complete-button') {
+			console.log('event value ', event.target.value);
+			if (clickedIndex === index) {
+				setClickedIndex(-1);
+			} else {
+				setClickedIndex(index);
+			}
 		}
 	};
 
@@ -66,7 +69,6 @@ export const OrdersProcessing = ({ user }) => {
 
 	return (
 		<div id='all-processing'>
-			
 			<div className='order-list'>
 				<div id='initial-titles'>
 					<p>Name</p>
@@ -80,8 +82,12 @@ export const OrdersProcessing = ({ user }) => {
 				) : (
 					orders.map((order, index) => {
 						return (
-							<div key={index} className='order-content' onClick={() => toggleDetails(index)}>
-								<div id='initial-details' >
+							<div
+								key={index}
+								className='order-content'
+								onClick={(event) => toggleDetails(event, index)}
+							>
+								<div id='initial-details'>
 									<p>
 										{order.user.firstName} {order.user.lastName}
 									</p>
@@ -101,6 +107,7 @@ export const OrdersProcessing = ({ user }) => {
 									</button> */}
 									<button
 										className='processing-button'
+										value='complete-button'
 										onClick={() => finalizeOrder(order)}
 									>
 										Complete Order
