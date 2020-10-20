@@ -23,6 +23,7 @@ export const Promoted = ({ NavLink, setProduct, useHistory }) => {
 	}, []);
 
 	const fetchPromotedProduct = (item, index) => {
+		
 		getProductById(item.id)
 			.then((response) => {
 				setProduct(response);

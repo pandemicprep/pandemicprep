@@ -13,9 +13,8 @@ export const Categories = ({ NavLink, category, setCategory, categoryList, setPa
         setCategory(selectedCat.name);
     };
 
-    if (category === '') {
-        history.push('/');
-    }
+    
+    
 
     return (
         <div className="category">

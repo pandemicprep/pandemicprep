@@ -32,6 +32,10 @@ export const Productlist = ({
 	const [searchPage, setSearchPage] = useState(1);
 	const history = useHistory();
 
+	if (category === '') {
+        history.push('/');
+    }
+
 	
 
 	return (
