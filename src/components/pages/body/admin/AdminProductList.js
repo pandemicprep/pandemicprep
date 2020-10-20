@@ -24,7 +24,6 @@ export const AdminProductList = ({ user }) => {
 	const [editDescription, setEditDescription] = useState('');
 	const [editPrice, setEditPrice] = useState('');
 	const [editImageURL, setEditImageURL] = useState('');
-	const [editCategories, setEditCategories] = useState('');
 	const resetInputs = () => {
 		setEditTitle('');
 		setEditDescription('');
@@ -75,11 +74,12 @@ export const AdminProductList = ({ user }) => {
 				imageURL,
 				category: categories,
 			});
-
+			resetInputs();
 			return newProduct;
 		} catch (error) {
 			throw error;
 		}
+		
 	};
 
 	const enableEditMode = (index, item) => {
@@ -327,12 +327,12 @@ export const AdminProductList = ({ user }) => {
 										{item.isActive ? (
 											<span id='active'>
 												<h1>Active:</h1>
-												<input type='checkbox' id='activeCheck' checked></input>
+												<input type='checkbox' id='activeCheck' checked readOnly></input>
 											</span>
 										) : (
 												<span id='active'>
 													<h1>Active:</h1>
-													<input type='checkbox' id='activeCheck'></input>
+													<input type='checkbox' id='activeCheck' readOnly></input>
 												</span>
 											)}
 									</span>
@@ -363,25 +363,25 @@ export const AdminProductList = ({ user }) => {
 					''
 				) : (
 						<>
-							<a href='#' onClick={firstHandler}>
+							<button onClick={firstHandler}>
 								❮❮
-						</a>
-							<a href='#' onClick={prevHandler}>
+						</button>
+							<button onClick={prevHandler}>
 								❮
-						</a>
+						</button>
 						</>
 					)}
-				<a href='#'>{adminPage}</a>
+				<button>{adminPage}</button>
 				{adminPage === adminPageLimit ? (
 					''
 				) : (
 						<>
-							<a href='#' onClick={nextHandler}>
+							<button onClick={nextHandler}>
 								❯
-						</a>
-							<a href='#' onClick={lastHandler}>
+						</button>
+							<button  onClick={lastHandler}>
 								❯❯
-						</a>
+						</button>
 						</>
 					)}
 			</div>

@@ -353,25 +353,25 @@ export const Userlist = ({ user, setUser, setCart }) => {
 					''
 				) : (
 						<>
-							<a href='#' onClick={firstHandler}>
+							<button onClick={firstHandler}>
 								❮❮
-						</a>
-							<a href='#' onClick={prevHandler}>
+						</button>
+							<button onClick={prevHandler}>
 								❮
-						</a>
+						</button>
 						</>
 					)}
-				<a href='#'>{userPage}</a>
+				<button>{userPage}</button>
 				{userPage === userPageLimit ? (
 					''
 				) : (
 						<>
-							<a href='#' onClick={nextHandler}>
+							<button onClick={nextHandler}>
 								❯
-						</a>
-							<a href='#' onClick={lastHandler}>
+						</button>
+							<button onClick={lastHandler}>
 								❯❯
-						</a>
+						</button>
 						</>
 					)}
 			</div>

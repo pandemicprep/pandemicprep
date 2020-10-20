@@ -159,25 +159,25 @@ export const OrdersProcessing = ({ user }) => {
 					''
 				) : (
 					<>
-						<a href='#' onClick={firstHandler}>
+						<button onClick={firstHandler}>
 							❮❮
-						</a>
-						<a href='#' onClick={prevHandler}>
+						</button>
+						<button onClick={prevHandler}>
 							❮
-						</a>
+						</button>
 					</>
 				)}
-				<a href='#'>{processingPage}</a>
+				<button>{processingPage}</button>
 				{processingPage === processingPageLimit ? (
 					''
 				) : (
 					<>
-						<a href='#' onClick={nextHandler}>
+						<button onClick={nextHandler}>
 							❯
-						</a>
-						<a href='#' onClick={lastHandler}>
+						</button>
+						<button onClick={lastHandler}>
 							❯❯
-						</a>
+						</button>
 					</>
 				)}
 			</div>

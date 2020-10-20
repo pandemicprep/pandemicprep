@@ -22,7 +22,7 @@
 
 button {
     outline: none !important;
-  }
+}
 
 .product {
     height: 200px;
@@ -36,4 +36,8 @@ button {
     margin-bottom: 200px;
     /* display: flex;
     flex-direction: column; */
+}
+
+#pagination button {
+    margin: 10px;
 }

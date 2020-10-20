@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Stripe } from '../../../index';
 import './Payment.css';
@@ -34,7 +34,7 @@ export const Payment = ({ cart }) => {
 						{parseFloat(cart.total) > 0
 							? (parseFloat(cart.total) + shipping).toLocaleString('en-US', {
 									minimumFractionDigits: 2,
-							  })
+							})
 							: '0.00'}
 					</span>
 				</div>

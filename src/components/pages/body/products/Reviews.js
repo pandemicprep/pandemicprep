@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import './Reviews.css';
-import { addNewReview, getReviewsByProductId } from '../../../../api/reviews';
 
 export const Review = () => {
 	const [creatorId, setCreatorId] = useState('');
@@ -28,18 +27,11 @@ export const Review = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const newReview = await addNewReview({
-			creatorId,
-			productId,
-			score,
-			description,
-		});
 	};
 
 	const logReviewsByProduct = async (event) => {
 		event.preventDefault();
 
-		const reviewsByProduct = await getReviewsByProductId(productId);
 	};
 
 	return (

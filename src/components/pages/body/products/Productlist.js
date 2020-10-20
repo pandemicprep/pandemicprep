@@ -1,35 +1,18 @@
 /** @format */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import './Productlist.css';
 import '../MainBody.css';
 
-import { Product } from './Product';
-
-import {
-	getProductsByQuery,
-	addNewProduct,
-	getProductById,
-	getProductsByCategory,
-} from '../../../../api/products';
-import { PageIndex } from './PageIndex';
-import { useHistory } from 'react-router-dom';
-
 export const Productlist = ({
 	products,
-	setProducts,
 	setProduct,
 	NavLink,
-	searchObject,
-	searchString,
 	category,
-	pageType,
-	setPageType,
 	useHistory,
 }) => {
-	const [categoryPage, setCategoryPage] = useState(1);
-	const [searchPage, setSearchPage] = useState(1);
+
 	const history = useHistory();
 
 	if (category === '') {

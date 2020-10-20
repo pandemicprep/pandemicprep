@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './PageIndex.css';
 import { getProductsByQuery } from '../../../../api/products';
 import { getProductsByCategory } from '../../../../api/products';
 
 export const PageIndex = ({
-	searchObject,
 	pageType,
-	setPageType,
 	setProducts,
 	category,
 	searchTerm,
@@ -74,25 +71,25 @@ export const PageIndex = ({
 				''
 			) : (
 				<>
-					<a href='#' onClick={firstHandler}>
+					<button onClick={firstHandler}>
 						❮❮
-					</a>
-					<a href='#' onClick={prevHandler}>
+					</button>
+					<button onClick={prevHandler}>
 						❮
-					</a>
+					</button>
 				</>
 			)}
-			<a href='#'>{page}</a>
+			<button>{page}</button>
 			{page === pageLimit ? (
 				''
 			) : (
 				<>
-					<a href='#' onClick={nextHandler}>
+					<button onClick={nextHandler}>
 						❯
-					</a>
-					<a href='#' onClick={lastHandler}>
+					</button>
+					<button onClick={lastHandler}>
 						❯❯
-					</a>
+					</button>
 				</>
 			)}
 		</div>

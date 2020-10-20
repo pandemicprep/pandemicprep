@@ -19,7 +19,6 @@ export async function addProductToGuestCart(cartState, product) {
 			quantity: 1,
 			unitPrice: parseFloat(product.price),
 			itemTotal: parseFloat(product.price),
-			price: parseFloat(product.price),
 			title: product.title,
 			description: product.description,
 			price: parseFloat(product.price),

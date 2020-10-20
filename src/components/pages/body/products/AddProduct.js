@@ -33,12 +33,6 @@ export const AddProduct = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const newProduct = await addNewProduct({
-			name,
-			price,
-			description,
-			image,
-		});
 	};
 
 	return (
