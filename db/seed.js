@@ -56,11 +56,11 @@ async function createNewUsers() {
         //creating a new user
         console.log("creating user one");
         const user1 = await addUser({
-            firstName: "Nicolas",
-            lastName: "Olivares",
+            firstName: "Johnny",
+            lastName: "Cash",
             isAdmin: true,
             isUser: true,
-            email: "myemail@you.com",
+            email: "johnny@cash.com",
             password: "Password1",
             addressLine1: "4545 street",
             addressLine2: "",
