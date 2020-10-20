@@ -1,20 +1,41 @@
-/*add new user*/
-#admin-list-user {
+.userList {
     display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
     align-items: center;
+}
+
+
+
+/*add new user*/
+#admin-list-user {
+    display: grid;
+    column-gap: 100px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 /*add new user headings*/
 #admin-list-user span {
     font: bold 22px Helvetica, Sans-Serif; 
+    
+}
+
+#admin-list-user span input {
+    margin-left: 0px;
 }
 
 /*add new user checkbox*/
+.checkbox2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
 #admin-checkbox {
-    height: 20px;
+    width: 50px;
+    margin-top: -10px;
 }
 
 /*add new user inputs*/
@@ -24,12 +45,13 @@
 
 /*add new user button*/
 #user-button2 {
-    width: 300px;
+    width: 200px;
     height: 40px;
     background-color: white;
     border: 1px solid black;
     border-radius: 20px;
-    margin-left: 10px;
+    margin-left: 40px;
+    margin-top: 20px;
     font: bold 22px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: dodgerblue; 
@@ -52,6 +74,9 @@
     transform: scale(1.075,1.075);
 }
 
+
+
+
 /*edit user big heading*/
 #addUserH1 {
     font: bold 32px Helvetica, Sans-Serif; 
@@ -68,6 +93,27 @@
     text-align: center;
 }
 
+.user-list-container {
+    width: 80%;
+}
+
+#admin-list-users {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 2fr 2fr;
+    grid-template-rows: 1fr;
+    
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+}
+
+
 /*edit user headings*/
 #admin-list span {
     font: bold 22px Helvetica, Sans-Serif; 
@@ -81,17 +127,19 @@
 }
 
 /*edit user checkboxes*/
-#checkbox2 {
-    height: 20px !important;
-    margin-left: -50px;
-}
+/* .checkbox2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+} */
 
 /*edit user button*/
 #user-button {
     width: 150px;
     height: 40px;
     margin-top: 20px;
-    margin-left: -100px;
+    margin-left: 20px;
     background-color: white;
     border: 1px solid black;
     border-radius: 20px;
@@ -118,6 +166,6 @@
 }
 
 #isUser {
-    margin-left: -100px;
-    margin-right: 50px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
