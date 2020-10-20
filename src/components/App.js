@@ -26,11 +26,9 @@ import {
 	Admin,
 	Promoted,
 	News,
-	Payment,
 	Success,
 } from './index';
 
-import { getPromotedProducts } from '../api/products';
 import { getUserFromToken } from '../api/users';
 
 import './App.css';

@@ -24,7 +24,7 @@ export const News = () => {
 					<div key={index}>
 						<div className='news-container'>
 							<h2 className='news-title'>
-								<a className='news-title' target='_blank' href={article.url}>
+								<a className='news-title' target='_blank' rel='noopener noreferrer' href={article.url}>
 									{article.title}
 								</a>
 							</h2>
@@ -34,7 +34,7 @@ export const News = () => {
 							<div className='news-date'>{article.published}</div>
 
 							<div className='news-image'>
-								<a target='_blank' href={article.url}>
+								<a target='_blank' rel='noopener noreferrer' href={article.url}>
 									<img
 										className='news-image'
 										src={article.image}

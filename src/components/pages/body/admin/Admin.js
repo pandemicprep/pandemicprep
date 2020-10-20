@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { AdminProductList, Userlist, OrdersProcessing } from '../../../index';
 import './Admin.css';
@@ -14,8 +14,6 @@ export const Admin = ({ user, setUser, setCart }) => {
 	 * list of all carts by a user(will get rendered by clicking on a specific user)
 	 *
 	 */
-
-	const adminProductSearch = () => {};
 
 	return (
 		<>
