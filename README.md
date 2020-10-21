@@ -1,105 +1,40 @@
-# Deployment: https://panprep.herokuapp.com/ 
+# Pandemic Prep
+Pandemic Prep is an e-commerce web application with the purpose of supplying products needed for emergency and/or 
+"apocalyptic" situations
 
-# The Smallest Starting Point
+# Deployment: 
+Our fully deployed app on heroku: https://panprep.herokuapp.com/ 
 
-So, you want to build a full-stack JavaScript application with:
+# Motivation
+This project is the conclusion of months of learning from an intensive bootcamp at FullStack Academy. This project reflects everything we have learned and more(PostgreSQL, Node.js, Express, React, JavaScript, axios, etc...).
 
-- An Express web server
-- A PostgreSQL database
-- A React front-end
+# Tech/Framework used
+- Database: PostgreSQL
+- Backend: Node.js, JavaScript, Bluebird, bcrypt
+- Middleware: Express, Json Web Token, JavaScript
+- API: Axios, JavaScript
+- Front End: React.js
 
-And you want it to work locally as well as be easy to deploy?
+# Features 
+We provide an e-commerce web application that has three distinct stories. One for guest, one for users, and one for admins.
+In addition to shopping, all of our visitors have the ability to browse disaster related news, in order to encourage them to be prepared.
+Whether you are a guest, user, or admin; You have the ability to browse the products in our site and add them to your cart.
 
-We've got your back:
+For the guest: 
+    - the items in your cart are saved in local storage(items will not be saved if returning to the app on a different machine)
+    - additional information is required if the guest would like to proceed to checkout
 
-## Local Development
+For the users:
+    - email and password are the minimum requirements to become a user(password is hashed with bcrypt)
+    - user info is saved in our database
+    - a one week token is provided upon registration or login(must log back in after token expiration)
+    - all of the users orders, as well as the individual items in a specific cart are saved in our database and available for the user to access upon request
+    - the user has the ability to edit or add to their information
 
-### Setting Up
-
-First, clone this repo locally, then remove the current `.git` folder. Follow this up with making it a new git repo.
-
-```bash
-rm -rf .git
-
-git init
-```
-
-Then go to GitHub, create a new repository, and add that remote to this local repo.
-
-Then, run `npm install` to install all node modules.
-
-You should decide on a name for your local testing database, and edit `db/index.js` changing the value of `DB_NAME`.
-
-Once you decide on that name, make sure to run `createdb` from your command line so it exists (and can be connected to).
-
-Finally you can run `npm run server:dev` to start the web server.
-
-In a second terminal navigate back to the local repo and run `npm run client:dev` to start the react server. 
-
-This is set up to run on a proxy, so that you can make calls back to your `api` without needing absolute paths. You can instead `axios.get('/api/posts')` or whatever without needing to know the root URL.
-
-Once both dev commands are running, you can start developing... the server restarts thanks to `nodemon`, and the client restarts thanks to `react-scripts`.
-
-### Project Structure
-
-```bash
-├── db
-│   ├── index.js
-│   └── init_db.js
-├── index.js
-├── package.json
-├── public
-│   └── index.html
-├── routes
-│   └── index.js
-└── src
-    ├── api
-    │   └── index.js
-    ├── components
-    │   ├── App.js
-    │   └── index.js
-    └── index.js
-```
-
-Top level `index.js` is your Express Server. This should be responsible for setting up your API, starting your server, and connecting to your database.
-
-Inside `/db` you have `index.js` which is responsible for creating all of your database connection functions, and `init_db.js` which should be run when you need to rebuild your tables and seed data.
-
-Inside `/routes` you have `index.js` which is responsible for building the `apiRouter`, which is attached in the express server. This will build all routes that your React application will use to send/receive data via JSON.
-
-Lastly `/public` and `/src` are the two puzzle pieces for your React front-end. `/public` contains any static files necessary for your front-end. This can include images, a favicon, and most importantly the `index.html` that is the root of your React application.
-
-### Command Line Tools
-
-In addition to `client:dev` and `server:dev`, you have access to `db:build` which (you will write to) rebuilds the database, all the tables, and ensures that there is meaningful data present.
-
-## Deployment
-
-### Setting up Heroku (once)
-
-```bash
-heroku create hopeful-project-name
-
-heroku addons:create heroku-postgresql:hobby-dev
-```
-
-This creates a heroku project which will live at https://hopeful-project-name.herokuapp.com (note, you should change this to be relevant to your project).
-
-It will also create a postgres database for you, on the free tier.
-
-
-### Deploying
-
-Once you've built the front-end you're ready to deploy, simply run `git push heroku master`. Note, your git has to be clean for this to work (which is why our two git commands live as part of getting ready to deploy, above).
-
-This will send off the new code to heroku, will install the node modules on their server, and will run `npm start`, starting up your express server.
-
-If you need to rebuild your database on heroku, you can do so right now with this command:
-
-```bash
-heroku run npm run db:build
-```
-
-Which will run `npm run db:build` on the heroku server.
-
-Once that command runs, you can type `heroku open` to get a browser to open up locally with your full-stack application running remotely.
+For the admins: 
+    - initial admin: email: johnny@cash.com password: Password1
+    - admins have access to an extra tab in the header that takes you to the admin page
+    - the admin page has four distinct management tabs including, products, users, processing orders, and sales report
+    - the admin can add/edit existing users or products as well as remove them(make them inactive, rather than deleting from database)
+    - the processing orders tab shows all orders pending delivery, and allows the admin to finalize them upon completion
+    - the sales report tab shows a list of all orders(both complete and processing) and combines them to show the total for that month
