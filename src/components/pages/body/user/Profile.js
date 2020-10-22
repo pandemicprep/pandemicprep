@@ -121,6 +121,7 @@ export const Profile = ({
                     country,
                     phone,
                 });
+                console.log('new user from profile ', newUser);
                 setUser({
                     id: newUser.id,
                     firstName: newUser.firstName,

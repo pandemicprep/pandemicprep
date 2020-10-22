@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState } from 'react';
+import { Form, FormControl, Button } from 'react-bootstrap'
 
 import './Header.css';
 
@@ -76,20 +77,18 @@ export const Header = ({
 					/>
 				</NavLink>
 
-				<form onSubmit={searchProducts} className='searchForm'>
-					<input
+				<Form onSubmit={searchProducts} className='searchForm'>
+					<FormControl
 						value={searchString}
 						onChange={handleSearchString}
 						type='text'
-						className='searchTerm'
+						// className='searchTerm'
 						placeholder='What are you looking for?'
 						contentEditable='true'
 					/>
 
-					<button type='submit' id='search' className='searchButton'>
-						<img id='sbtn' src={process.env.PUBLIC_URL + '/styleimages/search.png'} />
-					</button>
-				</form>
+					<Button variant="outline-primary">Search</Button>
+				</Form>
 
 				{user.isUser === true ? (
 					''
