@@ -147,3 +147,31 @@
     -o-transform: scale(1.075,1.075);
     transform: scale(1.075,1.075);
 }
+
+
+/* After React Bootstrap below here */
+
+#admin {
+    background-color: white;
+}
+
+#all-edit-forms {
+    background-color: lightgray;
+}
+
+#add-product-h3 {
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: -25px;
+}
+
+#edit-product-h3 {
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* #add-product-button {
+    display: block;
+    margin: 0 0 0 90%;
+} */

@@ -140,6 +140,7 @@ export const Userlist = ({ user, setUser, setCart }) => {
 
 	return (
 		<div className='userList'>
+			<h1 className='adminH1'>Add New User</h1>
 			<form id='admin-list-user' onSubmit={adminAddUser}>
 				<span className='each-input'>
 					First Name:

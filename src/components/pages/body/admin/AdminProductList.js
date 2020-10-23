@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 import './AdminProductList.css';
 
@@ -144,120 +145,134 @@ export const AdminProductList = ({ user }) => {
 	return (
 		<div id='admin'>
 			{adminPage === 1 ? (
-				<form id='admin-list' onSubmit={adminAddProduct}>
-					<span className='each-input' id='title'>
-						<h1>Title & Price:</h1>
-						<input
-							type='text'
-							placeholder='Title'
-							value={title}
-							onChange={handleTitle}
-						></input>
-						<input
-							type='text'
-							placeholder='Price'
-							value={price}
-							onChange={handlePrice}
-						></input>
-					</span>
+			<>
+				<h3 id='add-product-h3' >Add New Product</h3>
+					<Form id='add-product-form'>
+							<Row>
+								<Col>
+									<Form.Group controlId='add-title-group'>
+										<Form.Label>Title</Form.Label>
+										<Form.Control
+											type='text'
+											placeholder='Title'
+											value={title}
+											onChange={handleTitle}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group controlId='add-price-group'>
+										<Form.Label>Price</Form.Label>
+										<Form.Control
+											type='text'
+											placeholder='Price'
+											value={price}
+											onChange={handlePrice}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group controlId='add-category-group'>
+										<Form.Label>Categories</Form.Label>
+										<Form.Control
+											type='text'
+											placeholder='Categories'
+											value={categories}
+											onChange={handleCategories}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group controlId='add-image-group'>
+										<Form.Label>Image</Form.Label>
+										<Form.Control
+											type='text'
+											placeholder='Image URL'
+											value={imageURL}
+											onChange={handleImageURL}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+							</Row>
 
-					<span className='each-input' id='description2'>
-						<h1>Description:</h1>
-						<input
-							type='text'
-							placeholder='Description'
-							value={description}
-							onChange={handleDescription}
-						></input>
-						<input
-							type='text'
-							placeholder='Category'
-							value={categories}
-							onChange={handleCategories}
-						></input>
-					</span>
-
-					<span className='each-input' id='image'>
-						<h1>Image URL:</h1>
-						<input
-							id='checkbox'
-							placeholder='Image URL'
-							value={imageURL}
-							onChange={handleImageURL}
-						></input>
-						<button id='addNew'>Add New</button>
-					</span>
-				</form>
+							<Form.Group id='add-description-group' >
+								<Form.Label>Description</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='Description'
+									value={description}
+									onChange={handleDescription}
+								></Form.Control>								
+							</Form.Group>
+							<Button id='add-product-button' onClick={adminAddProduct}>
+								Create
+							</Button>						
+					</Form>
+				</>
 			) : (
 					''
 				)}
-			<h1 className='productH1'>Edit Existing Product</h1>
-			{adminProductList.map((item, index) => {
-				return (
-					<span key={index}>
-						{/* ternary that renders two different forms, one of which allowing the inputs to be edited */}
-						{adminView === 'editOneProduct' &&
-							clickedIndex === index /**edit mode ternary */ ? (
-								<form id='admin-list' onSubmit={(event) => editProduct(event, item)}>
-									<span className='each-input' id='title'>
-										<h1>Title & Price:</h1>
-										<input
-											type='text'
-											placeholder={item.title}
-											value={editTitle}
-											onChange={(event) => {
-												setEditTitle(event.target.value);
-											}}
-										></input>
-										<input
-											type='text'
-											id='price-input'
-											placeholder={item.price}
-											value={editPrice}
-											onChange={(event) => {
-												setEditPrice(event.target.value);
-											}}
-										></input>
-									</span>
 
-									<span className='each-input' id='description'>
-										<h1>Description:</h1>
-										<input
-											type='text'
-											placeholder={item.description}
-											value={editDescription}
-											onChange={(event) => {
-												setEditDescription(event.target.value);
-											}}
-										></input>
-										<input type='text' placeholder={item.categories}></input>
-									</span>
+			<div id='all-edit-forms'>
+				<h3 id='edit-product-h3'>Edit Existing Products</h3>
+				{adminProductList.map((item, index) => {
+					return (
 
-									<span className='each-input' id='image'>
-										<h1>Image URL:</h1>
-										<input
-											id='checkbox'
-											placeholder={item.image}
-											value={item.image}
-											onChange={(event) => {
-												setEditImageURL(event.target.value);
-											}}
-										></input>
-										{item.isActive ? (
-											<span id='active'>
-												<h1>Active:</h1>
-												<input
-													id='activeCheck'
-													type='checkbox'
-													defaultChecked={item.isActive}
-													onClick={(event) => {
-														isActive
-															? setIsActive(false)
-															: setIsActive(true);
-													}}
-												></input>
-											</span>
-										) : (
+						// <Form>
+							
+						// </Form>
+
+
+						<span key={index}>
+							{/* ternary that renders two different forms, one of which allowing the inputs to be edited */}
+							{adminView === 'editOneProduct' &&
+								clickedIndex === index /**edit mode ternary */ ? (
+									<form id='admin-list' onSubmit={(event) => editProduct(event, item)}>
+										<span className='each-input' id='title'>
+											<h1>Title & Price:</h1>
+											<input
+												type='text'
+												placeholder={item.title}
+												value={editTitle}
+												onChange={(event) => {
+													setEditTitle(event.target.value);
+												}}
+											></input>
+											<input
+												type='text'
+												id='price-input'
+												placeholder={item.price}
+												value={editPrice}
+												onChange={(event) => {
+													setEditPrice(event.target.value);
+												}}
+											></input>
+										</span>
+
+										<span className='each-input' id='description'>
+											<h1>Description:</h1>
+											<input
+												type='text'
+												placeholder={item.description}
+												value={editDescription}
+												onChange={(event) => {
+													setEditDescription(event.target.value);
+												}}
+											></input>
+											<input type='text' placeholder={item.categories}></input>
+										</span>
+
+										<span className='each-input' id='image'>
+											<h1>Image URL:</h1>
+											<input
+												id='checkbox'
+												placeholder={item.image}
+												value={item.image}
+												onChange={(event) => {
+													setEditImageURL(event.target.value);
+												}}
+											></input>
+											{item.isActive ? (
 												<span id='active'>
 													<h1>Active:</h1>
 													<input
@@ -271,93 +286,108 @@ export const AdminProductList = ({ user }) => {
 														}}
 													></input>
 												</span>
-											)}
-									</span>
+											) : (
+													<span id='active'>
+														<h1>Active:</h1>
+														<input
+															id='activeCheck'
+															type='checkbox'
+															defaultChecked={item.isActive}
+															onClick={(event) => {
+																isActive
+																	? setIsActive(false)
+																	: setIsActive(true);
+															}}
+														></input>
+													</span>
+												)}
+										</span>
 
-									<span id='button-span'>
-										<button id='addNew' type='button' onClick={enableEditMode}>
-											Edit
-									</button>
-										{adminView === 'editOneProduct' ? (
-											<button id='auth'>Authorize</button>
-										) : (
-												''
-											)}
-									</span>
-								</form>
-							) : (
-								<form id='admin-list'>
-									<span className='each-input' id='title'>
-										<h1>Title & Price:</h1>
-										<input
-											type='text'
-											readOnly
-											placeholder={item.title}
-											value={item.title}
-										></input>
-										<input
-											type='text'
-											id='price-input'
-											readOnly
-											placeholder={item.price}
-											value={item.price}
-										></input>
-									</span>
+										<span id='button-span'>
+											<button id='addNew' type='button' onClick={enableEditMode}>
+												Edit
+										</button>
+											{adminView === 'editOneProduct' ? (
+												<button id='auth'>Authorize</button>
+											) : (
+													''
+												)}
+										</span>
+									</form>
+								) : (
+									<form id='admin-list'>
+										<span className='each-input' id='title'>
+											<h1>Title & Price:</h1>
+											<input
+												type='text'
+												readOnly
+												placeholder={item.title}
+												value={item.title}
+											></input>
+											<input
+												type='text'
+												id='price-input'
+												readOnly
+												placeholder={item.price}
+												value={item.price}
+											></input>
+										</span>
 
-									<span className='each-input' id='description'>
-										<h1>Description:</h1>
-										<input
-											type='text'
-											readOnly
-											placeholder={item.description}
-											value={item.description}
-										></input>
-										<br></br>
-										<input type='text' placeholder={item.categories}></input>
-									</span>
+										<span className='each-input' id='description'>
+											<h1>Description:</h1>
+											<input
+												type='text'
+												readOnly
+												placeholder={item.description}
+												value={item.description}
+											></input>
+											<br></br>
+											<input type='text' placeholder={item.categories}></input>
+										</span>
 
-									<span className='each-input' id='image'>
-										<h1>Image URL:</h1>
-										<input
-											id='checkbox'
-											readOnly
-											placeholder={item.imageURL}
-											value={item.image}
-										></input>
-										{item.isActive ? (
-											<span id='active'>
-												<h1>Active:</h1>
-												<input type='checkbox' id='activeCheck' checked readOnly></input>
-											</span>
-										) : (
+										<span className='each-input' id='image'>
+											<h1>Image URL:</h1>
+											<input
+												id='checkbox'
+												readOnly
+												placeholder={item.imageURL}
+												value={item.image}
+											></input>
+											{item.isActive ? (
 												<span id='active'>
 													<h1>Active:</h1>
-													<input type='checkbox' id='activeCheck' readOnly></input>
+													<input type='checkbox' id='activeCheck' checked readOnly></input>
 												</span>
-											)}
-									</span>
+											) : (
+													<span id='active'>
+														<h1>Active:</h1>
+														<input type='checkbox' id='activeCheck' readOnly></input>
+													</span>
+												)}
+										</span>
 
-									<span id='button-span'>
-										<button
-											id='edit'
-											type='button'
-											onClick={() => {
-												enableEditMode(index, item);
-											}}
-										>
-											Edit
-									</button>
-										{adminView === 'editOneProduct' ? (
-											<button id='auth'>Authorize</button>
-										) : (
-												''
-											)}
-									</span>
-								</form>
-							)}
-					</span>
-				);
-			})}
+										<span id='button-span'>
+											<button
+												id='edit'
+												type='button'
+												onClick={() => {
+													enableEditMode(index, item);
+												}}
+											>
+												Edit
+										</button>
+											{adminView === 'editOneProduct' ? (
+												<button id='auth'>Authorize</button>
+											) : (
+													''
+												)}
+										</span>
+									</form>
+								)}
+						</span>
+					);
+				})}
+			</div>
 			<div id='pagination'>
 				{adminPage === 1 ? (
 					''

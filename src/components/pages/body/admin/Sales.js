@@ -94,7 +94,6 @@ export const Sales = ({ user }) => {
 				month[1].push({date: 'Monthly Total', cartQuantity: cartQuantity, total: total})
 
 				return(
-					  
 						<div key={index} className='month-container'>
 							<p className='month-h1'>{month[0]}</p>
 							<div className='report-titles'>
