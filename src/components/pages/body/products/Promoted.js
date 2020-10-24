@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-animated-slider';
+import { Carousel } from 'react-bootstrap';
 
 import './Promoted.css';
 import 'react-animated-slider/build/horizontal.css';
@@ -23,7 +24,6 @@ export const Promoted = ({ NavLink, setProduct, useHistory }) => {
 	}, []);
 
 	const fetchPromotedProduct = (item, index) => {
-		
 		getProductById(item.id)
 			.then((response) => {
 				setProduct(response);
@@ -39,31 +39,31 @@ export const Promoted = ({ NavLink, setProduct, useHistory }) => {
 			<div className='wrapper'>
 				<h1>Featured Products</h1>
 			</div>
-			<Slider className='slider-wrapper'>
+
+			<Carousel className='carousel'>
 				{content.map((item, index) => (
-					<div
+					<Carousel.Item
 						key={index}
-						className='slider-content'
-						style={{
-							background: `url('${item.image}') no-repeat center center`,
-						}}
+						className='carousel-item'
+						interval={1000}
 						onClick={() => {
 							fetchPromotedProduct(item, index);
 						}}
 					>
-						<div className='inner'>
-							<h1>{item.name}</h1>
-							<p>{item.description}</p>
-							<button id='promoButton'>
-								${' '}
+						<div className='image-container'>
+							<img className="d-block" src={item.image} />
+						
+						<Carousel.Caption id='carousel-captions'>
+							<h3>{item.title}</h3>
+							<p>${' '}
 								{item.price.toLocaleString('en-US', {
 									minimumFractionDigits: 2,
-								})}
-							</button>
+								})}</p>
+						</Carousel.Caption>
 						</div>
-					</div>
+					</Carousel.Item>
 				))}
-			</Slider>
+			</Carousel>
 		</div>
 	);
 };

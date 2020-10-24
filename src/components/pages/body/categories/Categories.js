@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import { Button } from 'react-bootstrap'
 
 import "./Categories.css";
 
@@ -27,9 +28,9 @@ export const Categories = ({ NavLink, category, setCategory, categoryList, setPa
                     >
                         <div key={i} id="cat" className="category-tile">
                             {category === item.name ? (
-                                <button className="category-name redCat">{item.name}</button>
+                                <Button variant='warning' className="category-name redCat">{item.name}</Button>
                             ) : (
-                                <button className="category-name">{item.name}</button>
+                                <Button variant='secondary' className="category-name">{item.name}</Button>
                             )}
                         </div>
                     </NavLink>
