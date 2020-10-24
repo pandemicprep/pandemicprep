@@ -151,25 +151,78 @@
 
 /* After React Bootstrap below here */
 
+#add-product-form {
+    margin: 40px 200px 40px 200px;
+    border: 1px solid #ced4da;
+    box-shadow:
+    10px 10px 20px rgba(0, 0, 0, 0.205),
+    -10px 10px 20px rgba(0, 0, 0, 0.205)
+    ;
+    border-radius: .25rem;
+    padding: 10px;
+    background-color: white;
+}
+
+#dollar-sign {
+    height: 38px;
+}
+
 #admin {
     background-color: white;
 }
 
-#all-edit-forms {
-    background-color: lightgray;
+.check-label {
+    position: relative;
+    top: 5px;
 }
 
-#add-product-h3 {
+.form-check-input {
+    height: 20px;
+    width: 100px;
+}
+
+.form-check {
+    position: relative;
+    bottom: 28px;
+    left: 15px;
+    width: 150px;
+}
+
+#edit-check-col {
+    max-width: 150px;
+}
+
+.edit-button {
+    margin-right: 10px;
+}
+
+#all-edit-forms {
+    background-color: #d6d9db;
+}
+
+/* #add-product-h3 {
     text-align: center;
     padding-top: 10px;
     margin-bottom: -25px;
-}
+} */
 
 #edit-product-h3 {
     text-align: center;
     padding-top: 10px;
     margin-bottom: 20px;
 }
+
+#edit-product-form {
+    margin: 40px 200px 40px 200px;
+    border: 1px solid #ced4da;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.205),
+    -10px 10px 20px rgba(0, 0, 0, 0.205)
+    ;
+    border-radius: .25rem;
+    padding: 10px;
+    background-color: white;
+}
+
 
 /* #add-product-button {
     display: block;
