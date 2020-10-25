@@ -50,9 +50,10 @@ export async function updateUser(fields = {}, token) {
  * @param {Object} {requires email, password}
  */
 export async function loginUser(credentials) {
+	
 	try {
 		const { data: user } = await axios.post('/api/users/login', credentials);
-
+		
 		return user;
 	} catch (error) {
 		throw error;
