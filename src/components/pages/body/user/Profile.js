@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Stripe, stripeConnection } from "../orders/Stripe";
+import { Form, Button } from 'react-bootstrap';
 
 import {
     addUser,
@@ -36,7 +37,7 @@ export const Profile = ({
     setProfileCompleted,
 }) => {
     //CURRENT VIEWS: login register guest userCheckout edit fulledit checkout-register
-    //CHANGE PASSWORD BUTTON: needs onclick function to switch state to ''
+    //CHANGE PASSWORD Button: needs onclick function to switch state to ''
     //SET UP STATES FOR DIFFERENT VIEWS! :)
 
     const [isUser, setIsUser] = useState(false);
@@ -287,7 +288,7 @@ export const Profile = ({
     //CURRENT VIEWS: login register guest userCheckout edit
     return (
         <div className="profile">
-            <form className="profileForm" onSubmit={formHandler}>
+            <Form className="profileForm" onSubmit={formHandler}>
                 <h1 className="editPro">
                     {view === "register"
                         ? "Sign Up"
@@ -304,7 +305,7 @@ export const Profile = ({
                         : ""}
                 </h1>
 
-                <input
+                <Form.Control
                     type="text"
                     id="firstName"
                     placeholder="First Name"
@@ -317,7 +318,7 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <input
+                <Form.Control
                     type="text"
                     id="lastName"
                     value={lastName}
@@ -331,9 +332,10 @@ export const Profile = ({
                     }
                 />
 
-                <input
+                <Form.Control
                     type="text"
                     id="email"
+                    className='field'
                     placeholder="Email Address"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
@@ -343,7 +345,7 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <button
+                <Button
                     id="reveal"
                     className={
                         view === "register" ||
@@ -358,8 +360,8 @@ export const Profile = ({
                     onClick={passwordButtonHandler}
                 >
                     Change Password
-                </button>
-                <input
+                </Button>
+                <Form.Control
                     type="password"
                     id="password1"
                     value={password1}
@@ -376,7 +378,7 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <input
+                <Form.Control
                     type="password"
                     id="password2"
                     value={password2}
@@ -396,7 +398,7 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <input
+                <Form.Control
                     type="text"
                     id="addressOne"
                     value={address1}
@@ -413,7 +415,7 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <input
+                <Form.Control
                     type="text"
                     id="addressTwo"
                     value={address2}
@@ -430,7 +432,7 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <input
+                <Form.Control
                     type="text"
                     id="city"
                     value={city}
@@ -443,7 +445,7 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <input
+                <Form.Control
                     type="text"
                     id="zipCode"
                     value={zipcode}
@@ -456,7 +458,8 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <select
+                <Form.Control
+                    as='select'
                     id="states"
                     className={view === "login" || view === "register" ? "field hide" : "field"}
                     value={state}
@@ -471,8 +474,9 @@ export const Profile = ({
                             </option>
                         );
                     })}
-                </select>
-                <select
+                </Form.Control>
+                <Form.Control
+                    as='select'
                     id="countries"
                     className={view === "register" || view === "login" ? "field hide" : "field"}
                     value={country}
@@ -487,8 +491,8 @@ export const Profile = ({
                             </option>
                         );
                     })}
-                </select>
-                <input
+                </Form.Control>
+                <Form.Control
                     type="text"
                     id="phoneNumber"
                     value={phone}
@@ -501,7 +505,7 @@ export const Profile = ({
                             : ""
                     }
                 />
-                <input
+                <Form.Control
                     type="number"
                     id="creditCard"
                     placeholder="Credit Card Number"
@@ -511,16 +515,16 @@ export const Profile = ({
                 />
 
                 <br></br>
-                <button id="submit" type="submit">
+                <Button id="submit" type="submit">
                     {view === "userCheckout" || view === "guest" || view === "checkout-register"
                         ? "Complete Payment"
                         : "Submit"}
-                </button>
+                </Button>
                 <br></br>
-                <button id="cancel" onClick={cancelHandler}>
+                <Button id="cancel" onClick={cancelHandler}>
                     Cancel
-                </button>
-            </form>
+                </Button>
+            </Form>
         </div>
     );
 };
