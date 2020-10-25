@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Pagination } from 'react-bootstrap';
 
 import './AdminProductList.css';
 
@@ -145,6 +145,28 @@ export const AdminProductList = ({ user }) => {
 
 	return (
 		<div id='admin'>
+				<Pagination className='bootstrap-pagination'>
+				{adminPage === 1 ? (
+					''
+				) : (
+					<>
+						<Pagination.First onClick={firstHandler}/>
+						<Pagination.Prev onClick={prevHandler}/>
+					</>
+				)}
+				<Pagination.Item>{adminPage}</Pagination.Item>
+				{adminPage === adminPageLimit ? (
+					''
+				) : (
+					<>
+						<Pagination.Next onClick={nextHandler}/>
+						<Pagination.Last onClick={lastHandler}/>
+					</>
+				)}
+
+			</Pagination>
+
+
 			{adminPage === 1 ? (
 			
 					<Form id='add-product-form'>
@@ -263,6 +285,7 @@ export const AdminProductList = ({ user }) => {
 									<Form.Group>
 										<Form.Label>Image</Form.Label>
 										<Form.Control
+											type='text'
 											placeholder={item.image}
 											value={item.image}
 											onChange={(event) => {
@@ -301,24 +324,30 @@ export const AdminProductList = ({ user }) => {
 										></Form.Check>
 									</Form.Group>
 								</Col>
-								<Col id='edit-check-col'>
-									<Button
-										className='edit-button'
-										type='button'
-										onClick={() => {
-											enableEditMode(index, item);
-										}}
-									>Edit</Button>
-									
+								<div className='edit-check-col'>																	
 									{adminView === 'editOneProduct' &&
 										clickedIndex === index ? (
-										<Button
-											type='button'
-											onClick={(event) => editProduct(event, item)}
-										>Authorize</Button>
-										) : ''
+											<div>
+												<Button
+													onClick={() => setAdminView('none')}
+												>Cancel</Button>
+
+												<Button
+													type='button'
+													
+												>Authorize</Button>
+											</div>
+										) : (
+											<Button
+												className='edit-button'
+												type='button'
+												onClick={() => {
+													enableEditMode(index, item);
+												}}
+											>Edit</Button>
+										)
 									}
-								</Col>
+								</div>
 							</Row>
 						</>						
 						) : (
@@ -362,8 +391,9 @@ export const AdminProductList = ({ user }) => {
 									<Form.Group>
 										<Form.Label>Image</Form.Label>
 										<Form.Control
-											placeholder={item.imageURL}
-											value={item.imageURL}
+											type='text'
+											placeholder={item.image}
+											value={item.image}
 											readOnly
 										></Form.Control>
 									</Form.Group>
@@ -400,24 +430,27 @@ export const AdminProductList = ({ user }) => {
 										}
 									</Form.Group>
 								</Col>
-								<Col id='edit-check-col'>
-									<Button
-										className='edit-button'
-										type='button'
-										onClick={() => {
-											enableEditMode(index, item);
-										}}
-									>Edit</Button>
-									
+								<div className='edit-check-col'>																	
 									{adminView === 'editOneProduct' &&
 										clickedIndex === index ? (
-										<Button
-											type='button'
-											
-										>Authorize</Button>
-										) : ''
+											<div id='cancel-authorize'>
+												<Button className='edit-button'>Cancel</Button>
+												<Button
+													type='button'
+													
+												>Authorize</Button>
+											</div>
+										) : (
+											<Button
+												id='edit-button'
+												type='button'
+												onClick={() => {
+													enableEditMode(index, item);
+												}}
+											>Edit</Button>
+										)
 									}
-								</Col>
+								</div>
 							</Row>
 						</>
 						)}
@@ -429,7 +462,29 @@ export const AdminProductList = ({ user }) => {
 					);
 				})}
 			</div>
-			<div id='pagination'>
+
+			<Pagination className='bootstrap-pagination'>
+				{adminPage === 1 ? (
+					''
+				) : (
+					<>
+						<Pagination.First onClick={firstHandler}/>
+						<Pagination.Prev onClick={prevHandler}/>
+					</>
+				)}
+				<Pagination.Item>{adminPage}</Pagination.Item>
+				{adminPage === adminPageLimit ? (
+					''
+				) : (
+					<>
+						<Pagination.Next onClick={nextHandler}/>
+						<Pagination.Last onClick={lastHandler}/>
+					</>
+				)}
+
+			</Pagination>
+
+			{/* <div id='pagination'>
 				{adminPage === 1 ? (
 					''
 				) : (
@@ -455,7 +510,7 @@ export const AdminProductList = ({ user }) => {
 						</button>
 						</>
 					)}
-			</div>
+			</div> */}
 		</div>
 	);
 };

@@ -188,12 +188,24 @@
     width: 150px;
 }
 
-#edit-check-col {
+.edit-check-col {
     max-width: 150px;
+    display: inline;
+    max-height: 50px;
 }
 
-.edit-button {
+#last-edit-row button {
     margin-right: 10px;
+    max-height: 50px;
+
+}
+
+#edit-button {
+    max-height: 50px;
+}
+
+#cancel-authorize {
+    display: flex;
 }
 
 #all-edit-forms {
@@ -228,3 +240,9 @@
     display: block;
     margin: 0 0 0 90%;
 } */
+
+.bootstrap-pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -1px;
+}
