@@ -33,7 +33,7 @@ export const Header = ({
 
 		if (searchString.length > 0) {
 			setPageType('search');
-			setCategory('');
+			setCategory('search');
 			setSearchTerm(searchString);
 
 			setSearchString('');
@@ -80,7 +80,7 @@ export const Header = ({
 						contentEditable='true'
 					/>
 
-					<Button variant='outline-primary'>Search</Button>
+					<Button variant='outline-primary' onClick={searchProducts} >Search</Button>
 				</Form>
 
 				{user.isUser === true ? (

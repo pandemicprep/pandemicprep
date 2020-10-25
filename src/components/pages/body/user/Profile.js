@@ -529,11 +529,3 @@ export const Profile = ({
     );
 };
 
-/*
-In form handler add stripe function if view is a checkout view. The stripe function will be hosted
-in its own file and will trigger the stripe payment.
-The cart info has to be sent in the stripe function.
-We won't return to the cart, but instead go straight to payment and see the total amount there.
-
-
-*/
