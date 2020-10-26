@@ -39,7 +39,7 @@ export const Header = ({
 
 		if (searchString.length > 0) {
 			setPageType('search');
-			setCategory('');
+			setCategory('search');
 			setSearchTerm(searchString);
 
 			setSearchString('');
