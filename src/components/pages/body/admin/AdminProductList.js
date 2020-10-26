@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Form, Button, Row, Col, Pagination } from 'react-bootstrap';
 
 import './AdminProductList.css';
 
@@ -90,6 +91,7 @@ export const AdminProductList = ({ user }) => {
 	};
 	const editProduct = async (event, item) => {
 		event.preventDefault();
+		console.log(event, item, 'event and item')
 		try {
 			const fields = {
 				title: editTitle === '' ? item.title : editTitle,
@@ -107,7 +109,7 @@ export const AdminProductList = ({ user }) => {
 				fields: fields,
 				token: user.token,
 			});
-
+			resetInputs();
 			setAdminView('none');
 			setEdit(!edit);
 		} catch (error) {
@@ -143,222 +145,346 @@ export const AdminProductList = ({ user }) => {
 
 	return (
 		<div id='admin'>
+				<Pagination className='bootstrap-pagination'>
+				{adminPage === 1 ? (
+					''
+				) : (
+					<>
+						<Pagination.First onClick={firstHandler}/>
+						<Pagination.Prev onClick={prevHandler}/>
+					</>
+				)}
+				<Pagination.Item>{adminPage}</Pagination.Item>
+				{adminPage === adminPageLimit ? (
+					''
+				) : (
+					<>
+						<Pagination.Next onClick={nextHandler}/>
+						<Pagination.Last onClick={lastHandler}/>
+					</>
+				)}
+
+			</Pagination>
+
+
 			{adminPage === 1 ? (
-				<form id='admin-list' onSubmit={adminAddProduct}>
-					<span className='each-input' id='title'>
-						<h1>Title & Price:</h1>
-						<input
-							type='text'
-							placeholder='Title'
-							value={title}
-							onChange={handleTitle}
-						></input>
-						<input
-							type='text'
-							placeholder='Price'
-							value={price}
-							onChange={handlePrice}
-						></input>
-					</span>
+			
+					<Form id='add-product-form'>
+					<h3 id='add-product-h3' >Add New Product</h3>
+							<Row>
+								<Col>
+									<Form.Group>
+										<Form.Label>Title</Form.Label>
+										<Form.Control
+											type='text'
+											placeholder='Title'
+											value={title}
+											onChange={handleTitle}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group>
+										<Form.Label>Price</Form.Label>
+										<Form.Control
+											type='text'
+											placeholder='Price'
+											value={price}
+											onChange={handlePrice}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group >
+										<Form.Label>Categories</Form.Label>
+										<Form.Control
+											type='text'
+											placeholder='Categories'
+											value={categories}
+											onChange={handleCategories}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group >
+										<Form.Label>Image</Form.Label>
+										<Form.Control
+											type='text'
+											placeholder='Image URL'
+											value={imageURL}
+											onChange={handleImageURL}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+							</Row>
 
-					<span className='each-input' id='description2'>
-						<h1>Description:</h1>
-						<input
-							type='text'
-							placeholder='Description'
-							value={description}
-							onChange={handleDescription}
-						></input>
-						<input
-							type='text'
-							placeholder='Category'
-							value={categories}
-							onChange={handleCategories}
-						></input>
-					</span>
-
-					<span className='each-input' id='image'>
-						<h1>Image URL:</h1>
-						<input
-							id='checkbox'
-							placeholder='Image URL'
-							value={imageURL}
-							onChange={handleImageURL}
-						></input>
-						<button id='addNew'>Add New</button>
-					</span>
-				</form>
+							<Form.Group id='add-description-group' >
+								<Form.Label>Description</Form.Label>
+								<Form.Control
+									as='textarea'
+									type='text'
+									placeholder='Description'
+									value={description}
+									onChange={handleDescription}
+								></Form.Control>								
+							</Form.Group>
+							<Button id='add-product-button' onClick={adminAddProduct}>
+								Create
+							</Button>						
+					</Form>
+				
 			) : (
 					''
 				)}
-			<h1 className='productH1'>Edit Existing Product</h1>
-			{adminProductList.map((item, index) => {
-				return (
-					<span key={index}>
-						{/* ternary that renders two different forms, one of which allowing the inputs to be edited */}
-						{adminView === 'editOneProduct' &&
-							clickedIndex === index /**edit mode ternary */ ? (
-								<form id='admin-list' onSubmit={(event) => editProduct(event, item)}>
-									<span className='each-input' id='title'>
-										<h1>Title & Price:</h1>
-										<input
+
+			<div id='all-edit-forms'>
+				<h3 id='edit-product-h3'>Edit Existing Products</h3>
+				{adminProductList.map((item, index) => {
+					return (
+					<Form key={index} id='edit-product-form' >
+						{adminView === 'editOneProduct' && clickedIndex === index ? (
+						<>
+							<h3>{item.title}</h3>
+							<Row>
+								<Col>
+									<Form.Group>
+										<Form.Label>Title</Form.Label>
+										<Form.Control
 											type='text'
 											placeholder={item.title}
 											value={editTitle}
 											onChange={(event) => {
 												setEditTitle(event.target.value);
 											}}
-										></input>
-										<input
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group>
+										<Form.Label>Price</Form.Label>
+										<Form.Control
 											type='text'
-											id='price-input'
 											placeholder={item.price}
 											value={editPrice}
 											onChange={(event) => {
 												setEditPrice(event.target.value);
 											}}
-										></input>
-									</span>
-
-									<span className='each-input' id='description'>
-										<h1>Description:</h1>
-										<input
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group>
+										<Form.Label>Categories</Form.Label>
+										<Form.Control
+											type='text' 
+											placeholder={item.categories}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group>
+										<Form.Label>Image</Form.Label>
+										<Form.Control
 											type='text'
-											placeholder={item.description}
-											value={editDescription}
-											onChange={(event) => {
-												setEditDescription(event.target.value);
-											}}
-										></input>
-										<input type='text' placeholder={item.categories}></input>
-									</span>
-
-									<span className='each-input' id='image'>
-										<h1>Image URL:</h1>
-										<input
-											id='checkbox'
 											placeholder={item.image}
 											value={item.image}
 											onChange={(event) => {
 												setEditImageURL(event.target.value);
 											}}
-										></input>
-										{item.isActive ? (
-											<span id='active'>
-												<h1>Active:</h1>
-												<input
-													id='activeCheck'
-													type='checkbox'
-													defaultChecked={item.isActive}
-													onClick={(event) => {
-														isActive
-															? setIsActive(false)
-															: setIsActive(true);
-													}}
-												></input>
-											</span>
-										) : (
-												<span id='active'>
-													<h1>Active:</h1>
-													<input
-														id='activeCheck'
-														type='checkbox'
-														defaultChecked={item.isActive}
-														onClick={(event) => {
-															isActive
-																? setIsActive(false)
-																: setIsActive(true);
-														}}
-													></input>
-												</span>
-											)}
-									</span>
+										></Form.Control>
+									</Form.Group>
+								</Col>								
+							</Row>
+							<Form.Group>
+									<Form.Label >Description</Form.Label>
+									<Form.Control
+										as='textarea'
+										className='control-description'
+										type='text'
+										placeholder={item.description}
+										value={editDescription}
+										onChange={(event) => {
+											setEditDescription(event.target.value);
+										}}
+									></Form.Control>
+							</Form.Group>
+							<Row xs={2} md={4} lg={6} id='last-edit-row'>
+								<Col>
+									<Form.Group id='check-group'>
+										<Form.Label className='check-label' >Active: </Form.Label>
+										<Form.Check
+											id='react-checkbox'
+											type='checkbox'
+											defaultChecked={isActive}
+											onClick={(event) => {
+												isActive
+													? setIsActive(false)
+													: setIsActive(true);
+											}}
+										></Form.Check>
+									</Form.Group>
+								</Col>
+								<div className='edit-check-col'>																	
+									{adminView === 'editOneProduct' &&
+										clickedIndex === index ? (
+											<div>
+												<Button
+													onClick={() => setAdminView('none')}
+												>Cancel</Button>
 
-									<span id='button-span'>
-										<button id='addNew' type='button' onClick={enableEditMode}>
-											Edit
-									</button>
-										{adminView === 'editOneProduct' ? (
-											<button id='auth'>Authorize</button>
+												<Button
+													type='button'
+													
+												>Authorize</Button>
+											</div>
 										) : (
-												''
-											)}
-									</span>
-								</form>
-							) : (
-								<form id='admin-list'>
-									<span className='each-input' id='title'>
-										<h1>Title & Price:</h1>
-										<input
+											<Button
+												className='edit-button'
+												type='button'
+												onClick={() => {
+													enableEditMode(index, item);
+												}}
+											>Edit</Button>
+										)
+									}
+								</div>
+							</Row>
+						</>						
+						) : (
+						<>
+							<h3>{item.title}</h3>
+
+							<Row>
+								<Col>
+									<Form.Group>
+										<Form.Label>Title</Form.Label>
+										<Form.Control
 											type='text'
-											readOnly
 											placeholder={item.title}
 											value={item.title}
-										></input>
-										<input
+											readOnly							
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group>
+										<Form.Label>Price</Form.Label>
+										<Form.Control
 											type='text'
-											id='price-input'
-											readOnly
 											placeholder={item.price}
 											value={item.price}
-										></input>
-									</span>
-
-									<span className='each-input' id='description'>
-										<h1>Description:</h1>
-										<input
+											readOnly
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group>
+										<Form.Label>Categories</Form.Label>
+										<Form.Control
+											type='text' 
+											placeholder={item.categories}
+											readOnly
+										></Form.Control>
+									</Form.Group>
+								</Col>
+								<Col>
+									<Form.Group>
+										<Form.Label>Image</Form.Label>
+										<Form.Control
 											type='text'
-											readOnly
-											placeholder={item.description}
-											value={item.description}
-										></input>
-										<br></br>
-										<input type='text' placeholder={item.categories}></input>
-									</span>
-
-									<span className='each-input' id='image'>
-										<h1>Image URL:</h1>
-										<input
-											id='checkbox'
-											readOnly
-											placeholder={item.imageURL}
+											placeholder={item.image}
 											value={item.image}
-										></input>
+											readOnly
+										></Form.Control>
+									</Form.Group>
+								</Col>								
+							</Row>
+							<Form.Group>
+									<Form.Label >Description</Form.Label>
+									<Form.Control
+										as='textarea'
+										className='control-description'
+										type='text'
+										placeholder={item.description}
+										value={item.description}
+										readOnly
+									></Form.Control>
+							</Form.Group>
+							<Row xs={2} md={4} lg={6} id='last-edit-row'>
+								<Col>
+									<Form.Group id='check-group'>
+										<Form.Label className='check-label' >Active: </Form.Label>
 										{item.isActive ? (
-											<span id='active'>
-												<h1>Active:</h1>
-												<input type='checkbox' id='activeCheck' checked readOnly></input>
-											</span>
+											<Form.Check
+												id='react-checkbox'
+												type='checkbox'
+												checked
+												readOnly
+											></Form.Check>
+										) : 
+											<Form.Check
+												id='react-checkbox'
+												type='checkbox'												
+												readOnly
+											></Form.Check>
+										}
+									</Form.Group>
+								</Col>
+								<div className='edit-check-col'>																	
+									{adminView === 'editOneProduct' &&
+										clickedIndex === index ? (
+											<div id='cancel-authorize'>
+												<Button className='edit-button'>Cancel</Button>
+												<Button
+													type='button'
+													
+												>Authorize</Button>
+											</div>
 										) : (
-												<span id='active'>
-													<h1>Active:</h1>
-													<input type='checkbox' id='activeCheck' readOnly></input>
-												</span>
-											)}
-									</span>
+											<Button
+												id='edit-button'
+												type='button'
+												onClick={() => {
+													enableEditMode(index, item);
+												}}
+											>Edit</Button>
+										)
+									}
+								</div>
+							</Row>
+						</>
+						)}
+					</Form>
 
-									<span id='button-span'>
-										<button
-											id='edit'
-											type='button'
-											onClick={() => {
-												enableEditMode(index, item);
-											}}
-										>
-											Edit
-									</button>
-										{adminView === 'editOneProduct' ? (
-											<button id='auth'>Authorize</button>
-										) : (
-												''
-											)}
-									</span>
-								</form>
-							)}
-					</span>
-				);
-			})}
-			<div id='pagination'>
+
+						
+					
+					);
+				})}
+			</div>
+
+			<Pagination className='bootstrap-pagination'>
+				{adminPage === 1 ? (
+					''
+				) : (
+					<>
+						<Pagination.First onClick={firstHandler}/>
+						<Pagination.Prev onClick={prevHandler}/>
+					</>
+				)}
+				<Pagination.Item>{adminPage}</Pagination.Item>
+				{adminPage === adminPageLimit ? (
+					''
+				) : (
+					<>
+						<Pagination.Next onClick={nextHandler}/>
+						<Pagination.Last onClick={lastHandler}/>
+					</>
+				)}
+
+			</Pagination>
+
+			{/* <div id='pagination'>
 				{adminPage === 1 ? (
 					''
 				) : (
@@ -384,7 +510,7 @@ export const AdminProductList = ({ user }) => {
 						</button>
 						</>
 					)}
-			</div>
+			</div> */}
 		</div>
 	);
 };

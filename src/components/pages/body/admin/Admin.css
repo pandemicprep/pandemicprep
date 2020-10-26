@@ -5,31 +5,35 @@
 
 #admin {
     font-size: 14px;
-    padding-top: 20px;
     overflow: scroll;
-    margin-bottom: 150px;
+    margin-bottom: 80px;
+    background-color: lightgray;
 }
 
 #admin-nav {
     font-size: 16px;
-    margin-top: 240px;
+    margin-top: 200px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: center;
     position: relative;
     bottom: 50px;
     z-index: 1;
 }
 
 #admin-nav button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     width: 140px;
-    font: bold 22px Helvetica, Sans-Serif; 
+    font: bold 20px Helvetica, Sans-Serif; 
     letter-spacing: -1px; 
     color: black; 
-    margin-bottom: 5px;
+    margin: 5px 50px -40px 50px;
+    padding: 0;
     background-image: -webkit-linear-gradient(45deg, black 50%, transparent 50%);
     background-image: linear-gradient(45deg, black 50%, transparent 50%);
     background-position: 100%;
@@ -46,6 +50,8 @@
     -ms-transform: scale(1.075,1.075);
     -o-transform: scale(1.075,1.075);
     transform: scale(1.075,1.075);
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
 #adminDiv {
