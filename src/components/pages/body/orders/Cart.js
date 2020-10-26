@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Stripe } from '../orders/Stripe';
+import { Button } from 'react-bootstrap';
 
 import './Cart.css';
 
@@ -166,22 +167,24 @@ export const Cart = ({
 												{product.quantity}
 											</label>
 											<div className='cart-buttons'>
-												<button
+												<Button
+													variant='dark'
 													className='uptick cart-field tick'
 													onClick={() => {
 														ticker(product, 1);
 													}}
 												>
 													&#11014;
-												</button>
-												<button
+												</Button>
+												<Button
+													variant='dark'
 													className='downtick cart-field tick'
 													onClick={() => {
 														ticker(product, -1);
 													}}
 												>
 													&#11015;
-												</button>
+												</Button>
 											</div>
 											<label className='cart-field cart-product-price'>
 												${' '}
@@ -195,14 +198,15 @@ export const Cart = ({
 													minimumFractionDigits: 2,
 												})}
 											</label>
-											<button
+											<Button
+												variant='dark'
 												className='cart-field cart-delete'
 												onClick={() => {
 													removeHandler(product);
 												}}
 											>
 												remove
-											</button>
+											</Button>
 										</div>
 									);
 							  })
@@ -237,17 +241,17 @@ export const Cart = ({
 						</span>
 					</div>
 					{user.isUser && !profileCompleted ? (
-						<button id='check' className='checkout-button' onClick={checkoutHandler}>
+						<Button id='check' className='checkout-button' onClick={checkoutHandler}>
 							Checkout
-						</button>
+						</Button>
 					) : !user.isUser && !profileCompleted ? (
 						<div className='options'>
-							<button className='checkout-guest asguest' onClick={guestCheckout}>
+							<Button  variant='dark' className='checkout-guest asguest' onClick={guestCheckout}>
 								As a guest
-							</button>
-							<button className='checkout-guest asuser' onClick={newUserCheckout}>
+							</Button>
+							<Button variant='dark' className='checkout-guest asuser' onClick={newUserCheckout}>
 								Create Account
-							</button>
+							</Button>
 						</div>
 					) : (
 						<Stripe className='stripe-button' />
