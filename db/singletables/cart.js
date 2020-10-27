@@ -9,6 +9,7 @@ const LIMIT = 20;
  * @param {object} status(active, processing, complete)
  */
 async function addCart({ status, total, userId }) {
+	console.log('im getting to add cart at the database', status, total, userId);
 	// lastUpdated = getDate();
 	try {
 		const {
@@ -24,7 +25,7 @@ async function addCart({ status, total, userId }) {
 		newCart.total = parseFloat(newCart.total);
 
 		newCart.items = [];
-
+		console.log('new cart being sent ', newCart);
 		return newCart;
 	} catch (error) {}
 }

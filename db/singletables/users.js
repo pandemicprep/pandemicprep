@@ -31,6 +31,7 @@ async function addUser({
 	phone = null,
 	creditCard = null,
 }) {
+	console.log('getting to add user at the database');
 	let securedPassword = null;
 	let securedCreditCard = null;
 
@@ -217,7 +218,10 @@ async function getUserByEmail(email) {
 	}
 }
 
+
+
 module.exports = {
+	
 	addUser,
 	getAllUsers,
 	updateUser,

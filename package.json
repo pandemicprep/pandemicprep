@@ -10,7 +10,8 @@
     "server:dev": "nodemon index.js",
     "db:build": "node ./db/init_db",
     "db:build:dev": "nodemon .db/init_db",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "Fletcher, Forgette, Landers, and Olivares",

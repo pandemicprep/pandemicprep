@@ -1,7 +1,8 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import './Product.css';
 
@@ -80,9 +81,9 @@ export const Product = ({ product, setCart, cart, user, setCartSize }) => {
 							minimumFractionDigits: 2,
 						})}
 					</p>
-					<button id='addToCart' onClick={addToCartHandler}>
+					<Button id='addToCart' onClick={addToCartHandler}>
 						Add to Cart
-					</button>
+					</Button>
 				</div>
 			</div>
 		</>

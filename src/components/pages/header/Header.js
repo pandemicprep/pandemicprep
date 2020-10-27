@@ -1,18 +1,12 @@
 /** @format */
 
 import React, { useState } from 'react';
+import { Form, FormControl, Button, Dropdown } from 'react-bootstrap';
 
 import './Header.css';
 
-import { getProductsByQuery } from '../../../api/products';
-
-import { Login, Register } from '../../index';
-
 export const Header = ({
-	products,
 	setProducts,
-	// searchObject,
-	// setSearchObject,
 	useHistory,
 	NavLink,
 	promotedProducts,
@@ -25,7 +19,7 @@ export const Header = ({
 	setCart,
 	setCartSize,
 	setCategory,
-	setProfileCompleted
+	setProfileCompleted,
 }) => {
 	const history = useHistory();
 	const [searchString, setSearchString] = useState('');
@@ -57,9 +51,9 @@ export const Header = ({
 					<span id='doomsday'>DOOMSDAY?</span>
 				</h1>
 				<NavLink to='/news'>
-					<button id='updatedButton' onClick={() => setCategory('')}>
+					<Button id='updatedButton' onClick={() => setCategory('')}>
 						Stay Updated
-					</button>
+					</Button>
 				</NavLink>
 			</div>
 			<div className='headerContainer'>
@@ -76,20 +70,18 @@ export const Header = ({
 					/>
 				</NavLink>
 
-				<form onSubmit={searchProducts} className='searchForm'>
-					<input
+				<Form onSubmit={searchProducts} className='searchForm'>
+					<FormControl
 						value={searchString}
 						onChange={handleSearchString}
 						type='text'
-						className='searchTerm'
+						// className='searchTerm'
 						placeholder='What are you looking for?'
 						contentEditable='true'
 					/>
 
-					<button type='submit' id='search' className='searchButton'>
-						<img id='sbtn' src={process.env.PUBLIC_URL + '/styleimages/search.png'} />
-					</button>
-				</form>
+					<Button variant='outline-primary' onClick={searchProducts} >Search</Button>
+				</Form>
 
 				{user.isUser === true ? (
 					''
@@ -138,74 +130,76 @@ export const Header = ({
 				{user.isUser === false ? (
 					''
 				) : (
-					<div className='dropdown'>
-						<button className='dropbtn'>
-							Welcome {user.firstName}!
-							<img
-								id='pointer'
-								src={process.env.PUBLIC_URL + '/styleimages/pointer.png'}
-							/>
-						</button>
-						<div className='dropdown-content'>
-							{user.isAdmin ? (
-								<a href='#' onClick={() => history.push('/admin')}>
+					<Dropdown  >
+						<div className='dropdown'>
+							<Dropdown.Toggle  variant="primary" id="dropdown-basic-button" >
+								Welcome {user.firstName}!
+								<img
+									id='pointer'
+									src={process.env.PUBLIC_URL + '/styleimages/pointer.png'}
+								/>
+							</Dropdown.Toggle>
+							<Dropdown.Menu  >
+								{user.isAdmin ? (
+									<Dropdown.Item href='#' onClick={() => history.push('/admin')}>
+										<img
+											id='dropdownIcon'
+											src={process.env.PUBLIC_URL + '/styleimages/admin.png'}
+										/>
+										Admin
+									</Dropdown.Item>
+								) : (
+									''
+								)}
+								<Dropdown.Item
+									href='#'
+									onClick={() => {
+										setView('edit');
+										history.push('/edit-user');
+									}}
+								>
 									<img
 										id='dropdownIcon'
-										src={process.env.PUBLIC_URL + '/styleimages/admin.png'}
+										src={process.env.PUBLIC_URL + '/styleimages/settings.png'}
 									/>
-									Admin
-								</a>
-							) : (
-								''
-							)}
-							<a
-								href='#'
-								onClick={() => {
-									setView('edit');
-									history.push('/edit-user');
-								}}
-							>
-								<img
-									id='dropdownIcon'
-									src={process.env.PUBLIC_URL + '/styleimages/settings.png'}
-								/>
-								Edit Profile
-							</a>
-							<a href='#' onClick={() => history.push('/orders')}>
-								<img
-									id='dropdownIcon'
-									src={process.env.PUBLIC_URL + '/styleimages/shop.png'}
-								/>
-								Orders
-							</a>
-							<a
-								href='#'
-								onClick={() => {
-									localStorage.removeItem('panprepToken');
-									setUser({
-										firstName: 'Guest',
-										isAdmin: false,
-										isUser: false,
-										token: '',
-									});
-									setCart({
-										status: 'active',
-										cartQuantity: 0,
-										total: 0,
-										items: [],
-									});
-									setCartSize(0);
-									setProfileCompleted(false);
-								}}
-							>
-								<img
-									id='dropdownIcon'
-									src={process.env.PUBLIC_URL + '/styleimages/logout.png'}
-								/>
-								Log Out
-							</a>
+									Edit Profile
+								</Dropdown.Item>
+								<Dropdown.Item href='#' onClick={() => history.push('/orders')}>
+									<img
+										id='dropdownIcon'
+										src={process.env.PUBLIC_URL + '/styleimages/shop.png'}
+									/>
+									Orders
+								</Dropdown.Item>
+								<Dropdown.Item
+									href='#'
+									onClick={() => {
+										localStorage.removeItem('panprepToken');
+										setUser({
+											firstName: 'Guest',
+											isAdmin: false,
+											isUser: false,
+											token: '',
+										});
+										setCart({
+											status: 'active',
+											cartQuantity: 0,
+											total: 0,
+											items: [],
+										});
+										setCartSize(0);
+										setProfileCompleted(false);
+									}}
+								>
+									<img
+										id='dropdownIcon'
+										src={process.env.PUBLIC_URL + '/styleimages/logout.png'}
+									/>
+									Log Out
+								</Dropdown.Item>
+							</Dropdown.Menu>
 						</div>
-					</div>
+					</Dropdown>
 				)}
 			</div>
 		</div>

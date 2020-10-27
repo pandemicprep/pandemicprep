@@ -61,7 +61,13 @@ usersRouter.post('/login', async (req, res, next) => {
 		if (user.message) {
 			res.send(user);
 		} else {
-			const validated = await bcrypt.compare(password, user.password);
+			let validated;
+			if (user.password) {
+				validated = await bcrypt.compare(password, user.password);
+			} else {
+				validated = false;
+			}
+			
 			if (validated) {
 				const token = jwt.sign(
 					{
@@ -83,6 +89,8 @@ usersRouter.post('/login', async (req, res, next) => {
 					activeCart: user.activeCart,
 					token: token,
 				});
+			} else {
+				res.send({ message: 'Incorrect email or password' });
 			}
 		}
 	} catch (error) {
