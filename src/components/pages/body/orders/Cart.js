@@ -241,7 +241,7 @@ export const Cart = ({
 						</span>
 					</div>
 					{user.isUser && !profileCompleted ? (
-						<Button id='check' className='checkout-button' onClick={checkoutHandler}>
+						<Button variant='dark' id='check' className='checkout-button' onClick={checkoutHandler}>
 							Checkout
 						</Button>
 					) : !user.isUser && !profileCompleted ? (

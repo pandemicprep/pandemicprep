@@ -20,8 +20,8 @@
 #cart-container {
     width: 80%;
     display: grid;
-    grid-template-column: 1fr;
-    grid-template-row: 1fr auto;
+    /* grid-template-column: 1fr;
+    grid-template-row: 20px auto; */
     font: bold 18px Helvetica, Sans-Serif;
     letter-spacing: -1px;
     color: black;
@@ -29,12 +29,13 @@
 
 .cart-titles {
     display: grid;
-    grid-template-columns: 2fr 4fr 2fr 1fr 2fr 2fr 1fr;
-    grid-template-rows: 1fr;
+    height: 30px;
+    grid-template-columns: 2fr 3fr 2fr 1fr 2fr 2fr;
+    grid-template-rows: 30px;
     font: bold 22px Helvetica, Sans-Serif;
     letter-spacing: -1px;
     color: black;
-    margin-bottom: 15px;
+    
 }
 
 .cart-title {
@@ -88,7 +89,7 @@
 }
 
 .tick {
-    width: 30px;
+    width: 40px;
     height: 20px;
     font-size: 12px;
     background-color: black;
@@ -142,12 +143,12 @@
 #check {
     width: 300px;
     height: 60px;
-    background-color: white;
+    /* background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     font: bold 22px Helvetica, Sans-Serif;
     letter-spacing: -1px;
-    color: black;
+    color: black; */
     margin-top: 10px;
     margin-bottom: 55px;
     margin-left: 75px;
